@@ -15,6 +15,7 @@
 		070C163D1D693CF800738BC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C163B1D693CF800738BC7 /* LaunchScreen.storyboard */; };
 		070C16481D693CF800738BC7 /* lingkeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16471D693CF800738BC7 /* lingkeTests.m */; };
 		070C16531D693CF800738BC7 /* lingkeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16521D693CF800738BC7 /* lingkeUITests.m */; };
+		070C16641D69443000738BC7 /* ConfigureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16631D69443000738BC7 /* ConfigureColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		070C164E1D693CF800738BC7 /* lingkeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lingkeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		070C16521D693CF800738BC7 /* lingkeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lingkeUITests.m; sourceTree = "<group>"; };
 		070C16541D693CF800738BC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		070C16621D69443000738BC7 /* ConfigureColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureColor.h; sourceTree = "<group>"; };
+		070C16631D69443000738BC7 /* ConfigureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureColor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 		070C16211D693CF800738BC7 = {
 			isa = PBXGroup;
 			children = (
+				070C16601D693E0A00738BC7 /* ColorConfigure */,
 				070C162C1D693CF800738BC7 /* lingke */,
 				070C16461D693CF800738BC7 /* lingkeTests */,
 				070C16511D693CF800738BC7 /* lingkeUITests */,
@@ -138,6 +142,15 @@
 				070C16541D693CF800738BC7 /* Info.plist */,
 			);
 			path = lingkeUITests;
+			sourceTree = "<group>";
+		};
+		070C16601D693E0A00738BC7 /* ColorConfigure */ = {
+			isa = PBXGroup;
+			children = (
+				070C16621D69443000738BC7 /* ConfigureColor.h */,
+				070C16631D69443000738BC7 /* ConfigureColor.m */,
+			);
+			name = ColorConfigure;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070C16641D69443000738BC7 /* ConfigureColor.m in Sources */,
 				070C16351D693CF800738BC7 /* ViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
