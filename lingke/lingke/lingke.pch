@@ -1,0 +1,23 @@
+//
+//  lingke.pch
+//  lingke
+//
+//  Created by clz on 16/8/21.
+//  Copyright © 2016年 CLZ. All rights reserved.
+//
+
+#ifndef lingke_pch
+#define lingke_pch
+
+#define ENABLE_DEBUG
+
+
+#ifdef ENABLE_DEBUG
+#define NSLog(format, args...) \
+NSLog(@"%s, line %d: " format "\n", \
+__func__, __LINE__, ## args);
+#else
+#define NSLog(format, args...) do {} while(0)
+#endif
+
+#endif 

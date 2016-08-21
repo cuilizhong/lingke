@@ -54,6 +54,7 @@
 		070C16541D693CF800738BC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		070C16621D69443000738BC7 /* ConfigureColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureColor.h; sourceTree = "<group>"; };
 		070C16631D69443000738BC7 /* ConfigureColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureColor.m; sourceTree = "<group>"; };
+		070C16651D6949FF00738BC7 /* lingke.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lingke.pch; path = lingke/lingke.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +85,7 @@
 		070C16211D693CF800738BC7 = {
 			isa = PBXGroup;
 			children = (
+				070C16651D6949FF00738BC7 /* lingke.pch */,
 				070C16601D693E0A00738BC7 /* ColorConfigure */,
 				070C162C1D693CF800738BC7 /* lingke */,
 				070C16461D693CF800738BC7 /* lingkeTests */,
@@ -429,6 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/lingke/lingke.pch";
 				INFOPLIST_FILE = lingke/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Softtek.lingke;
@@ -440,6 +443,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/lingke/lingke.pch";
 				INFOPLIST_FILE = lingke/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Softtek.lingke;
