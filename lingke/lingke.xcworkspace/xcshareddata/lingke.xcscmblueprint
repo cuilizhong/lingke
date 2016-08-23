@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E32B3477868D6370C1ADCE64379E308AC4BD5107",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "3591c5e8-e9a7-0410-8541-8ba97d4d9666++2756" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3591c5e8-e9a7-0410-8541-8ba97d4d9666++2756" : 0,
+    "E32B3477868D6370C1ADCE64379E308AC4BD5107" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5562F05E-37C9-4773-967B-95A902AE34F4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3591c5e8-e9a7-0410-8541-8ba97d4d9666++2756" : "%E4%B8%8A%E6%B5%B7%E5%87%8C%E6%9F%AF\/lingke\/lingke\/GData\/",
+    "E32B3477868D6370C1ADCE64379E308AC4BD5107" : "%E4%B8%8A%E6%B5%B7%E5%87%8C%E6%9F%AF\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "lingke",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "lingke\/lingke.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/172.18.8.55\/ios\/iPhone-PocoFood",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3591c5e8-e9a7-0410-8541-8ba97d4d9666++2756"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cuilizhong\/lingke.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E32B3477868D6370C1ADCE64379E308AC4BD5107"
+    }
+  ]
+}

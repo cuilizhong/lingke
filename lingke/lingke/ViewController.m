@@ -9,15 +9,25 @@
 #import "ViewController.h"
 #import "ConfigureColor.h"
 
+
 @interface ViewController ()
+
+/**
+ *  显示引导图片
+ */
+@property(nonatomic,strong)UIScrollView *scrollView;
+
+@property(nonatomic,assign)BOOL isDisplayTutorials;
 
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    NSLog(@"123");
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,7 +7,26 @@
 //
 
 #import "AppDelegate.h"
+#import "HttpsRequestManger.h"
+#import "GDataXMLNode.h"
+#import "TutorialsModel.h"
+#import "LocalData.h"
+#import "TutorialsViewController.h"
+#import "LoginViewController.h"
+#import "MainViewController.h"
+
 @interface AppDelegate ()
+
+/**
+ *  存放引导页面的数据
+ */
+@property(nonatomic,strong)NSMutableArray<TutorialsModel*> *tutorialsArray;
+
+
+/**
+ *  是否显示引导图片
+ */
+@property(nonatomic,assign)BOOL isDisplayTutorials;
 
 @end
 
@@ -16,7 +35,97 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // Override point for customization after application launch.
+    self.tutorialsArray = [[NSMutableArray alloc]init];
+    
+    [HttpsRequestManger sendHttpRequestForTutorialsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+        //解析xml
+        NSString *xmlStr  =[[ NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+        //xml文档类
+        GDataXMLDocument* doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:nil];
+        
+        //得到根节点,maps节点
+        GDataXMLElement* mapsEle = [doc rootElement];
+        
+        NSArray *array = [mapsEle children];
+        
+        for (int i = 0; i<array.count -1; i++) {
+            
+            GDataXMLElement* ele = array[i];
+            
+            GDataXMLElement *indexEle = [ele children].firstObject;
+            
+            GDataXMLElement *picurlEle = [ele children].lastObject;
+            
+            NSString *indexStr = indexEle.stringValue;
+            
+            NSString *picurlStr = picurlEle.stringValue;
+            
+            TutorialsModel *tutorialsModel = [[TutorialsModel alloc]init];
+            
+            tutorialsModel.index = indexStr;
+            
+            tutorialsModel.picurl = picurlStr;
+            
+            [self.tutorialsArray addObject:tutorialsModel];
+        }
+        
+        GDataXMLElement *updateEle = array.lastObject;
+        
+        //对比本地的引导图片更新时间
+        if ([[LocalData getTutorialsImageUpdateDate] isEqualToString:updateEle.stringValue]) {
+            //一样就不需要显示
+            self.isDisplayTutorials = NO;
+            
+            //判断是否注销
+            if ([LocalData getPhoneNumber].length>0) {
+                //跳转到主页
+                
+                MainViewController *mainViewController = [[MainViewController alloc]init];
+                
+                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:mainViewController];
+                
+                self.window.rootViewController = nav;
+                
+            }else{
+                //跳转到登陆页面
+                LoginViewController *loginViewController = [[LoginViewController alloc]init];
+                
+                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+                
+                self.window.rootViewController = nav;
+            }
+            
+        }else{
+            
+            //不一样需要显示
+            self.isDisplayTutorials = YES;
+            
+            [LocalData setTutorialsImageUpdateDate:updateEle.stringValue];
+            
+            //跳转到引导页面
+            TutorialsViewController *tutorialsViewController = [[TutorialsViewController alloc]init];
+            
+            tutorialsViewController.tutorialsArray = self.tutorialsArray;
+            
+            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:tutorialsViewController];
+            
+            self.window.rootViewController = nav;
+
+        }
+        
+        
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"请求失败");
+        
+    }];
+
+    self.window.backgroundColor = [UIColor whiteColor];
+    
     return YES;
 }
 
