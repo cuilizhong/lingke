@@ -1,13 +1,13 @@
 //
-//  LoginViewController.h
+//  BasicTableViewController.m
 //  lingke
 //
-//  Created by clz on 16/8/23.
+//  Created by clz on 16/8/24.
 //  Copyright © 2016年 CLZ. All rights reserved.
 //
 
 #import "BasicTableViewController.h"
 
-@interface LoginViewController : BasicTableViewController
+@implementation BasicTableViewController
 
 @end

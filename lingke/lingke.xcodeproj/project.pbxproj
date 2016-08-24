@@ -24,7 +24,11 @@
 		072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28631D6C9A2200EAFFAC /* BasicViewController.m */; };
 		072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28661D6C9A4700EAFFAC /* TutorialsViewController.m */; };
 		072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28691D6C9A5600EAFFAC /* LoginViewController.m */; };
-		072C286D1D6C9A6400EAFFAC /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C286C1D6C9A6400EAFFAC /* MainViewController.m */; };
+		072C28701D6D689000EAFFAC /* BasicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C286F1D6D689000EAFFAC /* BasicTableViewController.m */; };
+		072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28721D6D6B6E00EAFFAC /* LoginTableViewCell.m */; };
+		072C28751D6D6B9100EAFFAC /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072C28741D6D6B9100EAFFAC /* LoginTableViewCell.xib */; };
+		072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28771D6D789100EAFFAC /* UIScrollView+TouchEvent.m */; };
+		072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C287A1D6D851700EAFFAC /* MainTabBarController.m */; };
 		7D5B178C81F2F482EE8AB5E4 /* Pods_lingke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABC1DE342ED79682D8CD2E6 /* Pods_lingke.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,8 +84,15 @@
 		072C28661D6C9A4700EAFFAC /* TutorialsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialsViewController.m; sourceTree = "<group>"; };
 		072C28681D6C9A5600EAFFAC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		072C28691D6C9A5600EAFFAC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		072C286B1D6C9A6400EAFFAC /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		072C286C1D6C9A6400EAFFAC /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		072C286E1D6D689000EAFFAC /* BasicTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTableViewController.h; sourceTree = "<group>"; };
+		072C286F1D6D689000EAFFAC /* BasicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTableViewController.m; sourceTree = "<group>"; };
+		072C28711D6D6B6E00EAFFAC /* LoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewCell.h; sourceTree = "<group>"; };
+		072C28721D6D6B6E00EAFFAC /* LoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCell.m; sourceTree = "<group>"; };
+		072C28741D6D6B9100EAFFAC /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTableViewCell.xib; sourceTree = "<group>"; };
+		072C28761D6D789100EAFFAC /* UIScrollView+TouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TouchEvent.h"; path = "lingke/UIScrollView+TouchEvent.h"; sourceTree = "<group>"; };
+		072C28771D6D789100EAFFAC /* UIScrollView+TouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TouchEvent.m"; path = "lingke/UIScrollView+TouchEvent.m"; sourceTree = "<group>"; };
+		072C28791D6D851700EAFFAC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		072C287A1D6D851700EAFFAC /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		1F52B986CA02FD25F6B9BEE7 /* Pods-lingke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lingke.release.xcconfig"; path = "Pods/Target Support Files/Pods-lingke/Pods-lingke.release.xcconfig"; sourceTree = "<group>"; };
 		B4BC1DDAB6741730C958D890 /* Pods-lingke.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lingke.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lingke/Pods-lingke.debug.xcconfig"; sourceTree = "<group>"; };
 		DABC1DE342ED79682D8CD2E6 /* Pods_lingke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lingke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +128,8 @@
 		070C16211D693CF800738BC7 = {
 			isa = PBXGroup;
 			children = (
+				072C28761D6D789100EAFFAC /* UIScrollView+TouchEvent.h */,
+				072C28771D6D789100EAFFAC /* UIScrollView+TouchEvent.m */,
 				072C285F1D6C874200EAFFAC /* LocalData.h */,
 				072C28601D6C874200EAFFAC /* LocalData.m */,
 				070C16F81D6C4BB100738BC7 /* Model */,
@@ -150,12 +163,17 @@
 				070C16311D693CF800738BC7 /* AppDelegate.m */,
 				072C28621D6C9A2200EAFFAC /* BasicViewController.h */,
 				072C28631D6C9A2200EAFFAC /* BasicViewController.m */,
+				072C286E1D6D689000EAFFAC /* BasicTableViewController.h */,
+				072C286F1D6D689000EAFFAC /* BasicTableViewController.m */,
 				072C28651D6C9A4700EAFFAC /* TutorialsViewController.h */,
 				072C28661D6C9A4700EAFFAC /* TutorialsViewController.m */,
 				072C28681D6C9A5600EAFFAC /* LoginViewController.h */,
 				072C28691D6C9A5600EAFFAC /* LoginViewController.m */,
-				072C286B1D6C9A6400EAFFAC /* MainViewController.h */,
-				072C286C1D6C9A6400EAFFAC /* MainViewController.m */,
+				072C28711D6D6B6E00EAFFAC /* LoginTableViewCell.h */,
+				072C28721D6D6B6E00EAFFAC /* LoginTableViewCell.m */,
+				072C28741D6D6B9100EAFFAC /* LoginTableViewCell.xib */,
+				072C28791D6D851700EAFFAC /* MainTabBarController.h */,
+				072C287A1D6D851700EAFFAC /* MainTabBarController.m */,
 				070C16331D693CF800738BC7 /* ViewController.h */,
 				070C16341D693CF800738BC7 /* ViewController.m */,
 				070C16361D693CF800738BC7 /* Main.storyboard */,
@@ -357,6 +375,7 @@
 				070C163D1D693CF800738BC7 /* LaunchScreen.storyboard in Resources */,
 				070C163A1D693CF800738BC7 /* Assets.xcassets in Resources */,
 				070C16381D693CF800738BC7 /* Main.storyboard in Resources */,
+				072C28751D6D6B9100EAFFAC /* LoginTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,12 +454,15 @@
 				070C16351D693CF800738BC7 /* ViewController.m in Sources */,
 				072C28611D6C874200EAFFAC /* LocalData.m in Sources */,
 				070C16ED1D6C18F500738BC7 /* HttpsRequestManger.m in Sources */,
+				072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */,
 				072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */,
-				072C286D1D6C9A6400EAFFAC /* MainViewController.m in Sources */,
+				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
 				072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */,
+				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
+				072C28701D6D689000EAFFAC /* BasicTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +606,7 @@
 			baseConfigurationReference = B4BC1DDAB6741730C958D890 /* Pods-lingke.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lingke/lingke.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = lingke/Info.plist;
@@ -599,6 +622,7 @@
 			baseConfigurationReference = 1F52B986CA02FD25F6B9BEE7 /* Pods-lingke.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lingke/lingke.pch";
 				INFOPLIST_FILE = lingke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

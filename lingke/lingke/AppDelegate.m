@@ -13,7 +13,7 @@
 #import "LocalData.h"
 #import "TutorialsViewController.h"
 #import "LoginViewController.h"
-#import "MainViewController.h"
+#import "MainTabBarController.h"
 
 @interface AppDelegate ()
 
@@ -81,9 +81,11 @@
             if ([LocalData getPhoneNumber].length>0) {
                 //跳转到主页
                 
-                MainViewController *mainViewController = [[MainViewController alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 
-                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:mainViewController];
+                MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+                
+                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:mainTabBarController];
                 
                 self.window.rootViewController = nav;
                 
@@ -113,10 +115,6 @@
             self.window.rootViewController = nav;
 
         }
-        
-        
-        
-        
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         

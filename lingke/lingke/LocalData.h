@@ -31,6 +31,11 @@
 // */
 //@property(nonatomic,copy)NSString *tutorialsImageUpdateDate;
 
++ (void)setIsLaunchedApp:(NSString *)isLaunchedApp;
+
++ (NSString *)getIsLaunchedApp;
+
+
 + (void)setPhoneNumber:(NSString *)phoneNumber;
 
 + (NSString *)getPhoneNumber;
