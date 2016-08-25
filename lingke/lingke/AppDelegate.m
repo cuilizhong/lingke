@@ -23,6 +23,7 @@
 @property(nonatomic,strong)NSMutableArray<TutorialsModel*> *tutorialsArray;
 
 
+@property(nonatomic,strong)NSMutableData *receivedData;
 /**
  *  是否显示引导图片
  */
@@ -147,6 +148,46 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [self.receivedData setLength:0];
+
+}
+
+// 接收数据
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    if (!self.receivedData) {
+        self.receivedData = [[NSMutableData alloc]init];
+    }
+    
+    [self.receivedData appendData:data];
+}
+
+// 数据接收完毕
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSLog(@"成功");
+    
+    
+    NSString *results = [[NSString alloc]
+                         initWithBytes:[self.receivedData bytes]
+                         length:[self.receivedData length]
+                         encoding:NSUTF8StringEncoding];
+    
+    NSString *xmlStr  =[[ NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"返回结果 = %@",results);
+    
+}
+
+// 返回错误
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"Connection failed: %@", error);
 }
 
 @end

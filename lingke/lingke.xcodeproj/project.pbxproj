@@ -29,6 +29,12 @@
 		072C28751D6D6B9100EAFFAC /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072C28741D6D6B9100EAFFAC /* LoginTableViewCell.xib */; };
 		072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28771D6D789100EAFFAC /* UIScrollView+TouchEvent.m */; };
 		072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C287A1D6D851700EAFFAC /* MainTabBarController.m */; };
+		072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28831D6D900100EAFFAC /* HomepageViewController.m */; };
+		072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28861D6D901200EAFFAC /* WaittingHandViewController.m */; };
+		072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28891D6D901C00EAFFAC /* ScanViewController.m */; };
+		072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288C1D6D902800EAFFAC /* MessageViewController.m */; };
+		072C28901D6D903700EAFFAC /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288F1D6D903700EAFFAC /* MyViewController.m */; };
+		07FFA6F51D6EDADB00A40454 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA6F41D6EDADB00A40454 /* Network.m */; };
 		7D5B178C81F2F482EE8AB5E4 /* Pods_lingke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABC1DE342ED79682D8CD2E6 /* Pods_lingke.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +99,18 @@
 		072C28771D6D789100EAFFAC /* UIScrollView+TouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TouchEvent.m"; path = "lingke/UIScrollView+TouchEvent.m"; sourceTree = "<group>"; };
 		072C28791D6D851700EAFFAC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		072C287A1D6D851700EAFFAC /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		072C28821D6D900100EAFFAC /* HomepageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageViewController.h; sourceTree = "<group>"; };
+		072C28831D6D900100EAFFAC /* HomepageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageViewController.m; sourceTree = "<group>"; };
+		072C28851D6D901200EAFFAC /* WaittingHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaittingHandViewController.h; sourceTree = "<group>"; };
+		072C28861D6D901200EAFFAC /* WaittingHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaittingHandViewController.m; sourceTree = "<group>"; };
+		072C28881D6D901C00EAFFAC /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		072C28891D6D901C00EAFFAC /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		072C288B1D6D902800EAFFAC /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		072C288C1D6D902800EAFFAC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		072C288E1D6D903700EAFFAC /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		072C288F1D6D903700EAFFAC /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		07FFA6F31D6EDADB00A40454 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		07FFA6F41D6EDADB00A40454 /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
 		1F52B986CA02FD25F6B9BEE7 /* Pods-lingke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lingke.release.xcconfig"; path = "Pods/Target Support Files/Pods-lingke/Pods-lingke.release.xcconfig"; sourceTree = "<group>"; };
 		B4BC1DDAB6741730C958D890 /* Pods-lingke.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lingke.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lingke/Pods-lingke.debug.xcconfig"; sourceTree = "<group>"; };
 		DABC1DE342ED79682D8CD2E6 /* Pods_lingke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lingke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +194,11 @@
 				072C287A1D6D851700EAFFAC /* MainTabBarController.m */,
 				070C16331D693CF800738BC7 /* ViewController.h */,
 				070C16341D693CF800738BC7 /* ViewController.m */,
+				072C287C1D6D8E8300EAFFAC /* Homepage */,
+				072C287E1D6D8EE600EAFFAC /* WaittingHand */,
+				072C287F1D6D8F5F00EAFFAC /* Scan */,
+				072C28801D6D8F9B00EAFFAC /* Message */,
+				072C28811D6D8FA500EAFFAC /* My */,
 				070C16361D693CF800738BC7 /* Main.storyboard */,
 				070C16391D693CF800738BC7 /* Assets.xcassets */,
 				070C163B1D693CF800738BC7 /* LaunchScreen.storyboard */,
@@ -225,6 +248,8 @@
 			children = (
 				070C16EB1D6C18F500738BC7 /* HttpsRequestManger.h */,
 				070C16EC1D6C18F500738BC7 /* HttpsRequestManger.m */,
+				07FFA6F31D6EDADB00A40454 /* Network.h */,
+				07FFA6F41D6EDADB00A40454 /* Network.m */,
 			);
 			name = HttpInstance;
 			sourceTree = "<group>";
@@ -246,6 +271,51 @@
 				070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		072C287C1D6D8E8300EAFFAC /* Homepage */ = {
+			isa = PBXGroup;
+			children = (
+				072C28821D6D900100EAFFAC /* HomepageViewController.h */,
+				072C28831D6D900100EAFFAC /* HomepageViewController.m */,
+			);
+			name = Homepage;
+			sourceTree = "<group>";
+		};
+		072C287E1D6D8EE600EAFFAC /* WaittingHand */ = {
+			isa = PBXGroup;
+			children = (
+				072C28851D6D901200EAFFAC /* WaittingHandViewController.h */,
+				072C28861D6D901200EAFFAC /* WaittingHandViewController.m */,
+			);
+			name = WaittingHand;
+			sourceTree = "<group>";
+		};
+		072C287F1D6D8F5F00EAFFAC /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				072C28881D6D901C00EAFFAC /* ScanViewController.h */,
+				072C28891D6D901C00EAFFAC /* ScanViewController.m */,
+			);
+			name = Scan;
+			sourceTree = "<group>";
+		};
+		072C28801D6D8F9B00EAFFAC /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				072C288B1D6D902800EAFFAC /* MessageViewController.h */,
+				072C288C1D6D902800EAFFAC /* MessageViewController.m */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		072C28811D6D8FA500EAFFAC /* My */ = {
+			isa = PBXGroup;
+			children = (
+				072C288E1D6D903700EAFFAC /* MyViewController.h */,
+				072C288F1D6D903700EAFFAC /* MyViewController.m */,
+			);
+			name = My;
 			sourceTree = "<group>";
 		};
 		0C1A239DC18D7441DD73FB2F /* Pods */ = {
@@ -449,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */,
+				072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */,
 				070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */,
 				070C16641D69443000738BC7 /* ConfigureColor.m in Sources */,
 				070C16351D693CF800738BC7 /* ViewController.m in Sources */,
@@ -456,12 +527,17 @@
 				070C16ED1D6C18F500738BC7 /* HttpsRequestManger.m in Sources */,
 				072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */,
 				072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */,
+				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
+				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
+				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
+				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
 				072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */,
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
+				07FFA6F51D6EDADB00A40454 /* Network.m in Sources */,
 				072C28701D6D689000EAFFAC /* BasicTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,6 +10,7 @@
 #import "LoginTableViewCell.h"
 #import "UIScrollView+TouchEvent.h"
 #import "MainTabBarController.h"
+#import "Network.h"
 @implementation LoginViewController
 
 
@@ -94,6 +95,29 @@
         return (self.view.frame.size.height-165)/2.0 + 50;
 
     }
+}
+
+#pragma mark-request
+- (void)requestForLogin{
+    
+    NSDictionary *parameters = @{
+                                 
+                                 @"unitcode":@"LKTEST01",
+                                 
+                                 @"mobile":@"13961893758"
+                                 
+                                 };
+    
+    Network *network = [[Network alloc]initWithURL:@"http://www.linkersoft.com:9001/m1srv/xml/person" parameters:parameters requestSuccess:^(NSData *data) {
+        
+        NSString *xmlStr  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"xmlStr = %@",xmlStr);
+        
+    } requestFail:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

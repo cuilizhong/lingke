@@ -57,10 +57,10 @@
             </objects>
             <point key="canvasLocation" x="520" y="669"/>
         </scene>
-        <!--View Controller-->
+        <!--扫一扫-->
         <scene sceneID="CDh-dy-DDW">
             <objects>
-                <viewController id="mDM-Xy-Okd" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mDM-Xy-Okd" customClass="ScanViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tn8-7N-Cxy"/>
                         <viewControllerLayoutGuide type="bottom" id="DgI-XJ-OzT"/>
@@ -71,7 +71,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="btn_card" id="94u-ED-Plz"/>
-                    <navigationItem key="navigationItem" id="pvc-3D-03n"/>
+                    <navigationItem key="navigationItem" title="扫一扫" id="pvc-3D-03n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcL-v0-j61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -80,7 +80,7 @@
         <!--信息-->
         <scene sceneID="8dz-EG-ruU">
             <objects>
-                <viewController id="TSl-71-dfW" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TSl-71-dfW" customClass="MessageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DLd-rh-2Wk"/>
                         <viewControllerLayoutGuide type="bottom" id="B56-4s-bF6"/>
@@ -91,7 +91,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="信息" image="TabBar_Item_1" id="ba3-ig-q3k"/>
-                    <navigationItem key="navigationItem" id="qTt-dX-QEy"/>
+                    <navigationItem key="navigationItem" title="信息" id="qTt-dX-QEy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ddk-1e-Pvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -117,7 +117,7 @@
         <!--我的-->
         <scene sceneID="Kw3-yq-acC">
             <objects>
-                <viewController id="cmH-rd-lb4" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cmH-rd-lb4" customClass="MyViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="84S-eD-0oZ"/>
                         <viewControllerLayoutGuide type="bottom" id="nyG-Eg-q6q"/>
@@ -128,7 +128,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="我的" image="TabBar_Item_1" id="jNz-ce-HSc"/>
-                    <navigationItem key="navigationItem" id="iqM-Zq-V1q"/>
+                    <navigationItem key="navigationItem" title="我的" id="iqM-Zq-V1q"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MhZ-2j-woD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,7 +154,7 @@
         <!--待办-->
         <scene sceneID="8O5-ws-yyc">
             <objects>
-                <viewController id="4s0-Ql-VNa" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WaittingHandViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4s0-Ql-VNa" customClass="WaittingHandViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tMt-bs-FcQ"/>
                         <viewControllerLayoutGuide type="bottom" id="7Tf-sb-vYM"/>
@@ -165,7 +165,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="待办" image="TabBar_Item_1" id="PFb-Mw-ELL"/>
-                    <navigationItem key="navigationItem" id="S7o-94-J40"/>
+                    <navigationItem key="navigationItem" title="待办" id="S7o-94-J40"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byY-jw-ohA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -188,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="-252" y="-1426"/>
         </scene>
-        <!--首页-->
+        <!--上海凌柯 . 工作易-->
         <scene sceneID="inF-ED-tAU">
             <objects>
-                <viewController id="RSH-HX-jCI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomepageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RSH-HX-jCI" customClass="HomepageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sLi-aC-pdD"/>
                         <viewControllerLayoutGuide type="bottom" id="jyQ-k9-qOy"/>
@@ -202,7 +202,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" image="TabBar_Item_1" id="b6y-Q1-Sf5"/>
-                    <navigationItem key="navigationItem" id="2rw-7u-gET"/>
+                    <navigationItem key="navigationItem" title="上海凌柯 . 工作易" id="2rw-7u-gET">
+                        <barButtonItem key="leftBarButtonItem" image="TabBar_Item_1" style="done" id="8ZW-AV-nhq">
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="recordAction:" destination="RSH-HX-jCI" id="Wdu-4X-CT0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="TabBar_Item_1" id="p7T-jE-GS3">
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="fastApplyAction:" destination="RSH-HX-jCI" id="y5O-IF-dVB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wZR-se-cPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

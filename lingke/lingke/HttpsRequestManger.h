@@ -14,4 +14,6 @@
 
 + (void)sendHttpRequestForTutorialsSuccess:(void (^)(NSURLSessionDataTask *  task, id  responseObject))success failure:(void (^)(NSURLSessionDataTask *  task, NSError * error))failure;
 
+
++ (void)sendHttpRequestForVerificationWithUnitcode:(NSString *)unitcode mobile:(NSString *)mobile success:(void (^)(NSURLSessionDataTask * task, id  responseObject))success failure:(void (^)(NSURLSessionDataTask * task, NSError * error))failure;
 @end
