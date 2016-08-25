@@ -773,6 +773,7 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
             }
           }
         }
+          
       }
 
       // now evaluate the path
