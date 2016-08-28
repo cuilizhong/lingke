@@ -10,6 +10,8 @@
 #import "LocalData.h"
 #import "HomeappModel.h"
 #import "NewsInfoModel.h"
+#import "HomepageCell.h"
+#import "ExtendappModel.h"
 
 @interface HomepageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -96,6 +98,42 @@
                 
             }
             
+            
+            //获取扩展功能数据
+            NSDictionary *extendappDic = [responseDic objectForKey:@"extendapp"];
+            
+            NSArray *extendappArray = extendappDic[@"app"];
+            
+            for (NSDictionary *dic in extendappArray) {
+                
+                ExtendappModel *extendappModel = [[ExtendappModel alloc]init];
+                
+                [extendappModel setValueFromDic:dic];
+                
+                NSDictionary *appmenusDic = dic[@"appmenus"];
+                
+                NSArray *appmenuArray = appmenusDic[@"appmenu"];
+                
+                for (NSDictionary *tmpDic in appmenuArray) {
+                    
+                    AppmenuModel *appmenuModel = [[AppmenuModel alloc]init];
+                    
+                    [appmenuModel setValueFromDic:tmpDic];
+                    
+                    [extendappModel.appmenu addObject:appmenuModel];
+                    
+                }
+                
+                [extendappModel.appmenus setObject:extendappModel.appmenu forKey:@"appmenus"];
+                
+                [self.extendappDataArray addObject:extendappModel];
+                
+            }
+            
+            
+            NSLog(@"self.extendappDataArray = %@",self.extendappDataArray);
+            
+            
 #pragma mark-请求首页新闻
             NSDictionary *dataDic = @{
                                       
@@ -137,9 +175,9 @@
                 if ([[xmlDoc objectForKey:@"statuscode"]isEqualToString:@"0"]) {
                     
                     //获取数据成功
-                    NSDictionary *requestDic = [xmlDoc objectForKey:@"requestdata"];
+                    NSDictionary *responseDic = [xmlDoc objectForKey:@"responsedata"];
                     
-                    NSDictionary *newsinfosDic = requestDic[@"newsinfos"];
+                    NSDictionary *newsinfosDic = responseDic[@"newsinfos"];
                     
                     NSArray *newsinfoArray = newsinfosDic[@"newsinfo"];
                     
@@ -153,6 +191,11 @@
                     }
                     
                     //设置新闻
+                    [self.tableView reloadData];
+
+                    
+                    
+                    
                     
                 }else{
                     //获取数据失败
@@ -167,7 +210,7 @@
                 
             }];
 
-            //获取扩展功能数据
+           
             
         }else{
             
@@ -196,7 +239,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    HomepageCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"HomepageCell" owner:self options:nil]objectAtIndex:indexPath.row];
     
+    [cell showCellWithNewsInfoModelArray:self.newsInfoArray extendappArray:self.extendappDataArray];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 0) {
+        return 160.0f;
+    }else{
+        
+        return self.view.frame.size.height - 160.0f;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -24,6 +24,11 @@
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
 		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
 		072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190771D72CB0D00EA832B /* NewsInfoModel.m */; };
+		0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721907A1D72CF7300EA832B /* HomepageCell.m */; };
+		0721907D1D72CF8000EA832B /* HomepageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0721907C1D72CF8000EA832B /* HomepageCell.xib */; };
+		072190811D72D18500EA832B /* HomepageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721907F1D72D18500EA832B /* HomepageCollectionViewCell.m */; };
+		072190821D72D18500EA832B /* HomepageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072190801D72D18500EA832B /* HomepageCollectionViewCell.xib */; };
+		072190851D73158600EA832B /* ExtendappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190841D73158600EA832B /* ExtendappModel.m */; };
 		072C28611D6C874200EAFFAC /* LocalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28601D6C874200EAFFAC /* LocalData.m */; };
 		072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28631D6C9A2200EAFFAC /* BasicViewController.m */; };
 		072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28661D6C9A4700EAFFAC /* TutorialsViewController.m */; };
@@ -95,6 +100,14 @@
 		072190741D72972100EA832B /* HomeappModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeappModel.m; path = lingke/Model/HomeappModel.m; sourceTree = "<group>"; };
 		072190761D72CB0D00EA832B /* NewsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsInfoModel.h; path = lingke/Model/NewsInfoModel.h; sourceTree = "<group>"; };
 		072190771D72CB0D00EA832B /* NewsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsInfoModel.m; path = lingke/Model/NewsInfoModel.m; sourceTree = "<group>"; };
+		072190791D72CF7300EA832B /* HomepageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageCell.h; sourceTree = "<group>"; };
+		0721907A1D72CF7300EA832B /* HomepageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageCell.m; sourceTree = "<group>"; };
+		0721907C1D72CF8000EA832B /* HomepageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomepageCell.xib; sourceTree = "<group>"; };
+		0721907E1D72D18500EA832B /* HomepageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageCollectionViewCell.h; sourceTree = "<group>"; };
+		0721907F1D72D18500EA832B /* HomepageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageCollectionViewCell.m; sourceTree = "<group>"; };
+		072190801D72D18500EA832B /* HomepageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomepageCollectionViewCell.xib; sourceTree = "<group>"; };
+		072190831D73158600EA832B /* ExtendappModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtendappModel.h; path = lingke/Model/ExtendappModel.h; sourceTree = "<group>"; };
+		072190841D73158600EA832B /* ExtendappModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExtendappModel.m; path = lingke/Model/ExtendappModel.m; sourceTree = "<group>"; };
 		072C285F1D6C874200EAFFAC /* LocalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalData.h; path = lingke/LocalData.h; sourceTree = "<group>"; };
 		072C28601D6C874200EAFFAC /* LocalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalData.m; path = lingke/LocalData.m; sourceTree = "<group>"; };
 		072C28621D6C9A2200EAFFAC /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
@@ -290,6 +303,8 @@
 				072190741D72972100EA832B /* HomeappModel.m */,
 				072190761D72CB0D00EA832B /* NewsInfoModel.h */,
 				072190771D72CB0D00EA832B /* NewsInfoModel.m */,
+				072190831D73158600EA832B /* ExtendappModel.h */,
+				072190841D73158600EA832B /* ExtendappModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -308,6 +323,12 @@
 			children = (
 				072C28821D6D900100EAFFAC /* HomepageViewController.h */,
 				072C28831D6D900100EAFFAC /* HomepageViewController.m */,
+				072190791D72CF7300EA832B /* HomepageCell.h */,
+				0721907A1D72CF7300EA832B /* HomepageCell.m */,
+				0721907C1D72CF8000EA832B /* HomepageCell.xib */,
+				0721907E1D72D18500EA832B /* HomepageCollectionViewCell.h */,
+				0721907F1D72D18500EA832B /* HomepageCollectionViewCell.m */,
+				072190801D72D18500EA832B /* HomepageCollectionViewCell.xib */,
 			);
 			name = Homepage;
 			sourceTree = "<group>";
@@ -474,7 +495,9 @@
 			files = (
 				070C163D1D693CF800738BC7 /* LaunchScreen.storyboard in Resources */,
 				070C163A1D693CF800738BC7 /* Assets.xcassets in Resources */,
+				072190821D72D18500EA832B /* HomepageCollectionViewCell.xib in Resources */,
 				070C16381D693CF800738BC7 /* Main.storyboard in Resources */,
+				0721907D1D72CF8000EA832B /* HomepageCell.xib in Resources */,
 				072C28751D6D6B9100EAFFAC /* LoginTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */,
+				072190851D73158600EA832B /* ExtendappModel.m in Sources */,
 				072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */,
 				070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */,
 				070C16641D69443000738BC7 /* ConfigureColor.m in Sources */,
@@ -559,6 +583,7 @@
 				072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */,
 				072190721D7290BA00EA832B /* XMLDictionary.m in Sources */,
 				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
+				0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */,
 				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
 				072190751D72972200EA832B /* HomeappModel.m in Sources */,
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
@@ -566,6 +591,7 @@
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
+				072190811D72D18500EA832B /* HomepageCollectionViewCell.m in Sources */,
 				072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */,
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
