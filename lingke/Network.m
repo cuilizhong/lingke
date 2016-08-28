@@ -22,7 +22,6 @@
 
 @implementation Network
 
-
 - (instancetype)initWithURL:(NSString *)URL parameters:(NSDictionary *)parameters requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail{
     
     self = [super init];
@@ -40,15 +39,61 @@
         
         for (NSString *key in parameterKeys) {
             
-            GDataXMLElement *element = [GDataXMLNode elementWithName:key stringValue:parameters[key]];
-            
-            [rootElement addChild:element];
+            if ([parameters[key] isKindOfClass:[NSDictionary class]]) {
+                
+                GDataXMLElement *element = [GDataXMLNode elementWithName:key];
+                
+                NSDictionary *subElementParamenter = (NSDictionary *)parameters[key];
+                
+                NSArray *elementKeys = subElementParamenter.allKeys;
+                
+                for (NSString *elementKey in elementKeys) {
+                    
+                    if ([subElementParamenter[elementKey] isKindOfClass:[NSDictionary class]]) {
+                        
+                        GDataXMLElement *element1 = [GDataXMLNode elementWithName:elementKey];
+                        
+                        NSDictionary *subElementParamenter1 = (NSDictionary *)subElementParamenter[elementKey];
+                        
+                        NSArray *elementKeys1 = subElementParamenter1.allKeys;
+                        
+                        for (NSString *elementKey1 in elementKeys1) {
+                            
+                            GDataXMLElement *tmpElement1 = [GDataXMLNode elementWithName:elementKey1 stringValue:subElementParamenter1[elementKey1]];
+                            
+                            [element1 addChild:tmpElement1];
+                        }
+                        
+                        [element addChild:element1];
+                        
+                    }else if ([subElementParamenter[elementKey] isKindOfClass:[NSString class]]){
+                        
+                        GDataXMLElement *tmpElement = [GDataXMLNode elementWithName:elementKey stringValue:subElementParamenter[elementKey]];
+                        
+                        [element addChild:tmpElement];
+                        
+                    }
+                }
+                
+                [rootElement addChild:element];
 
+            }else if ([parameters[key] isKindOfClass:[NSString class]]){
+                
+                GDataXMLElement *element = [GDataXMLNode elementWithName:key stringValue:parameters[key]];
+                
+                [rootElement addChild:element];
+            }
         }
         
         GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithRootElement:rootElement];
         
         NSData *data =  [document XMLData];
+        
+        
+        NSString *xmlStr  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"请求的参数 = %@",xmlStr);
+
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL]];
         

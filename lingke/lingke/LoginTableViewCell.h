@@ -13,6 +13,13 @@ typedef void(^EntrySystemBlock)();
 
 @interface LoginTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UITextField *unitcodeTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+
 @property(nonatomic,strong)EntrySystemBlock entrySystemBlock;
 
 - (void)showCellWithEntrySystemBlock:(EntrySystemBlock)entrySystemBlock;

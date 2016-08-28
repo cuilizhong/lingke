@@ -61,6 +61,9 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="unitcodeTextField" destination="bsS-pJ-u13" id="zeh-fi-jqV"/>
+            </connections>
             <point key="canvasLocation" x="470" y="410.5"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="hfO-7S-6CR" customClass="LoginTableViewCell">
@@ -107,6 +110,9 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="phoneNumberTextField" destination="4rc-dP-RKM" id="VIk-ed-hFD"/>
+            </connections>
             <point key="canvasLocation" x="470" y="510.5"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="GOZ-GG-jU3" customClass="LoginTableViewCell">
@@ -153,6 +159,9 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="passwordTextField" destination="DR2-Jt-VMA" id="R3N-9s-k7a"/>
+            </connections>
             <point key="canvasLocation" x="470" y="618.5"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="120" id="8Dn-Ie-sQ1" customClass="LoginTableViewCell">

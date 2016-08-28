@@ -7,4 +7,5 @@ target 'lingke' do
     pod 'MBProgressHUD'
     pod 'MJRefresh'
     pod 'SDWebImage'
+    pod 'SSKeychain'
 end

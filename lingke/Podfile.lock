@@ -19,19 +19,22 @@ PODS:
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
+  - SSKeychain (1.4.0)
 
 DEPENDENCIES:
   - AFNetworking
   - MBProgressHUD
   - MJRefresh
   - SDWebImage
+  - SSKeychain
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
 
-PODFILE CHECKSUM: 0bb4f7cce47b73ae8c294965bf0272ca773f67dc
+PODFILE CHECKSUM: a09dc97792622eb768096995b41510cc0591cca5
 
 COCOAPODS: 1.0.1

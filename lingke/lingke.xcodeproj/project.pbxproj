@@ -20,6 +20,10 @@
 		070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16F41D6C336700738BC7 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		070C16F71D6C338D00738BC7 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 070C16F61D6C338D00738BC7 /* libxml2.tbd */; };
 		070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */; };
+		0721906E1D7015E200EA832B /* UserinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721906D1D7015E200EA832B /* UserinfoModel.m */; };
+		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
+		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
+		072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190771D72CB0D00EA832B /* NewsInfoModel.m */; };
 		072C28611D6C874200EAFFAC /* LocalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28601D6C874200EAFFAC /* LocalData.m */; };
 		072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28631D6C9A2200EAFFAC /* BasicViewController.m */; };
 		072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28661D6C9A4700EAFFAC /* TutorialsViewController.m */; };
@@ -82,6 +86,15 @@
 		070C16F61D6C338D00738BC7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		070C16F91D6C4C0300738BC7 /* TutorialsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialsModel.h; path = lingke/Model/TutorialsModel.h; sourceTree = "<group>"; };
 		070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialsModel.m; path = lingke/Model/TutorialsModel.m; sourceTree = "<group>"; };
+		0721906A1D6F2B3400EA832B /* HttpInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpInterface.h; path = lingke/HttpInterface.h; sourceTree = "<group>"; };
+		0721906C1D7015E200EA832B /* UserinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserinfoModel.h; path = lingke/Model/UserinfoModel.h; sourceTree = "<group>"; };
+		0721906D1D7015E200EA832B /* UserinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserinfoModel.m; path = lingke/Model/UserinfoModel.m; sourceTree = "<group>"; };
+		072190701D7290BA00EA832B /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = lingke/XMLDictionary.h; sourceTree = "<group>"; };
+		072190711D7290BA00EA832B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = lingke/XMLDictionary.m; sourceTree = "<group>"; };
+		072190731D72972100EA832B /* HomeappModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeappModel.h; path = lingke/Model/HomeappModel.h; sourceTree = "<group>"; };
+		072190741D72972100EA832B /* HomeappModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeappModel.m; path = lingke/Model/HomeappModel.m; sourceTree = "<group>"; };
+		072190761D72CB0D00EA832B /* NewsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsInfoModel.h; path = lingke/Model/NewsInfoModel.h; sourceTree = "<group>"; };
+		072190771D72CB0D00EA832B /* NewsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsInfoModel.m; path = lingke/Model/NewsInfoModel.m; sourceTree = "<group>"; };
 		072C285F1D6C874200EAFFAC /* LocalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalData.h; path = lingke/LocalData.h; sourceTree = "<group>"; };
 		072C28601D6C874200EAFFAC /* LocalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalData.m; path = lingke/LocalData.m; sourceTree = "<group>"; };
 		072C28621D6C9A2200EAFFAC /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
@@ -146,6 +159,7 @@
 		070C16211D693CF800738BC7 = {
 			isa = PBXGroup;
 			children = (
+				0721906F1D72907800EA832B /* Third */,
 				072C28761D6D789100EAFFAC /* UIScrollView+TouchEvent.h */,
 				072C28771D6D789100EAFFAC /* UIScrollView+TouchEvent.m */,
 				072C285F1D6C874200EAFFAC /* LocalData.h */,
@@ -250,6 +264,7 @@
 				070C16EC1D6C18F500738BC7 /* HttpsRequestManger.m */,
 				07FFA6F31D6EDADB00A40454 /* Network.h */,
 				07FFA6F41D6EDADB00A40454 /* Network.m */,
+				0721906A1D6F2B3400EA832B /* HttpInterface.h */,
 			);
 			name = HttpInstance;
 			sourceTree = "<group>";
@@ -269,8 +284,23 @@
 			children = (
 				070C16F91D6C4C0300738BC7 /* TutorialsModel.h */,
 				070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */,
+				0721906C1D7015E200EA832B /* UserinfoModel.h */,
+				0721906D1D7015E200EA832B /* UserinfoModel.m */,
+				072190731D72972100EA832B /* HomeappModel.h */,
+				072190741D72972100EA832B /* HomeappModel.m */,
+				072190761D72CB0D00EA832B /* NewsInfoModel.h */,
+				072190771D72CB0D00EA832B /* NewsInfoModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		0721906F1D72907800EA832B /* Third */ = {
+			isa = PBXGroup;
+			children = (
+				072190701D7290BA00EA832B /* XMLDictionary.h */,
+				072190711D7290BA00EA832B /* XMLDictionary.m */,
+			);
+			name = Third;
 			sourceTree = "<group>";
 		};
 		072C287C1D6D8E8300EAFFAC /* Homepage */ = {
@@ -527,8 +557,10 @@
 				070C16ED1D6C18F500738BC7 /* HttpsRequestManger.m in Sources */,
 				072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */,
 				072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */,
+				072190721D7290BA00EA832B /* XMLDictionary.m in Sources */,
 				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
 				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
+				072190751D72972200EA832B /* HomeappModel.m in Sources */,
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
@@ -538,6 +570,8 @@
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
 				07FFA6F51D6EDADB00A40454 /* Network.m in Sources */,
+				072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */,
+				0721906E1D7015E200EA832B /* UserinfoModel.m in Sources */,
 				072C28701D6D689000EAFFAC /* BasicTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

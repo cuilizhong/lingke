@@ -44,20 +44,20 @@
     return [userDefaults objectForKey:@"token"];
 }
 
-+ (void)setLicence:(NSString *)licence{
++ (void)setUnitcode:(NSString *)unitcode{
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    [userDefaults setObject:licence forKey:@"licence"];
+    [userDefaults setObject:unitcode forKey:@"unitcode"];
     
     [userDefaults synchronize];
 }
 
-+ (NSString *)getLicence{
++ (NSString *)getUnitcode{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    return [userDefaults objectForKey:@"licence"];
+    return [userDefaults objectForKey:@"unitcode"];
 
 }
 

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Network.h"
+#import "UserinfoModel.h"
+#import "XMLDictionary.h"
 @interface BasicViewController : UIViewController
 
 @end

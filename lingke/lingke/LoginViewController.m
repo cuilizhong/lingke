@@ -11,6 +11,26 @@
 #import "UIScrollView+TouchEvent.h"
 #import "MainTabBarController.h"
 #import "Network.h"
+#import "HttpInterface.h"
+#import "GDataXMLNode.h"
+#import <SSKeychain/SSKeychain.h>
+#import "LocalData.h"
+#import "UserinfoModel.h"
+#import "GDataXMLNode.h"
+
+
+
+@interface LoginViewController()
+
+@property(nonatomic,strong)UITextField *phoneNumberTextField;
+
+@property(nonatomic,strong)UITextField *passwordTextField;
+
+@property(nonatomic,strong)UITextField *unitcodeTextField;
+
+@end
+
+
 @implementation LoginViewController
 
 
@@ -51,7 +71,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     LoginTableViewCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"LoginTableViewCell" owner:self options:nil]objectAtIndex:indexPath.row];
     
     if (indexPath.row == 4) {
@@ -60,13 +79,29 @@
         
         [cell showCellWithEntrySystemBlock:^{
             
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            [weakSelf requestForLogin];
             
-            MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-            
-            [weakSelf.navigationController pushViewController:mainTabBarController animated:YES];
             
         }];
+    }
+    
+    if (indexPath.row == 1) {
+        
+        self.unitcodeTextField = cell.unitcodeTextField;
+        
+        self.unitcodeTextField.text = @"LKTEST01";
+
+    }else if (indexPath.row == 2){
+        
+        self.phoneNumberTextField = cell.phoneNumberTextField;
+        
+        self.phoneNumberTextField.text = @"13961893758";
+
+    }else if (indexPath.row == 3){
+        
+        self.passwordTextField = cell.passwordTextField;
+        
+        self.passwordTextField.text = @"password";
     }
   
     return cell;
@@ -97,30 +132,179 @@
     }
 }
 
+
 #pragma mark-request
 - (void)requestForLogin{
     
+    
+    if (self.unitcodeTextField.text.length<1) {
+        
+        
+        return;
+    }
+    
+    if (self.phoneNumberTextField.text.length<1) {
+        
+        return;
+    }
+    
+    if (self.passwordTextField.text.length<1) {
+        
+        
+        return;
+    }
+    
     NSDictionary *parameters = @{
                                  
-                                 @"unitcode":@"LKTEST01",
+                                 @"unitcode":self.unitcodeTextField.text,
                                  
-                                 @"mobile":@"13961893758"
+                                 @"mobile":self.phoneNumberTextField.text
                                  
                                  };
     
-    Network *network = [[Network alloc]initWithURL:@"http://www.linkersoft.com:9001/m1srv/xml/person" parameters:parameters requestSuccess:^(NSData *data) {
+    Network *verificationNetwork = [[Network alloc]initWithURL:verificationURL parameters:parameters requestSuccess:^(NSData *data) {
         
         NSString *xmlStr  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
+        //xml文档类
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:nil];
+        
+        //得到根节点,maps节点
+        GDataXMLElement *mapsEle = [doc rootElement];
+        
+        GDataXMLElement *responsedataEle = [[mapsEle elementsForName:@"responsedata"] lastObject];
+        
+        GDataXMLElement *serverinfoEle = [[responsedataEle elementsForName:@"serverinfo"] lastObject];
+       
+        GDataXMLElement *iphostEle = [[serverinfoEle elementsForName:@"iphost"]lastObject];
+        
+        GDataXMLElement *sslEle = [[serverinfoEle elementsForName:@"ssl"]lastObject];
+        
+        GDataXMLElement *pathEle = [[serverinfoEle elementsForName:@"path"]lastObject];
+        
+        GDataXMLElement *portEle = [[serverinfoEle elementsForName:@"port"]lastObject];
+        
+        NSString *iphost = iphostEle.stringValue;
+        
+        NSString *ssl = sslEle.stringValue;
+        
+        NSString *path = pathEle.stringValue;
+        
+        NSString *port = portEle.stringValue;
+
+        
+        NSString *loginInterface = [NSString stringWithFormat:@"%@://%@:%@%@",[ssl isEqualToString:@"no"]?@"http":@"https",iphost,port,path];
+
+        NSLog(@"interface = %@",loginInterface);
+        
         NSLog(@"xmlStr = %@",xmlStr);
+        
+        NSDictionary *loginParameters = @{
+                                     
+                                     @"unitcode":self.unitcodeTextField.text,
+                                     
+                                     @"mobile":self.phoneNumberTextField.text,
+                                     
+                                     @"password":self.passwordTextField.text,
+                                     
+                                     @"clientos":@"ios",
+
+                                     @"clientversion":[NSString stringWithFormat:@"ios%@",[[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]],
+
+                                     @"clientid":[self getDeviceId]
+                                     
+                                     };
+        
+        NSLog(@"loginParameters = %@",loginParameters);
+        
+        Network *loginNetwork = [[Network alloc]initWithURL:[NSString stringWithFormat:@"%@%@",loginInterface,loginURL] parameters:loginParameters requestSuccess:^(NSData *data) {
+            
+            NSString *xmlStr  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            NSLog(@"xmlStr = %@",xmlStr);
+            
+            GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:nil];
+            
+            GDataXMLElement *mapsEle = [doc rootElement];
+            
+            GDataXMLElement *statuscodeEle = [[mapsEle elementsForName:@"statuscode"] lastObject];
+            
+            if ([statuscodeEle.stringValue isEqualToString:@"0"]) {
+                //获取数据成功
+                //登陆成功保存用户信息
+                GDataXMLElement *responsedataEle = [[mapsEle elementsForName:@"responsedata"] lastObject];
+                
+                GDataXMLElement *sessioninfoEle = [[responsedataEle elementsForName:@"sessioninfo"]lastObject];
+
+                GDataXMLElement *tokenEle = [[sessioninfoEle elementsForName:@"token"] lastObject];
+
+                [LocalData setToken:tokenEle.stringValue];
+                
+                [LocalData setPhoneNumber:self.phoneNumberTextField.text];
+                
+                [LocalData setPassword:self.passwordTextField.text];
+                
+                [LocalData setUnitcode:self.unitcodeTextField.text];
+                
+                
+                [[UserinfoModel sharedInstance]setValueFromResponsedataEle:responsedataEle];
+                
+                //跳转到主页面
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                
+                MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+                
+                [self.navigationController pushViewController:mainTabBarController animated:YES];
+                
+            }else{
+                
+                //弹出错误消息
+                GDataXMLElement *statusmsgEle = [[mapsEle elementsForName:@"statusmsg"] lastObject];
+                
+                NSString *errorMsg = statusmsgEle.stringValue;
+
+                NSLog(@"errorMsg = %@",errorMsg);
+                
+            }
+            
+        } requestFail:^(NSError *error) {
+            
+            NSLog(@"请求失败");
+        }];
         
     } requestFail:^(NSError *error) {
         
+        NSLog(@"请求失败");
+
     }];
     
 }
 
+/*
+ UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+ 
+ MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+ 
+ [weakSelf.navigationController pushViewController:mainTabBarController animated:YES];
+ */
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+
+- (NSString *)getDeviceId
+{
+    NSString * currentDeviceUUIDStr = [SSKeychain passwordForService:@"com.Softtek.lingke"account:@"uuid"];
+    
+    if (currentDeviceUUIDStr == nil || [currentDeviceUUIDStr isEqualToString:@""])
+    {
+        NSUUID * currentDeviceUUID  = [UIDevice currentDevice].identifierForVendor;
+        currentDeviceUUIDStr = currentDeviceUUID.UUIDString;
+        currentDeviceUUIDStr = [currentDeviceUUIDStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        currentDeviceUUIDStr = [currentDeviceUUIDStr lowercaseString];
+        [SSKeychain setPassword: currentDeviceUUIDStr forService:@"com.Softtek.lingke"account:@"uuid"];
+    }
+    return currentDeviceUUIDStr;
 }
 @end

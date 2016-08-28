@@ -40,6 +40,10 @@
 
 + (NSString *)getPhoneNumber;
 
++ (void)setPassword:(NSString *)password;
+
++ (NSString *)getPassword;
+
 
 + (void)setToken:(NSString *)token;
 
@@ -49,5 +53,9 @@
 + (void)setTutorialsImageUpdateDate:(NSString *)tutorialsImageUpdateDate;
 
 + (NSString *)getTutorialsImageUpdateDate;
+
++ (void)setUnitcode:(NSString *)unitcode;
++ (NSString *)getUnitcode;
+
 
 @end
