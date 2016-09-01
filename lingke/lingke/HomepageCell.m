@@ -9,7 +9,9 @@
 #import "HomepageCell.h"
 #import "HomepageCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
-#import "ExtendappModel.h"
+#import "NewInfoImageView.h"
+
+
 
 
 @interface HomepageCell()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -24,7 +26,11 @@
 
 @property (strong,nonatomic)NSArray <NewsInfoModel*>* newsInfoModelArray;
 
-@property (strong,nonatomic)NSArray *extendappArray;
+@property (strong,nonatomic)NSArray <ExtendappModel*>* extendappArray;
+
+@property (strong,nonatomic)JumpNewsinfoBlock jumpNewsinfoBlock;
+
+@property (strong,nonatomic)EnterExtendappBlock enterExtendappBlock;
 
 @end
 
@@ -40,7 +46,7 @@
     self.collectionView.dataSource = self;
 }
 
-- (void)showCellWithNewsInfoModelArray:(NSArray<NewsInfoModel*>*)newsInfoModelArray extendappArray:(NSArray *)extendappArray{
+- (void)showCellWithNewsInfoModelArray:(NSArray<NewsInfoModel*>*)newsInfoModelArray extendappArray:(NSArray *)extendappArray jumpNewsinfoBlock:(JumpNewsinfoBlock)jumpNewsinfoBlock enterExtendappBlock:(EnterExtendappBlock)enterExtendappBlock{
     
     self.newsInfoModelArray = newsInfoModelArray;
     
@@ -60,9 +66,11 @@
         
         NSString *img = newsInfoModel.img;
         
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.frame.size.width, 0, self.frame.size.width, self.frame.size.height)];
+        NewInfoImageView *imageView = [[NewInfoImageView alloc]initWithFrame:CGRectMake(i*self.frame.size.width, 0, self.frame.size.width, self.frame.size.height)];
         
         imageView.userInteractionEnabled = YES;
+        
+        imageView.newsInfoModel = newsInfoModel;
         
         [imageView sd_setImageWithURL:[NSURL URLWithString:img] placeholderImage:[UIImage imageNamed:@" "] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
@@ -88,6 +96,10 @@
         
     }
     
+    self.jumpNewsinfoBlock = jumpNewsinfoBlock;
+    
+    self.enterExtendappBlock = enterExtendappBlock;
+    
     [self.collectionView reloadData];
 
 }
@@ -95,6 +107,9 @@
 - (void)tap:(UITapGestureRecognizer*)sender{
     
     NSLog(@"点击");
+    NewInfoImageView *view = (NewInfoImageView *)sender.view;
+    
+    self.jumpNewsinfoBlock(view.newsInfoModel);
 }
 
 
@@ -152,8 +167,12 @@
 
 //选择了某个cell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor greenColor]];
+//    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+//    [cell setBackgroundColor:[UIColor greenColor]];
+    
+    ExtendappModel *extendappModel = self.extendappArray[indexPath.row];
+    
+    self.enterExtendappBlock(extendappModel);
 }
 
 //取消选择了某个cell

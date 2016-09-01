@@ -14,6 +14,8 @@ static const NSString *verificationURL = @"http://www.linkersoft.com:9001/m1srv/
 
 static const NSString *loginURL = @"/dataapi/xml/login";
 
+static const NSString *wfapplyURL = @"/dataapi/wfapply";
+
 //首页新闻
 static const NSString *homenewsURL = @"/m1/dataapi/homenews";
 

@@ -128,5 +128,20 @@
     
 }
 
++ (void)setLoginInterface:(NSString *)loginInterface{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:loginInterface forKey:@"loginInterface"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getLoginInterface{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+    return [userDefaults objectForKey:@"loginInterface"];
+}
 
 @end

@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsInfoModel.h"
+#import "ExtendappModel.h"
+
+
+typedef void(^JumpNewsinfoBlock)(NewsInfoModel *newsInfoModel);
+
+typedef void(^EnterExtendappBlock)(ExtendappModel *extendappModel);
 
 @interface HomepageCell : UITableViewCell
 
 
-- (void)showCellWithNewsInfoModelArray:(NSArray<NewsInfoModel*>*)newsInfoModelArray extendappArray:(NSArray *)extendappArray;
+- (void)showCellWithNewsInfoModelArray:(NSArray<NewsInfoModel*>*)newsInfoModelArray extendappArray:(NSArray *)extendappArray jumpNewsinfoBlock:(JumpNewsinfoBlock)jumpNewsinfoBlock enterExtendappBlock:(EnterExtendappBlock)enterExtendappBlock;
 @end

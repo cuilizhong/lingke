@@ -43,6 +43,23 @@
 		072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28891D6D901C00EAFFAC /* ScanViewController.m */; };
 		072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288C1D6D902800EAFFAC /* MessageViewController.m */; };
 		072C28901D6D903700EAFFAC /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288F1D6D903700EAFFAC /* MyViewController.m */; };
+		073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D01D73DC090013DB67 /* NewInfoImageView.m */; };
+		073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */; };
+		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
+		073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D91D7414800013DB67 /* ExtendappCell.m */; };
+		07B44B831D76DA860023214C /* ApplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B821D76DA860023214C /* ApplyModel.m */; };
+		07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B851D76DE2B0023214C /* LZPopOverMenu.m */; };
+		07B44B891D77B94B0023214C /* FastApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B881D77B94B0023214C /* FastApplyViewController.m */; };
+		07B44B8D1D77D33C0023214C /* MailListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B8B1D77D33C0023214C /* MailListTableViewCell.m */; };
+		07B44B8E1D77D33C0023214C /* MailListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B44B8C1D77D33C0023214C /* MailListTableViewCell.xib */; };
+		07B44B911D7806660023214C /* MailListTableViewHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B901D7806660023214C /* MailListTableViewHeadView.m */; };
+		07B44B931D7807040023214C /* MailListTableViewHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B44B921D7807040023214C /* MailListTableViewHeadView.xib */; };
+		07B44B961D7815920023214C /* MailListClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B951D7815920023214C /* MailListClassViewController.m */; };
+		07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */; };
+		07EE15391D748C2B00E5CE91 /* AppurikindTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */; };
+		07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15461D75DB8800E5CE91 /* ApplyViewController.m */; };
+		07EE15541D7677F300E5CE91 /* ExtendappDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15531D7677F300E5CE91 /* ExtendappDetailViewController.m */; };
+		07EE155A1D76B8AF00E5CE91 /* MailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15591D76B8AF00E5CE91 /* MailListViewController.m */; };
 		07FFA6F51D6EDADB00A40454 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA6F41D6EDADB00A40454 /* Network.m */; };
 		7D5B178C81F2F482EE8AB5E4 /* Pods_lingke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABC1DE342ED79682D8CD2E6 /* Pods_lingke.framework */; };
 /* End PBXBuildFile section */
@@ -135,6 +152,37 @@
 		072C288C1D6D902800EAFFAC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		072C288E1D6D903700EAFFAC /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		072C288F1D6D903700EAFFAC /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		073A54CF1D73DC090013DB67 /* NewInfoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInfoImageView.h; sourceTree = "<group>"; };
+		073A54D01D73DC090013DB67 /* NewInfoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInfoImageView.m; sourceTree = "<group>"; };
+		073A54D21D73E0600013DB67 /* NewsinfoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsinfoDetailsViewController.h; sourceTree = "<group>"; };
+		073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsinfoDetailsViewController.m; sourceTree = "<group>"; };
+		073A54D51D7404700013DB67 /* ExtendappViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendappViewController.h; sourceTree = "<group>"; };
+		073A54D61D7404700013DB67 /* ExtendappViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappViewController.m; sourceTree = "<group>"; };
+		073A54D81D7414800013DB67 /* ExtendappCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendappCell.h; sourceTree = "<group>"; };
+		073A54D91D7414800013DB67 /* ExtendappCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappCell.m; sourceTree = "<group>"; };
+		07B44B811D76DA860023214C /* ApplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyModel.h; path = lingke/Model/ApplyModel.h; sourceTree = "<group>"; };
+		07B44B821D76DA860023214C /* ApplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplyModel.m; path = lingke/Model/ApplyModel.m; sourceTree = "<group>"; };
+		07B44B841D76DE2B0023214C /* LZPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LZPopOverMenu.h; path = lingke/LZPopOverMenu.h; sourceTree = "<group>"; };
+		07B44B851D76DE2B0023214C /* LZPopOverMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LZPopOverMenu.m; path = lingke/LZPopOverMenu.m; sourceTree = "<group>"; };
+		07B44B871D77B94B0023214C /* FastApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastApplyViewController.h; sourceTree = "<group>"; };
+		07B44B881D77B94B0023214C /* FastApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastApplyViewController.m; sourceTree = "<group>"; };
+		07B44B8A1D77D33C0023214C /* MailListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailListTableViewCell.h; sourceTree = "<group>"; };
+		07B44B8B1D77D33C0023214C /* MailListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListTableViewCell.m; sourceTree = "<group>"; };
+		07B44B8C1D77D33C0023214C /* MailListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailListTableViewCell.xib; sourceTree = "<group>"; };
+		07B44B8F1D7806660023214C /* MailListTableViewHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailListTableViewHeadView.h; sourceTree = "<group>"; };
+		07B44B901D7806660023214C /* MailListTableViewHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListTableViewHeadView.m; sourceTree = "<group>"; };
+		07B44B921D7807040023214C /* MailListTableViewHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailListTableViewHeadView.xib; sourceTree = "<group>"; };
+		07B44B941D7815920023214C /* MailListClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailListClassViewController.h; sourceTree = "<group>"; };
+		07B44B951D7815920023214C /* MailListClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListClassViewController.m; sourceTree = "<group>"; };
+		07EE15351D748C2B00E5CE91 /* AppurikindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppurikindTableViewCell.h; sourceTree = "<group>"; };
+		07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppurikindTableViewCell.m; sourceTree = "<group>"; };
+		07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppurikindTableViewCell.xib; sourceTree = "<group>"; };
+		07EE15451D75DB8800E5CE91 /* ApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyViewController.h; sourceTree = "<group>"; };
+		07EE15461D75DB8800E5CE91 /* ApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyViewController.m; sourceTree = "<group>"; };
+		07EE15521D7677F300E5CE91 /* ExtendappDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendappDetailViewController.h; sourceTree = "<group>"; };
+		07EE15531D7677F300E5CE91 /* ExtendappDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappDetailViewController.m; sourceTree = "<group>"; };
+		07EE15581D76B8AF00E5CE91 /* MailListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailListViewController.h; sourceTree = "<group>"; };
+		07EE15591D76B8AF00E5CE91 /* MailListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListViewController.m; sourceTree = "<group>"; };
 		07FFA6F31D6EDADB00A40454 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		07FFA6F41D6EDADB00A40454 /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
 		1F52B986CA02FD25F6B9BEE7 /* Pods-lingke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lingke.release.xcconfig"; path = "Pods/Target Support Files/Pods-lingke/Pods-lingke.release.xcconfig"; sourceTree = "<group>"; };
@@ -305,6 +353,8 @@
 				072190771D72CB0D00EA832B /* NewsInfoModel.m */,
 				072190831D73158600EA832B /* ExtendappModel.h */,
 				072190841D73158600EA832B /* ExtendappModel.m */,
+				07B44B811D76DA860023214C /* ApplyModel.h */,
+				07B44B821D76DA860023214C /* ApplyModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -312,6 +362,8 @@
 		0721906F1D72907800EA832B /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				07B44B841D76DE2B0023214C /* LZPopOverMenu.h */,
+				07B44B851D76DE2B0023214C /* LZPopOverMenu.m */,
 				072190701D7290BA00EA832B /* XMLDictionary.h */,
 				072190711D7290BA00EA832B /* XMLDictionary.m */,
 			);
@@ -323,12 +375,39 @@
 			children = (
 				072C28821D6D900100EAFFAC /* HomepageViewController.h */,
 				072C28831D6D900100EAFFAC /* HomepageViewController.m */,
+				07EE15581D76B8AF00E5CE91 /* MailListViewController.h */,
+				07EE15591D76B8AF00E5CE91 /* MailListViewController.m */,
+				07B44B941D7815920023214C /* MailListClassViewController.h */,
+				07B44B951D7815920023214C /* MailListClassViewController.m */,
+				07B44B8F1D7806660023214C /* MailListTableViewHeadView.h */,
+				07B44B901D7806660023214C /* MailListTableViewHeadView.m */,
+				07B44B921D7807040023214C /* MailListTableViewHeadView.xib */,
+				07B44B8A1D77D33C0023214C /* MailListTableViewCell.h */,
+				07B44B8B1D77D33C0023214C /* MailListTableViewCell.m */,
+				07B44B8C1D77D33C0023214C /* MailListTableViewCell.xib */,
+				073A54D21D73E0600013DB67 /* NewsinfoDetailsViewController.h */,
+				073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */,
+				073A54D51D7404700013DB67 /* ExtendappViewController.h */,
+				073A54D61D7404700013DB67 /* ExtendappViewController.m */,
+				07EE15451D75DB8800E5CE91 /* ApplyViewController.h */,
+				07EE15461D75DB8800E5CE91 /* ApplyViewController.m */,
+				07B44B871D77B94B0023214C /* FastApplyViewController.h */,
+				07B44B881D77B94B0023214C /* FastApplyViewController.m */,
+				07EE15521D7677F300E5CE91 /* ExtendappDetailViewController.h */,
+				07EE15531D7677F300E5CE91 /* ExtendappDetailViewController.m */,
+				073A54D81D7414800013DB67 /* ExtendappCell.h */,
+				073A54D91D7414800013DB67 /* ExtendappCell.m */,
+				07EE15351D748C2B00E5CE91 /* AppurikindTableViewCell.h */,
+				07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */,
+				07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */,
 				072190791D72CF7300EA832B /* HomepageCell.h */,
 				0721907A1D72CF7300EA832B /* HomepageCell.m */,
 				0721907C1D72CF8000EA832B /* HomepageCell.xib */,
 				0721907E1D72D18500EA832B /* HomepageCollectionViewCell.h */,
 				0721907F1D72D18500EA832B /* HomepageCollectionViewCell.m */,
 				072190801D72D18500EA832B /* HomepageCollectionViewCell.xib */,
+				073A54CF1D73DC090013DB67 /* NewInfoImageView.h */,
+				073A54D01D73DC090013DB67 /* NewInfoImageView.m */,
 			);
 			name = Homepage;
 			sourceTree = "<group>";
@@ -497,8 +576,11 @@
 				070C163A1D693CF800738BC7 /* Assets.xcassets in Resources */,
 				072190821D72D18500EA832B /* HomepageCollectionViewCell.xib in Resources */,
 				070C16381D693CF800738BC7 /* Main.storyboard in Resources */,
+				07B44B931D7807040023214C /* MailListTableViewHeadView.xib in Resources */,
+				07B44B8E1D77D33C0023214C /* MailListTableViewCell.xib in Resources */,
 				0721907D1D72CF8000EA832B /* HomepageCell.xib in Resources */,
 				072C28751D6D6B9100EAFFAC /* LoginTableViewCell.xib in Resources */,
+				07EE15391D748C2B00E5CE91 /* AppurikindTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,27 +655,41 @@
 			files = (
 				072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */,
 				072190851D73158600EA832B /* ExtendappModel.m in Sources */,
+				07B44B891D77B94B0023214C /* FastApplyViewController.m in Sources */,
+				073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */,
 				072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */,
 				070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */,
 				070C16641D69443000738BC7 /* ConfigureColor.m in Sources */,
 				070C16351D693CF800738BC7 /* ViewController.m in Sources */,
+				07B44B961D7815920023214C /* MailListClassViewController.m in Sources */,
 				072C28611D6C874200EAFFAC /* LocalData.m in Sources */,
 				070C16ED1D6C18F500738BC7 /* HttpsRequestManger.m in Sources */,
 				072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */,
 				072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */,
+				07B44B8D1D77D33C0023214C /* MailListTableViewCell.m in Sources */,
+				07EE15541D7677F300E5CE91 /* ExtendappDetailViewController.m in Sources */,
 				072190721D7290BA00EA832B /* XMLDictionary.m in Sources */,
+				07EE155A1D76B8AF00E5CE91 /* MailListViewController.m in Sources */,
 				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
+				07B44B911D7806660023214C /* MailListTableViewHeadView.m in Sources */,
 				0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */,
 				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
 				072190751D72972200EA832B /* HomeappModel.m in Sources */,
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
+				07B44B831D76DA860023214C /* ApplyModel.m in Sources */,
+				073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */,
+				073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */,
 				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
 				072190811D72D18500EA832B /* HomepageCollectionViewCell.m in Sources */,
 				072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */,
+				07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */,
+				07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */,
+				073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */,
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
+				07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
 				07FFA6F51D6EDADB00A40454 /* Network.m in Sources */,
 				072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */,

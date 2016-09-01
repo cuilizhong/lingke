@@ -57,5 +57,7 @@
 + (void)setUnitcode:(NSString *)unitcode;
 + (NSString *)getUnitcode;
 
++ (void)setLoginInterface:(NSString *)loginInterface;
++ (NSString *)getLoginInterface;
 
 @end

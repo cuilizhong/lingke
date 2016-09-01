@@ -12,6 +12,12 @@
 #import "NewsInfoModel.h"
 #import "HomepageCell.h"
 #import "ExtendappModel.h"
+#import "NewsinfoDetailsViewController.h"
+#import "ExtendappViewController.h"
+#import "MailListViewController.h"
+#import "ApplyModel.h"
+#import "LZPopOverMenu.h"
+#import "FastApplyViewController.h"
 
 @interface HomepageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -21,7 +27,14 @@
 
 @property(nonatomic,strong)NSMutableArray *extendappDataArray;
 
+@property(nonatomic,strong)NSMutableArray *applyArray;
+
 @property(nonatomic,strong)UITableView *tableView;
+
+@property(nonatomic,copy)NSString *applyAppCode;
+
+@property(nonatomic,copy)NSString *applyAppuri;
+
 
 @end
 
@@ -37,12 +50,23 @@
     
     self.extendappDataArray = [[NSMutableArray alloc]init];
     
+    self.applyArray = [[NSMutableArray alloc]init];
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setImage:[UIImage imageNamed:@"TabBar_Item_1"] forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame = CGRectMake(0, 0, 50, 20);
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+    
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
+    
+    
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
-    
-    
     
     NSDictionary *requestdata = @{
                                   
@@ -59,7 +83,6 @@
                                  @"requestdata":requestdata,
                                                                   
                                  };
-    
     
     Network *appcodeNetwork = [[Network alloc]initWithURL:[UserinfoModel sharedInstance].uri parameters:parameters requestSuccess:^(NSData *data) {
         
@@ -81,6 +104,9 @@
             
             NSString *appuri;
             
+//            NSString *applyAppCode;
+//            NSString *applyAppuri;
+            
             for (NSDictionary *dic in appArray) {
                 
                 HomeappModel *homeappModel = [[HomeappModel alloc]init];
@@ -94,6 +120,12 @@
                     //首页新闻
                     appcode = [dic objectForKey:@"appcode"];
                     appuri = [dic objectForKey:@"appuri"];
+                    
+                }else if([[dic objectForKey:@"appurikind"]isEqualToString:@"APPLY"]){
+                    
+                    //快速流程接口
+                    self.applyAppCode = [dic objectForKey:@"appcode"];
+                    self.applyAppuri = [dic objectForKey:@"appuri"];
                 }
                 
             }
@@ -129,7 +161,6 @@
                 [self.extendappDataArray addObject:extendappModel];
                 
             }
-            
             
             NSLog(@"self.extendappDataArray = %@",self.extendappDataArray);
             
@@ -209,8 +240,65 @@
             } requestFail:^(NSError *error) {
                 
             }];
+            
+            
+            //请求
+            
+            NSDictionary *applyRequestNewsdata = @{
+                                              
+                                              @"appcode":self.applyAppCode,
+                                              
+                                              @"method":@"WFAPPLYLIST",
+                                              
+                                              };
+            
+            
+            NSDictionary *applyParameters = @{
+                                                    
+                                                    @"token":[LocalData getToken],
+                                                    
+                                                    @"requestdata":applyRequestNewsdata,
+                                                    
+                                                    };
+            
+            Network *applyAppNewsNetwork = [[Network alloc]initWithURL:self.applyAppuri parameters:applyParameters requestSuccess:^(NSData *data) {
+                
+                NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+                
+                NSLog(@"xmlDoc = %@",xmlDoc);
+                
+                if ( [[xmlDoc objectForKey:@"statuscode"] isEqualToString:@"0"]) {
+                    
+                    
+                    
+                    NSDictionary *responsedataDic = [xmlDoc objectForKey:@"responsedata"];
+                    
+                    NSDictionary *applylistDic = [responsedataDic objectForKey:@"applylist"];
 
-           
+                    NSArray *applyArray = [applylistDic objectForKey:@"apply"];
+                    
+                    for (NSDictionary *dic in applyArray) {
+                        
+                        ApplyModel *applyModel = [[ApplyModel alloc]init];
+                        
+                        applyModel.applyname = dic[@"applyname"];
+                        
+                        applyModel.formid = dic[@"formid"];
+                        
+                        [self.applyArray addObject:applyModel];
+                        
+                    }
+                    
+                }else{
+                    
+                    NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+                    
+                    NSLog(@"errorMsg = %@",errorMsg);
+                }
+                
+            } requestFail:^(NSError *error) {
+                
+            }];
             
         }else{
             
@@ -241,7 +329,30 @@
     
     HomepageCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"HomepageCell" owner:self options:nil]objectAtIndex:indexPath.row];
     
-    [cell showCellWithNewsInfoModelArray:self.newsInfoArray extendappArray:self.extendappDataArray];
+    __weak typeof(self)weakSelf = self;
+    
+    [cell showCellWithNewsInfoModelArray:self.newsInfoArray extendappArray:self.extendappDataArray jumpNewsinfoBlock:^(NewsInfoModel *newsInfoModel) {
+        
+        NSLog(@"跳转到新闻详情");
+        
+        NewsinfoDetailsViewController *newsinfoDetailsViewController = [[NewsinfoDetailsViewController alloc]init];
+        
+        newsinfoDetailsViewController.newsInfoModel = newsInfoModel;
+        
+        [weakSelf.navigationController pushViewController:newsinfoDetailsViewController animated:YES];
+        
+    } enterExtendappBlock:^(ExtendappModel *extendappModel) {
+        
+        NSLog(@"跳转扩展应用");
+        
+        ExtendappViewController *extendappViewController = [[ExtendappViewController alloc]init];
+        
+        extendappViewController.extendappModel = extendappModel;
+        
+        [weakSelf.navigationController pushViewController:extendappViewController animated:YES];
+        
+    }];
+    
     
     return cell;
 }
@@ -262,8 +373,107 @@
 
 
 - (IBAction)recordAction:(id)sender {
+    
+    //通讯录
+    MailListViewController *mailListViewController = [[MailListViewController alloc]init];
+    
+    [self.navigationController pushViewController:mailListViewController animated:YES];
 }
 
 - (IBAction)fastApplyAction:(id)sender {
+    
+    //弹出列表
+    NSMutableArray *titlesArray = [[NSMutableArray alloc]init];
+    
+    for (ApplyModel *applyModel  in self.applyArray) {
+        
+        
+        NSString *title = applyModel.applyname;
+        
+        [titlesArray addObject:title];
+    }
+    
+    [LZPopOverMenu showForSender:sender withMenu:titlesArray imageNameArray:nil doneBlock:^(NSInteger selectedIndex) {
+        
+    } dismissBlock:^{
+        
+    }];
+}
+
+- (void)rightButtonAction:(id)sender{
+    
+    //弹出列表
+    NSMutableArray *titlesArray = [[NSMutableArray alloc]init];
+    
+    for (ApplyModel *applyModel  in self.applyArray) {
+        
+        
+        NSString *title = applyModel.applyname;
+        
+        [titlesArray addObject:title];
+    }
+    
+    [LZPopOverMenu showForSender:sender withMenu:titlesArray imageNameArray:nil doneBlock:^(NSInteger selectedIndex) {
+        
+        ApplyModel *applyModel = self.applyArray[selectedIndex];
+        
+        
+        NSDictionary *data = @{
+                               
+                               @"formid":applyModel.formid,
+                               
+                               @"applyname":applyModel.applyname
+                               
+                               };
+        
+        
+        NSDictionary *requestdata = @{
+                                      
+                                      @"appcode":self.applyAppCode,
+                                      
+                                      @"method":@"WFAPPLY",
+                                      
+                                      @"data":data
+                                      
+                                      };
+        
+        NSDictionary *parameters = @{
+                                     
+                                     @"token":[LocalData getToken],
+                                     
+                                     @"requestdata":requestdata,
+                                     
+                                     };
+        
+        
+        NSString *url = [LocalData getLoginInterface];
+
+        url = [NSString stringWithFormat:@"%@/dataapi/applydata/%@/%@?token=%@",url,self.applyAppCode,applyModel.formid,[LocalData getToken]];
+        
+        
+        NSLog(@"url = %@",url);
+        
+        FastApplyViewController *fastApplyViewController = [[FastApplyViewController alloc]init];
+        
+        fastApplyViewController.url = url;
+        
+        [self.navigationController pushViewController:fastApplyViewController animated:YES];
+
+        
+//        [[Network alloc]initWithURL:self.applyAppuri parameters:parameters requestSuccess:^(NSData *data) {
+//            
+//            NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+//            
+//            NSLog(@"xmlDoc = %@",xmlDoc);
+//            
+//        } requestFail:^(NSError *error) {
+//            
+//        }];
+        
+        
+        
+    } dismissBlock:^{
+        
+    }];
 }
 @end

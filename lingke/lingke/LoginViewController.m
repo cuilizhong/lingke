@@ -194,6 +194,10 @@
 
         
         NSString *loginInterface = [NSString stringWithFormat:@"%@://%@:%@%@",[ssl isEqualToString:@"no"]?@"http":@"https",iphost,port,path];
+        
+        //保存
+        [LocalData setLoginInterface:loginInterface];
+        
 
         NSLog(@"interface = %@",loginInterface);
         
