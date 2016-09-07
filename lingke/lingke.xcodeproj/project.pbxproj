@@ -20,6 +20,11 @@
 		070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16F41D6C336700738BC7 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		070C16F71D6C338D00738BC7 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 070C16F61D6C338D00738BC7 /* libxml2.tbd */; };
 		070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */; };
+		070C1A6D1D7EA34100D6E726 /* HomeFunctionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A6C1D7EA34100D6E726 /* HomeFunctionModel.m */; };
+		070C1A711D7EC28300D6E726 /* MenusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A701D7EC28300D6E726 /* MenusView.m */; };
+		070C1A741D80008100D6E726 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A731D80008100D6E726 /* MessageModel.m */; };
+		070C1A771D800CEA00D6E726 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A761D800CEA00D6E726 /* MessageTableViewCell.m */; };
+		070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */; };
 		0721906E1D7015E200EA832B /* UserinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721906D1D7015E200EA832B /* UserinfoModel.m */; };
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
 		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
@@ -47,6 +52,7 @@
 		073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */; };
 		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
 		073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D91D7414800013DB67 /* ExtendappCell.m */; };
+		07AA7A471D7D1DF300ED80D1 /* MailDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AA7A461D7D1DF300ED80D1 /* MailDetailsViewController.m */; };
 		07B44B831D76DA860023214C /* ApplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B821D76DA860023214C /* ApplyModel.m */; };
 		07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B851D76DE2B0023214C /* LZPopOverMenu.m */; };
 		07B44B891D77B94B0023214C /* FastApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B881D77B94B0023214C /* FastApplyViewController.m */; };
@@ -55,6 +61,7 @@
 		07B44B911D7806660023214C /* MailListTableViewHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B901D7806660023214C /* MailListTableViewHeadView.m */; };
 		07B44B931D7807040023214C /* MailListTableViewHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B44B921D7807040023214C /* MailListTableViewHeadView.xib */; };
 		07B44B961D7815920023214C /* MailListClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B951D7815920023214C /* MailListClassViewController.m */; };
+		07B44B991D7951AB0023214C /* PersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B981D7951AB0023214C /* PersionModel.m */; };
 		07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */; };
 		07EE15391D748C2B00E5CE91 /* AppurikindTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */; };
 		07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15461D75DB8800E5CE91 /* ApplyViewController.m */; };
@@ -108,6 +115,16 @@
 		070C16F61D6C338D00738BC7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		070C16F91D6C4C0300738BC7 /* TutorialsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialsModel.h; path = lingke/Model/TutorialsModel.h; sourceTree = "<group>"; };
 		070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialsModel.m; path = lingke/Model/TutorialsModel.m; sourceTree = "<group>"; };
+		070C1A6B1D7EA34100D6E726 /* HomeFunctionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeFunctionModel.h; path = lingke/Model/HomeFunctionModel.h; sourceTree = "<group>"; };
+		070C1A6C1D7EA34100D6E726 /* HomeFunctionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeFunctionModel.m; path = lingke/Model/HomeFunctionModel.m; sourceTree = "<group>"; };
+		070C1A6F1D7EC28300D6E726 /* MenusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenusView.h; path = lingke/CustomView/MenusView.h; sourceTree = "<group>"; };
+		070C1A701D7EC28300D6E726 /* MenusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenusView.m; path = lingke/CustomView/MenusView.m; sourceTree = "<group>"; };
+		070C1A721D80008100D6E726 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageModel.h; path = lingke/Model/MessageModel.h; sourceTree = "<group>"; };
+		070C1A731D80008100D6E726 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageModel.m; path = lingke/Model/MessageModel.m; sourceTree = "<group>"; };
+		070C1A751D800CEA00D6E726 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		070C1A761D800CEA00D6E726 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
+		070C1A781D8015A200D6E726 /* MessageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailsViewController.h; sourceTree = "<group>"; };
+		070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailsViewController.m; sourceTree = "<group>"; };
 		0721906A1D6F2B3400EA832B /* HttpInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpInterface.h; path = lingke/HttpInterface.h; sourceTree = "<group>"; };
 		0721906C1D7015E200EA832B /* UserinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserinfoModel.h; path = lingke/Model/UserinfoModel.h; sourceTree = "<group>"; };
 		0721906D1D7015E200EA832B /* UserinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserinfoModel.m; path = lingke/Model/UserinfoModel.m; sourceTree = "<group>"; };
@@ -160,6 +177,8 @@
 		073A54D61D7404700013DB67 /* ExtendappViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappViewController.m; sourceTree = "<group>"; };
 		073A54D81D7414800013DB67 /* ExtendappCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendappCell.h; sourceTree = "<group>"; };
 		073A54D91D7414800013DB67 /* ExtendappCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappCell.m; sourceTree = "<group>"; };
+		07AA7A451D7D1DF300ED80D1 /* MailDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailDetailsViewController.h; sourceTree = "<group>"; };
+		07AA7A461D7D1DF300ED80D1 /* MailDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailDetailsViewController.m; sourceTree = "<group>"; };
 		07B44B811D76DA860023214C /* ApplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyModel.h; path = lingke/Model/ApplyModel.h; sourceTree = "<group>"; };
 		07B44B821D76DA860023214C /* ApplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplyModel.m; path = lingke/Model/ApplyModel.m; sourceTree = "<group>"; };
 		07B44B841D76DE2B0023214C /* LZPopOverMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LZPopOverMenu.h; path = lingke/LZPopOverMenu.h; sourceTree = "<group>"; };
@@ -174,6 +193,8 @@
 		07B44B921D7807040023214C /* MailListTableViewHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailListTableViewHeadView.xib; sourceTree = "<group>"; };
 		07B44B941D7815920023214C /* MailListClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailListClassViewController.h; sourceTree = "<group>"; };
 		07B44B951D7815920023214C /* MailListClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListClassViewController.m; sourceTree = "<group>"; };
+		07B44B971D7951AB0023214C /* PersionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersionModel.h; path = lingke/Model/PersionModel.h; sourceTree = "<group>"; };
+		07B44B981D7951AB0023214C /* PersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersionModel.m; path = lingke/Model/PersionModel.m; sourceTree = "<group>"; };
 		07EE15351D748C2B00E5CE91 /* AppurikindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppurikindTableViewCell.h; sourceTree = "<group>"; };
 		07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppurikindTableViewCell.m; sourceTree = "<group>"; };
 		07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppurikindTableViewCell.xib; sourceTree = "<group>"; };
@@ -220,6 +241,7 @@
 		070C16211D693CF800738BC7 = {
 			isa = PBXGroup;
 			children = (
+				070C1A6E1D7EC23600D6E726 /* CustomView */,
 				0721906F1D72907800EA832B /* Third */,
 				072C28761D6D789100EAFFAC /* UIScrollView+TouchEvent.h */,
 				072C28771D6D789100EAFFAC /* UIScrollView+TouchEvent.m */,
@@ -355,8 +377,23 @@
 				072190841D73158600EA832B /* ExtendappModel.m */,
 				07B44B811D76DA860023214C /* ApplyModel.h */,
 				07B44B821D76DA860023214C /* ApplyModel.m */,
+				07B44B971D7951AB0023214C /* PersionModel.h */,
+				07B44B981D7951AB0023214C /* PersionModel.m */,
+				070C1A6B1D7EA34100D6E726 /* HomeFunctionModel.h */,
+				070C1A6C1D7EA34100D6E726 /* HomeFunctionModel.m */,
+				070C1A721D80008100D6E726 /* MessageModel.h */,
+				070C1A731D80008100D6E726 /* MessageModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		070C1A6E1D7EC23600D6E726 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				070C1A6F1D7EC28300D6E726 /* MenusView.h */,
+				070C1A701D7EC28300D6E726 /* MenusView.m */,
+			);
+			name = CustomView;
 			sourceTree = "<group>";
 		};
 		0721906F1D72907800EA832B /* Third */ = {
@@ -379,6 +416,8 @@
 				07EE15591D76B8AF00E5CE91 /* MailListViewController.m */,
 				07B44B941D7815920023214C /* MailListClassViewController.h */,
 				07B44B951D7815920023214C /* MailListClassViewController.m */,
+				07AA7A451D7D1DF300ED80D1 /* MailDetailsViewController.h */,
+				07AA7A461D7D1DF300ED80D1 /* MailDetailsViewController.m */,
 				07B44B8F1D7806660023214C /* MailListTableViewHeadView.h */,
 				07B44B901D7806660023214C /* MailListTableViewHeadView.m */,
 				07B44B921D7807040023214C /* MailListTableViewHeadView.xib */,
@@ -435,6 +474,10 @@
 			children = (
 				072C288B1D6D902800EAFFAC /* MessageViewController.h */,
 				072C288C1D6D902800EAFFAC /* MessageViewController.m */,
+				070C1A781D8015A200D6E726 /* MessageDetailsViewController.h */,
+				070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */,
+				070C1A751D800CEA00D6E726 /* MessageTableViewCell.h */,
+				070C1A761D800CEA00D6E726 /* MessageTableViewCell.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -656,6 +699,7 @@
 				072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */,
 				072190851D73158600EA832B /* ExtendappModel.m in Sources */,
 				07B44B891D77B94B0023214C /* FastApplyViewController.m in Sources */,
+				070C1A711D7EC28300D6E726 /* MenusView.m in Sources */,
 				073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */,
 				072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */,
 				070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */,
@@ -679,6 +723,7 @@
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				07B44B831D76DA860023214C /* ApplyModel.m in Sources */,
+				07AA7A471D7D1DF300ED80D1 /* MailDetailsViewController.m in Sources */,
 				073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */,
 				073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */,
 				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
@@ -686,14 +731,19 @@
 				072190811D72D18500EA832B /* HomepageCollectionViewCell.m in Sources */,
 				072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */,
 				07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */,
+				07B44B991D7951AB0023214C /* PersionModel.m in Sources */,
 				07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */,
+				070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */,
 				073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */,
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
 				07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
+				070C1A771D800CEA00D6E726 /* MessageTableViewCell.m in Sources */,
 				07FFA6F51D6EDADB00A40454 /* Network.m in Sources */,
+				070C1A6D1D7EA34100D6E726 /* HomeFunctionModel.m in Sources */,
 				072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */,
 				0721906E1D7015E200EA832B /* UserinfoModel.m in Sources */,
+				070C1A741D80008100D6E726 /* MessageModel.m in Sources */,
 				072C28701D6D689000EAFFAC /* BasicTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,6 @@
 #import "HttpsRequestManger.h"
 #import "GDataXMLNode.h"
 
-
 //引导图片
 static NSString *tutorials = @"http://www.linkersoft.com:9001/m1srv/appapi/tutorials?client=IOS&ver=";
 
@@ -83,6 +82,12 @@ static NSString *testURL = @"http://www.linkersoft.com:9009/m1srv/xml/person";
 //    xmlStr = @"<?xml version=\"1.0\" encoding=\"utf-8\"?><maps><mobile>13961893758</mobile><unitcode>LKDEVP01</unitcode></maps>";
     
     [session POST:testURL parameters:xmlStr progress:nil success:success failure:failure];
+    
+}
+
++ (void)sendHttpReqestWithUrl:(NSString *)url parameter:(NSDictionary *)parameter requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail{
+
+    [[Network alloc]initWithURL:url parameters:parameter requestSuccess:requestSuccess requestFail:requestFail];
     
 }
 

@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tabBarItem.badgeValue = @"1";
+//    self.tabBarItem.badgeValue = @"1";
+    
+    self.title = @"待办";
 
 }
 

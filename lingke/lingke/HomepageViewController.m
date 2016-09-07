@@ -104,9 +104,8 @@
             
             NSString *appuri;
             
-//            NSString *applyAppCode;
-//            NSString *applyAppuri;
             
+            //主功能
             for (NSDictionary *dic in appArray) {
                 
                 HomeappModel *homeappModel = [[HomeappModel alloc]init];
@@ -115,18 +114,43 @@
                 
                 [self.homeappArray addObject:homeappModel];
                 
-                if ([[dic objectForKey:@"appurikind"]isEqualToString:@"HOMENEWS"]) {
+                NSString *appurikindKey = [dic objectForKey:@"appurikind"];
+                
+                if ([appurikindKey isEqualToString:@"HOMENEWS"]) {
                     
                     //首页新闻
                     appcode = [dic objectForKey:@"appcode"];
                     appuri = [dic objectForKey:@"appuri"];
                     
-                }else if([[dic objectForKey:@"appurikind"]isEqualToString:@"APPLY"]){
+                    [HomeFunctionModel sharedInstance].newsAppModel = homeappModel;
+                    
+                }else if([appurikindKey isEqualToString:@"APPLY"]){
                     
                     //快速流程接口
                     self.applyAppCode = [dic objectForKey:@"appcode"];
                     self.applyAppuri = [dic objectForKey:@"appuri"];
+                    
+                    [HomeFunctionModel sharedInstance].applyAppModel = homeappModel;
+                    
+                    
+                }else if ([appurikindKey isEqualToString:@"ORG"]){
+                    //通讯录
+                    [HomeFunctionModel sharedInstance].orgAppModel = homeappModel;
+                    
+                }else if ([appurikindKey isEqualToString:@"HOMETODO"]){
+                    
+                    [HomeFunctionModel sharedInstance].homeTODOAppModel = homeappModel;
+                    
+                }else if ([appurikindKey isEqualToString:@"MESSAGE"]){
+                    
+                    [HomeFunctionModel sharedInstance].messageAppModel = homeappModel;
+                    
+                }else if ([appurikindKey isEqualToString:@"SCAN"]){
+                    
+                    [HomeFunctionModel sharedInstance].scanAppModel = homeappModel;
+                    
                 }
+                
                 
             }
             
@@ -329,7 +353,9 @@
     
     HomepageCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"HomepageCell" owner:self options:nil]objectAtIndex:indexPath.row];
     
-    __weak typeof(self)weakSelf = self;
+//    __weak typeof(self)weakSelf = self;
+    
+    @weakify(self)
     
     [cell showCellWithNewsInfoModelArray:self.newsInfoArray extendappArray:self.extendappDataArray jumpNewsinfoBlock:^(NewsInfoModel *newsInfoModel) {
         
@@ -339,7 +365,7 @@
         
         newsinfoDetailsViewController.newsInfoModel = newsInfoModel;
         
-        [weakSelf.navigationController pushViewController:newsinfoDetailsViewController animated:YES];
+        [weakself.navigationController pushViewController:newsinfoDetailsViewController animated:YES];
         
     } enterExtendappBlock:^(ExtendappModel *extendappModel) {
         
@@ -349,7 +375,7 @@
         
         extendappViewController.extendappModel = extendappModel;
         
-        [weakSelf.navigationController pushViewController:extendappViewController animated:YES];
+        [weakself.navigationController pushViewController:extendappViewController animated:YES];
         
     }];
     
@@ -375,9 +401,23 @@
 - (IBAction)recordAction:(id)sender {
     
     //通讯录
-    MailListViewController *mailListViewController = [[MailListViewController alloc]init];
-    
-    [self.navigationController pushViewController:mailListViewController animated:YES];
+    for (HomeappModel *homeappModel in self.homeappArray) {
+        
+        if ([homeappModel.appurikind isEqualToString:@"ORG"]) {
+            
+            self.hidesBottomBarWhenPushed = YES;
+            
+            MailListViewController *mailListViewController = [[MailListViewController alloc]init];
+            
+            mailListViewController.homeappModel = homeappModel;
+            
+            [self.navigationController pushViewController:mailListViewController animated:YES];
+            
+            self.hidesBottomBarWhenPushed = NO;
+            
+            return;
+        }
+    }
 }
 
 - (IBAction)fastApplyAction:(id)sender {

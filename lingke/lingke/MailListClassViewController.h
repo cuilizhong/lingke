@@ -10,4 +10,6 @@
 
 @interface MailListClassViewController : BasicViewController
 
+@property(nonatomic,strong)HomeappModel *homeappModel;
+
 @end

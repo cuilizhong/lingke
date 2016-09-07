@@ -199,9 +199,10 @@
         
         CGSize detailSize = [appmenuModel.appmenuname sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(1000, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
         
-        [cell showCellWithMenuTitle:appmenuModel.appmenuname cellSize:CGSizeMake(40, detailSize.width+10) clickMenuBlock:^{
+        [cell showCellWithMenuTitle:appmenuModel.appmenuname cellSize:CGSizeMake(40, detailSize.width+10) clickMenuBlock:^(NSString *menuTitle) {
             
             [weakSelf requestListDataWithAppmenuModel:appmenuModel];
+
             
         }];
         

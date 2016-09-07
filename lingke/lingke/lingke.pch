@@ -21,4 +21,6 @@ __func__, __LINE__, ## args);
 #define NSLog(format, args...) do {} while(0)
 #endif
 
+#define weakify(x)autoreleasepool{} __weak typeof(x)weak##x=x;
+
 #endif 

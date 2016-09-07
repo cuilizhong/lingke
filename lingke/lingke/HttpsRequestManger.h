@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-
+#import "Network.h"
 
 @interface HttpsRequestManger : NSObject
 
@@ -16,4 +16,7 @@
 
 
 + (void)sendHttpRequestForVerificationWithUnitcode:(NSString *)unitcode mobile:(NSString *)mobile success:(void (^)(NSURLSessionDataTask * task, id  responseObject))success failure:(void (^)(NSURLSessionDataTask * task, NSError * error))failure;
+
++ (void)sendHttpReqestWithUrl:(NSString *)url parameter:(NSDictionary *)parameter requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail;
+
 @end

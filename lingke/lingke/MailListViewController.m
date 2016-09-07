@@ -9,6 +9,7 @@
 #import "MailListViewController.h"
 #import "MailListTableViewCell.h"
 #import "MailListTableViewHeadView.h"
+#import "MailListClassViewController.h"
 
 @interface MailListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -123,6 +124,20 @@
     return 30.0f;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    self.hidesBottomBarWhenPushed = YES;
+
+    MailListClassViewController *mailListClassViewController = [[MailListClassViewController alloc]init];
+    
+    mailListClassViewController.homeappModel = self.homeappModel;
+    
+    [self.navigationController pushViewController:mailListClassViewController animated:YES];
+    
+    self.hidesBottomBarWhenPushed = YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

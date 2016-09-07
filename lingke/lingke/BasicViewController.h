@@ -11,6 +11,11 @@
 #import "Network.h"
 #import "UserinfoModel.h"
 #import "XMLDictionary.h"
+#import "HomeappModel.h"
+#import "HttpsRequestManger.h"
+#import "LocalData.h"
+#import "HomeFunctionModel.h"
+
 @interface BasicViewController : UIViewController
 
 @end

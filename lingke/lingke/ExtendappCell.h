@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ClickMenuBlock)();
+typedef void(^ClickMenuBlock)(NSString *menuTitle);
 
 @interface ExtendappCell : UITableViewCell
+
+@property(nonatomic,strong)UIButton *menuButton;
 
 - (void)showCellWithMenuTitle:(NSString *)menuTitle cellSize:(CGSize)cellSize clickMenuBlock:(ClickMenuBlock)clickMenuBlock;
 
