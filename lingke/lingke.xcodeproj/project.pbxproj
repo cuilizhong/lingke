@@ -67,6 +67,8 @@
 		07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15461D75DB8800E5CE91 /* ApplyViewController.m */; };
 		07EE15541D7677F300E5CE91 /* ExtendappDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15531D7677F300E5CE91 /* ExtendappDetailViewController.m */; };
 		07EE155A1D76B8AF00E5CE91 /* MailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15591D76B8AF00E5CE91 /* MailListViewController.m */; };
+		07F7C73D1D80FFF600A860EA /* DataIndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F7C73C1D80FFF600A860EA /* DataIndexModel.m */; };
+		07F7C7401D812E9000A860EA /* WFListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F7C73F1D812E9000A860EA /* WFListModel.m */; };
 		07FFA6F51D6EDADB00A40454 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA6F41D6EDADB00A40454 /* Network.m */; };
 		7D5B178C81F2F482EE8AB5E4 /* Pods_lingke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABC1DE342ED79682D8CD2E6 /* Pods_lingke.framework */; };
 /* End PBXBuildFile section */
@@ -204,6 +206,10 @@
 		07EE15531D7677F300E5CE91 /* ExtendappDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappDetailViewController.m; sourceTree = "<group>"; };
 		07EE15581D76B8AF00E5CE91 /* MailListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailListViewController.h; sourceTree = "<group>"; };
 		07EE15591D76B8AF00E5CE91 /* MailListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListViewController.m; sourceTree = "<group>"; };
+		07F7C73B1D80FFF600A860EA /* DataIndexModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataIndexModel.h; path = lingke/Model/DataIndexModel.h; sourceTree = "<group>"; };
+		07F7C73C1D80FFF600A860EA /* DataIndexModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataIndexModel.m; path = lingke/Model/DataIndexModel.m; sourceTree = "<group>"; };
+		07F7C73E1D812E9000A860EA /* WFListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFListModel.h; path = lingke/Model/WFListModel.h; sourceTree = "<group>"; };
+		07F7C73F1D812E9000A860EA /* WFListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFListModel.m; path = lingke/Model/WFListModel.m; sourceTree = "<group>"; };
 		07FFA6F31D6EDADB00A40454 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		07FFA6F41D6EDADB00A40454 /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
 		1F52B986CA02FD25F6B9BEE7 /* Pods-lingke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lingke.release.xcconfig"; path = "Pods/Target Support Files/Pods-lingke/Pods-lingke.release.xcconfig"; sourceTree = "<group>"; };
@@ -383,6 +389,10 @@
 				070C1A6C1D7EA34100D6E726 /* HomeFunctionModel.m */,
 				070C1A721D80008100D6E726 /* MessageModel.h */,
 				070C1A731D80008100D6E726 /* MessageModel.m */,
+				07F7C73B1D80FFF600A860EA /* DataIndexModel.h */,
+				07F7C73C1D80FFF600A860EA /* DataIndexModel.m */,
+				07F7C73E1D812E9000A860EA /* WFListModel.h */,
+				07F7C73F1D812E9000A860EA /* WFListModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -718,6 +728,7 @@
 				07B44B911D7806660023214C /* MailListTableViewHeadView.m in Sources */,
 				0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */,
 				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
+				07F7C73D1D80FFF600A860EA /* DataIndexModel.m in Sources */,
 				072190751D72972200EA832B /* HomeappModel.m in Sources */,
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
@@ -726,6 +737,7 @@
 				07AA7A471D7D1DF300ED80D1 /* MailDetailsViewController.m in Sources */,
 				073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */,
 				073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */,
+				07F7C7401D812E9000A860EA /* WFListModel.m in Sources */,
 				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
 				072190811D72D18500EA832B /* HomepageCollectionViewCell.m in Sources */,

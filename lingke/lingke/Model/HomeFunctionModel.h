@@ -13,6 +13,9 @@
 
 + (instancetype)sharedInstance;
 
+/**
+ *  待处理
+ */
 @property(nonatomic,strong)HomeappModel *homeTODOAppModel;
 
 @property(nonatomic,strong)HomeappModel *newsAppModel;
@@ -37,10 +40,7 @@
  */
 @property(nonatomic,strong)HomeappModel *scanAppModel;
 
-/**
- *  待处理
- */
-@property(nonatomic,strong)HomeappModel *waittingHandAppModel;
+
 
 /**
  *  我的
