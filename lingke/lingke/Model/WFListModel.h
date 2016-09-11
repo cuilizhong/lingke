@@ -14,6 +14,8 @@
 
 @property(nonatomic,copy)NSString *wfname;
 
+@property(nonatomic,copy)NSString *count;
+
 - (void)setValueFromDic:(NSDictionary *)dic;
 
 @end

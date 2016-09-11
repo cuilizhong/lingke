@@ -24,7 +24,8 @@
     
     [super viewDidLoad];
     
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     
 }
 

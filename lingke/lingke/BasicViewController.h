@@ -18,4 +18,6 @@
 
 @interface BasicViewController : UIViewController
 
+- (void)hiddenSurplusLine:(UITableView *)tableView;
+
 @end

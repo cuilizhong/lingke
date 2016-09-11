@@ -33,6 +33,9 @@
     
     self.title = @"信息";
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
+    
     self.messagekindsArray = [[NSMutableArray alloc]init];
     
     self.messageContentsArray = [[NSMutableArray alloc]init];
@@ -94,7 +97,7 @@
             [weakself.view addSubview:self.menusView];
             
             //crearTableView
-            self.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height+64, self.view.frame.size.width, self.view.frame.size.height-weakself.menusView.frame.size.height - 64) style:UITableViewStylePlain];
+            self.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height+64, self.view.frame.size.width, self.view.frame.size.height-weakself.menusView.frame.size.height - 64-49) style:UITableViewStylePlain];
             self.contentTableView.delegate = self;
             self.contentTableView.dataSource = self;
             [self.view addSubview:self.contentTableView];
