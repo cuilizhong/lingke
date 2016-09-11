@@ -45,7 +45,6 @@
 		072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C287A1D6D851700EAFFAC /* MainTabBarController.m */; };
 		072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28831D6D900100EAFFAC /* HomepageViewController.m */; };
 		072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28861D6D901200EAFFAC /* WaittingHandViewController.m */; };
-		072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28891D6D901C00EAFFAC /* ScanViewController.m */; };
 		072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288C1D6D902800EAFFAC /* MessageViewController.m */; };
 		072C28901D6D903700EAFFAC /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288F1D6D903700EAFFAC /* MyViewController.m */; };
 		073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D01D73DC090013DB67 /* NewInfoImageView.m */; };
@@ -53,6 +52,13 @@
 		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
 		073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D91D7414800013DB67 /* ExtendappCell.m */; };
 		0766ECD31D85866B00D884F5 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0766ECD21D85866B00D884F5 /* HelpViewController.m */; };
+		0766ECE41D85978700D884F5 /* scan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0766ECDE1D85978700D884F5 /* scan@2x.png */; };
+		0766ECE51D85978700D884F5 /* scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0766ECDF1D85978700D884F5 /* scan@3x.png */; };
+		0766ECE61D85978700D884F5 /* scan_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0766ECE01D85978700D884F5 /* scan_1@2x.png */; };
+		0766ECE71D85978700D884F5 /* scan_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0766ECE11D85978700D884F5 /* scan_1@3x.png */; };
+		0766ECE81D85978700D884F5 /* ZHScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0766ECE31D85978700D884F5 /* ZHScanView.m */; };
+		0766ECEB1D8597CC00D884F5 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0766ECEA1D8597CC00D884F5 /* ScanViewController.m */; };
+		0766ECEE1D85997800D884F5 /* ScanWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0766ECED1D85997800D884F5 /* ScanWebViewController.m */; };
 		07AA7A471D7D1DF300ED80D1 /* MailDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AA7A461D7D1DF300ED80D1 /* MailDetailsViewController.m */; };
 		07B44B831D76DA860023214C /* ApplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B821D76DA860023214C /* ApplyModel.m */; };
 		07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B851D76DE2B0023214C /* LZPopOverMenu.m */; };
@@ -166,8 +172,6 @@
 		072C28831D6D900100EAFFAC /* HomepageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageViewController.m; sourceTree = "<group>"; };
 		072C28851D6D901200EAFFAC /* WaittingHandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaittingHandViewController.h; sourceTree = "<group>"; };
 		072C28861D6D901200EAFFAC /* WaittingHandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaittingHandViewController.m; sourceTree = "<group>"; };
-		072C28881D6D901C00EAFFAC /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
-		072C28891D6D901C00EAFFAC /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		072C288B1D6D902800EAFFAC /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		072C288C1D6D902800EAFFAC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		072C288E1D6D903700EAFFAC /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
@@ -182,6 +186,16 @@
 		073A54D91D7414800013DB67 /* ExtendappCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappCell.m; sourceTree = "<group>"; };
 		0766ECD11D85866B00D884F5 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		0766ECD21D85866B00D884F5 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		0766ECDE1D85978700D884F5 /* scan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan@2x.png"; sourceTree = "<group>"; };
+		0766ECDF1D85978700D884F5 /* scan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan@3x.png"; sourceTree = "<group>"; };
+		0766ECE01D85978700D884F5 /* scan_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_1@2x.png"; sourceTree = "<group>"; };
+		0766ECE11D85978700D884F5 /* scan_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan_1@3x.png"; sourceTree = "<group>"; };
+		0766ECE21D85978700D884F5 /* ZHScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHScanView.h; sourceTree = "<group>"; };
+		0766ECE31D85978700D884F5 /* ZHScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHScanView.m; sourceTree = "<group>"; };
+		0766ECE91D8597CC00D884F5 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanViewController.h; path = lingke/ScanViewController.h; sourceTree = SOURCE_ROOT; };
+		0766ECEA1D8597CC00D884F5 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanViewController.m; path = lingke/ScanViewController.m; sourceTree = SOURCE_ROOT; };
+		0766ECEC1D85997800D884F5 /* ScanWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanWebViewController.h; path = lingke/ScanWebViewController.h; sourceTree = SOURCE_ROOT; };
+		0766ECED1D85997800D884F5 /* ScanWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanWebViewController.m; path = lingke/ScanWebViewController.m; sourceTree = SOURCE_ROOT; };
 		07AA7A451D7D1DF300ED80D1 /* MailDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailDetailsViewController.h; sourceTree = "<group>"; };
 		07AA7A461D7D1DF300ED80D1 /* MailDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailDetailsViewController.m; sourceTree = "<group>"; };
 		07B44B811D76DA860023214C /* ApplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyModel.h; path = lingke/Model/ApplyModel.h; sourceTree = "<group>"; };
@@ -476,8 +490,7 @@
 		072C287F1D6D8F5F00EAFFAC /* Scan */ = {
 			isa = PBXGroup;
 			children = (
-				072C28881D6D901C00EAFFAC /* ScanViewController.h */,
-				072C28891D6D901C00EAFFAC /* ScanViewController.m */,
+				0766ECDD1D85978700D884F5 /* ZHScanView */,
 			);
 			name = Scan;
 			sourceTree = "<group>";
@@ -504,6 +517,23 @@
 				0766ECD21D85866B00D884F5 /* HelpViewController.m */,
 			);
 			name = My;
+			sourceTree = "<group>";
+		};
+		0766ECDD1D85978700D884F5 /* ZHScanView */ = {
+			isa = PBXGroup;
+			children = (
+				0766ECDE1D85978700D884F5 /* scan@2x.png */,
+				0766ECDF1D85978700D884F5 /* scan@3x.png */,
+				0766ECE01D85978700D884F5 /* scan_1@2x.png */,
+				0766ECE11D85978700D884F5 /* scan_1@3x.png */,
+				0766ECE21D85978700D884F5 /* ZHScanView.h */,
+				0766ECE31D85978700D884F5 /* ZHScanView.m */,
+				0766ECE91D8597CC00D884F5 /* ScanViewController.h */,
+				0766ECEA1D8597CC00D884F5 /* ScanViewController.m */,
+				0766ECEC1D85997800D884F5 /* ScanWebViewController.h */,
+				0766ECED1D85997800D884F5 /* ScanWebViewController.m */,
+			);
+			path = ZHScanView;
 			sourceTree = "<group>";
 		};
 		0C1A239DC18D7441DD73FB2F /* Pods */ = {
@@ -631,6 +661,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				070C163D1D693CF800738BC7 /* LaunchScreen.storyboard in Resources */,
+				0766ECE41D85978700D884F5 /* scan@2x.png in Resources */,
+				0766ECE71D85978700D884F5 /* scan_1@3x.png in Resources */,
 				070C163A1D693CF800738BC7 /* Assets.xcassets in Resources */,
 				072190821D72D18500EA832B /* HomepageCollectionViewCell.xib in Resources */,
 				070C16381D693CF800738BC7 /* Main.storyboard in Resources */,
@@ -638,7 +670,9 @@
 				07B44B8E1D77D33C0023214C /* MailListTableViewCell.xib in Resources */,
 				0721907D1D72CF8000EA832B /* HomepageCell.xib in Resources */,
 				072C28751D6D6B9100EAFFAC /* LoginTableViewCell.xib in Resources */,
+				0766ECE51D85978700D884F5 /* scan@3x.png in Resources */,
 				07EE15391D748C2B00E5CE91 /* AppurikindTableViewCell.xib in Resources */,
+				0766ECE61D85978700D884F5 /* scan_1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +750,6 @@
 				07B44B891D77B94B0023214C /* FastApplyViewController.m in Sources */,
 				070C1A711D7EC28300D6E726 /* MenusView.m in Sources */,
 				073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */,
-				072C288A1D6D901C00EAFFAC /* ScanViewController.m in Sources */,
 				070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */,
 				070C16641D69443000738BC7 /* ConfigureColor.m in Sources */,
 				070C16351D693CF800738BC7 /* ViewController.m in Sources */,
@@ -728,7 +761,9 @@
 				07B44B8D1D77D33C0023214C /* MailListTableViewCell.m in Sources */,
 				07EE15541D7677F300E5CE91 /* ExtendappDetailViewController.m in Sources */,
 				072190721D7290BA00EA832B /* XMLDictionary.m in Sources */,
+				0766ECE81D85978700D884F5 /* ZHScanView.m in Sources */,
 				07EE155A1D76B8AF00E5CE91 /* MailListViewController.m in Sources */,
+				0766ECEE1D85997800D884F5 /* ScanWebViewController.m in Sources */,
 				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
 				07B44B911D7806660023214C /* MailListTableViewHeadView.m in Sources */,
 				0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */,
@@ -753,6 +788,7 @@
 				07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */,
 				070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */,
 				073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */,
+				0766ECEB1D8597CC00D884F5 /* ScanViewController.m in Sources */,
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
 				07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,

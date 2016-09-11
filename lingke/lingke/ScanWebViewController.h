@@ -1,5 +1,5 @@
 //
-//  ScanViewController.h
+//  ScanWebViewController.h
 //  lingke
 //
 //  Created by clz on 16/9/11.
@@ -8,6 +8,8 @@
 
 #import "BasicViewController.h"
 
-@interface ScanViewController : BasicViewController
+@interface ScanWebViewController : BasicViewController
+
+@property(nonatomic,copy)NSString *url;
 
 @end

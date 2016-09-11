@@ -2,13 +2,17 @@
 //  ScanViewController.m
 //  lingke
 //
-//  Created by clz on 16/8/24.
+//  Created by clz on 16/9/11.
 //  Copyright © 2016年 CLZ. All rights reserved.
 //
 
 #import "ScanViewController.h"
+#import "ZHScanView.h"
+#import "ScanWebViewController.h"
 
 @interface ScanViewController ()
+
+@property(nonatomic,strong)ZHScanView *scanf;
 
 @end
 
@@ -18,11 +22,35 @@
     
     [super viewDidLoad];
     
-    self.title = @"扫一扫";
+    
+    self.scanf = [ZHScanView scanViewWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49)];
+    self.scanf.promptMessage = @"请扫描二维码";
+    [self.view addSubview:self.scanf];
+    
+    [self.scanf startScaning];
+    
+    @weakify(self);
+    [self.scanf outPutResult:^(NSString *result) {
+        
+        NSLog(@"%@",result);
+        
+        ScanWebViewController *scanWebViewController = [[ScanWebViewController alloc]init];
+        scanWebViewController.url = result;
+        [weakself.navigationController pushViewController:scanWebViewController animated:YES];
+        
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear: animated];
+    
+    [self.scanf scanAgain];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*
