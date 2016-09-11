@@ -7,8 +7,13 @@
 //
 
 #import "MyViewController.h"
+#import "UserinfoModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface MyViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *englishNameLabel;
 
 @end
 
@@ -17,21 +22,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"我的";
+    self.headImageView.layer.cornerRadius = 35.0f;
+    self.headImageView.clipsToBounds = YES;
+    
+    self.title = @"个人中心";
+    
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[UserinfoModel sharedInstance].headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+    
+    self.usernameLabel.text = [UserinfoModel sharedInstance].username;
+    self.englishNameLabel.text = [UserinfoModel sharedInstance].unitname;
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 4) {
+        
+        //帮助
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -52,6 +52,7 @@
 		073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */; };
 		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
 		073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D91D7414800013DB67 /* ExtendappCell.m */; };
+		0766ECD31D85866B00D884F5 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0766ECD21D85866B00D884F5 /* HelpViewController.m */; };
 		07AA7A471D7D1DF300ED80D1 /* MailDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AA7A461D7D1DF300ED80D1 /* MailDetailsViewController.m */; };
 		07B44B831D76DA860023214C /* ApplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B821D76DA860023214C /* ApplyModel.m */; };
 		07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B851D76DE2B0023214C /* LZPopOverMenu.m */; };
@@ -179,6 +180,8 @@
 		073A54D61D7404700013DB67 /* ExtendappViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappViewController.m; sourceTree = "<group>"; };
 		073A54D81D7414800013DB67 /* ExtendappCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendappCell.h; sourceTree = "<group>"; };
 		073A54D91D7414800013DB67 /* ExtendappCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappCell.m; sourceTree = "<group>"; };
+		0766ECD11D85866B00D884F5 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		0766ECD21D85866B00D884F5 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		07AA7A451D7D1DF300ED80D1 /* MailDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailDetailsViewController.h; sourceTree = "<group>"; };
 		07AA7A461D7D1DF300ED80D1 /* MailDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailDetailsViewController.m; sourceTree = "<group>"; };
 		07B44B811D76DA860023214C /* ApplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyModel.h; path = lingke/Model/ApplyModel.h; sourceTree = "<group>"; };
@@ -497,6 +500,8 @@
 			children = (
 				072C288E1D6D903700EAFFAC /* MyViewController.h */,
 				072C288F1D6D903700EAFFAC /* MyViewController.m */,
+				0766ECD11D85866B00D884F5 /* HelpViewController.h */,
+				0766ECD21D85866B00D884F5 /* HelpViewController.m */,
 			);
 			name = My;
 			sourceTree = "<group>";
@@ -741,6 +746,7 @@
 				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
 				072190811D72D18500EA832B /* HomepageCollectionViewCell.m in Sources */,
+				0766ECD31D85866B00D884F5 /* HelpViewController.m in Sources */,
 				072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */,
 				07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */,
 				07B44B991D7951AB0023214C /* PersionModel.m in Sources */,

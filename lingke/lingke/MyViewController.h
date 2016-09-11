@@ -6,8 +6,8 @@
 //  Copyright © 2016年 CLZ. All rights reserved.
 //
 
-#import "BasicViewController.h"
+#import "BasicTableViewController.h"
 
-@interface MyViewController : BasicViewController
+@interface MyViewController : BasicTableViewController
 
 @end
