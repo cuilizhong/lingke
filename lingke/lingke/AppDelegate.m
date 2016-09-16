@@ -22,8 +22,6 @@
  */
 @property(nonatomic,strong)NSMutableArray<TutorialsModel*> *tutorialsArray;
 
-
-@property(nonatomic,strong)NSMutableData *receivedData;
 /**
  *  是否显示引导图片
  */
@@ -38,6 +36,8 @@
     
     self.tutorialsArray = [[NSMutableArray alloc]init];
     
+    //请求引导图片
+    @weakify(self);
     [HttpsRequestManger sendHttpRequestForTutorialsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
         //解析xml
         NSString *xmlStr  =[[ NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -68,7 +68,7 @@
             
             tutorialsModel.picurl = picurlStr;
             
-            [self.tutorialsArray addObject:tutorialsModel];
+            [weakself.tutorialsArray addObject:tutorialsModel];
         }
         
         GDataXMLElement *updateEle = array.lastObject;
@@ -76,19 +76,17 @@
         //对比本地的引导图片更新时间
         if ([[LocalData getTutorialsImageUpdateDate] isEqualToString:updateEle.stringValue]) {
             //一样就不需要显示
-            self.isDisplayTutorials = NO;
+            weakself.isDisplayTutorials = NO;
             
             //判断是否注销
-            if ([LocalData getPhoneNumber].length>0) {
+            if ([LocalData getMobile].length>0) {
                 //跳转到主页
                 
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 
                 MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-                
-                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:mainTabBarController];
-                
-                self.window.rootViewController = nav;
+                                
+                weakself.window.rootViewController = mainTabBarController;
                 
             }else{
                 //跳转到登陆页面
@@ -102,18 +100,19 @@
         }else{
             
             //不一样需要显示
-            self.isDisplayTutorials = YES;
+            weakself.isDisplayTutorials = YES;
             
+            //保存引导图片更新时间
             [LocalData setTutorialsImageUpdateDate:updateEle.stringValue];
             
             //跳转到引导页面
             TutorialsViewController *tutorialsViewController = [[TutorialsViewController alloc]init];
             
-            tutorialsViewController.tutorialsArray = self.tutorialsArray;
+            tutorialsViewController.tutorialsArray = weakself.tutorialsArray;
             
             UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:tutorialsViewController];
             
-            self.window.rootViewController = nav;
+            weakself.window.rootViewController = nav;
 
         }
         
@@ -151,43 +150,5 @@
 }
 
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [self.receivedData setLength:0];
-
-}
-
-// 接收数据
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    if (!self.receivedData) {
-        self.receivedData = [[NSMutableData alloc]init];
-    }
-    
-    [self.receivedData appendData:data];
-}
-
-// 数据接收完毕
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSLog(@"成功");
-    
-    
-    NSString *results = [[NSString alloc]
-                         initWithBytes:[self.receivedData bytes]
-                         length:[self.receivedData length]
-                         encoding:NSUTF8StringEncoding];
-    
-    NSString *xmlStr  =[[ NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"返回结果 = %@",results);
-    
-}
-
-// 返回错误
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"Connection failed: %@", error);
-}
 
 @end

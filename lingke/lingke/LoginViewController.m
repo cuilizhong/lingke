@@ -13,9 +13,7 @@
 #import "Network.h"
 #import "HttpInterface.h"
 #import "GDataXMLNode.h"
-#import <SSKeychain/SSKeychain.h>
 #import "LocalData.h"
-#import "UserinfoModel.h"
 #import "GDataXMLNode.h"
 
 
@@ -75,11 +73,11 @@
     
     if (indexPath.row == 4) {
         
-         __weak typeof(self)weakSelf = self;
+        @weakify(self);
         
         [cell showCellWithEntrySystemBlock:^{
             
-            [weakSelf requestForLogin];
+            [weakself requestForLogin];
             
             
         }];
@@ -136,8 +134,11 @@
 #pragma mark-request
 - (void)requestForLogin{
     
+    [self showHUDWithMessage:@"登陆中"];
     
     if (self.unitcodeTextField.text.length<1) {
+        
+        [self hiddenHUDWithMessage:@"请输入您单位许可证"];
         
         
         return;
@@ -145,12 +146,15 @@
     
     if (self.phoneNumberTextField.text.length<1) {
         
+        [self hiddenHUDWithMessage:@"请输入您的手机号码"];
+        
         return;
     }
     
     if (self.passwordTextField.text.length<1) {
         
-        
+        [self hiddenHUDWithMessage:@"请输入您的密码"];
+
         return;
     }
     
@@ -162,153 +166,140 @@
                                  
                                  };
     
+    @weakify(self);
     Network *verificationNetwork = [[Network alloc]initWithURL:verificationURL parameters:parameters requestSuccess:^(NSData *data) {
         
-        NSString *xmlStr  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
-        //xml文档类
-        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:nil];
+        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
-        //得到根节点,maps节点
-        GDataXMLElement *mapsEle = [doc rootElement];
+        NSLog(@"xmlDoc = %@",xmlDoc);
         
-        GDataXMLElement *responsedataEle = [[mapsEle elementsForName:@"responsedata"] lastObject];
-        
-        GDataXMLElement *serverinfoEle = [[responsedataEle elementsForName:@"serverinfo"] lastObject];
-       
-        GDataXMLElement *iphostEle = [[serverinfoEle elementsForName:@"iphost"]lastObject];
-        
-        GDataXMLElement *sslEle = [[serverinfoEle elementsForName:@"ssl"]lastObject];
-        
-        GDataXMLElement *pathEle = [[serverinfoEle elementsForName:@"path"]lastObject];
-        
-        GDataXMLElement *portEle = [[serverinfoEle elementsForName:@"port"]lastObject];
-        
-        NSString *iphost = iphostEle.stringValue;
-        
-        NSString *ssl = sslEle.stringValue;
-        
-        NSString *path = pathEle.stringValue;
-        
-        NSString *port = portEle.stringValue;
+        if ([[xmlDoc objectForKey:@"statuscode"]isEqualToString:@"0"]) {
+            
+            NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
+            
+            NSDictionary *serverinfoDic = responsedataDic[@"serverinfo"];
+            
+            NSDictionary *unitinfoDic = responsedataDic[@"unitinfo"];
+            
+            NSString *iphost = serverinfoDic[@"iphost"];
+            
+            NSString *ssl = serverinfoDic[@"ssl"];
+            
+            NSString *path = serverinfoDic[@"path"];
+            
+            NSString *port = serverinfoDic[@"port"];
+            
+            NSString *loginInterface = [NSString stringWithFormat:@"%@://%@:%@%@",[ssl isEqualToString:@"no"]?@"http":@"https",iphost,port,path];
+            
+            //保存接口
+            [LocalData setLoginInterface:loginInterface];
+            
+            //开始登陆
+            NSDictionary *loginParameters = @{
+                                              
+                                              @"unitcode":self.unitcodeTextField.text,
+                                              
+                                              @"mobile":self.phoneNumberTextField.text,
+                                              
+                                              @"password":self.passwordTextField.text,
+                                              
+                                              @"clientos":@"ios",
+                                              
+                                              @"clientversion":[NSString stringWithFormat:@"ios%@",[[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]],
+                                              
+                                              @"clientid":[self getDeviceId]
+                                              
+                                              };
+            
+            Network *loginNetwork = [[Network alloc]initWithURL:[NSString stringWithFormat:@"%@%@",loginInterface,loginURL] parameters:loginParameters requestSuccess:^(NSData *data) {
+                
+                NSDictionary *loginXmlDoc = [NSDictionary dictionaryWithXMLData:data];
+                
+                if ([[loginXmlDoc objectForKey:@"statuscode"]isEqualToString:@"0"]) {
+                    
+                    NSDictionary *loginResponsedataDic = loginXmlDoc[@"responsedata"];
+                    
+                    //把登陆的数据全部保存到本地
+                    NSDictionary *appcenterDic = loginResponsedataDic[@"appcenter"];
+                    NSDictionary *personinfoDic = loginResponsedataDic[@"personinfo"];
+                    NSDictionary *sessioninfoDic = loginResponsedataDic[@"sessioninfo"];
+                    NSDictionary *unitinfoDic = loginResponsedataDic[@"unitinfo"];
+                    
+                    
+                    NSString *appcenter = appcenterDic[@"uri"];
+                    
+                    NSString *gender = personinfoDic[@"gender"];
+                    NSString *mobile = personinfoDic[@"mobile"];
+                    NSString *password = weakself.passwordTextField.text;
+                    NSString *username = personinfoDic[@"username"];
+                    
+                    NSString *expiresin = sessioninfoDic[@"expiresin"];
+                    NSString *token = sessioninfoDic[@"token"];
+                    
+                    NSString *customerlogo = unitinfoDic[@"customerlogo"];
+                    NSString *unitcode = unitinfoDic[@"unitcode"];
+                    NSString *unitname = unitinfoDic[@"unitname"];
+                    NSString *updatetime = unitinfoDic[@"updatetime"];
+                    
+                    [LocalData setAppcenter:appcenter];
+                    [LocalData setMobile:mobile];
+                    [LocalData setGender:gender];
+                    [LocalData setPassword:password];
+                    [LocalData setUsername:username];
+                    [LocalData setExpiresin:expiresin];
+                    [LocalData setToken:token];
+                    [LocalData setCustomerlogo:customerlogo];
+                    [LocalData setUnitcode:unitcode];
+                    [LocalData setUnitname:unitname];
+                    [LocalData setUpdatetime:updatetime];
 
-        
-        NSString *loginInterface = [NSString stringWithFormat:@"%@://%@:%@%@",[ssl isEqualToString:@"no"]?@"http":@"https",iphost,port,path];
-        
-        //保存
-        [LocalData setLoginInterface:loginInterface];
-        
+                    [weakself hiddenHUD];
+                    
+                    //登陆
+                    //跳转到主页面
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    
+                    MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+                    
+                    [weakself.navigationController pushViewController:mainTabBarController animated:YES];
 
-        NSLog(@"interface = %@",loginInterface);
-        
-        NSLog(@"xmlStr = %@",xmlStr);
-        
-        NSDictionary *loginParameters = @{
-                                     
-                                     @"unitcode":self.unitcodeTextField.text,
-                                     
-                                     @"mobile":self.phoneNumberTextField.text,
-                                     
-                                     @"password":self.passwordTextField.text,
-                                     
-                                     @"clientos":@"ios",
+                    
+                }else{
+                    
+                    
+                    NSString *errorMsg = [loginXmlDoc objectForKey:@"statusmsg"];
+                    
+                    [weakself hiddenHUDWithMessage:errorMsg];
 
-                                     @"clientversion":[NSString stringWithFormat:@"ios%@",[[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]],
-
-                                     @"clientid":[self getDeviceId]
-                                     
-                                     };
-        
-        NSLog(@"loginParameters = %@",loginParameters);
-        
-        Network *loginNetwork = [[Network alloc]initWithURL:[NSString stringWithFormat:@"%@%@",loginInterface,loginURL] parameters:loginParameters requestSuccess:^(NSData *data) {
+                }
+                
+                
+            } requestFail:^(NSError *error) {
+                
+                [weakself hiddenHUDWithMessage:@"登陆失败"];
+            }];
             
-            NSString *xmlStr  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }else{
             
-            NSLog(@"xmlStr = %@",xmlStr);
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
-            GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:nil];
-            
-            GDataXMLElement *mapsEle = [doc rootElement];
-            
-            GDataXMLElement *statuscodeEle = [[mapsEle elementsForName:@"statuscode"] lastObject];
-            
-            if ([statuscodeEle.stringValue isEqualToString:@"0"]) {
-                //获取数据成功
-                //登陆成功保存用户信息
-                GDataXMLElement *responsedataEle = [[mapsEle elementsForName:@"responsedata"] lastObject];
-                
-                GDataXMLElement *sessioninfoEle = [[responsedataEle elementsForName:@"sessioninfo"]lastObject];
-
-                GDataXMLElement *tokenEle = [[sessioninfoEle elementsForName:@"token"] lastObject];
-
-                [LocalData setToken:tokenEle.stringValue];
-                
-                [LocalData setPhoneNumber:self.phoneNumberTextField.text];
-                
-                [LocalData setPassword:self.passwordTextField.text];
-                
-                [LocalData setUnitcode:self.unitcodeTextField.text];
-                
-                
-                [[UserinfoModel sharedInstance]setValueFromResponsedataEle:responsedataEle];
-                
-                //跳转到主页面
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                
-                MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-                
-                [self.navigationController pushViewController:mainTabBarController animated:YES];
-                
-            }else{
-                
-                //弹出错误消息
-                GDataXMLElement *statusmsgEle = [[mapsEle elementsForName:@"statusmsg"] lastObject];
-                
-                NSString *errorMsg = statusmsgEle.stringValue;
-
-                NSLog(@"errorMsg = %@",errorMsg);
-                
-            }
-            
-        } requestFail:^(NSError *error) {
-            
-            NSLog(@"请求失败");
-        }];
-        
+            [weakself hiddenHUDWithMessage:errorMsg];
+        }
+    
     } requestFail:^(NSError *error) {
         
-        NSLog(@"请求失败");
+        [weakself hiddenHUDWithMessage:@"验证失败"];
 
     }];
     
 }
 
-/*
- UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
- 
- MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
- 
- [weakSelf.navigationController pushViewController:mainTabBarController animated:YES];
- */
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
 
 
-- (NSString *)getDeviceId
-{
-    NSString * currentDeviceUUIDStr = [SSKeychain passwordForService:@"com.Softtek.lingke"account:@"uuid"];
-    
-    if (currentDeviceUUIDStr == nil || [currentDeviceUUIDStr isEqualToString:@""])
-    {
-        NSUUID * currentDeviceUUID  = [UIDevice currentDevice].identifierForVendor;
-        currentDeviceUUIDStr = currentDeviceUUID.UUIDString;
-        currentDeviceUUIDStr = [currentDeviceUUIDStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        currentDeviceUUIDStr = [currentDeviceUUIDStr lowercaseString];
-        [SSKeychain setPassword: currentDeviceUUIDStr forService:@"com.Softtek.lingke"account:@"uuid"];
-    }
-    return currentDeviceUUIDStr;
-}
+
 @end

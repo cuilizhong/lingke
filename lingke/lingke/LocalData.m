@@ -8,25 +8,12 @@
 
 #import "LocalData.h"
 
-//static LocalData *localData = nil;
-
 @implementation LocalData
 
-//+(instancetype )sharedInstance{
-//    
-//    static dispatch_once_t predicate;
-//    
-//    dispatch_once(&predicate, ^{
-//        
-//        localData = [[self alloc] init];
-//        
-//                
-//    });
-//    
-//    return localData;
-//}
 
 
+
+//token
 + (void)setToken:(NSString *)token{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -44,6 +31,7 @@
     return [userDefaults objectForKey:@"token"];
 }
 
+//unitCode
 + (void)setUnitcode:(NSString *)unitcode{
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -61,22 +49,24 @@
 
 }
 
-+ (void)setPhoneNumber:(NSString *)phoneNumber{
+//mobile
++ (void)setMobile:(NSString *)mobile{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    [userDefaults setObject:phoneNumber forKey:@"phoneNumber"];
+    [userDefaults setObject:mobile forKey:@"mobile"];
     
     [userDefaults synchronize];
 }
 
-+ (NSString *)getPhoneNumber{
++ (NSString *)getMobile{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    return [userDefaults objectForKey:@"phoneNumber"];
+    return [userDefaults objectForKey:@"mobile"];
 }
 
+//password
 + (void)setPassword:(NSString *)password{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -95,6 +85,126 @@
     
 }
 
+//appcenter
++ (void)setAppcenter:(NSString *)appcenter{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:appcenter forKey:@"appcenter"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getAppcenter{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    return [userDefaults objectForKey:@"appcenter"];
+}
+
+//gender
++ (void)setGender:(NSString *)gender{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:gender forKey:@"gender"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getGender{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    return [userDefaults objectForKey:@"gender"];
+}
+
+//username
++ (void)setUsername:(NSString *)username{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:username forKey:@"username"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getUsername{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    return [userDefaults objectForKey:@"username"];
+}
+
+//expiresin
++ (void)setExpiresin:(NSString *)expiresin{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:expiresin forKey:@"expiresin"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getExpiresin{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    return [userDefaults objectForKey:@"expiresin"];
+}
+
+//customerlogo
++ (void)setCustomerlogo:(NSString *)customerlogo{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:customerlogo forKey:@"customerlogo"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getCustomerlogo{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    return [userDefaults objectForKey:@"customerlogo"];
+}
+
+//unitname
++ (void)setUnitname:(NSString *)unitname{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:unitname forKey:@"unitname"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getUnitname{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    return [userDefaults objectForKey:@"unitname"];
+}
+
+//updatetime
++ (void)setUpdatetime:(NSString *)updatetime{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:updatetime forKey:@"updatetime"];
+    
+    [userDefaults synchronize];
+}
+
++ (NSString *)getUpdatetime{
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    return [userDefaults objectForKey:@"updatetime"];
+}
+
+//isLaunchedApp
 + (void)setIsLaunchedApp:(NSString *)isLaunchedApp{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -111,6 +221,7 @@
     return [userDefaults objectForKey:@"isLaunchedApp"];
 }
 
+//tutorialsImageUpdateDate
 + (void)setTutorialsImageUpdateDate:(NSString *)tutorialsImageUpdateDate{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -128,6 +239,8 @@
     
 }
 
+
+//loginInterface
 + (void)setLoginInterface:(NSString *)loginInterface{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -142,6 +255,30 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
     return [userDefaults objectForKey:@"loginInterface"];
+}
+
+//注销
++ (void)logout{
+    
+    //注销的时候需要删除本地所有的数据
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults removeObjectForKey:@"token"];
+    [userDefaults removeObjectForKey:@"unitcode"];
+    [userDefaults removeObjectForKey:@"mobile"];
+    [userDefaults removeObjectForKey:@"password"];
+    [userDefaults removeObjectForKey:@"appcenter"];
+    [userDefaults removeObjectForKey:@"gender"];
+    [userDefaults removeObjectForKey:@"username"];
+    [userDefaults removeObjectForKey:@"expiresin"];
+    [userDefaults removeObjectForKey:@"customerlogo"];
+    [userDefaults removeObjectForKey:@"unitname"];
+    [userDefaults removeObjectForKey:@"updatetime"];
+    [userDefaults removeObjectForKey:@"loginInterface"];
+
+
+    [userDefaults synchronize];
+
 }
 
 @end

@@ -25,7 +25,6 @@
 		070C1A741D80008100D6E726 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A731D80008100D6E726 /* MessageModel.m */; };
 		070C1A771D800CEA00D6E726 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A761D800CEA00D6E726 /* MessageTableViewCell.m */; };
 		070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */; };
-		0721906E1D7015E200EA832B /* UserinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721906D1D7015E200EA832B /* UserinfoModel.m */; };
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
 		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
 		072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190771D72CB0D00EA832B /* NewsInfoModel.m */; };
@@ -51,6 +50,9 @@
 		073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */; };
 		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
 		073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D91D7414800013DB67 /* ExtendappCell.m */; };
+		075C4A951D8B889D0028EF84 /* UIViewController+viewControllerHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C4A941D8B889D0028EF84 /* UIViewController+viewControllerHelp.m */; };
+		075C4A981D8B89180028EF84 /* UserinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C4A971D8B89180028EF84 /* UserinfoViewController.m */; };
+		075C4A9B1D8B892B0028EF84 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075C4A9A1D8B892B0028EF84 /* ChangePasswordViewController.m */; };
 		0766ECD31D85866B00D884F5 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0766ECD21D85866B00D884F5 /* HelpViewController.m */; };
 		0766ECE41D85978700D884F5 /* scan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0766ECDE1D85978700D884F5 /* scan@2x.png */; };
 		0766ECE51D85978700D884F5 /* scan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0766ECDF1D85978700D884F5 /* scan@3x.png */; };
@@ -135,8 +137,6 @@
 		070C1A781D8015A200D6E726 /* MessageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailsViewController.h; sourceTree = "<group>"; };
 		070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailsViewController.m; sourceTree = "<group>"; };
 		0721906A1D6F2B3400EA832B /* HttpInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpInterface.h; path = lingke/HttpInterface.h; sourceTree = "<group>"; };
-		0721906C1D7015E200EA832B /* UserinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserinfoModel.h; path = lingke/Model/UserinfoModel.h; sourceTree = "<group>"; };
-		0721906D1D7015E200EA832B /* UserinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserinfoModel.m; path = lingke/Model/UserinfoModel.m; sourceTree = "<group>"; };
 		072190701D7290BA00EA832B /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = lingke/XMLDictionary.h; sourceTree = "<group>"; };
 		072190711D7290BA00EA832B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = lingke/XMLDictionary.m; sourceTree = "<group>"; };
 		072190731D72972100EA832B /* HomeappModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeappModel.h; path = lingke/Model/HomeappModel.h; sourceTree = "<group>"; };
@@ -184,6 +184,12 @@
 		073A54D61D7404700013DB67 /* ExtendappViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappViewController.m; sourceTree = "<group>"; };
 		073A54D81D7414800013DB67 /* ExtendappCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendappCell.h; sourceTree = "<group>"; };
 		073A54D91D7414800013DB67 /* ExtendappCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendappCell.m; sourceTree = "<group>"; };
+		075C4A931D8B889D0028EF84 /* UIViewController+viewControllerHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+viewControllerHelp.h"; sourceTree = "<group>"; };
+		075C4A941D8B889D0028EF84 /* UIViewController+viewControllerHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+viewControllerHelp.m"; sourceTree = "<group>"; };
+		075C4A961D8B89180028EF84 /* UserinfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserinfoViewController.h; sourceTree = "<group>"; };
+		075C4A971D8B89180028EF84 /* UserinfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserinfoViewController.m; sourceTree = "<group>"; };
+		075C4A991D8B892B0028EF84 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		075C4A9A1D8B892B0028EF84 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		0766ECD11D85866B00D884F5 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		0766ECD21D85866B00D884F5 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		0766ECDE1D85978700D884F5 /* scan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scan@2x.png"; sourceTree = "<group>"; };
@@ -299,6 +305,8 @@
 			children = (
 				070C16301D693CF800738BC7 /* AppDelegate.h */,
 				070C16311D693CF800738BC7 /* AppDelegate.m */,
+				075C4A931D8B889D0028EF84 /* UIViewController+viewControllerHelp.h */,
+				075C4A941D8B889D0028EF84 /* UIViewController+viewControllerHelp.m */,
 				072C28621D6C9A2200EAFFAC /* BasicViewController.h */,
 				072C28631D6C9A2200EAFFAC /* BasicViewController.m */,
 				072C286E1D6D689000EAFFAC /* BasicTableViewController.h */,
@@ -307,8 +315,8 @@
 				072C28661D6C9A4700EAFFAC /* TutorialsViewController.m */,
 				072C28681D6C9A5600EAFFAC /* LoginViewController.h */,
 				072C28691D6C9A5600EAFFAC /* LoginViewController.m */,
-				072C28711D6D6B6E00EAFFAC /* LoginTableViewCell.h */,
 				072C28721D6D6B6E00EAFFAC /* LoginTableViewCell.m */,
+				072C28711D6D6B6E00EAFFAC /* LoginTableViewCell.h */,
 				072C28741D6D6B9100EAFFAC /* LoginTableViewCell.xib */,
 				072C28791D6D851700EAFFAC /* MainTabBarController.h */,
 				072C287A1D6D851700EAFFAC /* MainTabBarController.m */,
@@ -390,8 +398,6 @@
 			children = (
 				070C16F91D6C4C0300738BC7 /* TutorialsModel.h */,
 				070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */,
-				0721906C1D7015E200EA832B /* UserinfoModel.h */,
-				0721906D1D7015E200EA832B /* UserinfoModel.m */,
 				072190731D72972100EA832B /* HomeappModel.h */,
 				072190741D72972100EA832B /* HomeappModel.m */,
 				072190761D72CB0D00EA832B /* NewsInfoModel.h */,
@@ -513,6 +519,10 @@
 			children = (
 				072C288E1D6D903700EAFFAC /* MyViewController.h */,
 				072C288F1D6D903700EAFFAC /* MyViewController.m */,
+				075C4A961D8B89180028EF84 /* UserinfoViewController.h */,
+				075C4A971D8B89180028EF84 /* UserinfoViewController.m */,
+				075C4A991D8B892B0028EF84 /* ChangePasswordViewController.h */,
+				075C4A9A1D8B892B0028EF84 /* ChangePasswordViewController.m */,
 				0766ECD11D85866B00D884F5 /* HelpViewController.h */,
 				0766ECD21D85866B00D884F5 /* HelpViewController.m */,
 			);
@@ -767,6 +777,7 @@
 				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
 				07B44B911D7806660023214C /* MailListTableViewHeadView.m in Sources */,
 				0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */,
+				075C4A9B1D8B892B0028EF84 /* ChangePasswordViewController.m in Sources */,
 				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
 				07F7C73D1D80FFF600A860EA /* DataIndexModel.m in Sources */,
 				072190751D72972200EA832B /* HomeappModel.m in Sources */,
@@ -774,6 +785,7 @@
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				07B44B831D76DA860023214C /* ApplyModel.m in Sources */,
+				075C4A981D8B89180028EF84 /* UserinfoViewController.m in Sources */,
 				07AA7A471D7D1DF300ED80D1 /* MailDetailsViewController.m in Sources */,
 				073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */,
 				073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */,
@@ -790,13 +802,13 @@
 				073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */,
 				0766ECEB1D8597CC00D884F5 /* ScanViewController.m in Sources */,
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
+				075C4A951D8B889D0028EF84 /* UIViewController+viewControllerHelp.m in Sources */,
 				07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */,
 				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
 				070C1A771D800CEA00D6E726 /* MessageTableViewCell.m in Sources */,
 				07FFA6F51D6EDADB00A40454 /* Network.m in Sources */,
 				070C1A6D1D7EA34100D6E726 /* HomeFunctionModel.m in Sources */,
 				072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */,
-				0721906E1D7015E200EA832B /* UserinfoModel.m in Sources */,
 				070C1A741D80008100D6E726 /* MessageModel.m in Sources */,
 				072C28701D6D689000EAFFAC /* BasicTableViewController.m in Sources */,
 			);

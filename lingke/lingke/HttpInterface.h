@@ -10,13 +10,13 @@
 #ifndef HttpInterface_h
 #define HttpInterface_h
 
-static const NSString *verificationURL = @"http://www.linkersoft.com:9001/m1srv/xml/person";
+static  NSString *verificationURL = @"http://www.linkersoft.com:9001/m1srv/xml/person";
 
-static const NSString *loginURL = @"/dataapi/xml/login";
+static  NSString *loginURL = @"/dataapi/xml/login";
 
-static const NSString *wfapplyURL = @"/dataapi/wfapply";
+static  NSString *wfapplyURL = @"/dataapi/wfapply";
 
 //首页新闻
-static const NSString *homenewsURL = @"/m1/dataapi/homenews";
+static  NSString *homenewsURL = @"/m1/dataapi/homenews";
 
 #endif

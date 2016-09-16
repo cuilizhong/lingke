@@ -41,10 +41,10 @@
 @property(nonatomic,strong)HomeappModel *scanAppModel;
 
 
-
-/**
- *  我的
- */
-@property(nonatomic,strong)HomeappModel *myAppModel;
+//
+///**
+// *  我的
+// */
+//@property(nonatomic,strong)HomeappModel *myAppModel;
 
 @end

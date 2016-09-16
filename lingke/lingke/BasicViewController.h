@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "Network.h"
-#import "UserinfoModel.h"
 #import "XMLDictionary.h"
 #import "HomeappModel.h"
 #import "HttpsRequestManger.h"
@@ -18,6 +17,5 @@
 
 @interface BasicViewController : UIViewController
 
-- (void)hiddenSurplusLine:(UITableView *)tableView;
 
 @end

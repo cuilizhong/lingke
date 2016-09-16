@@ -61,7 +61,9 @@
             
             cell = [[NSBundle mainBundle]loadNibNamed:@"MailListTableViewCell" owner:self options:nil].firstObject;
             
-            cell.cell0Label.text = [UserinfoModel sharedInstance].unitname;
+            
+            
+            cell.cell0Label.text = [LocalData getUnitname];
             
         }else{
             

@@ -7,13 +7,11 @@
 //
 
 #import "MyViewController.h"
-#import "UserinfoModel.h"
 #import "UIImageView+WebCache.h"
 
 @interface MyViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *englishNameLabel;
+
 
 @end
 
@@ -27,12 +25,11 @@
     
     self.title = @"个人中心";
     
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[UserinfoModel sharedInstance].headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[LocalData getCustomerlogo]] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
-    self.usernameLabel.text = [UserinfoModel sharedInstance].username;
-    self.englishNameLabel.text = [UserinfoModel sharedInstance].unitname;
+    [self hiddenSurplusLine:self.tableView];
 
 }
 

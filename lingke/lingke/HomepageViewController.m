@@ -84,7 +84,7 @@
                                                                   
                                  };
     
-    Network *appcodeNetwork = [[Network alloc]initWithURL:[UserinfoModel sharedInstance].uri parameters:parameters requestSuccess:^(NSData *data) {
+    Network *appcodeNetwork = [[Network alloc]initWithURL:[LocalData getAppcenter] parameters:parameters requestSuccess:^(NSData *data) {
         
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         

@@ -10,54 +10,52 @@
 
 @interface LocalData : NSObject
 
-//+ (instancetype)sharedInstance;
-//
-//
-//@property(nonatomic,copy)NSString *token;
-//
-//@property(nonatomic,copy)NSString *licence;
-//
-//@property(nonatomic,copy)NSString *phoneNumber;
-//
-//@property(nonatomic,copy)NSString *password;
-//
-///**
-// *  判断是否是第一次进入app
-// */
-//@property(nonatomic,copy)NSString *isFirstLaunchApp;
-//
-///**
-// *  引导图片更新时间
-// */
-//@property(nonatomic,copy)NSString *tutorialsImageUpdateDate;
 
 + (void)setIsLaunchedApp:(NSString *)isLaunchedApp;
-
 + (NSString *)getIsLaunchedApp;
 
-
-+ (void)setPhoneNumber:(NSString *)phoneNumber;
-
-+ (NSString *)getPhoneNumber;
++ (void)setMobile:(NSString *)mobile;
++ (NSString *)getMobile;
 
 + (void)setPassword:(NSString *)password;
-
 + (NSString *)getPassword;
 
-
 + (void)setToken:(NSString *)token;
-
 + (NSString *)getToken;
-
-
-+ (void)setTutorialsImageUpdateDate:(NSString *)tutorialsImageUpdateDate;
-
-+ (NSString *)getTutorialsImageUpdateDate;
 
 + (void)setUnitcode:(NSString *)unitcode;
 + (NSString *)getUnitcode;
 
++ (void)setAppcenter:(NSString *)appcenter;
++ (NSString *)getAppcenter;
+
++ (void)setGender:(NSString *)gender;
++ (NSString *)getGender;
+
++ (void)setUsername:(NSString *)username;
++ (NSString *)getUsername;
+
++ (void)setExpiresin:(NSString *)expiresin;
++ (NSString *)getExpiresin;
+
++ (void)setCustomerlogo:(NSString *)customerlogo;
++ (NSString *)getCustomerlogo;
+
++ (void)setUnitname:(NSString *)unitname;
++ (NSString *)getUnitname;
+
++ (void)setUpdatetime:(NSString *)updatetime;
++ (NSString *)getUpdatetime;
+
++ (void)setTutorialsImageUpdateDate:(NSString *)tutorialsImageUpdateDate;
++ (NSString *)getTutorialsImageUpdateDate;
+
 + (void)setLoginInterface:(NSString *)loginInterface;
 + (NSString *)getLoginInterface;
+
+/**
+ *  注销
+ */
++ (void)logout;
 
 @end

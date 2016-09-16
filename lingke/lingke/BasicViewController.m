@@ -10,11 +10,6 @@
 
 @implementation BasicViewController
 
-- (void)hiddenSurplusLine:(UITableView *)tableView{
-    
-    UIView *view = [[UIView alloc]init];
-    view.backgroundColor = [UIColor clearColor];
-    tableView.tableFooterView = view;
-}
+
 
 @end

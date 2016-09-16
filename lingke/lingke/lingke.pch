@@ -9,6 +9,12 @@
 #ifndef lingke_pch
 #define lingke_pch
 
+#import "UIViewController+viewControllerHelp.h"
+
+
+#import "Network.h"
+
+#import "HomeFunctionModel.h"
 
 #define ENABLE_DEBUG
 

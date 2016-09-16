@@ -8,14 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "Network.h"
-#import "UserinfoModel.h"
 #import "XMLDictionary.h"
 #import "HomeappModel.h"
 #import "HttpsRequestManger.h"
 #import "LocalData.h"
 #import "UIScrollView+TouchEvent.h"
 #import "HomeFunctionModel.h"
+#import "MBProgressHUD.h"
 
-@interface BasicTableViewController : UITableViewController
+
+@interface BasicTableViewController : UITableViewController<MBProgressHUDDelegate>
+
+- (void)showHUDWithMessage:(NSString *)message;
+
+- (void)hiddenHUD;
+
+- (void)hiddenHUDWithMessage:(NSString *)message;
+
 
 @end
