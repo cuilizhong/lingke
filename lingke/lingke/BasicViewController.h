@@ -14,8 +14,17 @@
 #import "HttpsRequestManger.h"
 #import "LocalData.h"
 #import "HomeFunctionModel.h"
+#import "MBProgressHUD.h"
 
-@interface BasicViewController : UIViewController
 
+@interface BasicViewController : UIViewController<MBProgressHUDDelegate>
+
+- (void)showHUDWithMessage:(NSString *)message;
+
+- (void)hiddenHUD;
+
+- (void)hiddenHUDWithMessage:(NSString *)message;
+
+- (void)handErrorWihtErrorCode:(NSString *)errorCode errorMsg:(NSString *)errorMsg expireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock;
 
 @end

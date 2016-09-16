@@ -31,11 +31,6 @@
 
 @property(nonatomic,strong)UITableView *tableView;
 
-@property(nonatomic,copy)NSString *applyAppCode;
-
-@property(nonatomic,copy)NSString *applyAppuri;
-
-
 @end
 
 @implementation HomepageViewController
@@ -43,6 +38,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.homeappArray = [[NSMutableArray alloc]init];
     
@@ -55,19 +52,37 @@
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setImage:[UIImage imageNamed:@"TabBar_Item_1"] forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, 50, 20);
+    rightButton.frame = CGRectMake(0, 0, 44, 44);
     
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setImage:[UIImage imageNamed:@"TabBar_Item_1"] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.frame = CGRectMake(0, 0, 44, 44);
+    
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
+    
+    self.navigationItem.leftBarButtonItem = leftBarButton;
     
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
+    [self requestData];
+}
+
+
+- (void)requestData{
+    
+    [self showHUDWithMessage:RequestingMessage];
+    
+    //请求
     NSDictionary *requestdata = @{
                                   
                                   @"unitcode":[LocalData getUnitcode],
@@ -81,10 +96,10 @@
                                  @"token":[LocalData getToken],
                                  
                                  @"requestdata":requestdata,
-                                                                  
+                                 
                                  };
-    
-    Network *appcodeNetwork = [[Network alloc]initWithURL:[LocalData getAppcenter] parameters:parameters requestSuccess:^(NSData *data) {
+    @weakify(self);
+    [HttpsRequestManger sendHttpReqestWithUrl:[LocalData getAppcenter] parameter:parameters requestSuccess:^(NSData *data) {
         
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
@@ -100,62 +115,48 @@
             
             NSArray *appArray = [homeappDic objectForKey:@"app"];
             
-            NSString *appcode;
-            
-            NSString *appuri;
-            
-            
-            //主功能
+#pragma mark-主功能
             for (NSDictionary *dic in appArray) {
                 
                 HomeappModel *homeappModel = [[HomeappModel alloc]init];
                 
                 [homeappModel setValueFromDic:dic];
                 
-                [self.homeappArray addObject:homeappModel];
+                [weakself.homeappArray addObject:homeappModel];
                 
                 NSString *appurikindKey = [dic objectForKey:@"appurikind"];
                 
                 if ([appurikindKey isEqualToString:@"HOMENEWS"]) {
                     
                     //首页新闻
-                    appcode = [dic objectForKey:@"appcode"];
-                    appuri = [dic objectForKey:@"appuri"];
-                    
                     [HomeFunctionModel sharedInstance].newsAppModel = homeappModel;
                     
                 }else if([appurikindKey isEqualToString:@"APPLY"]){
                     
                     //快速流程接口
-                    self.applyAppCode = [dic objectForKey:@"appcode"];
-                    self.applyAppuri = [dic objectForKey:@"appuri"];
-                    
                     [HomeFunctionModel sharedInstance].applyAppModel = homeappModel;
-                    
                     
                 }else if ([appurikindKey isEqualToString:@"ORG"]){
                     //通讯录
                     [HomeFunctionModel sharedInstance].orgAppModel = homeappModel;
                     
                 }else if ([appurikindKey isEqualToString:@"HOMETODO"]){
-                    
+                    //待办
                     [HomeFunctionModel sharedInstance].homeTODOAppModel = homeappModel;
                     
                 }else if ([appurikindKey isEqualToString:@"MESSAGE"]){
-                    
+                    //信息
                     [HomeFunctionModel sharedInstance].messageAppModel = homeappModel;
                     
                 }else if ([appurikindKey isEqualToString:@"SCAN"]){
-                    
+                    //扫描
                     [HomeFunctionModel sharedInstance].scanAppModel = homeappModel;
                     
                 }
-                
-                
             }
             
             
-            //获取扩展功能数据
+#pragma mark-获取扩展功
             NSDictionary *extendappDic = [responseDic objectForKey:@"extendapp"];
             
             NSArray *extendappArray = extendappDic[@"app"];
@@ -182,159 +183,185 @@
                 
                 [extendappModel.appmenus setObject:extendappModel.appmenu forKey:@"appmenus"];
                 
-                [self.extendappDataArray addObject:extendappModel];
+                [weakself.extendappDataArray addObject:extendappModel];
                 
             }
             
-            NSLog(@"self.extendappDataArray = %@",self.extendappDataArray);
+            [weakself requestNews];
             
+            [weakself requestWFApplyList];
             
-#pragma mark-请求首页新闻
-            NSDictionary *dataDic = @{
-                                      
-                                      @"pagestart":@"1",
-                                      
-                                      @"pagecount":@"4"
-                                      
-                                      };
-            
-            NSDictionary *requestNewsdata = @{
-                                          
-                                          @"appcode":appcode,
-                                          
-                                          @"method":@"NEWSLIST",
-                                          
-                                          @"data":dataDic
-                                          
-                                          };
-            
-            
-            NSDictionary *requestNewsparameters = @{
-                                         
-                                         @"token":[LocalData getToken],
-                                         
-                                         @"requestdata":requestNewsdata,
-                                         
-                                         };
-            
-
-            
-            NSLog(@"requestNewsparameters = %@",requestNewsparameters);
-            
-            Network *newsNetwork = [[Network alloc]initWithURL:appuri parameters:requestNewsparameters requestSuccess:^(NSData *data) {
-                
-                NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
-                
-                NSLog(@"xmlDoc = %@",xmlDoc);
-                
-                if ([[xmlDoc objectForKey:@"statuscode"]isEqualToString:@"0"]) {
-                    
-                    //获取数据成功
-                    NSDictionary *responseDic = [xmlDoc objectForKey:@"responsedata"];
-                    
-                    NSDictionary *newsinfosDic = responseDic[@"newsinfos"];
-                    
-                    NSArray *newsinfoArray = newsinfosDic[@"newsinfo"];
-                    
-                    for (NSDictionary *dic in newsinfoArray) {
-                        
-                        NewsInfoModel *newsInfoModel = [[NewsInfoModel alloc]init];
-                        
-                        [newsInfoModel setValueFromDic:dic];
-                        
-                        [self.newsInfoArray addObject:newsInfoModel];
-                    }
-                    
-                    //设置新闻
-                    [self.tableView reloadData];
-
-                    
-                    
-                    
-                    
-                }else{
-                    //获取数据失败
-                    NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
-                    
-                }
-                
-                
-                
-                
-            } requestFail:^(NSError *error) {
-                
-            }];
-            
-            
-            //请求
-            
-            NSDictionary *applyRequestNewsdata = @{
-                                              
-                                              @"appcode":self.applyAppCode,
-                                              
-                                              @"method":@"WFAPPLYLIST",
-                                              
-                                              };
-            
-            
-            NSDictionary *applyParameters = @{
-                                                    
-                                                    @"token":[LocalData getToken],
-                                                    
-                                                    @"requestdata":applyRequestNewsdata,
-                                                    
-                                                    };
-            
-            Network *applyAppNewsNetwork = [[Network alloc]initWithURL:self.applyAppuri parameters:applyParameters requestSuccess:^(NSData *data) {
-                
-                NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
-                
-                NSLog(@"xmlDoc = %@",xmlDoc);
-                
-                if ( [[xmlDoc objectForKey:@"statuscode"] isEqualToString:@"0"]) {
-                    
-                    
-                    
-                    NSDictionary *responsedataDic = [xmlDoc objectForKey:@"responsedata"];
-                    
-                    NSDictionary *applylistDic = [responsedataDic objectForKey:@"applylist"];
-
-                    NSArray *applyArray = [applylistDic objectForKey:@"apply"];
-                    
-                    for (NSDictionary *dic in applyArray) {
-                        
-                        ApplyModel *applyModel = [[ApplyModel alloc]init];
-                        
-                        applyModel.applyname = dic[@"applyname"];
-                        
-                        applyModel.formid = dic[@"formid"];
-                        
-                        [self.applyArray addObject:applyModel];
-                        
-                    }
-                    
-                }else{
-                    
-                    NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
-                    
-                    NSLog(@"errorMsg = %@",errorMsg);
-                }
-                
-            } requestFail:^(NSError *error) {
-                
-            }];
             
         }else{
             
             NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
-            NSLog(@"errorMsg = %@",errorMsg);
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself requestData];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
+            
+        }
+        
+    } requestFail:^(NSError *error) {
+        
+        [weakself hiddenHUDWithMessage:RequestFailureMessage];
+    }];
+    
+}
+
+#pragma mark-请求新闻数据
+- (void)requestNews{
+    
+    HomeappModel *homeappModel = [HomeFunctionModel sharedInstance].newsAppModel;
+    
+    NSDictionary *data = @{
+                           
+                           @"pagestart":@"1",
+                           
+                           @"pagecount":@"4"
+                           
+                           };
+    
+    NSDictionary *requestdata = @{
+                                  
+                                  @"appcode":homeappModel.appcode,
+                                  
+                                  @"method":@"NEWSLIST",
+                                  
+                                  @"data":data
+                                  
+                                  };
+    
+    
+    NSDictionary *parameters = @{
+                                 
+                                 @"token":[LocalData getToken],
+                                 
+                                 @"requestdata":requestdata,
+                                 
+                                 };
+    
+    @weakify(self);
+    [HttpsRequestManger sendHttpReqestWithUrl:homeappModel.appuri parameter:parameters requestSuccess:^(NSData *data) {
+        
+        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+        
+        if ([[xmlDoc objectForKey:@"statuscode"]isEqualToString:@"0"]) {
+            
+            //获取数据成功
+            NSDictionary *responseDic = [xmlDoc objectForKey:@"responsedata"];
+            
+            NSDictionary *newsinfosDic = responseDic[@"newsinfos"];
+            
+            NSArray *newsinfoArray = newsinfosDic[@"newsinfo"];
+            
+            [weakself.newsInfoArray removeAllObjects];
+            
+            for (NSDictionary *dic in newsinfoArray) {
+                
+                NewsInfoModel *newsInfoModel = [[NewsInfoModel alloc]init];
+                
+                [newsInfoModel setValueFromDic:dic];
+                
+                [weakself.newsInfoArray addObject:newsInfoModel];
+            }
+            
+            //设置新闻
+            [weakself.tableView reloadData];
+            
+            if (weakself.applyArray.count>0) {
+                //所有的请求完成
+                [weakself hiddenHUD];
+            }
+            
+        }else{
+            //获取数据失败
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            [weakself hiddenHUDWithMessage:errorMsg];
+            
         }
         
         
     } requestFail:^(NSError *error) {
         
-        NSLog(@"失败");
+        [weakself hiddenHUDWithMessage:@"获取失败"];
+        
+    }];
+}
+
+#pragma mark-请求快速申请列表
+- (void)requestWFApplyList{
+    
+    HomeappModel *homeappModel = [HomeFunctionModel sharedInstance].applyAppModel;
+
+    
+    NSDictionary *requestdata = @{
+                                        @"appcode":homeappModel.appcode,
+                                           
+                                        @"method":@"WFAPPLYLIST",
+                                           
+                                    };
+    
+    
+    NSDictionary *parameters = @{
+                                      
+                                    @"token":[LocalData getToken],
+                                      
+                                    @"requestdata":requestdata,
+                                      
+                                };
+    
+    @weakify(self);
+    [HttpsRequestManger sendHttpReqestWithUrl:homeappModel.appuri parameter:parameters requestSuccess:^(NSData *data) {
+        
+        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+        
+        if ( [[xmlDoc objectForKey:@"statuscode"] isEqualToString:@"0"]) {
+            
+            NSDictionary *responsedataDic = [xmlDoc objectForKey:@"responsedata"];
+            
+            NSDictionary *applylistDic = [responsedataDic objectForKey:@"applylist"];
+            
+            NSArray *applyArray = [applylistDic objectForKey:@"apply"];
+            
+            [weakself.applyArray removeAllObjects];
+            
+            for (NSDictionary *dic in applyArray) {
+                
+                ApplyModel *applyModel = [[ApplyModel alloc]init];
+                
+                applyModel.applyname = dic[@"applyname"];
+                
+                applyModel.formid = dic[@"formid"];
+                
+                [weakself.applyArray addObject:applyModel];
+            }
+            
+            if (weakself.newsInfoArray.count>0) {
+                //所有的请求完成
+                [weakself hiddenHUD];
+            }
+            
+        }else{
+            
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            [weakself hiddenHUDWithMessage:errorMsg];
+            
+        }
+
+        
+    } requestFail:^(NSError *error) {
+        [weakself hiddenHUDWithMessage:RequestFailureMessage];
     }];
 }
 
@@ -353,11 +380,11 @@
     
     HomepageCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"HomepageCell" owner:self options:nil]objectAtIndex:indexPath.row];
     
-//    __weak typeof(self)weakSelf = self;
-    
     @weakify(self)
     
-    [cell showCellWithNewsInfoModelArray:self.newsInfoArray extendappArray:self.extendappDataArray jumpNewsinfoBlock:^(NewsInfoModel *newsInfoModel) {
+    CGSize cellSize = CGSizeMake(self.view.frame.size.width, 160);
+    
+    [cell showCellWithNewsInfoModelArray:self.newsInfoArray cellSize:cellSize cellIndex:indexPath.row extendappArray:self.extendappDataArray jumpNewsinfoBlock:^(NewsInfoModel *newsInfoModel) {
         
         NSLog(@"跳转到新闻详情");
         
@@ -389,16 +416,12 @@
         return 160.0f;
     }else{
         
-        return self.view.frame.size.height - 160.0f;
+        return self.view.frame.size.height - 160.0f - 49;
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
-
-- (IBAction)recordAction:(id)sender {
+- (void)leftButtonAction:(UIButton *)sender{
     
     //通讯录
     for (HomeappModel *homeappModel in self.homeappArray) {
@@ -418,26 +441,7 @@
             return;
         }
     }
-}
-
-- (IBAction)fastApplyAction:(id)sender {
     
-    //弹出列表
-    NSMutableArray *titlesArray = [[NSMutableArray alloc]init];
-    
-    for (ApplyModel *applyModel  in self.applyArray) {
-        
-        
-        NSString *title = applyModel.applyname;
-        
-        [titlesArray addObject:title];
-    }
-    
-    [LZPopOverMenu showForSender:sender withMenu:titlesArray imageNameArray:nil doneBlock:^(NSInteger selectedIndex) {
-        
-    } dismissBlock:^{
-        
-    }];
 }
 
 - (void)rightButtonAction:(id)sender{
@@ -457,6 +461,9 @@
         
         ApplyModel *applyModel = self.applyArray[selectedIndex];
         
+        HomeappModel *homeappModel = [HomeFunctionModel sharedInstance].applyAppModel;
+
+        
         
         NSDictionary *data = @{
                                
@@ -469,7 +476,7 @@
         
         NSDictionary *requestdata = @{
                                       
-                                      @"appcode":self.applyAppCode,
+                                      @"appcode":homeappModel.appcode,
                                       
                                       @"method":@"WFAPPLY",
                                       
@@ -488,7 +495,7 @@
         
         NSString *url = [LocalData getLoginInterface];
 
-        url = [NSString stringWithFormat:@"%@/dataapi/applydata/%@/%@?token=%@",url,self.applyAppCode,applyModel.formid,[LocalData getToken]];
+        url = [NSString stringWithFormat:@"%@/dataapi/applydata/%@/%@?token=%@",url,homeappModel.appcode,applyModel.formid,[LocalData getToken]];
         
         
         NSLog(@"url = %@",url);

@@ -16,6 +16,13 @@
 
 #import "HomeFunctionModel.h"
 
+
+#define RequestFailureMessage @"加载失败"
+
+#define RequestingMessage @"加载中"
+
+#define TokenInvalidCode @"1004"
+
 #define ENABLE_DEBUG
 
 

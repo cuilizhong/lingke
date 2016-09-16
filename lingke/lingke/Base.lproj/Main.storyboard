@@ -783,20 +783,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" image="TabBar_Item_1" id="b6y-Q1-Sf5"/>
-                    <navigationItem key="navigationItem" title="上海凌柯 . 工作易" id="2rw-7u-gET">
-                        <barButtonItem key="leftBarButtonItem" image="TabBar_Item_1" style="done" id="8ZW-AV-nhq">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="recordAction:" destination="RSH-HX-jCI" id="Wdu-4X-CT0"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="TabBar_Item_1" id="p7T-jE-GS3">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="fastApplyAction:" destination="RSH-HX-jCI" id="y5O-IF-dVB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="上海凌柯 . 工作易" id="2rw-7u-gET"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wZR-se-cPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

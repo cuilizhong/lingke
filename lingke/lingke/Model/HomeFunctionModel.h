@@ -18,6 +18,9 @@
  */
 @property(nonatomic,strong)HomeappModel *homeTODOAppModel;
 
+/**
+ *  新闻
+ */
 @property(nonatomic,strong)HomeappModel *newsAppModel;
 
 /**
@@ -40,11 +43,5 @@
  */
 @property(nonatomic,strong)HomeappModel *scanAppModel;
 
-
-//
-///**
-// *  我的
-// */
-//@property(nonatomic,strong)HomeappModel *myAppModel;
 
 @end

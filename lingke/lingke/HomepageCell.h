@@ -18,5 +18,5 @@ typedef void(^EnterExtendappBlock)(ExtendappModel *extendappModel);
 @interface HomepageCell : UITableViewCell
 
 
-- (void)showCellWithNewsInfoModelArray:(NSArray<NewsInfoModel*>*)newsInfoModelArray extendappArray:(NSArray *)extendappArray jumpNewsinfoBlock:(JumpNewsinfoBlock)jumpNewsinfoBlock enterExtendappBlock:(EnterExtendappBlock)enterExtendappBlock;
+- (void)showCellWithNewsInfoModelArray:(NSArray<NewsInfoModel*>*)newsInfoModelArray cellSize:(CGSize)cellSize cellIndex:(NSInteger)cellIndex extendappArray:(NSArray *)extendappArray jumpNewsinfoBlock:(JumpNewsinfoBlock)jumpNewsinfoBlock enterExtendappBlock:(EnterExtendappBlock)enterExtendappBlock;
 @end

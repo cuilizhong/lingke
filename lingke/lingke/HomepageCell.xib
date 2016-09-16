@@ -2,47 +2,21 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="160" id="CZq-bT-Hdz" customClass="HomepageCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="160" id="CZq-bT-Hdz" customClass="HomepageCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CZq-bT-Hdz" id="YVe-Lc-4gJ">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="159.5"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hD-hN-KUh">
-                        <rect key="frame" x="0.0" y="0.5" width="320" height="159.5"/>
-                    </scrollView>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="j1f-cO-aPP">
-                        <rect key="frame" x="222" y="123" width="90" height="37"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="90" id="G3y-hG-A2o"/>
-                            <constraint firstAttribute="height" constant="37" id="sCD-83-H9W"/>
-                        </constraints>
-                        <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </pageControl>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="7hD-hN-KUh" firstAttribute="top" secondItem="YVe-Lc-4gJ" secondAttribute="top" id="AMT-0Y-JrG"/>
-                    <constraint firstAttribute="bottom" secondItem="j1f-cO-aPP" secondAttribute="bottom" id="DYG-Cz-oUI"/>
-                    <constraint firstAttribute="bottom" secondItem="7hD-hN-KUh" secondAttribute="bottom" id="LWb-pJ-R7f"/>
-                    <constraint firstAttribute="trailing" secondItem="7hD-hN-KUh" secondAttribute="trailing" id="QRW-jr-uGA"/>
-                    <constraint firstItem="7hD-hN-KUh" firstAttribute="leading" secondItem="YVe-Lc-4gJ" secondAttribute="leading" id="QT3-PV-86P"/>
-                    <constraint firstAttribute="trailing" secondItem="j1f-cO-aPP" secondAttribute="trailing" constant="8" id="WBM-Sl-1l9"/>
-                </constraints>
             </tableViewCellContentView>
-            <connections>
-                <outlet property="pageControl" destination="j1f-cO-aPP" id="csT-JT-4ea"/>
-                <outlet property="scrollView" destination="7hD-hN-KUh" id="Fl5-OI-Fcw"/>
-            </connections>
             <point key="canvasLocation" x="578" y="221"/>
         </tableViewCell>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="219" id="oug-j5-XLB" customClass="HomepageCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="219" id="oug-j5-XLB" customClass="HomepageCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="219"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oug-j5-XLB" id="TZN-rl-LBh">
