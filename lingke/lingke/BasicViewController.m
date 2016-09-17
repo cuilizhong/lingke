@@ -32,6 +32,15 @@
 
 }
 
+- (void)showHUD{
+    
+    [self.progressHUD showAnimated:YES];
+    
+    self.progressHUD.mode = MBProgressHUDModeIndeterminate;
+    
+    self.progressHUD.detailsLabel.text = nil;
+    
+}
 
 
 - (void)showHUDWithMessage:(NSString *)message{

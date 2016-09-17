@@ -388,21 +388,29 @@
         
         NSLog(@"跳转到新闻详情");
         
+        weakself.hidesBottomBarWhenPushed = YES;
+        
         NewsinfoDetailsViewController *newsinfoDetailsViewController = [[NewsinfoDetailsViewController alloc]init];
         
         newsinfoDetailsViewController.newsInfoModel = newsInfoModel;
         
         [weakself.navigationController pushViewController:newsinfoDetailsViewController animated:YES];
         
+        weakself.hidesBottomBarWhenPushed = NO;
+        
     } enterExtendappBlock:^(ExtendappModel *extendappModel) {
         
         NSLog(@"跳转扩展应用");
+        
+        weakself.hidesBottomBarWhenPushed = YES;
         
         ExtendappViewController *extendappViewController = [[ExtendappViewController alloc]init];
         
         extendappViewController.extendappModel = extendappModel;
         
         [weakself.navigationController pushViewController:extendappViewController animated:YES];
+        
+        weakself.hidesBottomBarWhenPushed = NO;
         
     }];
     

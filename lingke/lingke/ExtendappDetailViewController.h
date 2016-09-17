@@ -7,7 +7,10 @@
 //
 
 #import "BasicViewController.h"
+#import "DataIndexModel.h"
 
 @interface ExtendappDetailViewController : BasicViewController
+
+@property(nonatomic,strong)DataIndexModel *dataIndexModel;
 
 @end

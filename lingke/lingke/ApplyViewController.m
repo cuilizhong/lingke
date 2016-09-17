@@ -33,7 +33,7 @@
     
     NSLog(@"url = %@",url);
     
-    self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]
                              

@@ -249,12 +249,12 @@
     self.enterExtendappBlock(extendappModel);
 }
 
-//取消选择了某个cell
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor redColor]];
-    
-}
+////取消选择了某个cell
+//- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
+//    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+//    [cell setBackgroundColor:[UIColor redColor]];
+//    
+//}
 
 
 @end

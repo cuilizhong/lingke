@@ -23,7 +23,17 @@
     [super viewDidLoad];
     self.title = @"新闻详情";
     
-    self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setImage:[UIImage imageNamed:@"TabBar_Item_1"] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.frame = CGRectMake(0, 0, 44, 44);
+    
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
+    
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+    
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.newsInfoModel.url]
                              
@@ -42,8 +52,15 @@
     self.activityView.color = [UIColor blackColor];
     
     [self.view addSubview:self.activityView];
+    
+
 
     
+}
+
+- (void)leftButtonAction:(UIButton *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

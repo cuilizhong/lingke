@@ -19,6 +19,8 @@
 
 @interface BasicViewController : UIViewController<MBProgressHUDDelegate>
 
+- (void)showHUD;
+
 - (void)showHUDWithMessage:(NSString *)message;
 
 - (void)hiddenHUD;
