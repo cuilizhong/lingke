@@ -7,6 +7,7 @@
 //
 
 #import "BasicTableViewController.h"
+#import "PersionModel.h"
 
 @interface MailDetailsViewController : BasicTableViewController
 
@@ -21,6 +22,8 @@
 @property(nonatomic,assign)BOOL isAdd;
 
 @property(nonatomic,strong)HomeappModel *homeappModel;
+
+@property(nonatomic,strong)PersionModel *persion;
 
 
 @end

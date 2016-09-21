@@ -8,7 +8,6 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -20,6 +19,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-706" y="1236"/>
         </scene>
@@ -1130,7 +1130,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="f9i-lz-XNT" firstAttribute="top" secondItem="ICq-yr-SwG" secondAttribute="top" constant="7" id="4mF-NB-D7v"/>
-                                                <constraint firstAttribute="bottom" secondItem="f9i-lz-XNT" secondAttribute="bottom" constant="6.5" id="CUi-Gh-Pfh"/>
+                                                <constraint firstAttribute="bottom" secondItem="f9i-lz-XNT" secondAttribute="bottom" constant="7" id="CUi-Gh-Pfh"/>
                                                 <constraint firstItem="f9i-lz-XNT" firstAttribute="leading" secondItem="Bfq-W6-q9F" secondAttribute="trailing" constant="8" id="OIX-kO-hun"/>
                                                 <constraint firstItem="Bfq-W6-q9F" firstAttribute="leading" secondItem="ICq-yr-SwG" secondAttribute="leading" constant="8" id="Thn-RT-1rt"/>
                                                 <constraint firstItem="Bfq-W6-q9F" firstAttribute="centerY" secondItem="ICq-yr-SwG" secondAttribute="centerY" id="iPH-He-BTK"/>

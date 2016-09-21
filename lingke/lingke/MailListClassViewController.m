@@ -12,8 +12,10 @@
 #import "PersionModel.h"
 #import "MJRefresh.h"
 #import "MailDetailsViewController.h"
+#import "UIImageView+WebCache.h"
 
-static const NSInteger pagecount = 20;
+
+static const NSInteger pagecount = 1000;
 
 typedef NS_ENUM(NSInteger, MailListClassify)
 {
@@ -40,11 +42,16 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 
 @property(nonatomic,assign)MailListClassify mailListClassify;
 
-@property(nonatomic,strong)NSMutableArray *dataArray;
+@property(nonatomic,strong)NSMutableArray *headTitleForDeptnameArray;
+@property(nonatomic,strong)NSMutableArray *classifyForDeptnameArray;
 
-@property(nonatomic,strong)NSMutableArray *headTitlesArray;
+@property(nonatomic,strong)NSMutableArray *headTitleForNameArray;
+@property(nonatomic,strong)NSMutableArray *classifyForNameArray;
 
-@property(nonatomic,strong)NSMutableArray *namesArray;
+
+@property(nonatomic,strong)UITableView *searchTableView;
+
+@property(nonatomic,strong)NSMutableArray *searchArray;
 
 @end
 
@@ -57,13 +64,17 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.headTitleForDeptnameArray = [[NSMutableArray alloc]init];
+    self.classifyForDeptnameArray = [[NSMutableArray alloc]init];
+    
+    self.headTitleForNameArray = [[NSMutableArray alloc]init];
+    self.classifyForNameArray = [[NSMutableArray alloc]init];
+
+    
     self.persionModelArray = [[NSMutableArray alloc]init];
     
-    self.dataArray = [[NSMutableArray alloc]init];
-    
-    self.headTitlesArray = [[NSMutableArray alloc]init];
-    
-    self.namesArray = [[NSMutableArray alloc]init];
+    self.searchArray = [[NSMutableArray alloc]init];
+
     
     self.mailListClassify = MailListClassifyForDeptname;
     
@@ -80,7 +91,7 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     NSArray *items = [[NSArray alloc]initWithObjects:@"按部门",@"按姓名", nil];
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:items];
-    self.segmentedControl.frame = CGRectMake(0,64, self.view.frame.size.width, 30);
+    self.segmentedControl.frame = CGRectMake(0,0, self.view.frame.size.width, 30);
     [self.segmentedControl addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
     self.segmentedControl.selectedSegmentIndex = 0;
     [self.view addSubview:self.segmentedControl];
@@ -105,31 +116,37 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 
     [self.view addSubview:self.searchBar];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.searchBar.frame.size.height+self.segmentedControl.frame.size.height+64,self.view.frame.size.width,self.view.frame.size.height - self.searchBar.frame.size.height-self.segmentedControl.frame.size.height-64) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.searchBar.frame.size.height+self.segmentedControl.frame.size.height,self.view.frame.size.width,self.view.frame.size.height - self.searchBar.frame.size.height-self.segmentedControl.frame.size.height-64) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    
+    
+    self.searchTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.searchBar.frame.size.height+self.segmentedControl.frame.size.height,self.view.frame.size.width,self.view.frame.size.height - self.searchBar.frame.size.height-self.segmentedControl.frame.size.height-64) style:UITableViewStylePlain];
+    self.searchTableView.delegate = self;
+    self.searchTableView.dataSource = self;
+    [self.view addSubview:self.searchTableView];
+    
+    self.searchTableView.hidden = YES;
     
     @weakify(self)
     
     self.tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
         
-        weakself.pagestart = 1;
-        
-        [weakself requestData];
-        
-        [weakself handData];
+        [weakself requestMailList];
         
     }];
     
-    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
-        
-        weakself.pagestart = weakself.pagestart+pagecount;
-        
-        [weakself requestData];
-        
-        [weakself handData];
-    }];
+//    self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+//        
+//        weakself.pagestart = weakself.pagestart+pagecount;
+//        
+//        [weakself requestData];
+//        
+//        [weakself handData];
+//    }];
+    
+    [self.tableView.mj_header beginRefreshing];
     
 }
 
@@ -154,8 +171,6 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)change:(UISegmentedControl *)sender{
@@ -167,7 +182,8 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             //按部门
             self.mailListClassify = MailListClassifyForDeptname;
             
-            [self handData];
+            [self.tableView reloadData];
+            
         }
             
             break;
@@ -176,8 +192,10 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             
             //按姓名
             self.mailListClassify = MailListClassifyForName;
+            
+            [self.tableView reloadData];
 
-            [self handData];
+
         }
             
             break;
@@ -187,12 +205,10 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     }
 }
 
-- (void)requestData{
+- (void)requestMailList{
     
-    if (self.pagestart == 1) {
-        
-        [self.persionModelArray removeAllObjects];
-    }
+    [self showHUDWithMessage:@"加载中，请稍后"];
+    
     
     NSDictionary *data = @{
                            
@@ -227,13 +243,21 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     [HttpsRequestManger sendHttpReqestWithUrl:self.homeappModel.appuri parameter:parameters requestSuccess:^(NSData *data) {
         
+        
+        [weakself endRefresh];
+        
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
 
         NSLog(@"xmlDoc = %@",xmlDoc);
         
         NSDictionary *responsedata = xmlDoc[@"responsedata"];
         
-        if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
+        NSString *statuscode = xmlDoc[@"statuscode"];
+        
+        if ([statuscode isEqualToString:@"0"]) {
+            
+            [weakself hiddenHUD];
+
             
             //数据获取成功
             NSDictionary *persons = responsedata[@"persons"];
@@ -250,23 +274,38 @@ typedef NS_ENUM(NSInteger, MailListClassify)
                 
             }
             
-            [weakself endRefresh];
 
             //处理数据
             [weakself handData];
             
-        }else{
+        }else if([statuscode isEqualToString:TokenInvalidCode]){
             
-            [weakself endRefresh];
+            //处理token过期
+            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+                
+                [weakself requestMailList];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself showHUDWithMessage:errorMessage];
+                
+            }];
+            
+            
+        }else{
             
             //数据获取失败
             NSString *errorMessage = xmlDoc[@"statusmsg"];
             
+            [weakself showHUDWithMessage:errorMessage];
         }
         
     } requestFail:^(NSError *error) {
         
         [weakself endRefresh];
+        
+        [weakself showHUDWithMessage:RequestFailureMessage];
+
         
     }];
 }
@@ -275,85 +314,110 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     [self.tableView.mj_header endRefreshing];
     
-    [self.tableView.mj_footer endRefreshing];
+//    [self.tableView.mj_footer endRefreshing];
 }
 
-#pragma mark-处理数据
+#pragma mark-处理数据(按部门，按姓名)
 - (void)handData{
     
-    [self.dataArray removeAllObjects];
-    [self.headTitlesArray removeAllObjects];
+    [self.headTitleForDeptnameArray removeAllObjects];
     
-    //分类数据
-    if (self.mailListClassify == MailListClassifyForDeptname) {
+    [self.classifyForDeptnameArray removeAllObjects];
+
+    
+    [self.headTitleForNameArray removeAllObjects];
+    
+    [self.classifyForNameArray removeAllObjects];
+    
+#pragma mark-按部分类
+    
+    //遍历获取部门
+    for (PersionModel *persion in self.persionModelArray) {
         
-        //部门
+        if (![self.headTitleForDeptnameArray containsObject:persion.orgname]) {
+            
+            [self.headTitleForDeptnameArray addObject:persion.orgname];
+            
+        }
+    }
+    
+    //分类
+    for (NSString *orgname in self.headTitleForDeptnameArray) {
+        
+        NSMutableArray *array = [[NSMutableArray alloc]init];
+        
         for (PersionModel *persion in self.persionModelArray) {
             
-            if (![self.headTitlesArray containsObject:persion.orgname]) {
+            if ([persion.orgname isEqualToString:orgname]) {
                 
-                [self.headTitlesArray addObject:persion.orgname];
-                
+                [array addObject:persion];
             }
         }
         
-        for (NSString *orgname in self.headTitlesArray) {
-            
-            NSMutableArray *array = [[NSMutableArray alloc]init];
-            
-            for (PersionModel *persion in self.persionModelArray) {
-                
-                if ([persion.orgname isEqualToString:orgname]) {
-                    
-                    [array addObject:persion];
-                }
-            }
-            
-            [self.dataArray addObject:array];
-            
-        }
-        
-        [self.tableView reloadData];
-        
-    }else{
-        
-        //名字
-        self.headTitlesArray = [[NSMutableArray alloc]initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
-        
-        [self.namesArray removeAllObjects];
-        
-        for (int i = 0; i<self.headTitlesArray.count; i++) {
-            
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-            
-            NSMutableArray *subArray = [[NSMutableArray alloc]init];
-            
-            [dic setObject:subArray forKey:self.headTitlesArray[i]];
-            
-            [self.namesArray addObject:dic];
-        }
-        
-        
-        for (int i = 0; i<self.namesArray.count; i++){
-            
-            NSMutableDictionary *tmpDic = self.namesArray[i];
-            
-            for (PersionModel *persionModel in self.persionModelArray) {
-                
-                NSString *key = [self firstCharactor:persionModel.username];
-                
-                if ([key isEqualToString:tmpDic.allKeys.lastObject]) {
-                    
-                    NSMutableArray *tmpArray = tmpDic[key];
-                    
-                    [tmpArray addObject:persionModel];
-                }
-            }
-        }
-        
-        NSLog(@"array = %@",self.namesArray);
-        
+        [self.classifyForDeptnameArray addObject:array];
     }
+    
+    
+#pragma mark-按首字母分类
+    //名字
+    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
+    
+    //先创建空的
+    for (int i = 0; i<self.headTitleForNameArray.count; i++) {
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        
+        NSMutableArray *subArray = [[NSMutableArray alloc]init];
+        
+        [dic setObject:subArray forKey:self.headTitleForNameArray[i]];
+        
+        [self.classifyForNameArray addObject:dic];
+    }
+    
+    //添加数据到每组里面
+    for (int i = 0; i<self.classifyForNameArray.count; i++){
+        
+        NSMutableDictionary *tmpDic = self.classifyForNameArray[i];
+        
+        for (PersionModel *persionModel in self.persionModelArray) {
+            
+            NSString *key = [self firstCharactor:persionModel.username];
+            
+            if ([key isEqualToString:tmpDic.allKeys.lastObject]) {
+                
+                NSMutableArray *tmpArray = tmpDic[key];
+                
+                [tmpArray addObject:persionModel];
+            }
+        }
+    }
+    
+    //删除空组
+    NSMutableArray *tmpHeadTitleForNameArray = [[NSMutableArray alloc]init];
+    NSMutableArray *tmpClassifyForNameArray = [[NSMutableArray alloc]init];
+    
+    for (NSString *title in self.headTitleForNameArray) {
+        
+        for (NSDictionary *dic in self.classifyForNameArray) {
+            
+            if ([title isEqualToString:dic.allKeys.lastObject]) {
+                
+                NSMutableArray *tmpArray = dic[title];
+                
+                if (tmpArray.count<1) {
+                    
+                    [tmpHeadTitleForNameArray addObject:title];
+                    
+                    [tmpClassifyForNameArray addObject:dic];
+                }
+                
+            }
+        }
+    }
+    
+    [self.headTitleForNameArray removeObjectsInArray:tmpHeadTitleForNameArray];
+    [self.classifyForNameArray removeObjectsInArray:tmpClassifyForNameArray];
+    
     
     [self.tableView reloadData];
 }
@@ -385,6 +449,9 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
     [searchBar resignFirstResponder];
+    
+    self.searchTableView.hidden = YES;
+    self.tableView.hidden = NO;
 }
 
 //当点击search的时候调用
@@ -392,41 +459,72 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     [searchBar resignFirstResponder];
     
-    //请求数据
+    [self.searchArray removeAllObjects];
+    
+    for (PersionModel *persion in self.persionModelArray) {
+        
+        if ([persion.username containsString:searchBar.text]) {
+            
+            [self.searchArray addObject:persion];
+        }
+        
+    }
+    
+    self.searchTableView.hidden = NO;
+    self.tableView.hidden = YES;
+    [self.searchTableView reloadData];
+    
+    
 }
 
 #pragma mark-UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    if (self.mailListClassify == MailListClassifyForDeptname) {
+    if (self.tableView == tableView) {
         
-        //部门
-        return self.dataArray.count;
+        if (self.mailListClassify == MailListClassifyForDeptname) {
+            
+            //部门
+            return self.headTitleForDeptnameArray.count;
+            
+            
+        }else{
+            
+            return self.headTitleForNameArray.count;
+        }
 
-        
     }else{
         
-        return self.headTitlesArray.count;
+        return 1;
     }
+    
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (self.mailListClassify == MailListClassifyForDeptname) {
+    if (self.tableView == tableView) {
         
-        return ((NSMutableArray *)(self.dataArray[section])).count;
-        
+        if (self.mailListClassify == MailListClassifyForDeptname) {
+            
+            return ((NSMutableArray *)(self.classifyForDeptnameArray[section])).count;
+            
+        }else{
+            
+            NSMutableDictionary *dic = self.classifyForNameArray[section];
+            
+            NSString *key = self.headTitleForNameArray[section];
+            
+            NSMutableArray *array = [dic objectForKey:key];
+            
+            return array.count;
+        }
     }else{
         
-        NSMutableDictionary *dic = self.namesArray[section];
-        
-        NSString *key = self.headTitlesArray[section];
-        
-        NSMutableArray *array = [dic objectForKey:key];
-        
-        return array.count;
+        return self.searchArray.count;
     }
+    
+   
     
 }
 
@@ -439,34 +537,73 @@ typedef NS_ENUM(NSInteger, MailListClassify)
         cell = [[NSBundle mainBundle]loadNibNamed:@"MailListTableViewCell" owner:self options:nil].lastObject;
     }
     
-    if (self.mailListClassify == MailListClassifyForDeptname) {
+    if (self.tableView == tableView) {
         
-        PersionModel *persion = self.dataArray[indexPath.section][indexPath.row];
-        
-        cell.cell1Label.text = persion.username;
-        
-        //    cell.cell1HeadImageView
+        if (self.mailListClassify == MailListClassifyForDeptname) {
+            
+            PersionModel *persion = self.classifyForDeptnameArray[indexPath.section][indexPath.row];
+            
+            cell.cell1Label.text = persion.username;
+            
+            [cell.cell1HeadImageView sd_setImageWithURL:[NSURL URLWithString:persion.headurl] placeholderImage:[UIImage imageNamed:@" "] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+            
+            
+        }else{
+            
+            NSMutableDictionary *dic = self.classifyForNameArray[indexPath.section];
+            
+            NSString *key = self.headTitleForNameArray[indexPath.section];
+            
+            NSMutableArray *array = [dic objectForKey:key];
+            
+            PersionModel *persion = array[indexPath.row];
+            
+            cell.cell1Label.text = persion.username;
+        }
         
     }else{
         
-        NSMutableDictionary *dic = self.namesArray[indexPath.section];
-        
-        NSString *key = self.headTitlesArray[indexPath.section];
-        
-        NSMutableArray *array = [dic objectForKey:key];
-        
-        PersionModel *persion = array[indexPath.row];
+        PersionModel *persion = self.searchArray[indexPath.row];
         
         cell.cell1Label.text = persion.username;
+        
     }
-    
-    
-    
+
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    PersionModel *persion;
+    
+    if (self.tableView == tableView) {
+        
+        if (self.mailListClassify == MailListClassifyForDeptname) {
+            
+            NSMutableArray *array = self.classifyForDeptnameArray[indexPath.section];
+            
+            persion = array[indexPath.row];
+            
+        }else{
+            
+            NSMutableDictionary *dic = self.classifyForNameArray[indexPath.row];
+            NSString *key = self.headTitleForNameArray[indexPath.row];
+            NSMutableArray *array = dic[key];
+            
+            persion = array[indexPath.row];
+        }
+    
+    }else{
+        
+        persion = self.searchArray[indexPath.row];
+        
+    }
+
     
     //跳转到详情
     self.hidesBottomBarWhenPushed = YES;
@@ -474,6 +611,11 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     UIStoryboard *storyborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     MailDetailsViewController *mailDetailsViewController = [storyborad instantiateViewControllerWithIdentifier:@"MailDetailsViewController"];
+    
+    mailDetailsViewController.persion = persion;
+    
+    mailDetailsViewController.homeappModel = self.homeappModel;
+    
     
     [self.navigationController pushViewController:mailDetailsViewController animated:YES];
     
@@ -483,21 +625,46 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    MailListTableViewHeadView *headView = (MailListTableViewHeadView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MailListTableViewHeadViewID"];
-    
-    if (!headView) {
+    if (self.tableView == tableView) {
         
-        headView = [[NSBundle mainBundle]loadNibNamed:@"MailListTableViewHeadView" owner:self options:nil].lastObject;
+        MailListTableViewHeadView *headView = (MailListTableViewHeadView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MailListTableViewHeadViewID"];
+        
+        if (!headView) {
+            
+            headView = [[NSBundle mainBundle]loadNibNamed:@"MailListTableViewHeadView" owner:self options:nil].lastObject;
+        }
+        
+        if (self.mailListClassify == MailListClassifyForDeptname) {
+            
+            headView.titleLabel.text = self.headTitleForDeptnameArray[section];
+            
+        }else{
+            
+            headView.titleLabel.text = self.headTitleForNameArray[section];
+            
+            
+        }
+        
+        
+        return headView;
+    }else{
+        
+        return nil;
     }
     
-    headView.titleLabel.text = self.headTitlesArray[section];
     
-    return headView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 30.0f;
+    if (self.tableView == tableView) {
+        
+        return 30.0f;
+    }else{
+        
+        return 0.01f;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

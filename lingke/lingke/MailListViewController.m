@@ -15,6 +15,12 @@
 
 @property(nonatomic,strong)UITableView *tableView;
 
+/**
+ *  常用联系人是查询本地的数据库的
+ */
+@property(nonatomic,strong)NSMutableArray *topContactsArray;
+
+
 @end
 
 @implementation MailListViewController
@@ -24,6 +30,8 @@
     [super viewDidLoad];
     
     self.title = @"通讯录";
+    
+    self.topContactsArray = [[NSMutableArray alloc]init];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     
@@ -76,11 +84,11 @@
             
             if (indexPath.row == 1) {
                 
-                cell.cell0Label.text = @"我的好友";
+                cell.cell1Label.text = @"我的好友";
                 
             }else if (indexPath.row == 2){
                 
-                cell.cell1Label.text = @"我的群住";
+                cell.cell1Label.text = @"我的群组";
             
             }else if (indexPath.row == 3){
                 
