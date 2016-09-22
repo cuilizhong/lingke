@@ -22,6 +22,8 @@
     
     [super viewDidLoad];
     
+    self.title = self.messageModel.title;
+    
     self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.messageModel.uri]

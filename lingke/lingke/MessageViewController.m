@@ -39,6 +39,18 @@
     self.messagekindsArray = [[NSMutableArray alloc]init];
     
     self.messageContentsArray = [[NSMutableArray alloc]init];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [self requst];
+}
+
+- (void)requst{
+    
+    [self showHUD];
     
     NSString *appcode = [HomeFunctionModel sharedInstance].messageAppModel.appcode;
     
@@ -79,6 +91,8 @@
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
             
+            [weakself hiddenHUD];
+            
             NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
             
             NSDictionary *messagekindsDic = responsedataDic[@"messagekinds"];
@@ -89,7 +103,7 @@
             
             [weakself.messagekindsArray addObjectsFromArray:messagekindArray];
             
-            weakself.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,64, weakself.view.frame.size.width,40) menusTitle:weakself.messagekindsArray selectedBlock:^(NSString *title) {
+            weakself.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, weakself.view.frame.size.width,40) menusTitle:weakself.messagekindsArray selectedBlock:^(NSString *title) {
                 
                 [weakself requestMessageDataWithKind:title];
             }];
@@ -97,7 +111,7 @@
             [weakself.view addSubview:self.menusView];
             
             //crearTableView
-            self.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height+64, self.view.frame.size.width, self.view.frame.size.height-weakself.menusView.frame.size.height - 64-49) style:UITableViewStylePlain];
+            self.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-weakself.menusView.frame.size.height-49) style:UITableViewStylePlain];
             self.contentTableView.delegate = self;
             self.contentTableView.dataSource = self;
             [self.view addSubview:self.contentTableView];
@@ -106,9 +120,13 @@
             
         }else{
             
+            
+            
             NSString *errorMessage = xmlDoc[@"statusmsg"];
             
             NSLog(@"errorMessage = %@",errorMessage);
+            
+            [weakself hiddenHUDWithMessage:errorMessage];
         }
         
         
@@ -116,11 +134,20 @@
         
     } requestFail:^(NSError *error) {
         
+        [weakself hiddenHUDWithMessage:RequestFailureMessage];
+        
+        
     }];
-
+    
 }
 
 - (void)requestMessageDataWithKind:(NSString *)kind{
+    
+    if ([kind isEqualToString:@"全部信息"]) {
+        kind = @"ALL";
+    }
+    
+    [self showHUD];
     
     [self.messageContentsArray removeAllObjects];
     
@@ -154,6 +181,7 @@
                                  
                                  };
     
+    @weakify(self);
     [HttpsRequestManger sendHttpReqestWithUrl:appuri parameter:parameters requestSuccess:^(NSData *data) {
         
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
@@ -161,6 +189,8 @@
         NSLog(@"信息xmlDoc = %@",xmlDoc);
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
+            
+            [weakself hiddenHUD];
             
             NSMutableDictionary *responsedataDic = xmlDoc[@"responsedata"];
             
@@ -183,11 +213,15 @@
             
             NSString *errorMessage = xmlDoc[@"statusmsg"];
             
+            [weakself hiddenHUDWithMessage:errorMessage];
+            
             NSLog(@"errorMessage = %@",errorMessage);
         }
         
         
     } requestFail:^(NSError *error) {
+        
+        [weakself hiddenHUDWithMessage:RequestFailureMessage];
         
     }];
     
@@ -262,11 +296,15 @@
     
     MessageModel *messageModel = self.messageContentsArray[indexPath.row];
     
+    self.hidesBottomBarWhenPushed = YES;
+    
     MessageDetailsViewController *messageDetailsViewController = [[MessageDetailsViewController alloc]init];
     
     messageDetailsViewController.messageModel = messageModel;
     
     [self.navigationController pushViewController:messageDetailsViewController animated:YES];
+    
+    self.hidesBottomBarWhenPushed = NO;
     
 }
 

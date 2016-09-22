@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     
     @weakify(self)
-    self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,64, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"所有待办",@"创建时间倒序", nil] selectedBlock:^(NSString *title) {
+    self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"所有待办",@"创建时间倒序", nil] selectedBlock:^(NSString *title) {
         
         if ([title isEqualToString:@"所有待办"]) {
             
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     [self.view addSubview:self.menusView];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.menusView.frame.size.height + 64, self.view.frame.size.width,self.view.frame.size.height - self.menusView.frame.size.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.menusView.frame.size.height, self.view.frame.size.width,self.view.frame.size.height - self.menusView.frame.size.height - 64) style:UITableViewStylePlain];
     
     self.tableView.delegate = self;
     
@@ -92,7 +92,17 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     
+    
+    [self request];
+    
+    [self requestClass];
+}
+
+
+- (void)request{
+    
     //request
+    @weakify(self)
     NSString *appcode = [HomeFunctionModel sharedInstance].homeTODOAppModel.appcode;
     
     NSString *appuri = [HomeFunctionModel sharedInstance].homeTODOAppModel.appuri;
@@ -130,7 +140,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
             
-        
+            
             
             NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
             
@@ -163,14 +173,12 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             NSLog(@"errorMessage = %@",errorMessage);
             
         }
-
+        
         
     } requestFail:^(NSError *error) {
         
     }];
     
-    
-    [self requestClass];
 }
 
 - (void)requestClass{
@@ -212,8 +220,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             NSDictionary *wflistDic = responsedataDic[@"wflist"];
             
             NSArray *wfArray = wflistDic[@"wf"];
-            
-//            NSMutableArray *array = [[NSMutableArray alloc]init];
             
             for (NSDictionary *dic in wfArray) {
                 
