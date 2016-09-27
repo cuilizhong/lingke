@@ -8,16 +8,15 @@
 
 #import "MailDetailsViewController.h"
 #import "UIImageView+WebCache.h"
+#import "AppDelegate.h"
 
-
-typedef NS_ENUM(NSInteger, EditSate)
-{
-    EditStateEdit,
-    
-    EditStateSave
-};
 
 @interface MailDetailsViewController ()<UITextViewDelegate>
+
+
+@property (weak, nonatomic) IBOutlet UIButton *maleButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *addressTableViewCell;
@@ -26,8 +25,6 @@ typedef NS_ENUM(NSInteger, EditSate)
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-
-@property (weak, nonatomic) IBOutlet UITextField *sexTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
 
@@ -53,7 +50,7 @@ typedef NS_ENUM(NSInteger, EditSate)
 
 @property (strong, nonatomic)UIBarButtonItem *rightBarButton;
 
-@property (assign, nonatomic)EditSate editSate;
+@property (assign, nonatomic)NSInteger sex;
 
 @end
 
@@ -68,19 +65,22 @@ typedef NS_ENUM(NSInteger, EditSate)
     if (self.persion) {
         
         //编辑
-        
         if ([self.persion.kind isEqualToString:@"SYSTEM"]) {
             //系统的不可以编辑
             
         }else if([self.persion.kind isEqualToString:@"PRIVATE"]){
             //个人的可以编辑
-            self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
             
-            self.navigationItem.rightBarButtonItem = self.rightBarButton;
+            if (!self.isLocal) {
+                
+                self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
+                
+                self.navigationItem.rightBarButtonItem = self.rightBarButton;
+                
+                self.isEdit = YES;
+            }
             
-            self.editSate = EditStateEdit;
             
-            self.isEdit = YES;
         }
         
     }else{
@@ -90,26 +90,48 @@ typedef NS_ENUM(NSInteger, EditSate)
         
         self.navigationItem.rightBarButtonItem = self.rightBarButton;
         
-        self.editSate = EditStateSave;
-        
         self.isAdd = YES;
     }
     
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
     
-    
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+
     self.addressCellHeight = 44.0f;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender{
     
-    [super viewWillAppear:animated];
+    [self insertPersionToLocal];
     
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.persion.headurl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark-赋值
+- (void)setInitValue{
+    
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.persion.headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
     self.usernameTextField.text = self.persion.username;
-    self.sexTextField.text = self.persion.gender.integerValue == 1?@"男":@"女";
+    self.sex = self.persion.gender.integerValue;
+    
+    if (self.sex == 1) {
+        
+        [self.maleButton setImage:[UIImage imageNamed:@"勾"] forState:UIControlStateNormal];
+        
+        [self.femaleButton setImage:[UIImage imageNamed:@"勾-_未选中"] forState:UIControlStateNormal];
+        
+       
+        
+    }else if(self.sex == 2){
+        
+        [self.maleButton setImage:[UIImage imageNamed:@"勾-_未选中"] forState:UIControlStateNormal];
+        
+        [self.femaleButton setImage:[UIImage imageNamed:@"勾"] forState:UIControlStateNormal];
+    }
+    
     self.phoneNumberTextField.text = self.persion.mobile;
     self.departmentTextField.text = self.persion.deptname;
     self.emailTextField.text = self.persion.email;
@@ -118,33 +140,48 @@ typedef NS_ENUM(NSInteger, EditSate)
     self.myFriendsSwitch.on = self.persion.isfriend.boolValue;
     self.myGroundSwitch.on = self.persion.ismygroup.boolValue;
     self.myFollowSwitch.on = self.persion.isattention.boolValue;
-    
     self.roleTextField.text = self.persion.rolename;
     self.groupTextField.text = self.persion.groupname;
-
     
+}
+
+- (void)addPersion{
+    
+    self.headImageView.userInteractionEnabled = YES;
+    self.usernameTextField.enabled = YES;
+    self.phoneNumberTextField.enabled = YES;
+    self.departmentTextField.enabled = YES;
+    self.emailTextField.enabled = YES;
+    self.fixedTelephoneTextField.enabled = YES;
+    self.addressTextView.editable = YES;
+    self.myFriendsSwitch.enabled = YES;
+    self.myGroundSwitch.enabled = YES;
+    self.myFollowSwitch.enabled = YES;
+    self.roleTextField.enabled = YES;
+    self.groupTextField.enabled = YES;
+    
+    self.maleButton.enabled = YES;
+    self.femaleButton.enabled = YES;
+    
+    [self.usernameTextField becomeFirstResponder];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [self upload];
+
     if (self.isAdd) {
         
-        self.headImageView.userInteractionEnabled = YES;
-        self.usernameTextField.enabled = YES;
-        self.sexTextField.enabled = YES;
-        self.phoneNumberTextField.enabled = YES;
-        self.departmentTextField.enabled = YES;
-        self.emailTextField.enabled = YES;
-        self.fixedTelephoneTextField.enabled = YES;
-        self.addressTextView.editable = YES;
-        self.myFriendsSwitch.enabled = YES;
-        self.myGroundSwitch.enabled = YES;
-        self.myFollowSwitch.enabled = YES;
-        self.roleTextField.enabled = YES;
-        self.groupTextField.enabled = YES;
+        [self addPersion];
         
+    }else{
         
-        self.sexTextField.text = nil;
+        [self setInitValue];
 
-        
-        [self.usernameTextField becomeFirstResponder];
     }
+    
     
 }
 
@@ -167,6 +204,15 @@ typedef NS_ENUM(NSInteger, EditSate)
         return;
     }
     
+    if (self.sex != 1 && self.sex != 2) {
+        
+        [self hiddenHUDWithMessage:@"请选择性别"];
+        
+        return;
+    }
+    
+
+    
     //上传
     NSDictionary *person = @{
                              
@@ -178,7 +224,7 @@ typedef NS_ENUM(NSInteger, EditSate)
                              
                              @"phone":(self.fixedTelephoneTextField.text.length>0)?self.fixedTelephoneTextField.text:@"",
                              
-                             @"gender":(self.sexTextField.text.length>0)?self.sexTextField.text:@"",
+                             @"gender":[NSString stringWithFormat:@"%ld",(long)self.sex],
                              
                              @"email":(self.emailTextField.text.length>0)?self.emailTextField.text:@"",
                              
@@ -200,6 +246,8 @@ typedef NS_ENUM(NSInteger, EditSate)
                              
                              
                              };
+    
+    [self.persion setValueFromDic:person];
     
     NSDictionary *requestdata = @{
                                   
@@ -233,7 +281,7 @@ typedef NS_ENUM(NSInteger, EditSate)
             
             [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
                 
-                [weakself save];
+                [weakself update];
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
@@ -254,8 +302,6 @@ typedef NS_ENUM(NSInteger, EditSate)
         [weakself hiddenHUDWithMessage:RequestFailureMessage];
         
     }];
-    
-    
 }
 
 - (void)save{
@@ -276,6 +322,14 @@ typedef NS_ENUM(NSInteger, EditSate)
         return;
     }
     
+    if (self.sex != 1 && self.sex != 2) {
+        
+        [self hiddenHUDWithMessage:@"请选择性别"];
+        
+        return;
+    }
+    
+    
     //上传
     NSDictionary *person = @{
                              
@@ -285,7 +339,7 @@ typedef NS_ENUM(NSInteger, EditSate)
                              
                              @"phone":(self.fixedTelephoneTextField.text.length>0)?self.fixedTelephoneTextField.text:@"",
                              
-                             @"gender":(self.sexTextField.text.length>0)?self.sexTextField.text:@"",
+                             @"gender":[NSString stringWithFormat:@"%ld",(long)self.sex],
                              
                              @"email":(self.emailTextField.text.length>0)?self.emailTextField.text:@"",
                              
@@ -307,6 +361,8 @@ typedef NS_ENUM(NSInteger, EditSate)
                              
                              
                              };
+    
+    [self.persion setValueFromDic:person];
     
     NSDictionary *requestdata = @{
                                   
@@ -367,24 +423,28 @@ typedef NS_ENUM(NSInteger, EditSate)
 #pragma mark-保存
 - (void)saveAction:(UIBarButtonItem *)sender{
     
-    [self save];
+    if (self.isAdd) {
+        
+        [self save];
+    }
     
-    [self update];
-    
+    if (self.isEdit) {
+        
+        [self update];
+
+    }
+  
 }
 
 #pragma mark-编辑
 - (void)editAction:(UIBarButtonItem *)sender{
     
-    if (self.editSate == EditStateEdit) {
-        
-        self.editSate = EditStateSave;
+    if ([self.rightBarButton.title isEqualToString:@"编辑"]) {
         
         [self.rightBarButton setTitle:@"保存"];
         
         self.headImageView.userInteractionEnabled = YES;
         self.usernameTextField.enabled = YES;
-        self.sexTextField.enabled = YES;
         self.phoneNumberTextField.enabled = YES;
         self.departmentTextField.enabled = YES;
         self.emailTextField.enabled = YES;
@@ -395,6 +455,10 @@ typedef NS_ENUM(NSInteger, EditSate)
         self.myFollowSwitch.enabled = YES;
         self.roleTextField.enabled = YES;
         self.groupTextField.enabled = YES;
+        
+        
+        self.maleButton.enabled = YES;
+        self.femaleButton.enabled = YES;
    
 
         
@@ -431,9 +495,6 @@ typedef NS_ENUM(NSInteger, EditSate)
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
@@ -464,6 +525,51 @@ typedef NS_ENUM(NSInteger, EditSate)
     
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     
+}
+
+#pragma mark-设为常用联系人
+- (void)insertPersionToLocal{
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [delegate update:self.persion];
+}
+
+- (IBAction)maleAction:(id)sender {
+    //男
+    self.sex = 1;
+    
+    [self.maleButton setImage:[UIImage imageNamed:@"勾"] forState:UIControlStateNormal];
+    
+    [self.femaleButton setImage:[UIImage imageNamed:@"勾-_未选中"] forState:UIControlStateNormal];
+}
+
+- (IBAction)femaleAction:(id)sender {
+    //女
+    self.sex = 2;
+    
+    [self.maleButton setImage:[UIImage imageNamed:@"勾-_未选中"] forState:UIControlStateNormal];
+    
+    [self.femaleButton setImage:[UIImage imageNamed:@"勾"] forState:UIControlStateNormal];
+}
+
+- (void)upload{
+    
+    NSString *token = [LocalData getToken];
+    
+    NSString *URL = [LocalData getLoginInterface];
+    URL = [NSString stringWithFormat:@"%@/dataapi/attach/upload?token=%@",URL,token];
+    
+    [[Network alloc]initUploadImageWithURL:URL image:nil requestSuccess:^(NSData *data) {
+        
+        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+        
+        NSLog(@"xmlDoc = %@",xmlDoc);
+        
+        
+    } requestFail:^(NSError *error) {
+        
+    }];
 }
 
 @end

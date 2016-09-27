@@ -10,6 +10,9 @@
 #import "MailListTableViewCell.h"
 #import "MailListTableViewHeadView.h"
 #import "MailListClassViewController.h"
+#import "AppDelegate.h"
+#import "PersionModel.h"
+#import "MailDetailsViewController.h"
 
 @interface MailListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -31,9 +34,11 @@
     
     self.title = @"通讯录";
     
-    self.topContactsArray = [[NSMutableArray alloc]init];
+//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+//    
+//    self.topContactsArray = [delegate selectAll];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStyleGrouped];
     
     self.tableView.delegate = self;
     
@@ -41,6 +46,31 @@
     
     [self.view addSubview:self.tableView];
     
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    
+    [super viewWillAppear:animated];
+    
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    self.topContactsArray = [delegate selectAll];
+    
+    //
+    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+
+}
+
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark-UITableViewDelegate,UITableViewDataSource
@@ -54,7 +84,7 @@
     if (section == 0) {
         return 4;
     }else{
-        return 1;
+        return self.self.topContactsArray.count;
     }
 }
 
@@ -99,12 +129,18 @@
         
     }else{
         
+        //常联系人
         cell = [tableView dequeueReusableCellWithIdentifier:@"MailListTableViewCell1ID"];
         
         if (!cell) {
             
             cell = [[NSBundle mainBundle]loadNibNamed:@"MailListTableViewCell" owner:self options:nil].lastObject;
         }
+        
+        PersionModel *persionModel = self.topContactsArray[indexPath.row];
+        
+        cell.cell1Label.text = persionModel.username;
+
         
     }
     
@@ -138,15 +174,49 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.hidesBottomBarWhenPushed = YES;
-
-    MailListClassViewController *mailListClassViewController = [[MailListClassViewController alloc]init];
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            
+            //企业通讯录
+            self.hidesBottomBarWhenPushed = YES;
+            
+            MailListClassViewController *mailListClassViewController = [[MailListClassViewController alloc]init];
+            
+            mailListClassViewController.homeappModel = self.homeappModel;
+            
+            [self.navigationController pushViewController:mailListClassViewController animated:YES];
+            
+            self.hidesBottomBarWhenPushed = YES;
+            
+        }else{
+            
+            //我的好友、我的群组、我的关注
+            //接口不明
+            
+        }
+        
+    }else if (indexPath.section == 1){
+        
+        //常用联系人
+        self.hidesBottomBarWhenPushed = YES;
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        MailDetailsViewController *mailDetailsViewController = [storyboard instantiateViewControllerWithIdentifier:@"MailDetailsViewController"];;
+        
+        mailDetailsViewController.persion = self.topContactsArray[indexPath.row];
+        
+        mailDetailsViewController.homeappModel = self.homeappModel;
+        
+        mailDetailsViewController.isLocal = YES;
+        
+        [self.navigationController pushViewController:mailDetailsViewController animated:YES];
+        
+        self.hidesBottomBarWhenPushed = YES;
+    }
     
-    mailListClassViewController.homeappModel = self.homeappModel;
     
-    [self.navigationController pushViewController:mailListClassViewController animated:YES];
-    
-    self.hidesBottomBarWhenPushed = YES;
 }
 
 - (void)didReceiveMemoryWarning {

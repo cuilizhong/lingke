@@ -99,7 +99,7 @@
         
         self.passwordTextField = cell.passwordTextField;
         
-        self.passwordTextField.text = @"password";
+        self.passwordTextField.text = @"1234";
     }
   
     return cell;

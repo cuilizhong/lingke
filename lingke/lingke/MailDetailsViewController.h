@@ -21,6 +21,11 @@
  */
 @property(nonatomic,assign)BOOL isAdd;
 
+/**
+ *  是否是本地查看
+ */
+@property(nonatomic,assign)BOOL isLocal;
+
 @property(nonatomic,strong)HomeappModel *homeappModel;
 
 @property(nonatomic,strong)PersionModel *persion;

@@ -264,6 +264,8 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             
             NSArray *personArray = persons[@"person"];
             
+            [weakself.persionModelArray removeAllObjects];
+            
             for (NSDictionary *dic in personArray) {
                 
                 PersionModel *persion = [[PersionModel alloc]init];
