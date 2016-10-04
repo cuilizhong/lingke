@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 
 
-static const NSInteger pagecount = 10;
+static const NSInteger pagecount = 5000;
 
 typedef NS_ENUM(NSInteger, MailListClassify)
 {
@@ -366,7 +366,10 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
 #pragma mark-按首字母分类
     //名字
-    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
+//    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
+    
+    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c",@"d",@"e",@"f",@"g",@"h",@"i",@"j",@"k",@"l",@"m",@"n",@"o",@"p",@"q",@"r",@"s",@"t",@"u",@"v",@"w",@"x",@"y",@"z", nil];
+
     
     //先创建空的
     for (int i = 0; i<self.headTitleForNameArray.count; i++) {
@@ -387,7 +390,9 @@ typedef NS_ENUM(NSInteger, MailListClassify)
         
         for (PersionModel *persionModel in self.persionModelArray) {
             
-            NSString *key = [self firstCharactor:persionModel.username];
+            NSString *key = [persionModel.pyusername substringToIndex:1];
+            
+//            NSString *key = [self firstCharactor:persionModel.username];
             
             if ([key isEqualToString:tmpDic.allKeys.lastObject]) {
                 
@@ -597,9 +602,11 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             
         }else{
             
-            NSMutableDictionary *dic = self.classifyForNameArray[indexPath.row];
-            NSString *key = self.headTitleForNameArray[indexPath.row];
-            NSMutableArray *array = dic[key];
+            NSMutableDictionary *dic = self.classifyForNameArray[indexPath.section];
+            
+            NSString *key = self.headTitleForNameArray[indexPath.section];
+            
+            NSMutableArray *array = [dic objectForKey:key];
             
             persion = array[indexPath.row];
         }
@@ -646,8 +653,9 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             
         }else{
             
-            headView.titleLabel.text = self.headTitleForNameArray[section];
-            
+            NSString *title = self.headTitleForNameArray[section];
+
+            headView.titleLabel.text = [title uppercaseString];
             
         }
         

@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "PersionModel.h"
 #import "MailListTableViewCell.h"
+#import "MailDetailsViewController.h"
 
 
 @interface MyFriendViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -55,6 +56,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
+    [self hiddenSurplusLine:self.tableView];
     
     @weakify(self)
     
@@ -67,13 +69,20 @@
     self.tipNoDataLabel = [[UILabel alloc]init];
     self.tipNoDataLabel.text = @"暂无数据";
     self.tipNoDataLabel.font = [UIFont systemFontOfSize:14];
-    self.tipNoDataLabel.textColor = [UIColor blackColor];
+    self.tipNoDataLabel.textColor = [UIColor darkGrayColor];
     self.tipNoDataLabel.textAlignment = NSTextAlignmentCenter;
     self.tipNoDataLabel.backgroundColor = [UIColor clearColor];
     self.tipNoDataLabel.center = self.view.center;
-    self.tipNoDataLabel.frame = CGRectMake(0,self.view.frame.origin.y-30, self.view.frame.size.width, 30);
+    self.tipNoDataLabel.frame = CGRectMake(0,self.tipNoDataLabel.frame.origin.y-60, self.view.frame.size.width, 30);
     [self.view addSubview:self.tipNoDataLabel];
     self.tipNoDataLabel.hidden = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    
+    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark-UITableViewDataSource,UITableViewDelegate
@@ -106,6 +115,23 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 44.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+    UIStoryboard *storyborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    MailDetailsViewController *mailDetailsViewController = [storyborad instantiateViewControllerWithIdentifier:@"MailDetailsViewController"];
+    
+    mailDetailsViewController.persion = self.dataArray[indexPath.row];
+    
+    mailDetailsViewController.homeappModel = self.homeappModel;
+    
+    [self.navigationController pushViewController:mailDetailsViewController animated:YES];
+    
+    self.hidesBottomBarWhenPushed = YES;
 }
 
 #pragma mark-请求数据

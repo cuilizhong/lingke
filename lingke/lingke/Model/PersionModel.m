@@ -34,7 +34,8 @@
     self.updatetime = dic[@"updatetime"];
     self.username = dic[@"username"];
     self.headurl = dic[@"headurl"];
+    self.pydeptname = dic[@"pydeptname"];
+    self.pyusername = dic[@"pyusername"];
 
-
-    }
+}
 @end

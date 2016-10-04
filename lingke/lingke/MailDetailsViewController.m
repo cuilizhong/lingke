@@ -170,7 +170,7 @@
     
     [super viewWillAppear:animated];
     
-    [self upload];
+//    [self upload];
 
     if (self.isAdd) {
         

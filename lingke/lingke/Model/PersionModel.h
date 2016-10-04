@@ -41,6 +41,10 @@
 @property(nonatomic,copy)NSString *username;
 @property(nonatomic,copy)NSString *headurl;
 
+@property(nonatomic,copy)NSString *pydeptname;
+@property(nonatomic,copy)NSString *pyusername;
+
+
 
 
 
