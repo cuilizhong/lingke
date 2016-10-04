@@ -102,7 +102,11 @@
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)sender{
     
-    [self insertPersionToLocal];
+    if (self.persion) {
+        
+        [self insertPersionToLocal];
+
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -361,6 +365,12 @@
                              
                              
                              };
+    
+    
+    if (!self.persion) {
+        
+        self.persion = [[PersionModel alloc]init];
+    }
     
     [self.persion setValueFromDic:person];
     
