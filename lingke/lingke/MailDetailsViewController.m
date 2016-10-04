@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 
 
-@interface MailDetailsViewController ()<UITextViewDelegate>
+@interface MailDetailsViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIButton *maleButton;
@@ -52,6 +52,8 @@
 
 @property (assign, nonatomic)NSInteger sex;
 
+@property (strong, nonatomic)NSData *headImageData;
+
 @end
 
 @implementation MailDetailsViewController
@@ -61,6 +63,12 @@
     [super viewDidLoad];
     
     self.title = @"通讯录";
+    
+    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+    
+    [singleTapGestureRecognizer setNumberOfTapsRequired:1];
+    
+    [self.headImageView addGestureRecognizer:singleTapGestureRecognizer];
     
     if (self.persion) {
         
@@ -174,7 +182,7 @@
     
     [super viewWillAppear:animated];
     
-//    [self upload];
+    [self upload];
 
     if (self.isAdd) {
         
@@ -563,14 +571,97 @@
     [self.femaleButton setImage:[UIImage imageNamed:@"勾"] forState:UIControlStateNormal];
 }
 
+- (void)singleTap:(UITapGestureRecognizer *)sender{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择照片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *takephotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        //判断是否可以打开相机，模拟器此功能无法使用
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;  //是否可编辑
+            //摄像头
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:picker animated:YES completion:^{
+                
+            }];
+            
+        }else{
+            
+            //如果没有提示用户
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"缺少摄像头" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [alert show];
+        }
+        
+    }];
+    
+    UIAlertAction *choosePhotoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;  //是否可编辑
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:picker animated:YES completion:^{
+            }];
+        }else{
+            //如果没有提示用户
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"提示" message:@"你没有相册" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [alert show];
+        }
+        
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:takephotoAction];
+    [alert addAction:choosePhotoAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+}
+
+#pragma mark-UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //得到图片
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    self.headImageView.image = image;
+    
+    self.headImageData = UIImageJPEGRepresentation(image, 0.1);
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+
 - (void)upload{
     
     NSString *token = [LocalData getToken];
     
     NSString *URL = [LocalData getLoginInterface];
+    
     URL = [NSString stringWithFormat:@"%@/dataapi/attach/upload?token=%@",URL,token];
     
-    [[Network alloc]initUploadImageWithURL:URL image:nil requestSuccess:^(NSData *data) {
+    [[Network alloc]initUploadImageWithURL:URL image:self.headImageData requestSuccess:^(NSData *data) {
         
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
