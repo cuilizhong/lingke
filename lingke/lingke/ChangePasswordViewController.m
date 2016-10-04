@@ -28,10 +28,18 @@
     
     [super viewDidLoad];
     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(barButtonItemAction:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+    
     self.submitButton.layer.cornerRadius = 5.0f;
     self.submitButton.clipsToBounds = YES;
     
     [self hiddenSurplusLine:self.tableView];
+}
+
+- (void)barButtonItemAction:(UIBarButtonItem *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)submitAction:(id)sender {

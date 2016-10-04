@@ -43,9 +43,8 @@
     
     [self.view addSubview:self.tableView];
     
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
-    
-    self.navigationItem.leftBarButtonItem = leftBarButton;
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
     
 }
 

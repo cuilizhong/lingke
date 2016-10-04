@@ -53,6 +53,10 @@ static ConfigureColor *color = nil;
 
         color.red = UIColorFromRGB(0xff0000);
         
+        color.loginColor = UIColorFromRGB(0x3f94d7);
+        
+        color.enterMainButtonColor = UIColorFromRGB(0x1367b4);
+        
     });
     
     return color;

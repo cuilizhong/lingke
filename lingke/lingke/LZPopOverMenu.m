@@ -238,9 +238,8 @@ typedef NS_ENUM(NSUInteger, LZPopOverMenuArrowDirection) {
         cell.backgroundColor = [UIColor clearColor];
 
     }
-    
     cell.textLabel.text = [NSString stringWithFormat:@"%@",self.menuStringArray[indexPath.row]];
-    
+        
     cell.textLabel.textColor = [UIColor whiteColor];
     
     return cell;
@@ -308,6 +307,11 @@ typedef NS_ENUM(NSUInteger, LZPopOverMenuArrowDirection) {
         
         return 0.01f;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 40.0f;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -481,7 +485,19 @@ static LZPopOverMenu *popOverMenu = nil;
         senderRect.origin.y = KSCREEN_HEIGHT;
     }
     
-    CGFloat menuHeight = FTDefaultMenuRowHeight * self.menuArray.count + FTDefaultMenuArrowHeight;
+    CGFloat menuHeight;
+    
+    if (self.menuArray.count>10) {
+        
+        menuHeight = FTDefaultMenuRowHeight * 10 + FTDefaultMenuArrowHeight + 25;
+        
+    }else{
+        
+        menuHeight =  FTDefaultMenuRowHeight * self.menuArray.count + FTDefaultMenuArrowHeight;
+
+    }
+    
+    
     
     CGPoint menuArrowPoint = CGPointMake(senderRect.origin.x + (senderRect.size.width/2.0), 0);
     

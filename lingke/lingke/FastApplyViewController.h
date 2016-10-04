@@ -12,4 +12,6 @@
 
 @property(nonatomic,copy)NSString *url;
 
+@property(nonatomic,copy)NSString *titleStr;
+
 @end

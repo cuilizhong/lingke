@@ -43,6 +43,10 @@
 
 @property(nonatomic,strong)UIColor *red;
 
+@property(nonatomic,strong)UIColor *loginColor;
+
+@property(nonatomic,strong)UIColor *enterMainButtonColor;
+
 
 
 

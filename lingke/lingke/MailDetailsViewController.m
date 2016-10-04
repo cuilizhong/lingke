@@ -73,6 +73,9 @@
     
     [self.headImageView addGestureRecognizer:singleTapGestureRecognizer];
     
+    self.headImageView.layer.cornerRadius = 40.0f;
+    self.headImageView.clipsToBounds = YES;
+    
     if (self.persion) {
         
         //编辑

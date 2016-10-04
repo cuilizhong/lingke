@@ -34,6 +34,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //设置navigationbaritem的字体颜色
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    
+    //设置title的颜色、字体
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor blackColor], NSForegroundColorAttributeName,
+                                                           
+                                                           nil]];
+    
     self.tutorialsArray = [[NSMutableArray alloc]init];
     
     //请求引导图片

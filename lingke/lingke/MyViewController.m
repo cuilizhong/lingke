@@ -23,7 +23,6 @@
     self.headImageView.layer.cornerRadius = 35.0f;
     self.headImageView.clipsToBounds = YES;
     
-    self.title = @"个人中心";
     
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[LocalData getCustomerlogo]] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         

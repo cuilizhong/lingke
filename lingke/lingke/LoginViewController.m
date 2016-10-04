@@ -15,6 +15,7 @@
 #import "GDataXMLNode.h"
 #import "LocalData.h"
 #import "GDataXMLNode.h"
+#import "ConfigureColor.h"
 
 
 
@@ -40,13 +41,14 @@
     
     self.tableView.scrollEnabled = NO;
     
-    CGRect rect = [[self view] bounds];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
-    [imageView setImage:[UIImage imageNamed:@"image_1"]];
+//    CGRect rect = [[self view] bounds];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
+//    [imageView setImage:[UIImage imageNamed:@"image_1"]];
+//    
+//    self.tableView.opaque = NO;3f94d7
+//    self.tableView.backgroundView = imageView;
     
-    self.tableView.opaque = NO;
-    self.tableView.backgroundView = imageView;
-    
+    self.tableView.backgroundColor = [ConfigureColor sharedInstance].loginColor;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 

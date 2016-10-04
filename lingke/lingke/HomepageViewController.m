@@ -50,18 +50,18 @@
     self.applyArray = [[NSMutableArray alloc]init];
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setImage:[UIImage imageNamed:@"TabBar_Item_1"] forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"fast"] forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, 44, 44);
+    rightButton.frame = CGRectMake(0, 0, 25, 44);
     
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setImage:[UIImage imageNamed:@"TabBar_Item_1"] forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"mail"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    leftButton.frame = CGRectMake(0, 0, 44, 44);
+    leftButton.frame = CGRectMake(0, 0, 30, 44);
     
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
     
@@ -465,6 +465,7 @@
         [titlesArray addObject:title];
     }
     
+    
     [LZPopOverMenu showForSender:sender withMenu:titlesArray imageNameArray:nil doneBlock:^(NSInteger selectedIndex) {
         
         ApplyModel *applyModel = self.applyArray[selectedIndex];
@@ -512,7 +513,13 @@
         
         fastApplyViewController.url = url;
         
+        fastApplyViewController.title = titlesArray[selectedIndex];
+        
+        self.hidesBottomBarWhenPushed = YES;
+        
         [self.navigationController pushViewController:fastApplyViewController animated:YES];
+        
+        self.hidesBottomBarWhenPushed = NO;
 
         
 //        [[Network alloc]initWithURL:self.applyAppuri parameters:parameters requestSuccess:^(NSData *data) {
