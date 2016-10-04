@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 
 
-static const NSInteger pagecount = 1000;
+static const NSInteger pagecount = 10;
 
 typedef NS_ENUM(NSInteger, MailListClassify)
 {
@@ -216,7 +216,11 @@ typedef NS_ENUM(NSInteger, MailListClassify)
                            
                            @"pagecount":[NSString stringWithFormat:@"%ld",pagecount],
                            
-                           @"kind":@"ALL"
+                           @"kind":@"ALL",
+                           
+//                           @"orderby":@"DEPTNAME"
+                           
+//                           @"orderby":@"USERNAME"
                            
                            };
     

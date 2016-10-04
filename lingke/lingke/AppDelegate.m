@@ -34,33 +34,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    PersionModel *persionModel = [[PersionModel alloc]init];
-//    persionModel.address = @"测试地址";
-//    persionModel.deptname = @"测试部门";
-//    persionModel.email = @"lizhong.cui@softtek.com";
-//    persionModel.gender = @"1";
-//    persionModel.groupname = @"lizhongzhu";
-//    persionModel.info1 = @"测试info1";
-//    persionModel.info2 = @"测info2";
-//    persionModel.info3 = @"测info3";
-//    persionModel.isattention = @"测试isattention";
-//    persionModel.isfriend = @"1";
-//    persionModel.ismygroup = @"1";
-//    persionModel.kind = @"ceshikind";
-//    persionModel.mobile = @"12345";
-//    persionModel.orgname = @"orgnamee";
-//    persionModel.phone = @"111111";
-//    persionModel.pid = @"22222";
-//    persionModel.rolename = @"lizhong";
-//    
-//    persionModel.updatetime = @"2016";
-//    persionModel.username = @"yexu";
-//    persionModel.headurl = @"www.baidu.com";
-//
-//    [self insert:persionModel];
-//    
-//    [self selectAll];
-    
     self.tutorialsArray = [[NSMutableArray alloc]init];
     
     //请求引导图片

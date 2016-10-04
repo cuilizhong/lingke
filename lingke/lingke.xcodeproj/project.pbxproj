@@ -48,6 +48,7 @@
 		072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28861D6D901200EAFFAC /* WaittingHandViewController.m */; };
 		072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288C1D6D902800EAFFAC /* MessageViewController.m */; };
 		072C28901D6D903700EAFFAC /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288F1D6D903700EAFFAC /* MyViewController.m */; };
+		0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */; };
 		073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D01D73DC090013DB67 /* NewInfoImageView.m */; };
 		073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */; };
 		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
@@ -183,6 +184,8 @@
 		072C288C1D6D902800EAFFAC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		072C288E1D6D903700EAFFAC /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		072C288F1D6D903700EAFFAC /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		0734DF7A1DA32C8A0058B1A3 /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
+		0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
 		073A54CF1D73DC090013DB67 /* NewInfoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInfoImageView.h; sourceTree = "<group>"; };
 		073A54D01D73DC090013DB67 /* NewInfoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInfoImageView.m; sourceTree = "<group>"; };
 		073A54D21D73E0600013DB67 /* NewsinfoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsinfoDetailsViewController.h; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 				072C28831D6D900100EAFFAC /* HomepageViewController.m */,
 				07EE15581D76B8AF00E5CE91 /* MailListViewController.h */,
 				07EE15591D76B8AF00E5CE91 /* MailListViewController.m */,
+				0734DF7A1DA32C8A0058B1A3 /* MyFriendViewController.h */,
+				0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */,
 				07B44B941D7815920023214C /* MailListClassViewController.h */,
 				07B44B951D7815920023214C /* MailListClassViewController.m */,
 				07AA7A451D7D1DF300ED80D1 /* MailDetailsViewController.h */,
@@ -808,6 +813,7 @@
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
+				0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */,
 				07B44B831D76DA860023214C /* ApplyModel.m in Sources */,
 				075C4A981D8B89180028EF84 /* UserinfoViewController.m in Sources */,
 				07AA7A471D7D1DF300ED80D1 /* MailDetailsViewController.m in Sources */,

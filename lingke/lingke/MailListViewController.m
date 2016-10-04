@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "PersionModel.h"
 #import "MailDetailsViewController.h"
+#import "MyFriendViewController.h"
 
 @interface MailListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -33,10 +34,6 @@
     [super viewDidLoad];
     
     self.title = @"通讯录";
-    
-//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-//    
-//    self.topContactsArray = [delegate selectAll];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStyleGrouped];
     
@@ -191,9 +188,30 @@
             
         }else{
             
-            //我的好友、我的群组、我的关注
-            //接口不明
+            //我的好友、我的群组、我的关注（请求所有的数据，本地过滤）
+            self.hidesBottomBarWhenPushed = YES;
             
+            MyFriendViewController *myFriendViewController = [[MyFriendViewController alloc]init];
+            if (indexPath.row == 1) {
+                //我的好友
+                myFriendViewController.mailListState = MailListState_Friend;
+                
+            }else if (indexPath.row == 2){
+                //我的群组
+                myFriendViewController.mailListState = MailListState_Grounp;
+
+            
+            }else if (indexPath.row == 3){
+                //我的关注
+                myFriendViewController.mailListState = MailListState_Follow;
+
+            }
+            
+            myFriendViewController.homeappModel = self.homeappModel;
+            
+            [self.navigationController pushViewController:myFriendViewController animated:YES];
+            
+            self.hidesBottomBarWhenPushed = YES;
         }
         
     }else if (indexPath.section == 1){
