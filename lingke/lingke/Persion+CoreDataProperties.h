@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *updatetime;
 @property (nullable, nonatomic, retain) NSString *username;
 @property (nullable, nonatomic, retain) NSString *headurl;
-@property (nullable, nonatomic, retain) NSString *times;
+@property (nonatomic, assign) NSInteger times;
 
 
 @end

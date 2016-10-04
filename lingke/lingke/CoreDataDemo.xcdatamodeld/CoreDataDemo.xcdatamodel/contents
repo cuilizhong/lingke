@@ -19,11 +19,11 @@
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rolename" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="times" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="times" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updatetime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Persion" positionX="-54" positionY="-9" width="128" height="358"/>
+        <element name="Persion" positionX="-54" positionY="-9" width="128" height="360"/>
     </elements>
 </model>

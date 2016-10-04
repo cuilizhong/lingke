@@ -292,7 +292,7 @@
     
     [persion setValue:persionModel.headurl forKey:@"headurl"];
     
-    [persion setValue:@"1" forKey:@"times"];
+    [persion setValue:@1 forKey:@"times"];
     
     
     
@@ -412,13 +412,13 @@
         
         [obj setValue:persionModel.headurl forKey:@"headurl"];
         
-        NSString *timesStr = [obj valueForKey:@"times"];
+        NSNumber *timesNum = [obj valueForKey:@"times"];
         
-        NSInteger times = timesStr.integerValue+1;
+        NSInteger times = timesNum.integerValue+1;
         
         NSLog(@"times = %ld",(long)times);
         
-        [obj setValue:[NSString stringWithFormat:@"%ld",(long)times] forKey:@"times"];
+        [obj setValue:[NSNumber numberWithInteger:times] forKey:@"times"];
         
         [context save:nil];
 

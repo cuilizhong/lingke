@@ -146,8 +146,6 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 //        [weakself handData];
 //    }];
     
-    [self.tableView.mj_header beginRefreshing];
-    
 }
 
 - (void)addAction:(UIBarButtonItem *)sender{
@@ -171,6 +169,8 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)change:(UISegmentedControl *)sender{

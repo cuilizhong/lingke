@@ -54,6 +54,9 @@
 
 @property (strong, nonatomic)NSData *headImageData;
 
+
+@property (nonatomic,assign)BOOL isSaveSuccessful;
+
 @end
 
 @implementation MailDetailsViewController
@@ -182,8 +185,6 @@
     
     [super viewWillAppear:animated];
     
-    [self upload];
-
     if (self.isAdd) {
         
         [self addPersion];
@@ -286,6 +287,8 @@
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
+            
+            weakself.isSaveSuccessful = YES;
             
             [weakself hiddenHUDWithMessage:@"已保存"];
             
@@ -408,6 +411,8 @@
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
             
+            weakself.isSaveSuccessful = YES;
+            
             [weakself hiddenHUDWithMessage:@"已保存"];
             
         }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
@@ -444,14 +449,11 @@
     if (self.isAdd) {
         
         [self save];
-    }
-    
-    if (self.isEdit) {
         
+    }else{
         [self update];
 
     }
-  
 }
 
 #pragma mark-编辑
@@ -640,7 +642,10 @@
     
     self.headImageData = UIImageJPEGRepresentation(image, 0.1);
     
+    @weakify(self);
     [self dismissViewControllerAnimated:YES completion:^{
+        
+        [weakself upload];
         
     }];
 }
@@ -650,6 +655,20 @@
     [picker dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)hud{
+    
+    if (self.isSaveSuccessful) {
+        
+        if (self.persion) {
+            
+            [self insertPersionToLocal];
+            
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
@@ -670,6 +689,7 @@
         
     } requestFail:^(NSError *error) {
         
+        NSLog(@"上传失败");
     }];
 }
 
