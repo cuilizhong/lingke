@@ -12,6 +12,14 @@ typedef void(^SelectedBlock)(NSString *title);
 
 @interface MenusView : UIView
 
+@property(nonatomic,strong)NSMutableArray *menusTitleArray;
+
+@property(nonatomic,strong)UITableView *tableView;
+
+@property(nonatomic,copy)NSString *selectedTitle;
+
+
+
 - (instancetype)initWithFrame:(CGRect)frame menusTitle:(NSMutableArray<NSString *>*)menusTitle selectedBlock:(SelectedBlock)selectedBlock;
 
 @end

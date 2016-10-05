@@ -12,13 +12,10 @@
 
 @interface MenusView()<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic,strong)UITableView *tableView;
 
-@property(nonatomic,strong)NSMutableArray *menusTitleArray;
 
 @property(nonatomic,strong)SelectedBlock selectedBlock;
 
-@property(nonatomic,copy)NSString *selectedTitle;
 
 @end
 

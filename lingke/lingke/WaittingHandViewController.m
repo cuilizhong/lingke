@@ -57,9 +57,9 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     
     @weakify(self)
-    self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"所有待办",@"创建时间倒序", nil] selectedBlock:^(NSString *title) {
+    self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"所有待办▼",@"创建时间倒序▼", nil] selectedBlock:^(NSString *title) {
         
-        if ([title isEqualToString:@"所有待办"]) {
+        if ([title isEqualToString:@"所有待办▼"]) {
             
             weakself.tableViewDataType = TableViewDataTypeWFList;
             
@@ -71,8 +71,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         }
         
         [weakself.tableView reloadData];
-
-        
     }];
     
     [self.view addSubview:self.menusView];
@@ -93,13 +91,21 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     
     
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
     [self request];
     
     [self requestClass];
 }
 
-
 - (void)request{
+    
+    [self showHUD];
     
     //request
     @weakify(self)
@@ -159,12 +165,24 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 [weakself.dataIndexModelArray addObject:dataIndexModel];
             }
             
-            if (self.WFListModelArray.count>0) {
+            if (weakself.WFListModelArray.count>0) {
                 
                 [weakself handCount];
                 
             }
             
+            
+        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+            
+            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+                
+                [weakself request];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
             
         }else{
             
@@ -172,16 +190,22 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             
             NSLog(@"errorMessage = %@",errorMessage);
             
+            [weakself hiddenHUDWithMessage:errorMessage];
+            
         }
         
         
     } requestFail:^(NSError *error) {
+        
+        [weakself hiddenHUDWithMessage:@"加载失败"];
         
     }];
     
 }
 
 - (void)requestClass{
+    
+    [self showHUD];
     
     NSString *appcode = [HomeFunctionModel sharedInstance].homeTODOAppModel.appcode;
     
@@ -221,40 +245,53 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             
             NSArray *wfArray = wflistDic[@"wf"];
             
+            [weakself.WFListModelArray removeAllObjects];
+            
             for (NSDictionary *dic in wfArray) {
                 
                 WFListModel *wFListModel = [[WFListModel alloc]init];
                 
                 [wFListModel setValueFromDic:dic];
                 
-                [self.WFListModelArray addObject:wFListModel];
+                [weakself.WFListModelArray addObject:wFListModel];
                 
             }
-            
             
             //处理分类
-            if (self.dataIndexModelArray.count>0) {
+            if (weakself.dataIndexModelArray.count>0) {
                 
                 [weakself handCount];
-                
-                
             }
             
             
+        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
             
+            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+                
+                [weakself requestClass];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
             
-            
-        }else{
+        } else{
             
             NSString *errorMessage = xmlDoc[@"statusmsg"];
             
             NSLog(@"errorMessage = %@",errorMessage);
+            
+            [weakself hiddenHUDWithMessage:errorMessage];
+
             
         }
         
         
     } requestFail:^(NSError *error) {
         
+        [weakself hiddenHUDWithMessage:@"加载失败"];
+
     }];
 }
 
@@ -426,10 +463,24 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         self.tableViewDataType = TableViewDataTypeWFContent;
         
         if (indexPath.row == 0) {
+            //@"所有待办▼",@"创建时间倒序▼"
+            [self.menusView.menusTitleArray removeAllObjects];
+            [self.menusView.menusTitleArray addObject:@"所有待办▼"];
+            [self.menusView.menusTitleArray addObject:@"创建时间倒序▼"];
+            self.menusView.selectedTitle = @"创建时间倒序▼";
+            [self.menusView.tableView reloadData];
+
             
             [self handSort:YES];
             
         }else if(indexPath.row == 1){
+            
+            [self.menusView.menusTitleArray removeAllObjects];
+            [self.menusView.menusTitleArray addObject:@"所有待办▼"];
+            [self.menusView.menusTitleArray addObject:@"创建时间正序▼"];
+            self.menusView.selectedTitle = @"创建时间正序▼";
+
+            [self.menusView.tableView reloadData];
             
             [self handSort:NO];
             
@@ -463,6 +514,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 
 - (void)handCount{
+    
+    [self hiddenHUD];
     
     for (WFListModel *wflistModel in self.WFListModelArray) {
         
