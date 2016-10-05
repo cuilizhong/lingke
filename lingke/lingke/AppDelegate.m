@@ -43,6 +43,8 @@
                                                            
                                                            nil]];
     
+    
+    
     self.tutorialsArray = [[NSMutableArray alloc]init];
     
     //请求引导图片
