@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -520,6 +520,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwo-Vs-lNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="89" y="486"/>
+        </scene>
+        <!--Error View Controller-->
+        <scene sceneID="GTY-YB-fw1">
+            <objects>
+                <viewController storyboardIdentifier="ErrorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D4k-R6-oxJ" customClass="ErrorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TNP-yn-KEQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="L53-lK-eug"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y3K-sK-g6Y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="请检查您的网络连接，如果您网络连接正常，请联系管理员。点击屏幕再次尝试。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAM-sT-Z4q">
+                                <rect key="frame" x="20" y="244" width="280" height="80"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DAM-sT-Z4q" firstAttribute="centerY" secondItem="y3K-sK-g6Y" secondAttribute="centerY" id="T7Q-6I-5Z1"/>
+                            <constraint firstAttribute="trailing" secondItem="DAM-sT-Z4q" secondAttribute="trailing" constant="20" id="eG3-dS-nVl"/>
+                            <constraint firstItem="DAM-sT-Z4q" firstAttribute="centerX" secondItem="y3K-sK-g6Y" secondAttribute="centerX" id="iWN-3E-Wff"/>
+                            <constraint firstItem="DAM-sT-Z4q" firstAttribute="leading" secondItem="y3K-sK-g6Y" secondAttribute="leading" constant="20" id="k5u-3i-alP"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZs-ez-W5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-321" y="1236"/>
         </scene>
         <!--修改密码-->
         <scene sceneID="s0J-Yf-l64">

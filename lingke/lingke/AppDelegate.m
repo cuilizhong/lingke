@@ -15,6 +15,8 @@
 #import "LoginViewController.h"
 #import "MainTabBarController.h"
 
+#import "ViewController.h"
+
 @interface AppDelegate ()
 
 /**
@@ -45,93 +47,101 @@
     
     
     
-    self.tutorialsArray = [[NSMutableArray alloc]init];
+//    self.tutorialsArray = [[NSMutableArray alloc]init];
+//    
+//    //请求引导图片
+//    @weakify(self);
+//    [HttpsRequestManger sendHttpRequestForTutorialsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
+//        //解析xml
+//        NSString *xmlStr  =[[ NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        
+//        //xml文档类
+//        GDataXMLDocument* doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:nil];
+//        
+//        //得到根节点,maps节点
+//        GDataXMLElement* mapsEle = [doc rootElement];
+//        
+//        NSArray *array = [mapsEle children];
+//        
+//        for (int i = 0; i<array.count -1; i++) {
+//            
+//            GDataXMLElement* ele = array[i];
+//            
+//            GDataXMLElement *indexEle = [ele children].firstObject;
+//            
+//            GDataXMLElement *picurlEle = [ele children].lastObject;
+//            
+//            NSString *indexStr = indexEle.stringValue;
+//            
+//            NSString *picurlStr = picurlEle.stringValue;
+//            
+//            TutorialsModel *tutorialsModel = [[TutorialsModel alloc]init];
+//            
+//            tutorialsModel.index = indexStr;
+//            
+//            tutorialsModel.picurl = picurlStr;
+//            
+//            [weakself.tutorialsArray addObject:tutorialsModel];
+//        }
+//        
+//        GDataXMLElement *updateEle = array.lastObject;
+//        
+//        //对比本地的引导图片更新时间
+//        if ([[LocalData getTutorialsImageUpdateDate] isEqualToString:updateEle.stringValue]) {
+//            //一样就不需要显示
+//            weakself.isDisplayTutorials = NO;
+//            
+//            //判断是否注销
+//            if ([LocalData getMobile].length>0) {
+//                //跳转到主页
+//                
+//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//                
+//                MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+//                                
+//                weakself.window.rootViewController = mainTabBarController;
+//
+//            }else{
+//                //跳转到登陆页面
+//                LoginViewController *loginViewController = [[LoginViewController alloc]init];
+//                
+//                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+//                
+//                self.window.rootViewController = nav;
+//            }
+//            
+//        }else{
+//            
+//            //不一样需要显示
+//            weakself.isDisplayTutorials = YES;
+//            
+//            //保存引导图片更新时间
+//            [LocalData setTutorialsImageUpdateDate:updateEle.stringValue];
+//            
+//            //跳转到引导页面
+//            TutorialsViewController *tutorialsViewController = [[TutorialsViewController alloc]init];
+//            
+//            tutorialsViewController.tutorialsArray = weakself.tutorialsArray;
+//            
+//            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:tutorialsViewController];
+//            
+//            weakself.window.rootViewController = nav;
+//
+//        }
+//        
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        
+//        NSLog(@"请求失败");
+//        
+//    }];
     
-    //请求引导图片
-    @weakify(self);
-    [HttpsRequestManger sendHttpRequestForTutorialsSuccess:^(NSURLSessionDataTask *task, id responseObject) {
-        //解析xml
-        NSString *xmlStr  =[[ NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        
-        //xml文档类
-        GDataXMLDocument* doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:nil];
-        
-        //得到根节点,maps节点
-        GDataXMLElement* mapsEle = [doc rootElement];
-        
-        NSArray *array = [mapsEle children];
-        
-        for (int i = 0; i<array.count -1; i++) {
-            
-            GDataXMLElement* ele = array[i];
-            
-            GDataXMLElement *indexEle = [ele children].firstObject;
-            
-            GDataXMLElement *picurlEle = [ele children].lastObject;
-            
-            NSString *indexStr = indexEle.stringValue;
-            
-            NSString *picurlStr = picurlEle.stringValue;
-            
-            TutorialsModel *tutorialsModel = [[TutorialsModel alloc]init];
-            
-            tutorialsModel.index = indexStr;
-            
-            tutorialsModel.picurl = picurlStr;
-            
-            [weakself.tutorialsArray addObject:tutorialsModel];
-        }
-        
-        GDataXMLElement *updateEle = array.lastObject;
-        
-        //对比本地的引导图片更新时间
-        if ([[LocalData getTutorialsImageUpdateDate] isEqualToString:updateEle.stringValue]) {
-            //一样就不需要显示
-            weakself.isDisplayTutorials = NO;
-            
-            //判断是否注销
-            if ([LocalData getMobile].length>0) {
-                //跳转到主页
-                
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                
-                MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-                                
-                weakself.window.rootViewController = mainTabBarController;
-                
-            }else{
-                //跳转到登陆页面
-                LoginViewController *loginViewController = [[LoginViewController alloc]init];
-                
-                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginViewController];
-                
-                self.window.rootViewController = nav;
-            }
-            
-        }else{
-            
-            //不一样需要显示
-            weakself.isDisplayTutorials = YES;
-            
-            //保存引导图片更新时间
-            [LocalData setTutorialsImageUpdateDate:updateEle.stringValue];
-            
-            //跳转到引导页面
-            TutorialsViewController *tutorialsViewController = [[TutorialsViewController alloc]init];
-            
-            tutorialsViewController.tutorialsArray = weakself.tutorialsArray;
-            
-            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:tutorialsViewController];
-            
-            weakself.window.rootViewController = nav;
-
-        }
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        NSLog(@"请求失败");
-        
-    }];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    ViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    
+    self.window.rootViewController = viewController;
+    
 
     self.window.backgroundColor = [UIColor whiteColor];
     

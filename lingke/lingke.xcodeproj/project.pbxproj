@@ -49,6 +49,7 @@
 		072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288C1D6D902800EAFFAC /* MessageViewController.m */; };
 		072C28901D6D903700EAFFAC /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288F1D6D903700EAFFAC /* MyViewController.m */; };
 		0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */; };
+		0734DFC41DA4A3B90058B1A3 /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DFC31DA4A3B90058B1A3 /* ErrorViewController.m */; };
 		073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D01D73DC090013DB67 /* NewInfoImageView.m */; };
 		073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */; };
 		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
@@ -186,6 +187,8 @@
 		072C288F1D6D903700EAFFAC /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		0734DF7A1DA32C8A0058B1A3 /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
 		0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
+		0734DFC21DA4A3B90058B1A3 /* ErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorViewController.h; sourceTree = "<group>"; };
+		0734DFC31DA4A3B90058B1A3 /* ErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorViewController.m; sourceTree = "<group>"; };
 		073A54CF1D73DC090013DB67 /* NewInfoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInfoImageView.h; sourceTree = "<group>"; };
 		073A54D01D73DC090013DB67 /* NewInfoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInfoImageView.m; sourceTree = "<group>"; };
 		073A54D21D73E0600013DB67 /* NewsinfoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsinfoDetailsViewController.h; sourceTree = "<group>"; };
@@ -339,6 +342,8 @@
 				072C287A1D6D851700EAFFAC /* MainTabBarController.m */,
 				070C16331D693CF800738BC7 /* ViewController.h */,
 				070C16341D693CF800738BC7 /* ViewController.m */,
+				0734DFC21DA4A3B90058B1A3 /* ErrorViewController.h */,
+				0734DFC31DA4A3B90058B1A3 /* ErrorViewController.m */,
 				072C287C1D6D8E8300EAFFAC /* Homepage */,
 				072C287E1D6D8EE600EAFFAC /* WaittingHand */,
 				072C287F1D6D8F5F00EAFFAC /* Scan */,
@@ -821,6 +826,7 @@
 				073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */,
 				07F7C7401D812E9000A860EA /* WFListModel.m in Sources */,
 				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
+				0734DFC41DA4A3B90058B1A3 /* ErrorViewController.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,
 				072190811D72D18500EA832B /* HomepageCollectionViewCell.m in Sources */,
 				0766ECD31D85866B00D884F5 /* HelpViewController.m in Sources */,
