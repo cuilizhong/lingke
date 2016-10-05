@@ -87,6 +87,8 @@
             
             if (!self.isLocal) {
                 
+                //addpersion
+                                
                 self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
                 
                 self.navigationItem.rightBarButtonItem = self.rightBarButton;
@@ -107,9 +109,9 @@
         self.isAdd = YES;
     }
     
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
     
-    self.navigationItem.leftBarButtonItem = leftBarButton;
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
 
     self.addressCellHeight = 44.0f;
 }

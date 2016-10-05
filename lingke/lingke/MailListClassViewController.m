@@ -82,9 +82,12 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     self.pagestart = 1;
     
-    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"新增" style:UIBarButtonItemStylePlain target:self action:@selector(addAction:)];
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"addpersion"] style:UIBarButtonItemStylePlain target:self action:@selector(addAction:)];
     
     self.navigationItem.rightBarButtonItem = addButtonItem;
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
     
     
     
@@ -146,6 +149,11 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 //        [weakself handData];
 //    }];
     
+}
+
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)addAction:(UIBarButtonItem *)sender{

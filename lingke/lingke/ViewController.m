@@ -165,9 +165,6 @@
         }];
         
     }];
-
-    
-    
 }
 
 - (void)showHUDWithMessage:(NSString *)message{

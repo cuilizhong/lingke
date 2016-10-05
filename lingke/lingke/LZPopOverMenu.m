@@ -319,7 +319,7 @@ typedef NS_ENUM(NSUInteger, LZPopOverMenuArrowDirection) {
     NSLog(@"contentOffset.y = %f",scrollView.contentOffset.y);
     
     //计算位移
-    if (scrollView.contentOffset.y <= 0) {
+    if (scrollView.contentOffset.y <= 0 && self.menuStringArray.count>10) {
         
         self.isDispalyHeader = NO;
         self.isDisplayFooter = YES;
@@ -328,7 +328,8 @@ typedef NS_ENUM(NSUInteger, LZPopOverMenuArrowDirection) {
     }
     
     
-    if (scrollView.contentOffset.y >= scrollView.contentSize.height-scrollView.frame.size.height) {
+    if (scrollView.contentOffset.y >= scrollView.contentSize.height-scrollView.frame.size.height  && self.menuStringArray.count>10) {
+        
         self.isDisplayFooter = NO;
         self.isDispalyHeader = YES;
         
