@@ -34,7 +34,12 @@
 @implementation AppDelegate
 
 
+
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     
     //设置navigationbaritem的字体颜色
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];

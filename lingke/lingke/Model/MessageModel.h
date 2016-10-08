@@ -24,7 +24,7 @@
 
 @property(nonatomic,copy)NSString *title;
 
-@property(nonatomic,copy)NSString *uri;
+@property(nonatomic,copy)NSString *url;
 
 - (void)setValueFromDic:(NSDictionary *)dic;
 

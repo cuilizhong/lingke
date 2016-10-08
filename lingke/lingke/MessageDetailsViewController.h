@@ -9,6 +9,9 @@
 #import "BasicViewController.h"
 #import "MessageModel.h"
 
+#import <JavaScriptCore/JavaScriptCore.h>
+
+
 @interface MessageDetailsViewController : BasicViewController
 
 @property(nonatomic,strong)MessageModel *messageModel;

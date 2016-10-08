@@ -24,9 +24,13 @@
     
     self.title = self.messageModel.title;
     
-    self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    NSString *token = [LocalData getToken];
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.messageModel.uri]
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@",self.messageModel.url,token];
+    
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]
                              
                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
                              
@@ -43,7 +47,16 @@
     self.activityView.color = [UIColor blackColor];
     
     [self.view addSubview:self.activityView];
+    
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
 
+}
+
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark-UIWebViewDelegate

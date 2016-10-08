@@ -12,6 +12,8 @@
 #import "MessageTableViewCell.h"
 #import "MessageDetailsViewController.h"
 
+#import "DataIndexViewController.h"
+
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)NSMutableArray *messagekindsArray;
@@ -98,6 +100,9 @@
             NSDictionary *messagekindsDic = responsedataDic[@"messagekinds"];
             
             NSArray *messagekindArray = messagekindsDic[@"messagekind"];
+            
+            
+            [weakself.messagekindsArray removeAllObjects];
             
             [weakself.messagekindsArray addObject:@"全部信息"];
             
@@ -298,11 +303,17 @@
     
     self.hidesBottomBarWhenPushed = YES;
     
-    MessageDetailsViewController *messageDetailsViewController = [[MessageDetailsViewController alloc]init];
+    DataIndexViewController *dataIndexViewController = [[DataIndexViewController alloc]init];
     
-    messageDetailsViewController.messageModel = messageModel;
+    dataIndexViewController.title = messageModel.title;
+    dataIndexViewController.url = messageModel.url;
     
-    [self.navigationController pushViewController:messageDetailsViewController animated:YES];
+    
+//    MessageDetailsViewController *messageDetailsViewController = [[MessageDetailsViewController alloc]init];
+//    
+//    messageDetailsViewController.messageModel = messageModel;
+    
+    [self.navigationController pushViewController:dataIndexViewController animated:YES];
     
     self.hidesBottomBarWhenPushed = NO;
     

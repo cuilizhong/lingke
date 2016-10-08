@@ -15,6 +15,7 @@
 #import "ExtendappDetailViewController.h"
 #import "MenusView.h"
 #import "DataIndexModel.h"
+#import "DataIndexViewController.h"
 
 @interface ExtendappViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -293,13 +294,22 @@
     
     self.hidesBottomBarWhenPushed = YES;
     
-    ExtendappDetailViewController *extendappDetailViewController = [[ExtendappDetailViewController alloc]init];
-    
     DataIndexModel *dataIndexModel = self.contentsArray[indexPath.row];
     
-    extendappDetailViewController.dataIndexModel = dataIndexModel;
+    DataIndexViewController *dataIndexViewController = [[DataIndexViewController alloc]init];
     
-    [self.navigationController pushViewController:extendappDetailViewController animated:YES];
+    dataIndexViewController.title = dataIndexModel.title;
+    
+    dataIndexViewController.url = dataIndexModel.openurl;
+    
+    
+//    ExtendappDetailViewController *extendappDetailViewController = [[ExtendappDetailViewController alloc]init];
+//    
+//    DataIndexModel *dataIndexModel = self.contentsArray[indexPath.row];
+//    
+//    extendappDetailViewController.dataIndexModel = dataIndexModel;
+    
+    [self.navigationController pushViewController:dataIndexViewController animated:YES];
     
     self.hidesBottomBarWhenPushed = YES;
 

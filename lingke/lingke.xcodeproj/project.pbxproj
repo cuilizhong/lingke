@@ -24,6 +24,8 @@
 		070C1A741D80008100D6E726 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A731D80008100D6E726 /* MessageModel.m */; };
 		070C1A771D800CEA00D6E726 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A761D800CEA00D6E726 /* MessageTableViewCell.m */; };
 		070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */; };
+		070C51B51DA935A000F42D25 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51B41DA935A000F42D25 /* AttachmentViewController.m */; };
+		070C51B81DA93B6C00F42D25 /* PreviewFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51B71DA93B6C00F42D25 /* PreviewFileViewController.m */; };
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
 		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
 		072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190771D72CB0D00EA832B /* NewsInfoModel.m */; };
@@ -142,6 +144,10 @@
 		070C1A761D800CEA00D6E726 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		070C1A781D8015A200D6E726 /* MessageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailsViewController.h; sourceTree = "<group>"; };
 		070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailsViewController.m; sourceTree = "<group>"; };
+		070C51B31DA935A000F42D25 /* AttachmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
+		070C51B41DA935A000F42D25 /* AttachmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
+		070C51B61DA93B6C00F42D25 /* PreviewFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewFileViewController.h; sourceTree = "<group>"; };
+		070C51B71DA93B6C00F42D25 /* PreviewFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewFileViewController.m; sourceTree = "<group>"; };
 		0721906A1D6F2B3400EA832B /* HttpInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpInterface.h; path = lingke/HttpInterface.h; sourceTree = "<group>"; };
 		072190701D7290BA00EA832B /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = lingke/XMLDictionary.h; sourceTree = "<group>"; };
 		072190711D7290BA00EA832B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = lingke/XMLDictionary.m; sourceTree = "<group>"; };
@@ -555,6 +561,10 @@
 				075C4A9A1D8B892B0028EF84 /* ChangePasswordViewController.m */,
 				0766ECD11D85866B00D884F5 /* HelpViewController.h */,
 				0766ECD21D85866B00D884F5 /* HelpViewController.m */,
+				070C51B31DA935A000F42D25 /* AttachmentViewController.h */,
+				070C51B41DA935A000F42D25 /* AttachmentViewController.m */,
+				070C51B61DA93B6C00F42D25 /* PreviewFileViewController.h */,
+				070C51B71DA93B6C00F42D25 /* PreviewFileViewController.m */,
 			);
 			name = My;
 			sourceTree = "<group>";
@@ -826,6 +836,7 @@
 				07F7C73D1D80FFF600A860EA /* DataIndexModel.m in Sources */,
 				072190751D72972200EA832B /* HomeappModel.m in Sources */,
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
+				070C51B51DA935A000F42D25 /* AttachmentViewController.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */,
@@ -842,6 +853,7 @@
 				0766ECD31D85866B00D884F5 /* HelpViewController.m in Sources */,
 				072C286A1D6C9A5600EAFFAC /* LoginViewController.m in Sources */,
 				07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */,
+				070C51B81DA93B6C00F42D25 /* PreviewFileViewController.m in Sources */,
 				07B44B991D7951AB0023214C /* PersionModel.m in Sources */,
 				07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */,
 				070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */,

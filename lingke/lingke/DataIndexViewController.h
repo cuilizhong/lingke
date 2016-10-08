@@ -12,14 +12,20 @@
 
 @protocol JsApiDelegate  <JSExport>
 
-- (void) jscallIOS:(NSString *)parameter;
+- (void) back:(NSString *)parameter;
+
+- (void)downloadAttachment:(NSString *)parameter;
+
+- (void)setRead:(NSString *)parameter;
 
 
 @end
 
 @interface DataIndexViewController : BasicViewController<JsApiDelegate>
 
-@property(nonatomic,strong)DataIndexModel *dataIndexModel;
+//@property(nonatomic,strong)DataIndexModel *dataIndexModel;
+
+@property(nonatomic,copy)NSString *url;
 
 @property (nonatomic,strong) JSContext *context;
 

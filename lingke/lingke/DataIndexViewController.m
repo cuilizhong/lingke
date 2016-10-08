@@ -24,15 +24,13 @@
     
     [super viewDidLoad];
     
-    self.title = self.dataIndexModel.title;
-    
     NSString *token = [LocalData getToken];
     
-    NSString *url = [NSString stringWithFormat:@"%@?token=%@",self.dataIndexModel.openurl,token];
+//    NSString *url = [NSString stringWithFormat:@"%@?token=%@",self.dataIndexModel.openurl,token];
     
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.url]
                              
                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
                              
@@ -98,13 +96,13 @@
 }
 
 
-//js调用 ios方法
-- (void) jscallIOS:(NSString *)parameter{
+#pragma mark-JsApiDelegate
+#pragma mark-返回
+- (void)back:(NSString *)parameter{
 
     NSDictionary *parameterDic = [NSString dictionaryWithJsonString:parameter];
     
     NSLog(@"parameterDic= %@",parameterDic);
-    
     
     @weakify(self);
     
@@ -113,6 +111,18 @@
         [weakself.navigationController popViewControllerAnimated:YES];
 
     });
+    
+}
+
+#pragma mark-下载附件
+- (void)downloadAttachment:(NSString *)parameter{
+    
+    
+}
+
+#pragma mark-设置已读
+- (void)setRead:(NSString *)parameter{
+    
     
 }
 

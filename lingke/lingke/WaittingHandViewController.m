@@ -499,7 +499,15 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         DataIndexViewController *viewController =  [[DataIndexViewController alloc]init];
         
-        viewController.dataIndexModel = dataIndexModel;
+        viewController.title = dataIndexModel.title;
+        
+        NSString *token = [LocalData getToken];
+        
+        NSString *url = [NSString stringWithFormat:@"%@?token=%@",dataIndexModel.openurl,token];
+        
+        viewController.url = url;
+        
+//        viewController.dataIndexModel = dataIndexModel;
         
         self.hidesBottomBarWhenPushed = YES;
         

@@ -25,6 +25,8 @@
     self.mobile = dic[@"mobile"];
     
     self.title = dic[@"title"];
+    
+    self.url = dic[@"url"];
 
 }
 
