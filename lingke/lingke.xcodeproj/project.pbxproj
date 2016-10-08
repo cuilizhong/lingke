@@ -17,7 +17,6 @@
 		070C16531D693CF800738BC7 /* lingkeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16521D693CF800738BC7 /* lingkeUITests.m */; };
 		070C16641D69443000738BC7 /* ConfigureColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16631D69443000738BC7 /* ConfigureColor.m */; };
 		070C16ED1D6C18F500738BC7 /* HttpsRequestManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16EC1D6C18F500738BC7 /* HttpsRequestManger.m */; };
-		070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16F41D6C336700738BC7 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		070C16F71D6C338D00738BC7 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 070C16F61D6C338D00738BC7 /* libxml2.tbd */; };
 		070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */; };
 		070C1A6D1D7EA34100D6E726 /* HomeFunctionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A6C1D7EA34100D6E726 /* HomeFunctionModel.m */; };
@@ -76,6 +75,7 @@
 		07B44B931D7807040023214C /* MailListTableViewHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B44B921D7807040023214C /* MailListTableViewHeadView.xib */; };
 		07B44B961D7815920023214C /* MailListClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B951D7815920023214C /* MailListClassViewController.m */; };
 		07B44B991D7951AB0023214C /* PersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B981D7951AB0023214C /* PersionModel.m */; };
+		07B90A3B1DA889FB00B759BA /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B90A3A1DA889FB00B759BA /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */; };
 		07EE15391D748C2B00E5CE91 /* AppurikindTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */; };
 		07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15461D75DB8800E5CE91 /* ApplyViewController.m */; };
@@ -126,8 +126,6 @@
 		070C16651D6949FF00738BC7 /* lingke.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lingke.pch; path = lingke/lingke.pch; sourceTree = "<group>"; };
 		070C16EB1D6C18F500738BC7 /* HttpsRequestManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpsRequestManger.h; path = lingke/HttpsRequestManger.h; sourceTree = "<group>"; };
 		070C16EC1D6C18F500738BC7 /* HttpsRequestManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpsRequestManger.m; path = lingke/HttpsRequestManger.m; sourceTree = "<group>"; };
-		070C16F31D6C336700738BC7 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		070C16F41D6C336700738BC7 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		070C16F61D6C338D00738BC7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		070C16F91D6C4C0300738BC7 /* TutorialsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialsModel.h; path = lingke/Model/TutorialsModel.h; sourceTree = "<group>"; };
 		070C16FA1D6C4C0300738BC7 /* TutorialsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialsModel.m; path = lingke/Model/TutorialsModel.m; sourceTree = "<group>"; };
@@ -234,6 +232,8 @@
 		07B44B951D7815920023214C /* MailListClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailListClassViewController.m; sourceTree = "<group>"; };
 		07B44B971D7951AB0023214C /* PersionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersionModel.h; path = lingke/Model/PersionModel.h; sourceTree = "<group>"; };
 		07B44B981D7951AB0023214C /* PersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersionModel.m; path = lingke/Model/PersionModel.m; sourceTree = "<group>"; };
+		07B90A391DA889FB00B759BA /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GDataXMLNode.h; path = lingke/GDataXMLNode.h; sourceTree = "<group>"; };
+		07B90A3A1DA889FB00B759BA /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GDataXMLNode.m; path = lingke/GDataXMLNode.m; sourceTree = "<group>"; };
 		07EE15351D748C2B00E5CE91 /* AppurikindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppurikindTableViewCell.h; sourceTree = "<group>"; };
 		07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppurikindTableViewCell.m; sourceTree = "<group>"; };
 		07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppurikindTableViewCell.xib; sourceTree = "<group>"; };
@@ -297,7 +297,6 @@
 				072C285F1D6C874200EAFFAC /* LocalData.h */,
 				072C28601D6C874200EAFFAC /* LocalData.m */,
 				070C16F81D6C4BB100738BC7 /* Model */,
-				070C16F21D6C336700738BC7 /* GData */,
 				070C16E71D6BF98700738BC7 /* HttpInstance */,
 				070C16651D6949FF00738BC7 /* lingke.pch */,
 				070C16601D693E0A00738BC7 /* ColorConfigure */,
@@ -405,16 +404,6 @@
 			name = HttpInstance;
 			sourceTree = "<group>";
 		};
-		070C16F21D6C336700738BC7 /* GData */ = {
-			isa = PBXGroup;
-			children = (
-				070C16F31D6C336700738BC7 /* GDataXMLNode.h */,
-				070C16F41D6C336700738BC7 /* GDataXMLNode.m */,
-			);
-			name = GData;
-			path = lingke/GData;
-			sourceTree = "<group>";
-		};
 		070C16F81D6C4BB100738BC7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +443,8 @@
 		0721906F1D72907800EA832B /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				07B90A391DA889FB00B759BA /* GDataXMLNode.h */,
+				07B90A3A1DA889FB00B759BA /* GDataXMLNode.m */,
 				07B44B841D76DE2B0023214C /* LZPopOverMenu.h */,
 				07B44B851D76DE2B0023214C /* LZPopOverMenu.m */,
 				072190701D7290BA00EA832B /* XMLDictionary.h */,
@@ -793,6 +784,7 @@
 				073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */,
 				070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */,
 				070C16641D69443000738BC7 /* ConfigureColor.m in Sources */,
+				07B90A3B1DA889FB00B759BA /* GDataXMLNode.m in Sources */,
 				070C16351D693CF800738BC7 /* ViewController.m in Sources */,
 				072AAFC61D96871F0045F7DD /* Persion+CoreDataProperties.m in Sources */,
 				07B44B961D7815920023214C /* MailListClassViewController.m in Sources */,
@@ -840,7 +832,6 @@
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
 				075C4A951D8B889D0028EF84 /* UIViewController+viewControllerHelp.m in Sources */,
 				07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */,
-				070C16F51D6C336700738BC7 /* GDataXMLNode.m in Sources */,
 				070C1A771D800CEA00D6E726 /* MessageTableViewCell.m in Sources */,
 				07FFA6F51D6EDADB00A40454 /* Network.m in Sources */,
 				070C1A6D1D7EA34100D6E726 /* HomeFunctionModel.m in Sources */,
@@ -996,7 +987,7 @@
 				INFOPLIST_FILE = lingke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Softtek.lingke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkwzig.lingke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1007,12 +998,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wuzhou International Holdings Limited";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lingke/lingke.pch";
+				HEADER_SEARCH_PATHS = "/usr/include/libxml2 ";
 				INFOPLIST_FILE = lingke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Softtek.lingke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkwzig.lingke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "51fa79fc-db6d-4d6c-addf-46266cf1b3d4";
 			};
 			name = Release;
 		};
