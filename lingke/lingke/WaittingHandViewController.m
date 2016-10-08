@@ -10,6 +10,7 @@
 #import "DataIndexModel.h"
 #import "WFListModel.h"
 #import "MenusView.h"
+#import "DataIndexViewController.h"
 
 typedef NS_ENUM(NSInteger, TableViewDataType)
 {
@@ -145,8 +146,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         NSLog(@"xmlDoc = %@",xmlDoc);
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
-            
-            
             
             NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
             
@@ -356,9 +355,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         return self.sortTitleArray.count;
     }
-    
-    
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -412,6 +408,15 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         }
         
         DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
+        
+        if (dataIndexModel.isread.integerValue == 1) {
+            //已读
+            cell.textLabel.textColor = [UIColor blackColor];
+            
+        }else if (dataIndexModel.isread.integerValue == 1){
+            //未读
+            cell.textLabel.textColor = [UIColor redColor];
+        }
         
         cell.textLabel.text = dataIndexModel.title;
         
@@ -489,7 +494,21 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
     }else if (self.tableViewDataType == TableViewDataTypeWFContent){
         
+        //进入待办
+        DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
+        
+        DataIndexViewController *viewController =  [[DataIndexViewController alloc]init];
+        
+        viewController.dataIndexModel = dataIndexModel;
+        
+        self.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:viewController animated:YES];
+        
+        self.hidesBottomBarWhenPushed = NO;
+        
     }
+    
     
     
     

@@ -20,4 +20,6 @@ typedef void(^RequestFail)(NSError *error);
 //上传图片
 - (instancetype)initUploadImageWithURL:(NSString *)URL image:(NSData *)image requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail;
 
++ (void)upload:(NSString *)name filename:(NSString *)filename mimeType:(NSString *)mimeType data:(NSData *)data parmas:(NSDictionary *)params url:(NSString *)url;
+
 @end

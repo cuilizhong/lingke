@@ -18,7 +18,7 @@
 
     self.formid = dic[@"formid"];
 
-//    self.isread = dic[@"isread"];
+    self.isread = dic[@"isread"];
 
     self.openurl = dic[@"openurl"];
     

@@ -9,6 +9,7 @@
 #import "MailDetailsViewController.h"
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
+#import "UIImage+Compression.h"
 
 
 @interface MailDetailsViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -643,9 +644,9 @@
     //得到图片
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    self.headImageView.image = image;
+    self.headImageView.image = [UIImage imageWithImageSimple:image scaledToSize:CGSizeMake(300, 300)];
     
-    self.headImageData = UIImageJPEGRepresentation(image, 0.1);
+    self.headImageData = UIImageJPEGRepresentation(self.headImageView.image, 0.1);
     
     @weakify(self);
     [self dismissViewControllerAnimated:YES completion:^{
@@ -685,17 +686,20 @@
     
     URL = [NSString stringWithFormat:@"%@/dataapi/attach/upload?token=%@",URL,token];
     
-    [[Network alloc]initUploadImageWithURL:URL image:self.headImageData requestSuccess:^(NSData *data) {
-        
-        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
-        
-        NSLog(@"xmlDoc = %@",xmlDoc);
-        
-        
-    } requestFail:^(NSError *error) {
-        
-        NSLog(@"上传失败");
-    }];
+    
+    [Network upload:@"test" filename:@"testt" mimeType:@"application/octet-stream" data:self.headImageData parmas:nil url:URL];
+    
+//    [[Network alloc]initUploadImageWithURL:URL image:self.headImageData requestSuccess:^(NSData *data) {
+//        
+//        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+//        
+//        NSLog(@"xmlDoc = %@",xmlDoc);
+//        
+//        
+//    } requestFail:^(NSError *error) {
+//        
+//        NSLog(@"上传失败");
+//    }];
 }
 
 @end

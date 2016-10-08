@@ -7,8 +7,13 @@
 //
 
 #import "Network.h"
+#import "XMLDictionary.h"
+
 
 #import "GDataXMLNode.h"
+
+#define YYEncode(str) [str dataUsingEncoding:NSUTF8StringEncoding]
+
 
 @interface Network()
 
@@ -21,6 +26,72 @@
 @end
 
 @implementation Network
+
+
++ (void)upload:(NSString *)name filename:(NSString *)filename mimeType:(NSString *)mimeType data:(NSData *)data parmas:(NSDictionary *)params url:(NSString *)url{
+    
+      // 文件上传
+//     NSURL *url = [NSURL URLWithString:@"http://192.168.1.200:8080/YYServer/upload"];
+     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+     request.HTTPMethod = @"POST";
+    
+    // 设置请求体
+    NSMutableData *body = [NSMutableData data];
+    
+     /***************文件参数***************/
+     // 参数开始的标志
+     [body appendData:YYEncode(@"--YY\r\n")];
+    // name : 指定参数名(必须跟服务器端保持一致)
+    // filename : 文件名
+    NSString *disposition = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", name, filename];
+    [body appendData:YYEncode(disposition)];
+    NSString *type = [NSString stringWithFormat:@"Content-Type: %@\r\n", mimeType];
+    [body appendData:YYEncode(type)];
+    
+    [body appendData:YYEncode(@"\r\n")];
+    [body appendData:data];
+    [body appendData:YYEncode(@"\r\n")];
+    
+     /***************普通参数***************/
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+          // 参数开始的标志
+        [body appendData:YYEncode(@"--YY\r\n")];
+        NSString *disposition = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key];
+        [body appendData:YYEncode(disposition)];
+        
+        [body appendData:YYEncode(@"\r\n")];
+        [body appendData:YYEncode(obj)];
+         [body appendData:YYEncode(@"\r\n")];
+         }];
+    
+      /***************参数结束***************/
+    // YY--\r\n
+    [body appendData:YYEncode(@"--YY--\r\n")];
+    request.HTTPBody = body;
+    
+     // 设置请求头
+    // 请求体的长度
+     [request setValue:[NSString stringWithFormat:@"%zd", body.length] forHTTPHeaderField:@"Content-Length"];
+    // 声明这个POST请求是个文件上传
+    [request setValue:@"multipart/form-data; boundary=YY" forHTTPHeaderField:@"Content-Type"];
+    
+    // 发送请求
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+//                        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                
+                NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+                
+                NSLog(@"xmlDoc = %@",xmlDoc);
+                
+//                        NSLog(@"%@", dict);
+                
+                    } else {
+                        
+                            NSLog(@"上传失败");
+                    }
+           }];
+}
 
 
 - (instancetype)initUploadImageWithURL:(NSString *)URL image:(NSData *)image requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail{

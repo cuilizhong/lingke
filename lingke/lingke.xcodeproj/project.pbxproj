@@ -76,6 +76,9 @@
 		07B44B961D7815920023214C /* MailListClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B951D7815920023214C /* MailListClassViewController.m */; };
 		07B44B991D7951AB0023214C /* PersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B44B981D7951AB0023214C /* PersionModel.m */; };
 		07B90A3B1DA889FB00B759BA /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B90A3A1DA889FB00B759BA /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		07B90A3E1DA8946A00B759BA /* UIImage+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B90A3D1DA8946A00B759BA /* UIImage+Compression.m */; };
+		07B90A411DA8D06400B759BA /* DataIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B90A401DA8D06300B759BA /* DataIndexViewController.m */; };
+		07B90A441DA8D6F400B759BA /* NSString+FormatConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B90A431DA8D6F400B759BA /* NSString+FormatConvert.m */; };
 		07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */; };
 		07EE15391D748C2B00E5CE91 /* AppurikindTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */; };
 		07EE15471D75DB8800E5CE91 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EE15461D75DB8800E5CE91 /* ApplyViewController.m */; };
@@ -234,6 +237,12 @@
 		07B44B981D7951AB0023214C /* PersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersionModel.m; path = lingke/Model/PersionModel.m; sourceTree = "<group>"; };
 		07B90A391DA889FB00B759BA /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GDataXMLNode.h; path = lingke/GDataXMLNode.h; sourceTree = "<group>"; };
 		07B90A3A1DA889FB00B759BA /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GDataXMLNode.m; path = lingke/GDataXMLNode.m; sourceTree = "<group>"; };
+		07B90A3C1DA8946A00B759BA /* UIImage+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Compression.h"; path = "lingke/UIImage+Compression.h"; sourceTree = "<group>"; };
+		07B90A3D1DA8946A00B759BA /* UIImage+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Compression.m"; path = "lingke/UIImage+Compression.m"; sourceTree = "<group>"; };
+		07B90A3F1DA8D06300B759BA /* DataIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataIndexViewController.h; sourceTree = "<group>"; };
+		07B90A401DA8D06300B759BA /* DataIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataIndexViewController.m; sourceTree = "<group>"; };
+		07B90A421DA8D6F400B759BA /* NSString+FormatConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FormatConvert.h"; path = "lingke/NSString+FormatConvert.h"; sourceTree = "<group>"; };
+		07B90A431DA8D6F400B759BA /* NSString+FormatConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FormatConvert.m"; path = "lingke/NSString+FormatConvert.m"; sourceTree = "<group>"; };
 		07EE15351D748C2B00E5CE91 /* AppurikindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppurikindTableViewCell.h; sourceTree = "<group>"; };
 		07EE15361D748C2B00E5CE91 /* AppurikindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppurikindTableViewCell.m; sourceTree = "<group>"; };
 		07EE15371D748C2B00E5CE91 /* AppurikindTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppurikindTableViewCell.xib; sourceTree = "<group>"; };
@@ -443,6 +452,10 @@
 		0721906F1D72907800EA832B /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				07B90A421DA8D6F400B759BA /* NSString+FormatConvert.h */,
+				07B90A431DA8D6F400B759BA /* NSString+FormatConvert.m */,
+				07B90A3C1DA8946A00B759BA /* UIImage+Compression.h */,
+				07B90A3D1DA8946A00B759BA /* UIImage+Compression.m */,
 				07B90A391DA889FB00B759BA /* GDataXMLNode.h */,
 				07B90A3A1DA889FB00B759BA /* GDataXMLNode.m */,
 				07B44B841D76DE2B0023214C /* LZPopOverMenu.h */,
@@ -504,6 +517,8 @@
 			children = (
 				072C28851D6D901200EAFFAC /* WaittingHandViewController.h */,
 				072C28861D6D901200EAFFAC /* WaittingHandViewController.m */,
+				07B90A3F1DA8D06300B759BA /* DataIndexViewController.h */,
+				07B90A401DA8D06300B759BA /* DataIndexViewController.m */,
 			);
 			name = WaittingHand;
 			sourceTree = "<group>";
@@ -777,6 +792,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07B90A441DA8D6F400B759BA /* NSString+FormatConvert.m in Sources */,
 				072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */,
 				072190851D73158600EA832B /* ExtendappModel.m in Sources */,
 				07B44B891D77B94B0023214C /* FastApplyViewController.m in Sources */,
@@ -789,6 +805,7 @@
 				072AAFC61D96871F0045F7DD /* Persion+CoreDataProperties.m in Sources */,
 				07B44B961D7815920023214C /* MailListClassViewController.m in Sources */,
 				072C28611D6C874200EAFFAC /* LocalData.m in Sources */,
+				07B90A3E1DA8946A00B759BA /* UIImage+Compression.m in Sources */,
 				070C16ED1D6C18F500738BC7 /* HttpsRequestManger.m in Sources */,
 				072C287B1D6D851700EAFFAC /* MainTabBarController.m in Sources */,
 				072C28641D6C9A2200EAFFAC /* BasicViewController.m in Sources */,
@@ -796,6 +813,7 @@
 				07EE15541D7677F300E5CE91 /* ExtendappDetailViewController.m in Sources */,
 				072190721D7290BA00EA832B /* XMLDictionary.m in Sources */,
 				0782BCD61D9681ED0077B4D2 /* CoreDataDemo.xcdatamodeld in Sources */,
+				07B90A411DA8D06400B759BA /* DataIndexViewController.m in Sources */,
 				0766ECE81D85978700D884F5 /* ZHScanView.m in Sources */,
 				07EE155A1D76B8AF00E5CE91 /* MailListViewController.m in Sources */,
 				072AAFC71D96871F0045F7DD /* Persion.m in Sources */,
