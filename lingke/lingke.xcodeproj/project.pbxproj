@@ -26,6 +26,12 @@
 		070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */; };
 		070C51B51DA935A000F42D25 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51B41DA935A000F42D25 /* AttachmentViewController.m */; };
 		070C51B81DA93B6C00F42D25 /* PreviewFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51B71DA93B6C00F42D25 /* PreviewFileViewController.m */; };
+		070C51BB1DA9E7E800F42D25 /* SearchExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51BA1DA9E7E800F42D25 /* SearchExtendappViewController.m */; };
+		070C51BF1DA9E9E400F42D25 /* SearchExtendappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51BD1DA9E9E400F42D25 /* SearchExtendappCell.m */; };
+		070C51C01DA9E9E400F42D25 /* SearchExtendappCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070C51BE1DA9E9E400F42D25 /* SearchExtendappCell.xib */; };
+		070C51C31DAA0F3200F42D25 /* SearchfieldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C21DAA0F3200F42D25 /* SearchfieldModel.m */; };
+		070C51C61DAA281300F42D25 /* SearchDataindexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C51DAA281300F42D25 /* SearchDataindexModel.m */; };
+		070C51C91DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */; };
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
 		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
 		072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190771D72CB0D00EA832B /* NewsInfoModel.m */; };
@@ -148,6 +154,17 @@
 		070C51B41DA935A000F42D25 /* AttachmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
 		070C51B61DA93B6C00F42D25 /* PreviewFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewFileViewController.h; sourceTree = "<group>"; };
 		070C51B71DA93B6C00F42D25 /* PreviewFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewFileViewController.m; sourceTree = "<group>"; };
+		070C51B91DA9E7E800F42D25 /* SearchExtendappViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchExtendappViewController.h; sourceTree = "<group>"; };
+		070C51BA1DA9E7E800F42D25 /* SearchExtendappViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchExtendappViewController.m; sourceTree = "<group>"; };
+		070C51BC1DA9E9E400F42D25 /* SearchExtendappCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchExtendappCell.h; sourceTree = "<group>"; };
+		070C51BD1DA9E9E400F42D25 /* SearchExtendappCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchExtendappCell.m; sourceTree = "<group>"; };
+		070C51BE1DA9E9E400F42D25 /* SearchExtendappCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchExtendappCell.xib; sourceTree = "<group>"; };
+		070C51C11DAA0F3200F42D25 /* SearchfieldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchfieldModel.h; sourceTree = "<group>"; };
+		070C51C21DAA0F3200F42D25 /* SearchfieldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchfieldModel.m; sourceTree = "<group>"; };
+		070C51C41DAA281300F42D25 /* SearchDataindexModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDataindexModel.h; sourceTree = "<group>"; };
+		070C51C51DAA281300F42D25 /* SearchDataindexModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDataindexModel.m; sourceTree = "<group>"; };
+		070C51C71DAA2E0000F42D25 /* SearchExtendappDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchExtendappDetailsViewController.h; sourceTree = "<group>"; };
+		070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchExtendappDetailsViewController.m; sourceTree = "<group>"; };
 		0721906A1D6F2B3400EA832B /* HttpInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpInterface.h; path = lingke/HttpInterface.h; sourceTree = "<group>"; };
 		072190701D7290BA00EA832B /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = lingke/XMLDictionary.h; sourceTree = "<group>"; };
 		072190711D7290BA00EA832B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = lingke/XMLDictionary.m; sourceTree = "<group>"; };
@@ -495,6 +512,17 @@
 				073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */,
 				073A54D51D7404700013DB67 /* ExtendappViewController.h */,
 				073A54D61D7404700013DB67 /* ExtendappViewController.m */,
+				070C51B91DA9E7E800F42D25 /* SearchExtendappViewController.h */,
+				070C51BA1DA9E7E800F42D25 /* SearchExtendappViewController.m */,
+				070C51C71DAA2E0000F42D25 /* SearchExtendappDetailsViewController.h */,
+				070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */,
+				070C51C11DAA0F3200F42D25 /* SearchfieldModel.h */,
+				070C51C21DAA0F3200F42D25 /* SearchfieldModel.m */,
+				070C51C41DAA281300F42D25 /* SearchDataindexModel.h */,
+				070C51C51DAA281300F42D25 /* SearchDataindexModel.m */,
+				070C51BC1DA9E9E400F42D25 /* SearchExtendappCell.h */,
+				070C51BD1DA9E9E400F42D25 /* SearchExtendappCell.m */,
+				070C51BE1DA9E9E400F42D25 /* SearchExtendappCell.xib */,
 				07EE15451D75DB8800E5CE91 /* ApplyViewController.h */,
 				07EE15461D75DB8800E5CE91 /* ApplyViewController.m */,
 				07B44B871D77B94B0023214C /* FastApplyViewController.h */,
@@ -720,6 +748,7 @@
 				070C163D1D693CF800738BC7 /* LaunchScreen.storyboard in Resources */,
 				0766ECE41D85978700D884F5 /* scan@2x.png in Resources */,
 				0766ECE71D85978700D884F5 /* scan_1@3x.png in Resources */,
+				070C51C01DA9E9E400F42D25 /* SearchExtendappCell.xib in Resources */,
 				070C163A1D693CF800738BC7 /* Assets.xcassets in Resources */,
 				072190821D72D18500EA832B /* HomepageCollectionViewCell.xib in Resources */,
 				070C16381D693CF800738BC7 /* Main.storyboard in Resources */,
@@ -802,11 +831,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070C51C61DAA281300F42D25 /* SearchDataindexModel.m in Sources */,
 				07B90A441DA8D6F400B759BA /* NSString+FormatConvert.m in Sources */,
 				072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */,
 				072190851D73158600EA832B /* ExtendappModel.m in Sources */,
 				07B44B891D77B94B0023214C /* FastApplyViewController.m in Sources */,
 				070C1A711D7EC28300D6E726 /* MenusView.m in Sources */,
+				070C51C91DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m in Sources */,
 				073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */,
 				070C16FB1D6C4C0300738BC7 /* TutorialsModel.m in Sources */,
 				070C16641D69443000738BC7 /* ConfigureColor.m in Sources */,
@@ -833,11 +864,13 @@
 				0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */,
 				075C4A9B1D8B892B0028EF84 /* ChangePasswordViewController.m in Sources */,
 				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
+				070C51BF1DA9E9E400F42D25 /* SearchExtendappCell.m in Sources */,
 				07F7C73D1D80FFF600A860EA /* DataIndexModel.m in Sources */,
 				072190751D72972200EA832B /* HomeappModel.m in Sources */,
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				070C51B51DA935A000F42D25 /* AttachmentViewController.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
+				070C51C31DAA0F3200F42D25 /* SearchfieldModel.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */,
 				07B44B831D76DA860023214C /* ApplyModel.m in Sources */,
@@ -846,6 +879,7 @@
 				073A54DB1D7414800013DB67 /* ExtendappCell.m in Sources */,
 				073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */,
 				07F7C7401D812E9000A860EA /* WFListModel.m in Sources */,
+				070C51BB1DA9E7E800F42D25 /* SearchExtendappViewController.m in Sources */,
 				072C28901D6D903700EAFFAC /* MyViewController.m in Sources */,
 				0734DFC41DA4A3B90058B1A3 /* ErrorViewController.m in Sources */,
 				070C162F1D693CF800738BC7 /* main.m in Sources */,

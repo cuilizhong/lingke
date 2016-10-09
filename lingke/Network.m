@@ -120,6 +120,34 @@
 }
 
 
+- (instancetype)initWithURL:(NSString *)URL requestData:(NSData *)requestData requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail{
+    
+    self = [super init];
+    
+    if (self) {
+        
+        self.requestSuccess = requestSuccess;
+        
+        self.requestFail = requestFail;
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL]];
+        
+        [request setHTTPMethod:@"POST"];
+        
+        [request addValue: @"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        
+        [request setHTTPBody:requestData];
+        
+        [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+    }
+    
+    return self;
+
+    
+}
+
+
 
 - (instancetype)initWithURL:(NSString *)URL parameters:(NSDictionary *)parameters requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail{
     

@@ -93,7 +93,7 @@
     
     [super viewDidLoad];
     
-    [self downFileFromServer];
+//    [self downFileFromServer];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     

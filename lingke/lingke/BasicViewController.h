@@ -15,6 +15,8 @@
 #import "LocalData.h"
 #import "HomeFunctionModel.h"
 #import "MBProgressHUD.h"
+#import "UIScrollView+TouchEvent.h"
+
 
 
 @interface BasicViewController : UIViewController<MBProgressHUDDelegate>

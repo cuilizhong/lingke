@@ -17,6 +17,8 @@ typedef void(^RequestFail)(NSError *error);
 
 - (instancetype)initWithURL:(NSString *)URL parameters:(NSDictionary *)parameters requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail;
 
+- (instancetype)initWithURL:(NSString *)URL requestData:(NSData *)requestData requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail;
+
 //上传图片
 - (instancetype)initUploadImageWithURL:(NSString *)URL image:(NSData *)image requestSuccess:(RequestSuccess)requestSuccess requestFail:(RequestFail)requestFail;
 

@@ -16,6 +16,7 @@
 #import "MenusView.h"
 #import "DataIndexModel.h"
 #import "DataIndexViewController.h"
+#import "SearchExtendappViewController.h"
 
 @interface ExtendappViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -31,6 +32,12 @@
 @property(nonatomic,strong)MenusView *menusView;
 
 @property(nonatomic,strong)AppmenuModel *currentAppmenuModel;
+
+@property(nonatomic,strong)UIBarButtonItem *searchBarButton;
+
+@property(nonatomic,strong)UIBarButtonItem *applyBarButton;
+
+@property(nonatomic,strong)NSMutableArray *barButtonItems;
 
 @end
 
@@ -52,16 +59,36 @@
     
     self.menusArray = [[NSMutableArray alloc]init];
     
+    self.barButtonItems = [[NSMutableArray alloc]init];
+    
     [self handData];
     
     self.currentAppmenuModel = self.menusArray[0];
     
     if (self.applyAppmenuModel) {
         
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"申请" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction:)];
+        self.applyBarButton = [[UIBarButtonItem alloc]initWithTitle:@"申请" style:UIBarButtonItemStylePlain target:self action:@selector(applyBarButtonAction:)];
         
-        self.navigationItem.rightBarButtonItem = rightBarButton;
+        [self.barButtonItems addObject:self.applyBarButton];
+        
     }
+    
+    AppmenuModel *appmenuModel = self.menusArray[0];
+    
+    if ([appmenuModel.appurikind isEqualToString:@"HASDONE"] || [appmenuModel.appurikind isEqualToString:@"MYHASDONE"]) {
+        
+        self.searchBarButton = [[UIBarButtonItem alloc]initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(searchBarButtonAction:)];
+        
+        [self.barButtonItems addObject:self.searchBarButton];
+        
+    }
+    
+    if (self.barButtonItems.count>0) {
+        
+        self.navigationItem.rightBarButtonItems = self.barButtonItems;
+
+    }
+    
     
     NSMutableArray *menusTitleArray = [[NSMutableArray alloc]init];
     
@@ -79,6 +106,33 @@
             
             if ([appmenuModel.appmenuname isEqualToString:title]) {
                 
+                //判断显示搜索按钮
+                if ([appmenuModel.appurikind isEqualToString:@"HASDONE"] || [appmenuModel.appurikind isEqualToString:@"MYHASDONE"]) {
+                    //已办、我的申请
+                    if (![self.barButtonItems containsObject:self.searchBarButton]) {
+                        
+                        if (!self.searchBarButton) {
+                            
+                            self.searchBarButton = [[UIBarButtonItem alloc]initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(searchBarButtonAction:)];
+                        }
+                        
+                        [self.barButtonItems addObject:self.searchBarButton];
+                        
+                        self.navigationItem.rightBarButtonItems = self.barButtonItems;
+                    }
+                    
+                }else{
+                    
+                    if ([self.barButtonItems containsObject:self.searchBarButton]) {
+                        
+                        [self.barButtonItems removeObject:self.searchBarButton];
+                        
+                        self.navigationItem.rightBarButtonItems = self.barButtonItems;
+                    }
+                    
+                }
+                
+                //请求数据
                 weakself.currentAppmenuModel = appmenuModel;
                 
                 [weakself requestListDataWithAppmenuModel:appmenuModel];
@@ -127,7 +181,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)rightBarButtonAction:(UIBarButtonItem *)sender{
+- (void)applyBarButtonAction:(UIBarButtonItem *)sender{
     
     self.hidesBottomBarWhenPushed = YES;
     
@@ -141,6 +195,24 @@
     
     self.hidesBottomBarWhenPushed = YES;
 
+}
+
+- (void)searchBarButtonAction:(UIBarButtonItem *)sender{
+    
+    NSLog(@"搜索");
+    
+    SearchExtendappViewController *searchExtendappViewController = [[SearchExtendappViewController alloc]init];
+    
+    searchExtendappViewController.extendappModel = self.extendappModel;
+    
+    searchExtendappViewController.appmenuModel = self.currentAppmenuModel;
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:searchExtendappViewController animated:YES];
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
 }
 
 - (void)requestListDataWithAppmenuModel:(AppmenuModel*)appmenuModel{
@@ -254,7 +326,6 @@
 
         }
     }
-    
 }
 
 #pragma mark-UITableViewDelegate,UITableViewDataSource
