@@ -14,6 +14,8 @@
 
 #import "DataIndexViewController.h"
 
+#import "SearchMessageViewController.h"
+
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)NSMutableArray *messagekindsArray;
@@ -23,6 +25,8 @@
 @property(nonatomic,strong)NSMutableArray *messageContentsArray;
 
 @property(nonatomic,strong)UITableView *contentTableView;
+
+@property(nonatomic,strong)NSString *currentTitle;
 
 
 @end
@@ -35,12 +39,29 @@
     
     self.title = @"信息";
     
+    self.currentTitle = @"全部信息";
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    
     self.messagekindsArray = [[NSMutableArray alloc]init];
     
     self.messageContentsArray = [[NSMutableArray alloc]init];
+    
+    UIBarButtonItem *searchBarButton = [[UIBarButtonItem alloc]initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(searchBarButtonAction:)];
+    self.navigationItem.rightBarButtonItem = searchBarButton;
+}
+
+- (void)searchBarButtonAction:(UIBarButtonItem *)sender{
+
+    SearchMessageViewController *searchMessageViewController = [[SearchMessageViewController alloc]init];
+    
+    searchMessageViewController.kind = self.currentTitle;
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:searchMessageViewController animated:YES];
+    
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -109,6 +130,8 @@
             [weakself.messagekindsArray addObjectsFromArray:messagekindArray];
             
             weakself.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, weakself.view.frame.size.width,40) menusTitle:weakself.messagekindsArray selectedBlock:^(NSString *title) {
+                
+                weakself.currentTitle = title;
                 
                 [weakself requestMessageDataWithKind:title];
             }];

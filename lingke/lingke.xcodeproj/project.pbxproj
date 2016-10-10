@@ -32,6 +32,7 @@
 		070C51C31DAA0F3200F42D25 /* SearchfieldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C21DAA0F3200F42D25 /* SearchfieldModel.m */; };
 		070C51C61DAA281300F42D25 /* SearchDataindexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C51DAA281300F42D25 /* SearchDataindexModel.m */; };
 		070C51C91DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */; };
+		070C51CC1DAA426300F42D25 /* SearchMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51CB1DAA426300F42D25 /* SearchMessageViewController.m */; };
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
 		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
 		072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190771D72CB0D00EA832B /* NewsInfoModel.m */; };
@@ -165,6 +166,8 @@
 		070C51C51DAA281300F42D25 /* SearchDataindexModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDataindexModel.m; sourceTree = "<group>"; };
 		070C51C71DAA2E0000F42D25 /* SearchExtendappDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchExtendappDetailsViewController.h; sourceTree = "<group>"; };
 		070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchExtendappDetailsViewController.m; sourceTree = "<group>"; };
+		070C51CA1DAA426300F42D25 /* SearchMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMessageViewController.h; sourceTree = "<group>"; };
+		070C51CB1DAA426300F42D25 /* SearchMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMessageViewController.m; sourceTree = "<group>"; };
 		0721906A1D6F2B3400EA832B /* HttpInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpInterface.h; path = lingke/HttpInterface.h; sourceTree = "<group>"; };
 		072190701D7290BA00EA832B /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = lingke/XMLDictionary.h; sourceTree = "<group>"; };
 		072190711D7290BA00EA832B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = lingke/XMLDictionary.m; sourceTree = "<group>"; };
@@ -570,6 +573,8 @@
 			children = (
 				072C288B1D6D902800EAFFAC /* MessageViewController.h */,
 				072C288C1D6D902800EAFFAC /* MessageViewController.m */,
+				070C51CA1DAA426300F42D25 /* SearchMessageViewController.h */,
+				070C51CB1DAA426300F42D25 /* SearchMessageViewController.m */,
 				070C1A781D8015A200D6E726 /* MessageDetailsViewController.h */,
 				070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */,
 				070C1A751D800CEA00D6E726 /* MessageTableViewCell.h */,
@@ -857,6 +862,7 @@
 				07B90A411DA8D06400B759BA /* DataIndexViewController.m in Sources */,
 				0766ECE81D85978700D884F5 /* ZHScanView.m in Sources */,
 				07EE155A1D76B8AF00E5CE91 /* MailListViewController.m in Sources */,
+				070C51CC1DAA426300F42D25 /* SearchMessageViewController.m in Sources */,
 				072AAFC71D96871F0045F7DD /* Persion.m in Sources */,
 				0766ECEE1D85997800D884F5 /* ScanWebViewController.m in Sources */,
 				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
