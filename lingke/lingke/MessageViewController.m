@@ -11,10 +11,14 @@
 #import "MessageModel.h"
 #import "MessageTableViewCell.h"
 #import "MessageDetailsViewController.h"
+#import "MJRefresh.h"
 
 #import "DataIndexViewController.h"
 
 #import "SearchMessageViewController.h"
+
+static const NSInteger pagecount = 20;
+
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -28,6 +32,8 @@
 
 @property(nonatomic,strong)NSString *currentTitle;
 
+@property(nonatomic,assign)NSInteger pagestart;
+
 
 @end
 
@@ -40,6 +46,8 @@
     self.title = @"信息";
     
     self.currentTitle = @"全部信息";
+    
+    self.pagestart = 1;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 
@@ -131,6 +139,8 @@
             
             weakself.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, weakself.view.frame.size.width,40) menusTitle:weakself.messagekindsArray selectedBlock:^(NSString *title) {
                 
+                weakself.pagestart = 1;
+                
                 weakself.currentTitle = title;
                 
                 [weakself requestMessageDataWithKind:title];
@@ -143,6 +153,23 @@
             self.contentTableView.delegate = self;
             self.contentTableView.dataSource = self;
             [self.view addSubview:self.contentTableView];
+            
+            @weakify(self)
+            self.contentTableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
+                
+                weakself.pagestart = 1;
+                
+                [weakself requestMessageDataWithKind:weakself.currentTitle];
+                
+            }];
+            
+            self.contentTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+                
+                weakself.pagestart = weakself.pagestart+pagecount;
+                
+                [weakself requestMessageDataWithKind:weakself.currentTitle];
+                
+            }];
             
             [weakself requestMessageDataWithKind:@"ALL"];
             
@@ -177,7 +204,11 @@
     
     [self showHUD];
     
-    [self.messageContentsArray removeAllObjects];
+    if (self.pagestart == 1) {
+        
+        [self.messageContentsArray removeAllObjects];
+
+    }
     
     NSString *appcode = [HomeFunctionModel sharedInstance].messageAppModel.appcode;
     
@@ -186,6 +217,10 @@
     NSDictionary *data = @{
                            
                            @"kind":kind,
+                           
+                           @"pagestart":[NSString stringWithFormat:@"%ld",(long)self.pagestart],
+                           
+                           @"pagecount":[NSString stringWithFormat:@"%ld",(long)pagecount],
                            
                            };
     
@@ -211,6 +246,9 @@
     
     @weakify(self);
     [HttpsRequestManger sendHttpReqestWithUrl:appuri parameter:parameters requestSuccess:^(NSData *data) {
+        
+        [weakself.contentTableView.mj_footer endRefreshing];
+        [weakself.contentTableView.mj_header endRefreshing];
         
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
@@ -248,6 +286,9 @@
         
         
     } requestFail:^(NSError *error) {
+        
+        [weakself.contentTableView.mj_footer endRefreshing];
+        [weakself.contentTableView.mj_header endRefreshing];
         
         [weakself hiddenHUDWithMessage:RequestFailureMessage];
         

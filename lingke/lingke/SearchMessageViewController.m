@@ -288,6 +288,8 @@ static const NSInteger pagecount = 20;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     MessageModel *messageModel = self.dataArray[indexPath.row];
     
