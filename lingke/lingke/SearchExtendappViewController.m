@@ -14,6 +14,7 @@
 #import "SearchExtendappDetailsViewController.h"
 
 
+
 @interface SearchExtendappViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -58,155 +59,25 @@
 }
 
 - (void)startSearchAction:(UIBarButtonItem *)sender{
+    
     [self.view endEditing:YES];
-    //都没填写的话fieldvalue 传空的
     
-    [self searchRequest];
-}
-
-
-- (void)searchRequest{
-    
-    [self showHUD];
-    
-    NSMutableArray *searchfields = [[NSMutableArray alloc]init];
-    
-    for (SearchfieldModel *searchfieldModel in self.dataArray) {
+    if (self.dataArray.count<1) {
         
-        NSDictionary *searchfieldDic = @{
-                                         
-                                         @"fieldname":searchfieldModel.fieldname,
-                                         
-                                         @"fieldvalue":searchfieldModel.fieldvalue.length>0?searchfieldModel.fieldvalue:@""
-                                         
-                                         };
+        [self hiddenHUDWithMessage:@"暂无查询条件"];
         
-        [searchfields addObject:searchfieldDic];
-        
-    }
-
-    //请求
-    GDataXMLElement *rootElement = [GDataXMLNode elementWithName:@"maps"];
-    
-    GDataXMLElement *tokenElement = [GDataXMLNode elementWithName:@"token" stringValue:[LocalData getToken]];
-    
-    GDataXMLElement *requestdataElement = [GDataXMLNode elementWithName:@"requestdata"];
-
-    GDataXMLElement *appcodeElement = [GDataXMLNode elementWithName:@"appcode" stringValue:self.extendappModel.appcode];
-    
-    GDataXMLElement *methodElement = [GDataXMLNode elementWithName:@"method" stringValue:[NSString stringWithFormat:@"%@LIST",self.appmenuModel.appurikind]];
-    GDataXMLElement *dataElement = [GDataXMLNode elementWithName:@"data"];
-    
-    [requestdataElement addChild:appcodeElement];
-    [requestdataElement addChild:methodElement];
-    
-    
-    GDataXMLElement *formidElement = [GDataXMLNode elementWithName:@"formid" stringValue:self.appmenuModel.formid];
-    GDataXMLElement *pagestartElement = [GDataXMLNode elementWithName:@"pagestart" stringValue:@"1"];
-    GDataXMLElement *pagecountElement = [GDataXMLNode elementWithName:@"pagecount" stringValue:@"10"];
-    GDataXMLElement *searchfieldsElement = [GDataXMLNode elementWithName:@"searchfields"];
-    
-    [dataElement addChild:formidElement];
-    [dataElement addChild:pagestartElement];
-    [dataElement addChild:pagecountElement];
-
-
-    for (NSDictionary *dic in searchfields) {
-        
-        GDataXMLElement *searchfieldElement = [GDataXMLNode elementWithName:@"searchfield"];
-        
-        GDataXMLElement *fieldnameElement = [GDataXMLNode elementWithName:@"fieldname" stringValue:dic[@"fieldname"]];
-        
-        GDataXMLElement *fieldvalueElement = [GDataXMLNode elementWithName:@"fieldvalue" stringValue:dic[@"fieldvalue"]];
-        
-        [searchfieldElement addChild:fieldnameElement];
-        
-        [searchfieldElement addChild:fieldvalueElement];
-        
-        [searchfieldsElement addChild:searchfieldElement];
-
+        return;
     }
     
-    [dataElement addChild:searchfieldsElement];
+    SearchExtendappDetailsViewController *searchExtendappDetailsViewController = [[SearchExtendappDetailsViewController alloc]init];
     
-    [requestdataElement addChild:dataElement];
-
-
+    searchExtendappDetailsViewController.dataArray = self.dataArray;
     
-    [rootElement addChild:tokenElement];
+    searchExtendappDetailsViewController.appmenuModel = self.appmenuModel;
     
-    [rootElement addChild:requestdataElement];
-
-    GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithRootElement:rootElement];
+    searchExtendappDetailsViewController.extendappModel = self.extendappModel;
     
-    NSData *data =  [document XMLData];
-    
-    NSString *xmlStr = [[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"请求的参数 = %@",xmlStr);
-
-    @weakify(self);
-    
-    [[Network alloc]initWithURL:self.appmenuModel.appuri requestData:data requestSuccess:^(NSData *data) {
-        
-        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
-        
-        NSLog(@"xmlDoc = %@",xmlDoc);
-        
-        if ([xmlDoc[@"statuscode"]isEqualToString:@"0"]) {
-            
-            [weakself hiddenHUD];
-            
-            NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
-            
-            NSDictionary *dataindexsDic = responsedataDic[@"dataindexs"];
-            
-            NSArray *dataindexsArray = dataindexsDic[@"dataindex"];
-            
-            [weakself.searchDataArray removeAllObjects];
-            
-            for (NSDictionary *dic in dataindexsArray) {
-                
-                SearchDataindexModel *searchDataindexModel = [[SearchDataindexModel alloc]init];
-                
-                [searchDataindexModel setValueFromDic:dic];
-                
-                [weakself.searchDataArray addObject:searchDataindexModel];
-                
-            }
-            
-            //
-            SearchExtendappDetailsViewController *searchExtendappDetailsViewController = [[SearchExtendappDetailsViewController alloc]init];
-            
-            searchExtendappDetailsViewController.searchDataArray = self.searchDataArray;
-            
-            [weakself.navigationController pushViewController:searchExtendappDetailsViewController animated:NO];
-            
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
-            
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
-                
-                [weakself searchRequest];
-                
-            } expireLoginFailureBlock:^(NSString *errorMessage) {
-                
-                [weakself hiddenHUDWithMessage:errorMessage];
-                
-            }];
-            
-            
-        }else{
-            
-            [weakself hiddenHUDWithMessage:xmlDoc[@"statusmsg"]];
-            
-        }
-        
-        
-    } requestFail:^(NSError *error) {
-        
-        [weakself hiddenHUDWithMessage:RequestFailureMessage];
-
-    }];
+    [self.navigationController pushViewController:searchExtendappDetailsViewController animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

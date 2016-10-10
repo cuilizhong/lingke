@@ -18,6 +18,9 @@
 #import "DataIndexViewController.h"
 #import "SearchExtendappViewController.h"
 
+static const NSInteger pagecount = 20;
+
+
 @interface ExtendappViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *contentTableView;
@@ -39,6 +42,14 @@
 
 @property(nonatomic,strong)NSMutableArray *barButtonItems;
 
+@property(nonatomic,assign)NSInteger pagestart;
+
+@property(nonatomic,strong)UIWebView *webView;
+
+//如果只有一个，那么menuHeight = 0
+@property(nonatomic,assign)CGFloat menuHeight;
+
+
 @end
 
 @implementation ExtendappViewController
@@ -50,6 +61,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = self.extendappModel.appname;
+    
+    self.pagestart = 1;
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftButtonAction:)];
     self.navigationItem.leftBarButtonItem = barButtonItem;
@@ -97,11 +110,19 @@
         [menusTitleArray addObject:appmenuModel.appmenuname];
     }
     
+    if (self.menusArray.count>1) {
+        self.menuHeight = 40.0f;
+    }else{
+        
+        self.menuHeight = 0;
+    }
+    
     @weakify(self);
-    self.menusView = [[MenusView  alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40) menusTitle:menusTitleArray selectedBlock:^(NSString *title) {
+    self.menusView = [[MenusView  alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.menuHeight) menusTitle:menusTitleArray selectedBlock:^(NSString *title) {
         
         NSLog(@"title = %@",title);
         
+        //控制搜索按钮显示问题
         for (AppmenuModel *appmenuModel in weakself.menusArray) {
             
             if ([appmenuModel.appmenuname isEqualToString:title]) {
@@ -135,37 +156,97 @@
                 //请求数据
                 weakself.currentAppmenuModel = appmenuModel;
                 
-                [weakself requestListDataWithAppmenuModel:appmenuModel];
+                if (![appmenuModel.appurikind isEqualToString:@"URL"]) {
+                    
+                    [weakself requestListDataWithAppmenuModel:appmenuModel];
+
+                }
+                
             }
             
         }
+        
+        //判断是显示webview还是tableview
+        for (AppmenuModel *appmenuModel in weakself.menusArray) {
+            
+            if ([appmenuModel.appmenuname isEqualToString:title]) {
+                
+                if ([appmenuModel.appurikind isEqualToString:@"URL"]) {
+                    
+                    weakself.contentTableView.hidden = YES;
+                    weakself.webView.hidden = NO;
+                    
+                    NSString *token = [LocalData getToken];
+                    
+                        NSString *url = [NSString stringWithFormat:@"%@?token=%@",appmenuModel.appuri,token];
+
+                    
+                    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]
+                                             
+                                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                             
+                                                              timeoutInterval:60];
+                    
+                    [self.webView loadRequest:request];
+                    [self.webView scalesPageToFit];
+                    
+                }else{
+                    
+                    weakself.contentTableView.hidden = NO;
+                    weakself.webView.hidden = YES;
+                }
+            }
+            
+        }
+
 
         
     }];
     [self.view addSubview:self.menusView];
     
-    self.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,40,self.view.frame.size.width,self.view.frame.size.height-40-64) style:UITableViewStylePlain];
+    self.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.menuHeight,self.view.frame.size.width,self.view.frame.size.height-self.menuHeight-64) style:UITableViewStylePlain];
     self.contentTableView.delegate = self;
     self.contentTableView.dataSource = self;
     [self.view addSubview:self.contentTableView];
     
     [self hiddenSurplusLine:self.contentTableView];
     
+    
     self.contentTableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
+        
+        weakself.pagestart = 1;
         
         [weakself requestListDataWithAppmenuModel:weakself.currentAppmenuModel];
         
     }];
     
-//    self.contentTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
-//        
-//        [weakself requestListDataWithAppmenuModel:weakself.currentAppmenuModel];
-//
-//        [self.contentTableView.mj_footer endRefreshing];
-//
-//    }];
+    self.contentTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        
+   
+        
+        weakself.pagestart = weakself.pagestart + pagecount;
+        
+        [weakself requestListDataWithAppmenuModel:weakself.currentAppmenuModel];
+
+    }];
     
+    self.webView = [[UIWebView alloc]init];
+    self.webView.frame = self.contentTableView.frame;
+    [self.view addSubview:self.webView];
     
+    //判断第一个是显示webview还是tableview
+    AppmenuModel *firstAppmenuModel = self.menusArray[0];
+    
+    if ([firstAppmenuModel.appurikind isEqualToString:@"URL"]) {
+        
+        self.contentTableView.hidden = YES;
+        self.webView.hidden = NO;
+        
+    }else{
+        
+        self.contentTableView.hidden = NO;
+        self.webView.hidden = YES;
+    }
     
 }
 
@@ -219,11 +300,27 @@
     
     [self showHUD];
     
-    NSDictionary *dataDic = @{
-                              
-                              @"formid":appmenuModel.formid,
-                              
-                              };
+    NSDictionary *dataDic;
+    
+    if ([appmenuModel.appurikind isEqualToString:@"MYHASDONE"] || [appmenuModel.appurikind isEqualToString:@"HASDONE"]) {
+        
+        dataDic = @{
+                    
+                    @"formid":appmenuModel.formid,
+                    
+                    @"pagestart":[NSString stringWithFormat:@"%ld",(long)self.pagestart],
+                    
+                    @"pagecount":[NSString stringWithFormat:@"%ld",(long)pagecount]
+                    
+                    };
+    }else{
+        
+        dataDic = @{
+                    
+                    @"formid":appmenuModel.formid,
+                    
+                    };
+    }
     
     NSDictionary *requestNewsdata = @{
                                       
@@ -248,6 +345,7 @@
     [HttpsRequestManger sendHttpReqestWithUrl:appmenuModel.appuri parameter:parameters requestSuccess:^(NSData *data) {
         
         [weakself.contentTableView.mj_header endRefreshing];
+        [weakself.contentTableView.mj_footer endRefreshing];
         
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
@@ -305,6 +403,9 @@
         }
         
     } requestFail:^(NSError *error) {
+        
+        [weakself.contentTableView.mj_header endRefreshing];
+        [weakself.contentTableView.mj_footer endRefreshing];
         
         [weakself hiddenHUDWithMessage:RequestFailureMessage];
         
@@ -372,13 +473,6 @@
     dataIndexViewController.title = dataIndexModel.title;
     
     dataIndexViewController.url = dataIndexModel.openurl;
-    
-    
-//    ExtendappDetailViewController *extendappDetailViewController = [[ExtendappDetailViewController alloc]init];
-//    
-//    DataIndexModel *dataIndexModel = self.contentsArray[indexPath.row];
-//    
-//    extendappDetailViewController.dataIndexModel = dataIndexModel;
     
     [self.navigationController pushViewController:dataIndexViewController animated:YES];
     

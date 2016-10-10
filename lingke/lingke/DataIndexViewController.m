@@ -26,11 +26,11 @@
     
     NSString *token = [LocalData getToken];
     
-//    NSString *url = [NSString stringWithFormat:@"%@?token=%@",self.dataIndexModel.openurl,token];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?token=%@",self.url,token];
     
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.url]
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlStr]
                              
                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
                              

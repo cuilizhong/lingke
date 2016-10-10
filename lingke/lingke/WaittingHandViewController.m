@@ -501,11 +501,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         viewController.title = dataIndexModel.title;
         
-        NSString *token = [LocalData getToken];
-        
-        NSString *url = [NSString stringWithFormat:@"%@?token=%@",dataIndexModel.openurl,token];
-        
-        viewController.url = url;
+        viewController.url = dataIndexModel.openurl;
         
 //        viewController.dataIndexModel = dataIndexModel;
         
