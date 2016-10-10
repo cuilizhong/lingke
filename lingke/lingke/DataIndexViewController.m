@@ -117,7 +117,17 @@
 #pragma mark-下载附件
 - (void)downloadAttachment:(NSString *)parameter{
     
+    NSLog(@"parameter = %@",parameter);
     
+    NSDictionary *parameterDic = [NSString dictionaryWithJsonString:parameter];
+    
+    NSString *url = parameterDic[@"url"];
+    
+    NSString *filename = parameterDic[@"filename"];
+    
+    NSLog(@"url = %@",url);
+    
+    [self downFileFromServer:url filename:filename];
 }
 
 #pragma mark-设置已读
@@ -125,6 +135,57 @@
     
     
 }
+
+- (void)downFileFromServer:(NSString *)urlStr filename:(NSString *)filename{
+    
+    //urlStr转码
+    urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURL *URL = [NSURL URLWithString:urlStr];
+    
+    //默认配置
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    //AFN3.0+基于封住URLSession的句柄
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    //请求
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    //下载Task操作
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        // @property int64_t totalUnitCount;     需要下载文件的总大小
+        // @property int64_t completedUnitCount; 当前已经下载的大小
+        
+        // 给Progress添加监听 KVO
+        NSLog(@"%f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
+        
+        // 回到主队列刷新UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 设置进度条的百分比
+        });
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //- block的返回值, 要求返回一个URL, 返回的这个URL就是文件的位置的路径
+        NSString *filepath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        
+        filepath = [NSString stringWithFormat:@"%@/%@",filepath,filename];
+        
+        NSLog(@"附件filepath = %@",filepath);
+        
+        return [NSURL fileURLWithPath:filepath];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        //设置下载完成操作
+        
+    }];
+    
+    [downloadTask resume];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
