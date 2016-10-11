@@ -14,7 +14,6 @@
 #import "TutorialsViewController.h"
 #import "LoginViewController.h"
 #import "MainTabBarController.h"
-
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -336,6 +335,48 @@
     }
 }
 
+#pragma mark-增加附件
+- (void)insertFilename:(NSString *)filename filepath:(NSString *)filepath{
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    //1. 获得context
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    //2. 找到实体结构,并生成一个实体对象
+    /*
+     
+     NSEntityDescription实体描述，也就是表的结构
+     
+     参数1：表名字
+     
+     参数2:实例化的对象由谁来管理，就是context
+     
+     */
+    NSManagedObject *Attachment = [NSEntityDescription insertNewObjectForEntityForName:@"Attachment" inManagedObjectContext:context];
+    
+    //3. 设置实体属性值
+    [Attachment setValue:filename forKey:@"filename"];
+    
+    [Attachment setValue:filepath forKey:@"filepath"];
+    
+    //4. 调用context,保存实体,如果没有成功，返回错误信息
+    NSError *error;
+    
+    if ([context save:&error]) {
+        
+        NSLog(@"save ok");
+        
+    }    else    {
+        
+        NSLog(@"%@",error);
+        
+    }
+}
+
+
+
+
 #pragma mark-删
 - (void)deletePersion:(PersionModel *)persionModel{
     
@@ -352,6 +393,40 @@
     
     //构造查询条件，相当于where子句
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"pid=%@",persionModel.pid];
+    
+    //把查询条件放进去
+    [request setPredicate:predicate];
+    
+    //执行查询
+    NSManagedObject *obj = [[context executeFetchRequest:request error:nil] lastObject];
+    
+    //删除
+    if (obj) {
+        
+        [context deleteObject:obj];
+        
+        [context save:nil];
+        
+    }
+    
+}
+
+#pragma mark-删除附件
+- (void)deleteFilename:(NSString *)filename{
+    
+    //删除 先找到，然后删除
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    NSEntityDescription *stu = [NSEntityDescription entityForName:@"Attachment" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [NSFetchRequest new];
+    
+    [request setEntity:stu];
+    
+    //构造查询条件，相当于where子句
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"filename=%@",filename];
     
     //把查询条件放进去
     [request setPredicate:predicate];
@@ -455,6 +530,39 @@
     
 }
 
+#pragma mark-添加附件
+- (void)updateFilename:(NSString *)filename filepath:(NSString *)filepath{
+    
+    //更新 (从数据库找到-->更新)
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    NSEntityDescription *stu = [NSEntityDescription entityForName:@"Attachment" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [NSFetchRequest new];
+    
+    [request setEntity:stu];
+    
+    //构造查询条件，相当于where子句
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"filename=%@",filename];
+    
+    //把查询条件放进去
+    [request setPredicate:predicate];
+    
+    //执行查询
+    NSArray *studentAry = [context executeFetchRequest:request error:nil];
+    
+    if (studentAry.count>0)    {
+        
+    }else{
+        
+        [self insertFilename:filename filepath:filepath];
+    }
+    
+}
+
+
 #pragma mar-查
 - (NSMutableArray <PersionModel *>*)selectAll{
     
@@ -524,6 +632,42 @@
         persionModel.headurl = [enity valueForKey:@"headurl"];
         
         [array addObject:persionModel];
+    }
+    
+    return array;
+}
+
+#pragma mar-查附件
+- (NSMutableArray <NSDictionary *>*)selectAllAttachments{
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
+    NSEntityDescription *AttachmentDescription = [NSEntityDescription entityForName:@"Attachment" inManagedObjectContext:context];
+    
+    //构造查询对象
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:AttachmentDescription];
+    
+    //执行查询，返回结果集
+    NSArray *resultAry = [context executeFetchRequest:request error:nil];
+    
+    //遍历结果集
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    
+    for (NSManagedObject *enity in resultAry) {
+        
+        NSDictionary *attachment = @{
+                                     
+                                     @"filepath":[enity valueForKey:@"filepath"],
+                                     
+                                     @"filename":[enity valueForKey:@"filename"]
+                                     
+                                     };
+        
+        [array addObject:attachment];
     }
     
     return array;

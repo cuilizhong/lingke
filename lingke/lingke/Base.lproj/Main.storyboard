@@ -263,6 +263,39 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="aZB-ez-OPN">
+                                        <rect key="frame" x="0.0" y="310" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aZB-ez-OPN" id="tXA-nR-Tsl">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的附件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9H6-Xf-TQb">
+                                                    <rect key="frame" x="63" y="14" width="216" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="kaS-hy-l3I"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar_Item_1" translatesAutoresizingMaskIntoConstraints="NO" id="K2L-U8-S0y">
+                                                    <rect key="frame" x="20" y="7" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="Zk2-jM-R7G"/>
+                                                        <constraint firstAttribute="width" constant="35" id="diR-0D-9CT"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="9H6-Xf-TQb" secondAttribute="trailing" constant="8" id="0aI-2B-Sl3"/>
+                                                <constraint firstItem="9H6-Xf-TQb" firstAttribute="centerY" secondItem="tXA-nR-Tsl" secondAttribute="centerY" id="16r-Ce-UPU"/>
+                                                <constraint firstItem="9H6-Xf-TQb" firstAttribute="leading" secondItem="K2L-U8-S0y" secondAttribute="trailing" constant="8" id="gPc-Co-don"/>
+                                                <constraint firstItem="K2L-U8-S0y" firstAttribute="leading" secondItem="tXA-nR-Tsl" secondAttribute="leading" constant="20" id="nGg-xb-Ebf"/>
+                                                <constraint firstItem="K2L-U8-S0y" firstAttribute="centerY" secondItem="tXA-nR-Tsl" secondAttribute="centerY" id="rdS-yN-hBc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -930,7 +963,7 @@
                                                                         <constraint firstAttribute="height" constant="21" id="bBb-RG-1We"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -965,7 +998,7 @@
                                                                         <constraint firstAttribute="height" constant="21" id="Nhv-qp-DVR"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>

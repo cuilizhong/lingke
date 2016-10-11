@@ -33,6 +33,8 @@
 		070C51C61DAA281300F42D25 /* SearchDataindexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C51DAA281300F42D25 /* SearchDataindexModel.m */; };
 		070C51C91DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */; };
 		070C51CC1DAA426300F42D25 /* SearchMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51CB1DAA426300F42D25 /* SearchMessageViewController.m */; };
+		072133601DAB85FF00C072EA /* Attachment+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721335D1DAB85FF00C072EA /* Attachment+CoreDataProperties.m */; };
+		072133611DAB85FF00C072EA /* Attachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721335F1DAB85FF00C072EA /* Attachment.m */; };
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
 		072190751D72972200EA832B /* HomeappModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190741D72972100EA832B /* HomeappModel.m */; };
 		072190781D72CB0D00EA832B /* NewsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190771D72CB0D00EA832B /* NewsInfoModel.m */; };
@@ -168,6 +170,10 @@
 		070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchExtendappDetailsViewController.m; sourceTree = "<group>"; };
 		070C51CA1DAA426300F42D25 /* SearchMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMessageViewController.h; sourceTree = "<group>"; };
 		070C51CB1DAA426300F42D25 /* SearchMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMessageViewController.m; sourceTree = "<group>"; };
+		0721335C1DAB85FF00C072EA /* Attachment+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Attachment+CoreDataProperties.h"; path = "lingke/Attachment+CoreDataProperties.h"; sourceTree = "<group>"; };
+		0721335D1DAB85FF00C072EA /* Attachment+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Attachment+CoreDataProperties.m"; path = "lingke/Attachment+CoreDataProperties.m"; sourceTree = "<group>"; };
+		0721335E1DAB85FF00C072EA /* Attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attachment.h; path = lingke/Attachment.h; sourceTree = "<group>"; };
+		0721335F1DAB85FF00C072EA /* Attachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Attachment.m; path = lingke/Attachment.m; sourceTree = "<group>"; };
 		0721906A1D6F2B3400EA832B /* HttpInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HttpInterface.h; path = lingke/HttpInterface.h; sourceTree = "<group>"; };
 		072190701D7290BA00EA832B /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = lingke/XMLDictionary.h; sourceTree = "<group>"; };
 		072190711D7290BA00EA832B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = lingke/XMLDictionary.m; sourceTree = "<group>"; };
@@ -323,6 +329,10 @@
 				072AAFC31D96871F0045F7DD /* Persion+CoreDataProperties.m */,
 				072AAFC41D96871F0045F7DD /* Persion.h */,
 				072AAFC51D96871F0045F7DD /* Persion.m */,
+				0721335C1DAB85FF00C072EA /* Attachment+CoreDataProperties.h */,
+				0721335D1DAB85FF00C072EA /* Attachment+CoreDataProperties.m */,
+				0721335E1DAB85FF00C072EA /* Attachment.h */,
+				0721335F1DAB85FF00C072EA /* Attachment.m */,
 				0782BCD41D9681ED0077B4D2 /* CoreDataDemo.xcdatamodeld */,
 				0782BC7D1D9674B20077B4D2 /* FMDB */,
 				070C1A6E1D7EC23600D6E726 /* CustomView */,
@@ -876,6 +886,7 @@
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				070C51B51DA935A000F42D25 /* AttachmentViewController.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
+				072133611DAB85FF00C072EA /* Attachment.m in Sources */,
 				070C51C31DAA0F3200F42D25 /* SearchfieldModel.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,
 				0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */,
@@ -900,6 +911,7 @@
 				073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */,
 				0766ECEB1D8597CC00D884F5 /* ScanViewController.m in Sources */,
 				072C28781D6D789100EAFFAC /* UIScrollView+TouchEvent.m in Sources */,
+				072133601DAB85FF00C072EA /* Attachment+CoreDataProperties.m in Sources */,
 				075C4A951D8B889D0028EF84 /* UIViewController+viewControllerHelp.m in Sources */,
 				07B44B861D76DE2B0023214C /* LZPopOverMenu.m in Sources */,
 				070C1A771D800CEA00D6E726 /* MessageTableViewCell.m in Sources */,

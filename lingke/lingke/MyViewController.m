@@ -8,6 +8,7 @@
 
 #import "MyViewController.h"
 #import "UIImageView+WebCache.h"
+#import "AttachmentViewController.h"
 
 @interface MyViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
@@ -36,9 +37,20 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 4) {
+    if (indexPath.row == 3) {
         
         //帮助
+        
+    }else if (indexPath.row == 4){
+        
+        //我的附件
+        AttachmentViewController *attachmentViewController = [[AttachmentViewController alloc]init];
+        
+        self.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:attachmentViewController animated:YES];
+        
+        self.hidesBottomBarWhenPushed = NO;
         
     }
     

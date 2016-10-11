@@ -8,6 +8,8 @@
 
 #import "DataIndexViewController.h"
 #import "NSString+FormatConvert.h"
+#import "AppDelegate.h"
+#import "Attachment.h"
 
 @interface DataIndexViewController ()<UIWebViewDelegate>
 
@@ -152,6 +154,8 @@
     //请求
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
+    __block NSString *filepath;
+    
     //下载Task操作
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         
@@ -169,9 +173,10 @@
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         
         //- block的返回值, 要求返回一个URL, 返回的这个URL就是文件的位置的路径
-        NSString *filepath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        filepath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         
         filepath = [NSString stringWithFormat:@"%@/%@",filepath,filename];
+        
         
         NSLog(@"附件filepath = %@",filepath);
         
@@ -179,6 +184,11 @@
         
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         //设置下载完成操作
+        
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        
+        [delegate updateFilename:filename filepath:filepath];
+        
         
     }];
     

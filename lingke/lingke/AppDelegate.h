@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "PersionModel.h"
+#import "Attachment.h"
+
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -31,6 +33,15 @@
 - (void)update:(PersionModel *)persionModel;
 
 - (NSMutableArray <PersionModel *>*)selectAll;
+
+
+- (void)insertFilename:(NSString *)filename filepath:(NSString *)filepath;
+
+- (void)deleteFilename:(NSString *)filename;
+
+- (void)updateFilename:(NSString *)filename filepath:(NSString *)filepath;
+
+- (NSMutableArray <NSDictionary *>*)selectAllAttachments;
 
 @end
 

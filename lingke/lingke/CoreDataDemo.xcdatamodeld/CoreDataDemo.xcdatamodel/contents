@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+    <entity name="Attachment" representedClassName="Attachment" syncable="YES">
+        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="filepath" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Persion" representedClassName="Persion" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deptname" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,5 +29,6 @@
     </entity>
     <elements>
         <element name="Persion" positionX="-54" positionY="-9" width="128" height="360"/>
+        <element name="Attachment" positionX="-54" positionY="144" width="128" height="75"/>
     </elements>
 </model>

@@ -7,6 +7,9 @@
 //
 
 #import "AttachmentViewController.h"
+#import "AppDelegate.h"
+#import "PreviewFileViewController.h"
+
 
 @interface AttachmentViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,7 +29,9 @@
     
     self.title = @"附件";
     
-    self.dataArray = [[NSMutableArray alloc]init];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+
+    self.dataArray = [delegate selectAllAttachments];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -69,9 +74,9 @@
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     
-    NSString *title = self.dataArray[indexPath.row];
+    NSDictionary *attachment = self.dataArray[indexPath.row];
     
-    cell.textLabel.text = title;
+    cell.textLabel.text = attachment[@"filename"];
     
     return cell;
 }
@@ -85,7 +90,17 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSDictionary *attachment = self.dataArray[indexPath.row];
+    
+    NSString *filepath = attachment[@"filepath"];
+    
     //查看文件
+    PreviewFileViewController *previewFileViewController = [[PreviewFileViewController alloc]init];
+    previewFileViewController.filepath = filepath;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:previewFileViewController animated:YES];
+    self.hidesBottomBarWhenPushed = YES;
+
 }
 
 
