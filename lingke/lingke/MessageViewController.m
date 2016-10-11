@@ -128,14 +128,22 @@ static const NSInteger pagecount = 20;
             
             NSDictionary *messagekindsDic = responsedataDic[@"messagekinds"];
             
-            NSArray *messagekindArray = messagekindsDic[@"messagekind"];
+            id messagekindArray = messagekindsDic[@"messagekind"];
             
             
             [weakself.messagekindsArray removeAllObjects];
             
             [weakself.messagekindsArray addObject:@"全部信息"];
             
-            [weakself.messagekindsArray addObjectsFromArray:messagekindArray];
+            if ([messagekindArray isKindOfClass:[NSArray class]]) {
+                
+                [weakself.messagekindsArray addObjectsFromArray:messagekindArray];
+
+            }else if ([messagekindArray isKindOfClass:[NSString class]]){
+                
+                [weakself.messagekindsArray addObject:messagekindArray];
+
+            }
             
             weakself.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, weakself.view.frame.size.width,40) menusTitle:weakself.messagekindsArray selectedBlock:^(NSString *title) {
                 
@@ -262,16 +270,30 @@ static const NSInteger pagecount = 20;
             
             NSMutableDictionary *messagesDic = responsedataDic[@"messages"];
             
-            NSArray *messageArray = messagesDic[@"message"];
+            id messageArray = messagesDic[@"message"];
             
-            for (NSDictionary *dic in messageArray) {
+            if ([messageArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in messageArray) {
+                    
+                    MessageModel *messageModel = [[MessageModel alloc]init];
+                    
+                    [messageModel setValueFromDic:dic];
+                    
+                    [self.messageContentsArray addObject:messageModel];
+                }
+                
+                
+            }else if([messageArray isKindOfClass:[NSDictionary class]]){
                 
                 MessageModel *messageModel = [[MessageModel alloc]init];
                 
-                [messageModel setValueFromDic:dic];
+                [messageModel setValueFromDic:messageArray];
                 
                 [self.messageContentsArray addObject:messageModel];
             }
+            
+            
             
             [self.contentTableView reloadData];
 

@@ -18,7 +18,6 @@
 #import "ApplyModel.h"
 #import "LZPopOverMenu.h"
 #import "FastApplyViewController.h"
-#import "XMLConverter.h"
 
 @interface HomepageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -102,17 +101,6 @@
     @weakify(self);
     [HttpsRequestManger sendHttpReqestWithUrl:[LocalData getAppcenter] parameter:parameters requestSuccess:^(NSData *data) {
         
-        
-        [XMLConverter convertXMLData:data completion:^(BOOL success, NSMutableDictionary *dictionary, NSError *error) {
-            
-            NSLog(@"dictionary = %@",dictionary);
-
-        }];
-        
-
-        
-        
-        
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
         if ([[xmlDoc objectForKey:@"statuscode"]isEqualToString:@"0"]) {
@@ -125,18 +113,61 @@
             //获取新闻数据
             NSDictionary *homeappDic = [responseDic objectForKey:@"homeapp"];
             
-            NSArray *appArray = [homeappDic objectForKey:@"app"];
+            id appArray = [homeappDic objectForKey:@"app"];
             
+            [weakself.homeappArray removeAllObjects];
+
+            if ([appArray isKindOfClass:[NSArray class]]) {
+                
 #pragma mark-主功能
-            for (NSDictionary *dic in appArray) {
+                for (NSDictionary *dic in appArray) {
+                    
+                    HomeappModel *homeappModel = [[HomeappModel alloc]init];
+                    
+                    [homeappModel setValueFromDic:dic];
+                    
+                    [weakself.homeappArray addObject:homeappModel];
+                    
+                    NSString *appurikindKey = [dic objectForKey:@"appurikind"];
+                    
+                    if ([appurikindKey isEqualToString:@"HOMENEWS"]) {
+                        
+                        //首页新闻
+                        [HomeFunctionModel sharedInstance].newsAppModel = homeappModel;
+                        
+                    }else if([appurikindKey isEqualToString:@"APPLY"]){
+                        
+                        //快速流程接口
+                        [HomeFunctionModel sharedInstance].applyAppModel = homeappModel;
+                        
+                    }else if ([appurikindKey isEqualToString:@"ORG"]){
+                        //通讯录
+                        [HomeFunctionModel sharedInstance].orgAppModel = homeappModel;
+                        
+                    }else if ([appurikindKey isEqualToString:@"HOMETODO"]){
+                        //待办
+                        [HomeFunctionModel sharedInstance].homeTODOAppModel = homeappModel;
+                        
+                    }else if ([appurikindKey isEqualToString:@"MESSAGE"]){
+                        //信息
+                        [HomeFunctionModel sharedInstance].messageAppModel = homeappModel;
+                        
+                    }else if ([appurikindKey isEqualToString:@"SCAN"]){
+                        //扫描
+                        [HomeFunctionModel sharedInstance].scanAppModel = homeappModel;
+                        
+                    }
+                }
+                
+            }else if ([appArray isKindOfClass:[NSDictionary class]]){
                 
                 HomeappModel *homeappModel = [[HomeappModel alloc]init];
                 
-                [homeappModel setValueFromDic:dic];
+                [homeappModel setValueFromDic:appArray];
                 
                 [weakself.homeappArray addObject:homeappModel];
                 
-                NSString *appurikindKey = [dic objectForKey:@"appurikind"];
+                NSString *appurikindKey = [appArray objectForKey:@"appurikind"];
                 
                 if ([appurikindKey isEqualToString:@"HOMENEWS"]) {
                     
@@ -165,39 +196,100 @@
                     [HomeFunctionModel sharedInstance].scanAppModel = homeappModel;
                     
                 }
+                
             }
+            
+
             
             
 #pragma mark-获取扩展功
             NSDictionary *extendappDic = [responseDic objectForKey:@"extendapp"];
             
-            NSArray *extendappArray = extendappDic[@"app"];
+            id extendappArray = extendappDic[@"app"];
             
-            for (NSDictionary *dic in extendappArray) {
+            if ([extendappArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in extendappArray) {
+                    
+                    ExtendappModel *extendappModel = [[ExtendappModel alloc]init];
+                    
+                    [extendappModel setValueFromDic:dic];
+                    
+                    NSDictionary *appmenusDic = dic[@"appmenus"];
+                    
+                    id appmenuArray = appmenusDic[@"appmenu"];
+                    
+                    if ([appmenuArray isKindOfClass:[NSArray class]]) {
+                        
+                        for (NSDictionary *tmpDic in appmenuArray) {
+                            
+                            AppmenuModel *appmenuModel = [[AppmenuModel alloc]init];
+                            
+                            [appmenuModel setValueFromDic:tmpDic];
+                            
+                            [extendappModel.appmenu addObject:appmenuModel];
+                            
+                        }
+                        
+                    }else if ([appmenuArray isKindOfClass:[NSDictionary class]]){
+                        
+                        AppmenuModel *appmenuModel = [[AppmenuModel alloc]init];
+                        
+                        [appmenuModel setValueFromDic:appmenuArray];
+                        
+                        [extendappModel.appmenu addObject:appmenuModel];
+                        
+                    }
+                    
+                    [extendappModel.appmenus setObject:extendappModel.appmenu forKey:@"appmenus"];
+                    
+                    [weakself.extendappDataArray addObject:extendappModel];
+                    
+                }
+
+                
+            }else if([extendappArray isKindOfClass:[NSDictionary class]]){
+            
                 
                 ExtendappModel *extendappModel = [[ExtendappModel alloc]init];
                 
-                [extendappModel setValueFromDic:dic];
+                [extendappModel setValueFromDic:extendappArray];
                 
-                NSDictionary *appmenusDic = dic[@"appmenus"];
+                NSDictionary *appmenusDic = extendappArray[@"appmenus"];
                 
-                NSArray *appmenuArray = appmenusDic[@"appmenu"];
+                id appmenuArray = appmenusDic[@"appmenu"];
                 
-                for (NSDictionary *tmpDic in appmenuArray) {
+                if ([appmenuArray isKindOfClass:[NSArray class]]) {
+                    
+                    for (NSDictionary *tmpDic in appmenuArray) {
+                        
+                        AppmenuModel *appmenuModel = [[AppmenuModel alloc]init];
+                        
+                        [appmenuModel setValueFromDic:tmpDic];
+                        
+                        [extendappModel.appmenu addObject:appmenuModel];
+                        
+                    }
+                    
+                }else if ([appmenuArray isKindOfClass:[NSDictionary class]]){
                     
                     AppmenuModel *appmenuModel = [[AppmenuModel alloc]init];
                     
-                    [appmenuModel setValueFromDic:tmpDic];
+                    [appmenuModel setValueFromDic:appmenuArray];
                     
                     [extendappModel.appmenu addObject:appmenuModel];
                     
                 }
                 
+                
                 [extendappModel.appmenus setObject:extendappModel.appmenu forKey:@"appmenus"];
                 
                 [weakself.extendappDataArray addObject:extendappModel];
-                
+            
             }
+            
+            
+            
             
             [weakself requestNews];
             
@@ -273,15 +365,27 @@
             
             NSDictionary *newsinfosDic = responseDic[@"newsinfos"];
             
-            NSArray *newsinfoArray = newsinfosDic[@"newsinfo"];
+            id newsinfoArray = newsinfosDic[@"newsinfo"];
             
             [weakself.newsInfoArray removeAllObjects];
             
-            for (NSDictionary *dic in newsinfoArray) {
+            if ([newsinfoArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in newsinfoArray) {
+                    
+                    NewsInfoModel *newsInfoModel = [[NewsInfoModel alloc]init];
+                    
+                    [newsInfoModel setValueFromDic:dic];
+                    
+                    [weakself.newsInfoArray addObject:newsInfoModel];
+                }
+                
+            }else if ([newsinfoArray isKindOfClass:[NSDictionary class]]){
+                
                 
                 NewsInfoModel *newsInfoModel = [[NewsInfoModel alloc]init];
                 
-                [newsInfoModel setValueFromDic:dic];
+                [newsInfoModel setValueFromDic:newsinfoArray];
                 
                 [weakself.newsInfoArray addObject:newsInfoModel];
             }
@@ -343,17 +447,30 @@
             
             NSDictionary *applylistDic = [responsedataDic objectForKey:@"applylist"];
             
-            NSArray *applyArray = [applylistDic objectForKey:@"apply"];
+            id applyArray = [applylistDic objectForKey:@"apply"];
             
             [weakself.applyArray removeAllObjects];
             
-            for (NSDictionary *dic in applyArray) {
+            if ([applyArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in applyArray) {
+                    
+                    ApplyModel *applyModel = [[ApplyModel alloc]init];
+                    
+                    applyModel.applyname = dic[@"applyname"];
+                    
+                    applyModel.formid = dic[@"formid"];
+                    
+                    [weakself.applyArray addObject:applyModel];
+                }
+
+            }else if ([applyArray isKindOfClass:[NSDictionary class]]){
                 
                 ApplyModel *applyModel = [[ApplyModel alloc]init];
                 
-                applyModel.applyname = dic[@"applyname"];
+                applyModel.applyname = applyArray[@"applyname"];
                 
-                applyModel.formid = dic[@"formid"];
+                applyModel.formid = applyArray[@"formid"];
                 
                 [weakself.applyArray addObject:applyModel];
             }

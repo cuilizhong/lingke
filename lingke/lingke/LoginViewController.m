@@ -184,6 +184,11 @@
             
             NSDictionary *unitinfoDic = responsedataDic[@"unitinfo"];
             
+            /*
+             unitcode = LJTEST01;
+             unitname = "\U7eff\U5efa\U79fb\U52a8\U5f00\U53d1";
+             */
+            
             NSString *iphost = serverinfoDic[@"iphost"];
             
             NSString *ssl = serverinfoDic[@"ssl"];

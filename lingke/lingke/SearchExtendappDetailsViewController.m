@@ -178,7 +178,7 @@ static const NSInteger pagecount = 20;
             
             NSDictionary *dataindexsDic = responsedataDic[@"dataindexs"];
             
-            NSArray *dataindexsArray = dataindexsDic[@"dataindex"];
+            id dataindexsArray = dataindexsDic[@"dataindex"];
             
             if (weakself.pagestart == 1) {
                 
@@ -186,11 +186,23 @@ static const NSInteger pagecount = 20;
 
             }
             
-            for (NSDictionary *dic in dataindexsArray) {
+            if ([dataindexsArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in dataindexsArray) {
+                    
+                    SearchDataindexModel *searchDataindexModel = [[SearchDataindexModel alloc]init];
+                    
+                    [searchDataindexModel setValueFromDic:dic];
+                    
+                    [weakself.searchDataArray addObject:searchDataindexModel];
+                    
+                }
+                
+            }else if ([dataindexsArray isKindOfClass:[NSDictionary class]]){
                 
                 SearchDataindexModel *searchDataindexModel = [[SearchDataindexModel alloc]init];
                 
-                [searchDataindexModel setValueFromDic:dic];
+                [searchDataindexModel setValueFromDic:dataindexsArray];
                 
                 [weakself.searchDataArray addObject:searchDataindexModel];
                 

@@ -151,18 +151,31 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             
             NSDictionary *dataindexsDic = responsedataDic[@"dataindexs"];
             
-            NSArray *dataindexArray = dataindexsDic[@"dataindex"];
+            id dataindexArray = dataindexsDic[@"dataindex"];
             
             [weakself.dataIndexModelArray removeAllObjects];
             
-            for (NSDictionary *dic in dataindexArray) {
+            if ([dataindexArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in dataindexArray) {
+                    
+                    DataIndexModel *dataIndexModel = [[DataIndexModel alloc]init];
+                    
+                    [dataIndexModel setValueFromDic:dic];
+                    
+                    [weakself.dataIndexModelArray addObject:dataIndexModel];
+                }
+                
+            }else if ([dataindexArray isKindOfClass:[NSDictionary class]]){
                 
                 DataIndexModel *dataIndexModel = [[DataIndexModel alloc]init];
                 
-                [dataIndexModel setValueFromDic:dic];
+                [dataIndexModel setValueFromDic:dataindexArray];
                 
                 [weakself.dataIndexModelArray addObject:dataIndexModel];
             }
+            
+            
             
             if (weakself.WFListModelArray.count>0) {
                 
@@ -242,19 +255,32 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             
             NSDictionary *wflistDic = responsedataDic[@"wflist"];
             
-            NSArray *wfArray = wflistDic[@"wf"];
+            id wfArray = wflistDic[@"wf"];
             
             [weakself.WFListModelArray removeAllObjects];
             
-            for (NSDictionary *dic in wfArray) {
+            if ([wfArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in wfArray) {
+                    
+                    WFListModel *wFListModel = [[WFListModel alloc]init];
+                    
+                    [wFListModel setValueFromDic:dic];
+                    
+                    [weakself.WFListModelArray addObject:wFListModel];
+                    
+                }
+                
+            }else if ([wfArray isKindOfClass:[NSDictionary class]]){
                 
                 WFListModel *wFListModel = [[WFListModel alloc]init];
                 
-                [wFListModel setValueFromDic:dic];
+                [wFListModel setValueFromDic:wfArray];
                 
                 [weakself.WFListModelArray addObject:wFListModel];
-                
             }
+            
+            
             
             //处理分类
             if (weakself.dataIndexModelArray.count>0) {

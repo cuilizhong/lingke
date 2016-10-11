@@ -58,8 +58,6 @@
 		072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28861D6D901200EAFFAC /* WaittingHandViewController.m */; };
 		072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288C1D6D902800EAFFAC /* MessageViewController.m */; };
 		072C28901D6D903700EAFFAC /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288F1D6D903700EAFFAC /* MyViewController.m */; };
-		0731B7351DAC924000D9A646 /* XMLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0731B7321DAC924000D9A646 /* XMLConverter.m */; };
-		0731B7361DAC924000D9A646 /* XMLConverterExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 0731B7341DAC924000D9A646 /* XMLConverterExample.m */; };
 		0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */; };
 		0734DFC41DA4A3B90058B1A3 /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DFC31DA4A3B90058B1A3 /* ErrorViewController.m */; };
 		073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D01D73DC090013DB67 /* NewInfoImageView.m */; };
@@ -220,10 +218,6 @@
 		072C288C1D6D902800EAFFAC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		072C288E1D6D903700EAFFAC /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		072C288F1D6D903700EAFFAC /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
-		0731B7311DAC924000D9A646 /* XMLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLConverter.h; sourceTree = "<group>"; };
-		0731B7321DAC924000D9A646 /* XMLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLConverter.m; sourceTree = "<group>"; };
-		0731B7331DAC924000D9A646 /* XMLConverterExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLConverterExample.h; sourceTree = "<group>"; };
-		0731B7341DAC924000D9A646 /* XMLConverterExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLConverterExample.m; sourceTree = "<group>"; };
 		0734DF7A1DA32C8A0058B1A3 /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
 		0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
 		0734DFC21DA4A3B90058B1A3 /* ErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorViewController.h; sourceTree = "<group>"; };
@@ -331,7 +325,6 @@
 		070C16211D693CF800738BC7 = {
 			isa = PBXGroup;
 			children = (
-				0731B7301DAC924000D9A646 /* XMLConverter */,
 				072AAFC21D96871F0045F7DD /* Persion+CoreDataProperties.h */,
 				072AAFC31D96871F0045F7DD /* Persion+CoreDataProperties.m */,
 				072AAFC41D96871F0045F7DD /* Persion.h */,
@@ -619,18 +612,6 @@
 			name = My;
 			sourceTree = "<group>";
 		};
-		0731B7301DAC924000D9A646 /* XMLConverter */ = {
-			isa = PBXGroup;
-			children = (
-				0731B7311DAC924000D9A646 /* XMLConverter.h */,
-				0731B7321DAC924000D9A646 /* XMLConverter.m */,
-				0731B7331DAC924000D9A646 /* XMLConverterExample.h */,
-				0731B7341DAC924000D9A646 /* XMLConverterExample.m */,
-			);
-			name = XMLConverter;
-			path = lingke/XMLConverter;
-			sourceTree = "<group>";
-		};
 		0766ECDD1D85978700D884F5 /* ZHScanView */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,7 +847,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				070C51C61DAA281300F42D25 /* SearchDataindexModel.m in Sources */,
-				0731B7351DAC924000D9A646 /* XMLConverter.m in Sources */,
 				07B90A441DA8D6F400B759BA /* NSString+FormatConvert.m in Sources */,
 				072C28671D6C9A4700EAFFAC /* TutorialsViewController.m in Sources */,
 				072190851D73158600EA832B /* ExtendappModel.m in Sources */,
@@ -906,7 +886,6 @@
 				072C28731D6D6B6E00EAFFAC /* LoginTableViewCell.m in Sources */,
 				070C51B51DA935A000F42D25 /* AttachmentViewController.m in Sources */,
 				072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */,
-				0731B7361DAC924000D9A646 /* XMLConverterExample.m in Sources */,
 				072133611DAB85FF00C072EA /* Attachment.m in Sources */,
 				070C51C31DAA0F3200F42D25 /* SearchfieldModel.m in Sources */,
 				070C16321D693CF800738BC7 /* AppDelegate.m in Sources */,

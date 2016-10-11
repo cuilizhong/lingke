@@ -9,6 +9,10 @@
 #import "ScanViewController.h"
 #import "ZHScanView.h"
 #import "ScanWebViewController.h"
+#import "Network.h"
+#import "DataIndexViewController.h"
+#import "GDataXMLNode.h"
+
 
 @interface ScanViewController ()
 
@@ -32,13 +36,162 @@
     @weakify(self);
     [self.scanf outPutResult:^(NSString *result) {
         
+        
+        
         NSLog(@"%@",result);
         
-        ScanWebViewController *scanWebViewController = [[ScanWebViewController alloc]init];
-        scanWebViewController.url = result;
-        [weakself.navigationController pushViewController:scanWebViewController animated:YES];
+        [weakself submit:result];
+        
         
     }];
+}
+
+- (void)submit:(NSString *)result{
+    
+    HomeappModel *homeappModel = [HomeFunctionModel sharedInstance].scanAppModel;
+        
+//    NSDictionary *data = @{
+//                           
+//                           @"lng":@"",
+//                           
+//                           @"lat":@"",
+//                           
+//                           };
+//    
+//    NSDictionary *scan = @{
+//                           
+//                           @"content":result,
+//                           
+//                           @"gps":data
+//                           
+//                           };
+//    
+//    
+//    NSDictionary *requestdata = @{
+//                                
+//                                  @"appcode":homeappModel.appcode,
+//                                  
+//                                  @"method":@"SCAN",
+//                                  
+//                                  @"scan":scan
+//                                  
+//                                  };
+//    
+//    NSDictionary *parameters = @{
+//                                 
+//                                 @"token":[LocalData getToken],
+//                                 
+//                                 @"requestdata":requestdata,
+//                                 
+//                                 };
+    
+    
+    
+    
+    GDataXMLElement *rootElement = [GDataXMLNode elementWithName:@"maps"];
+    
+    GDataXMLElement *tokenElement = [GDataXMLNode elementWithName:@"token" stringValue:[LocalData getToken]];
+    
+    GDataXMLElement *requestdataElement = [GDataXMLNode elementWithName:@"requestdata"];
+    
+    GDataXMLElement *appcodeElement = [GDataXMLNode elementWithName:@"appcode" stringValue:homeappModel.appcode];
+    GDataXMLElement *methodElement = [GDataXMLNode elementWithName:@"method" stringValue:@"SCAN"];
+    
+    GDataXMLElement *scanElement = [GDataXMLNode elementWithName:@"scan"];
+    
+    [requestdataElement addChild:appcodeElement];
+    [requestdataElement addChild:methodElement];
+    
+    
+    GDataXMLElement *contentElement = [GDataXMLNode elementWithName:@"content" stringValue:result];
+    
+    GDataXMLElement *gpsElement = [GDataXMLNode elementWithName:@"gps"];
+    
+    GDataXMLElement *lngElement = [GDataXMLNode elementWithName:@"lng" stringValue:@""];
+    
+    GDataXMLElement *latElement = [GDataXMLNode elementWithName:@"lat" stringValue:@""];
+    
+    [gpsElement addChild:lngElement];
+    [gpsElement addChild:latElement];
+
+    [scanElement addChild:contentElement];
+    [scanElement addChild:gpsElement];
+
+    [requestdataElement addChild:scanElement];
+    
+    
+    [rootElement addChild:tokenElement];
+    
+    [rootElement addChild:requestdataElement];
+    
+    GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithRootElement:rootElement];
+    
+    NSData *data =  [document XMLData];
+    
+    NSString *xmlStr = [[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"请求的参数 = %@",xmlStr);
+    
+    
+    @weakify(self);
+    [[Network alloc]initWithURL:homeappModel.appuri requestData:data requestSuccess:^(NSData *data) {
+        
+        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+        
+        NSLog(@"xmlDoc = %@",xmlDoc);
+        
+        NSString *statuscode = xmlDoc[@"statuscode"];
+        
+        if ([statuscode isEqualToString:@"0"]) {
+            
+            [weakself hiddenHUD];
+            
+            NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
+            
+            NSDictionary *sanDic = responsedataDic[@"scan"];
+            
+            DataIndexViewController *dataIndexViewController = [[DataIndexViewController alloc]init];
+            
+            dataIndexViewController.url = sanDic[@"openurl"];
+            
+            dataIndexViewController.title = sanDic[@"retcontent"];
+            
+            weakself.hidesBottomBarWhenPushed = YES;
+            
+            [weakself.navigationController pushViewController:dataIndexViewController animated:YES];
+            
+            weakself.hidesBottomBarWhenPushed = NO;
+
+            
+        }else if([statuscode isEqualToString:TokenInvalidCode]){
+            
+            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+                
+                [weakself submit:result];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+
+            }];
+            
+        }else{
+            
+            NSString *errorMessage = xmlDoc[@"statusmsg"];
+            
+            NSLog(@"errorMessage = %@",errorMessage);
+            
+            [weakself hiddenHUDWithMessage:errorMessage];
+            
+        }
+
+        
+    } requestFail:^(NSError *error) {
+        
+        [weakself hiddenHUDWithMessage:@"提交失败"];
+
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -50,7 +203,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

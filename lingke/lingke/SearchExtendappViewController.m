@@ -131,18 +131,29 @@
             
             NSDictionary *searchfieldsDic = responsedataDic[@"searchfields"];
             
-            NSArray *searchfieldsArray = searchfieldsDic[@"searchfield"];
+            id searchfieldsArray = searchfieldsDic[@"searchfield"];
             
             [weakself.dataArray removeAllObjects];
             
-            for (NSDictionary *dic in searchfieldsArray) {
+            if ([searchfieldsArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in searchfieldsArray) {
+                    
+                    SearchfieldModel *searchfieldModel = [[SearchfieldModel alloc]init];
+                    
+                    [searchfieldModel setValueFromDic:dic];
+                    
+                    [weakself.dataArray addObject:searchfieldModel];
+                    
+                }
+                
+            }else if ([searchfieldsArray isKindOfClass:[NSDictionary class]]){
                 
                 SearchfieldModel *searchfieldModel = [[SearchfieldModel alloc]init];
                 
-                [searchfieldModel setValueFromDic:dic];
+                [searchfieldModel setValueFromDic:searchfieldsArray];
                 
                 [weakself.dataArray addObject:searchfieldModel];
-                
             }
             
             [weakself.tableView reloadData];

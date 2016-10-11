@@ -152,17 +152,29 @@ static const NSInteger pagecount = 20;
             
             NSMutableDictionary *messagesDic = responsedataDic[@"messages"];
             
-            NSArray *messageArray = messagesDic[@"message"];
+            id messageArray = messagesDic[@"message"];
             
-            for (NSDictionary *dic in messageArray) {
+            if ([messageArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in messageArray) {
+                    
+                    MessageModel *messageModel = [[MessageModel alloc]init];
+                    
+                    [messageModel setValueFromDic:dic];
+                    
+                    [weakself.dataArray addObject:messageModel];
+                }
+                
+            }else if ([messageArray isKindOfClass:[NSDictionary class]]){
                 
                 MessageModel *messageModel = [[MessageModel alloc]init];
                 
-                [messageModel setValueFromDic:dic];
+                [messageModel setValueFromDic:messageArray];
                 
                 [weakself.dataArray addObject:messageModel];
+
             }
-            
+                        
             [weakself.tableView reloadData];
             
         }else{

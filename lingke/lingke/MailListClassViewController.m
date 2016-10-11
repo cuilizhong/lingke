@@ -274,15 +274,27 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             //数据获取成功
             NSDictionary *persons = responsedata[@"persons"];
             
-            NSArray *personArray = persons[@"person"];
+            id personArray = persons[@"person"];
             
             [weakself.persionModelArray removeAllObjects];
             
-            for (NSDictionary *dic in personArray) {
+            if ([personArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in personArray) {
+                    
+                    PersionModel *persion = [[PersionModel alloc]init];
+                    
+                    [persion setValueFromDic:dic];
+                    
+                    [weakself.persionModelArray addObject:persion];
+                    
+                }
+                
+            }else if ([personArray isKindOfClass:[NSDictionary class]]){
                 
                 PersionModel *persion = [[PersionModel alloc]init];
                 
-                [persion setValueFromDic:dic];
+                [persion setValueFromDic:personArray];
                 
                 [weakself.persionModelArray addObject:persion];
                 

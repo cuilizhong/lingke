@@ -254,7 +254,28 @@ static const NSInteger pagecount = 20;
     
     [super viewWillAppear:animated];
     
-    [self.contentTableView.mj_header beginRefreshing];
+    if ([self.currentAppmenuModel.appurikind isEqualToString:@"URL"]) {
+        
+        NSString *token = [LocalData getToken];
+        
+        NSString *url = [NSString stringWithFormat:@"%@?token=%@",self.currentAppmenuModel.appuri,token];
+        
+        
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]
+                                 
+                                                      cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                 
+                                                  timeoutInterval:60];
+        
+        [self.webView loadRequest:request];
+        [self.webView scalesPageToFit];
+        
+    }else{
+        
+        [self.contentTableView.mj_header beginRefreshing];
+  
+    }
+
 }
 
 - (void)leftButtonAction:(UIButton *)sender{

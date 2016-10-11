@@ -189,15 +189,64 @@
             //数据获取成功
             NSDictionary *persons = responsedata[@"persons"];
             
-            NSArray *personArray = persons[@"person"];
+            id personArray = persons[@"person"];
             
             [weakself.dataArray removeAllObjects];
             
-            for (NSDictionary *dic in personArray) {
+            if ([personArray isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *dic in personArray) {
+                    
+                    PersionModel *persion = [[PersionModel alloc]init];
+                    
+                    [persion setValueFromDic:dic];
+                    
+                    switch (self.mailListState) {
+                            
+                        case MailListState_Friend:{
+                            
+                            if (persion.isfriend.integerValue == 1) {
+                                
+                                [weakself.dataArray addObject:persion];
+                                
+                            }
+                            
+                        }
+                            
+                            break;
+                            
+                        case MailListState_Grounp:{
+                            
+                            if (persion.ismygroup.integerValue == 1) {
+                                
+                                [weakself.dataArray addObject:persion];
+                            }
+                            
+                        }
+                            
+                            break;
+                            
+                        case MailListState_Follow:{
+                            
+                            if (persion.isattention.integerValue == 1) {
+                                
+                                [weakself.dataArray addObject:persion];
+                            }
+                            
+                        }
+                            
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+                
+            }else if ([personArray isKindOfClass:[NSDictionary class]]){
                 
                 PersionModel *persion = [[PersionModel alloc]init];
                 
-                [persion setValueFromDic:dic];
+                [persion setValueFromDic:personArray];
                 
                 switch (self.mailListState) {
                         
@@ -206,7 +255,7 @@
                         if (persion.isfriend.integerValue == 1) {
                             
                             [weakself.dataArray addObject:persion];
-
+                            
                         }
                         
                     }
@@ -238,7 +287,10 @@
                     default:
                         break;
                 }
+                
             }
+            
+            
             
             if (weakself.dataArray.count>0) {
                 
