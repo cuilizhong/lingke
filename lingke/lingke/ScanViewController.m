@@ -13,11 +13,16 @@
 #import "DataIndexViewController.h"
 #import "GDataXMLNode.h"
 
+#import "LocationManger.h"
+
 
 @interface ScanViewController ()
 
 @property(nonatomic,strong)ZHScanView *scanf;
 
+@property(nonatomic,copy)NSString *lng;
+
+@property(nonatomic,copy)NSString *lat;
 @end
 
 @implementation ScanViewController
@@ -25,6 +30,9 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    self.lng = @"";
+    self.lat = @"";
     
     
     self.scanf = [ZHScanView scanViewWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49)];
@@ -36,58 +44,41 @@
     @weakify(self);
     [self.scanf outPutResult:^(NSString *result) {
         
-        
-        
         NSLog(@"%@",result);
         
         [weakself submit:result];
         
-        
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [self.scanf scanAgain];
+    
+    @weakify(self);
+    [[LocationManger sharedInstance]startUpdatingLocationWithUpdateLocationSuccessBlock:^(CLLocation *location) {
+        
+        weakself.lng = [NSString stringWithFormat:@"%lf",location.coordinate.longitude];
+        
+        weakself.lat = [NSString stringWithFormat:@"%lf",location.coordinate.latitude];
+        
+    } updateLocationFailBlock:^(NSError *error) {
+        
+        [weakself hiddenHUDWithMessage:@"定位失败"];
+        
+    }];
+
+}
+
+
 - (void)submit:(NSString *)result{
     
+    [self showHUDWithMessage:@"提交中"];
+    
     HomeappModel *homeappModel = [HomeFunctionModel sharedInstance].scanAppModel;
-        
-//    NSDictionary *data = @{
-//                           
-//                           @"lng":@"",
-//                           
-//                           @"lat":@"",
-//                           
-//                           };
-//    
-//    NSDictionary *scan = @{
-//                           
-//                           @"content":result,
-//                           
-//                           @"gps":data
-//                           
-//                           };
-//    
-//    
-//    NSDictionary *requestdata = @{
-//                                
-//                                  @"appcode":homeappModel.appcode,
-//                                  
-//                                  @"method":@"SCAN",
-//                                  
-//                                  @"scan":scan
-//                                  
-//                                  };
-//    
-//    NSDictionary *parameters = @{
-//                                 
-//                                 @"token":[LocalData getToken],
-//                                 
-//                                 @"requestdata":requestdata,
-//                                 
-//                                 };
-    
-    
-    
-    
+
     GDataXMLElement *rootElement = [GDataXMLNode elementWithName:@"maps"];
     
     GDataXMLElement *tokenElement = [GDataXMLNode elementWithName:@"token" stringValue:[LocalData getToken]];
@@ -107,9 +98,9 @@
     
     GDataXMLElement *gpsElement = [GDataXMLNode elementWithName:@"gps"];
     
-    GDataXMLElement *lngElement = [GDataXMLNode elementWithName:@"lng" stringValue:@""];
+    GDataXMLElement *lngElement = [GDataXMLNode elementWithName:@"lng" stringValue:self.lng];
     
-    GDataXMLElement *latElement = [GDataXMLNode elementWithName:@"lat" stringValue:@""];
+    GDataXMLElement *latElement = [GDataXMLNode elementWithName:@"lat" stringValue:self.lat];
     
     [gpsElement addChild:lngElement];
     [gpsElement addChild:latElement];
@@ -194,25 +185,11 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    
-    [super viewWillAppear: animated];
-    
-    [self.scanf scanAgain];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

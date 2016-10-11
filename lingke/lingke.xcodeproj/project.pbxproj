@@ -58,6 +58,7 @@
 		072C28871D6D901200EAFFAC /* WaittingHandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C28861D6D901200EAFFAC /* WaittingHandViewController.m */; };
 		072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288C1D6D902800EAFFAC /* MessageViewController.m */; };
 		072C28901D6D903700EAFFAC /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072C288F1D6D903700EAFFAC /* MyViewController.m */; };
+		0731B7391DACE26700D9A646 /* LocationManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0731B7381DACE26700D9A646 /* LocationManger.m */; };
 		0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */; };
 		0734DFC41DA4A3B90058B1A3 /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DFC31DA4A3B90058B1A3 /* ErrorViewController.m */; };
 		073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D01D73DC090013DB67 /* NewInfoImageView.m */; };
@@ -218,6 +219,8 @@
 		072C288C1D6D902800EAFFAC /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		072C288E1D6D903700EAFFAC /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		072C288F1D6D903700EAFFAC /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		0731B7371DACE26700D9A646 /* LocationManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationManger.h; path = lingke/LocationManger.h; sourceTree = "<group>"; };
+		0731B7381DACE26700D9A646 /* LocationManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManger.m; path = lingke/LocationManger.m; sourceTree = "<group>"; };
 		0734DF7A1DA32C8A0058B1A3 /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
 		0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
 		0734DFC21DA4A3B90058B1A3 /* ErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorViewController.h; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 		070C16211D693CF800738BC7 = {
 			isa = PBXGroup;
 			children = (
+				0731B7371DACE26700D9A646 /* LocationManger.h */,
+				0731B7381DACE26700D9A646 /* LocationManger.m */,
 				072AAFC21D96871F0045F7DD /* Persion+CoreDataProperties.h */,
 				072AAFC31D96871F0045F7DD /* Persion+CoreDataProperties.m */,
 				072AAFC41D96871F0045F7DD /* Persion.h */,
@@ -868,6 +873,7 @@
 				07B44B8D1D77D33C0023214C /* MailListTableViewCell.m in Sources */,
 				07EE15541D7677F300E5CE91 /* ExtendappDetailViewController.m in Sources */,
 				072190721D7290BA00EA832B /* XMLDictionary.m in Sources */,
+				0731B7391DACE26700D9A646 /* LocationManger.m in Sources */,
 				0782BCD61D9681ED0077B4D2 /* CoreDataDemo.xcdatamodeld in Sources */,
 				07B90A411DA8D06400B759BA /* DataIndexViewController.m in Sources */,
 				0766ECE81D85978700D884F5 /* ZHScanView.m in Sources */,

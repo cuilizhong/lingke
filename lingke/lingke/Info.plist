@@ -48,5 +48,7 @@
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>工作易</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
 </dict>
 </plist>
