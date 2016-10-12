@@ -31,6 +31,8 @@
 
 @property(nonatomic,strong)UITableView *tableView;
 
+@property(nonatomic,assign)BOOL isHasApply;
+
 @end
 
 @implementation HomepageViewController
@@ -136,6 +138,8 @@
                         [HomeFunctionModel sharedInstance].newsAppModel = homeappModel;
                         
                     }else if([appurikindKey isEqualToString:@"APPLY"]){
+                        
+                        weakself.isHasApply = NO;
                         
                         //快速流程接口
                         [HomeFunctionModel sharedInstance].applyAppModel = homeappModel;
@@ -393,10 +397,19 @@
             //设置新闻
             [weakself.tableView reloadData];
             
-            if (weakself.applyArray.count>0) {
-                //所有的请求完成
+            if (weakself.isHasApply) {
+                
+                if (weakself.applyArray.count>0) {
+                    [weakself hiddenHUD];
+
+                }
+            }else{
+                
                 [weakself hiddenHUD];
+
             }
+            
+            
             
         }else{
             //获取数据失败
@@ -417,8 +430,13 @@
 #pragma mark-请求快速申请列表
 - (void)requestWFApplyList{
     
+    
     HomeappModel *homeappModel = [HomeFunctionModel sharedInstance].applyAppModel;
 
+    if (!homeappModel) {
+        
+        return;
+    }
     
     NSDictionary *requestdata = @{
                                         @"appcode":homeappModel.appcode,
@@ -582,6 +600,13 @@
 }
 
 - (void)rightButtonAction:(id)sender{
+    
+    if (self.applyArray.count<1) {
+        
+        [self hiddenHUDWithMessage:@"暂无该功能"];
+        
+        return;
+    }
     
     //弹出列表
     NSMutableArray *titlesArray = [[NSMutableArray alloc]init];
