@@ -31,7 +31,6 @@
 + (void)upload:(NSString *)name filename:(NSString *)filename mimeType:(NSString *)mimeType data:(NSData *)data parmas:(NSDictionary *)params url:(NSString *)url{
     
       // 文件上传
-//     NSURL *url = [NSURL URLWithString:@"http://192.168.1.200:8080/YYServer/upload"];
      NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
      request.HTTPMethod = @"POST";
     
@@ -84,7 +83,6 @@
                 
                 NSLog(@"xmlDoc = %@",xmlDoc);
                 
-//                        NSLog(@"%@", dict);
                 
                     } else {
                         

@@ -11,6 +11,9 @@
 #import "AppDelegate.h"
 #import "UIImage+Compression.h"
 
+#import "AFNetworking.h"
+#import "GDataXMLNode.h"
+
 
 @interface MailDetailsViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -57,6 +60,12 @@
 
 
 @property (nonatomic,assign)BOOL isSaveSuccessful;
+
+
+/**
+ *  判断是否做了修改，用于返回的时候提示用户 是否需要保存
+ */
+@property (nonatomic,assign)BOOL isModify;
 
 @end
 
@@ -119,13 +128,41 @@
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)sender{
     
-    if (self.persion) {
+    if (self.isModify) {
         
-        [self insertPersionToLocal];
-
+        @weakify(self);
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定放弃更改吗？" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        
+        UIAlertAction *backAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           
+            [weakself.navigationController popViewControllerAnimated:YES];
+            
+        }];
+        
+        [alertController addAction:cancel];
+        
+        [alertController addAction:backAction];
+        
+        [self presentViewController:alertController animated:YES completion:^{
+            
+        }];
+        
+    }else{
+        
+        if (self.persion) {
+            //更新数据库
+            [self insertPersionToLocal];
+            
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
     }
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark-赋值
@@ -644,9 +681,9 @@
     //得到图片
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    self.headImageView.image = [UIImage imageWithImageSimple:image scaledToSize:CGSizeMake(300, 300)];
+//    self.headImageView.image = [UIImage imageWithImageSimple:image scaledToSize:CGSizeMake(300, 300)];
     
-    self.headImageData = UIImageJPEGRepresentation(self.headImageView.image, 0.1);
+    self.headImageData = UIImageJPEGRepresentation(image, 0.1);
     
     @weakify(self);
     [self dismissViewControllerAnimated:YES completion:^{
@@ -677,8 +714,10 @@
     }
 }
 
-
+#pragma mark-上传头像
 - (void)upload{
+    
+    [self showHUDWithMessage:@"上传中，请稍后"];
     
     NSString *token = [LocalData getToken];
     
@@ -686,20 +725,81 @@
     
     URL = [NSString stringWithFormat:@"%@/dataapi/attach/upload?token=%@",URL,token];
     
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     
-    [Network upload:@"test" filename:@"testt" mimeType:@"application/octet-stream" data:self.headImageData parmas:nil url:URL];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
     
-//    [[Network alloc]initUploadImageWithURL:URL image:self.headImageData requestSuccess:^(NSData *data) {
-//        
-//        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
-//        
-//        NSLog(@"xmlDoc = %@",xmlDoc);
-//        
-//        
-//    } requestFail:^(NSError *error) {
-//        
-//        NSLog(@"上传失败");
-//    }];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [session.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    
+    @weakify(self);
+    [session POST:URL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSDate *nowDate = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        dateFormatter.dateFormat = @"yyyy_MM_dd_HH_mm_ss";
+        NSString *dateStr = [dateFormatter stringFromDate:nowDate];
+        
+        NSString *fileName = [NSString stringWithFormat:@"%@.png",dateStr];
+        
+        [formData appendPartWithFileData:weakself.headImageData name:@"headImage" fileName:fileName mimeType:@"application/octet-stream"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"uploadProgress = %@",uploadProgress);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:responseObject];
+        
+        NSLog(@"xmlDoc = %@",xmlDoc);
+        
+        if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
+            
+            [weakself hiddenHUDWithMessage:@"上传成功"];
+            
+            NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
+            
+            NSDictionary *attachDic = responsedataDic[@"attach"];
+            
+            NSString *url = attachDic[@"url"];
+            
+            NSString *headId = attachDic[@"id"];
+            
+            [weakself.headImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                
+            }];
+            
+            weakself.persion.headid = headId;
+            
+        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+            
+            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+                
+                [weakself update];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:RequestFailureMessage];
+                
+            }];
+            
+        }else{
+            
+            [weakself hiddenHUDWithMessage:xmlDoc[@"statusmsg"]];
+            
+        }
+
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"上传失败");
+        
+        [weakself hiddenHUDWithMessage:@"头像上传失败"];
+
+    }];
 }
 
 @end

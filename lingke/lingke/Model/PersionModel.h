@@ -20,6 +20,10 @@
 
 @property(nonatomic,copy)NSString *groupname;
 
+@property(nonatomic,copy)NSString *headid;
+
+@property(nonatomic,copy)NSString *headurl;
+
 @property(nonatomic,copy)NSString *info1;
 
 @property(nonatomic,copy)NSString *info2;
@@ -33,19 +37,16 @@
 @property(nonatomic,copy)NSString *ismygroup;
 @property(nonatomic,copy)NSString *kind;
 @property(nonatomic,copy)NSString *mobile;
+
 @property(nonatomic,copy)NSString *orgname;
 @property(nonatomic,copy)NSString *phone;
 @property(nonatomic,copy)NSString *pid;
-@property(nonatomic,copy)NSString *rolename;
-@property(nonatomic,copy)NSString *updatetime;
-@property(nonatomic,copy)NSString *username;
-@property(nonatomic,copy)NSString *headurl;
-
 @property(nonatomic,copy)NSString *pydeptname;
 @property(nonatomic,copy)NSString *pyusername;
 
-
-
+@property(nonatomic,copy)NSString *rolename;
+@property(nonatomic,copy)NSString *updatetime;
+@property(nonatomic,copy)NSString *username;
 
 
 - (void)setValueFromDic:(NSDictionary *)dic;

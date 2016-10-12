@@ -255,6 +255,9 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     [HttpsRequestManger sendHttpReqestWithUrl:self.homeappModel.appuri parameter:parameters requestSuccess:^(NSData *data) {
         
+//        NSString *xmlStr  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//
+//        NSLog(@"xmlStr = %@",xmlStr);
         
         [weakself endRefresh];
         
@@ -360,21 +363,21 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     //遍历获取部门
     for (PersionModel *persion in self.persionModelArray) {
         
-        if (![self.headTitleForDeptnameArray containsObject:persion.orgname]) {
+        if (![self.headTitleForDeptnameArray containsObject:persion.deptname]) {
             
-            [self.headTitleForDeptnameArray addObject:persion.orgname];
+            [self.headTitleForDeptnameArray addObject:persion.deptname];
             
         }
     }
     
     //分类
-    for (NSString *orgname in self.headTitleForDeptnameArray) {
+    for (NSString *deptname in self.headTitleForDeptnameArray) {
         
         NSMutableArray *array = [[NSMutableArray alloc]init];
         
         for (PersionModel *persion in self.persionModelArray) {
             
-            if ([persion.orgname isEqualToString:orgname]) {
+            if ([persion.deptname isEqualToString:deptname]) {
                 
                 [array addObject:persion];
             }
@@ -386,9 +389,9 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
 #pragma mark-按首字母分类
     //名字
-//    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
+    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
     
-    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c",@"d",@"e",@"f",@"g",@"h",@"i",@"j",@"k",@"l",@"m",@"n",@"o",@"p",@"q",@"r",@"s",@"t",@"u",@"v",@"w",@"x",@"y",@"z", nil];
+//    self.headTitleForNameArray = [[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c",@"d",@"e",@"f",@"g",@"h",@"i",@"j",@"k",@"l",@"m",@"n",@"o",@"p",@"q",@"r",@"s",@"t",@"u",@"v",@"w",@"x",@"y",@"z", nil];
 
     
     //先创建空的
@@ -675,7 +678,10 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             
             NSString *title = self.headTitleForNameArray[section];
 
-            headView.titleLabel.text = [title uppercaseString];
+//            headView.titleLabel.text = [title uppercaseString];
+            
+            headView.titleLabel.text = title;
+
             
         }
         
