@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 
 
-static const NSInteger pagecount = 5000;
+static const NSInteger pagecount = 10000;
 
 typedef NS_ENUM(NSInteger, MailListClassify)
 {
@@ -102,20 +102,13 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,self.segmentedControl.frame.size.height+self.segmentedControl.frame.origin.y, self.view.frame.size.width, 40)];
     self.searchBar.delegate = self;
-    self.searchBar.showsCancelButton = YES;
     
     
-    for(id view in [self.searchBar.subviews[0] subviews]){
-        
-        if([view isKindOfClass:[UIButton class]]){
-            
-            UIButton *btn = (UIButton *)view;
-            
-            [btn setTitle:@"取消"  forState:UIControlStateNormal];
-        }
-    }
     
     self.searchBar.placeholder=@"搜索";
+    
+    self.searchBar.showsCancelButton = NO;
+    
 
     [self.view addSubview:self.searchBar];
     
@@ -164,7 +157,7 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     MailDetailsViewController *mailDetailsViewController = [storyboard instantiateViewControllerWithIdentifier:@"MailDetailsViewController"];
     
-    mailDetailsViewController.isEdit = YES;
+    mailDetailsViewController.mailDetailsStatus = MailDetailsStatus_ADD;
     
     mailDetailsViewController.homeappModel = self.homeappModel;
     
@@ -460,29 +453,64 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 //任务编辑文本
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     
+    self.searchBar.showsCancelButton = YES;
+    
+    for(id view in [self.searchBar.subviews[0] subviews]){
+        
+        if([view isKindOfClass:[UIButton class]]){
+            
+            UIButton *btn = (UIButton *)view;
+            
+            [btn setTitle:@"取消"forState:UIControlStateNormal];
+        }
+    }
+
     return YES;
 }
 
 //开始编辑
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
 
+
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
+    
+
     return YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
     
+    self.searchBar.showsCancelButton = NO;
+
+    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     
+    [self.searchArray removeAllObjects];
+    
+    for (PersionModel *persion in self.persionModelArray) {
+        
+        if ([persion.username containsString:searchBar.text] || [persion.pyusername containsString:searchBar.text]|| [persion.pyusername containsString:searchBar.text.uppercaseString]) {
+            
+            [self.searchArray addObject:persion];
+        }
+        
+    }
+    
+    self.searchTableView.hidden = NO;
+    self.tableView.hidden = YES;
+    [self.searchTableView reloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
     [searchBar resignFirstResponder];
+    
+    self.searchBar.showsCancelButton = NO;
+
     
     self.searchTableView.hidden = YES;
     self.tableView.hidden = NO;
@@ -493,11 +521,14 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
     [searchBar resignFirstResponder];
     
+    self.searchBar.showsCancelButton = NO;
+
+    
     [self.searchArray removeAllObjects];
     
     for (PersionModel *persion in self.persionModelArray) {
         
-        if ([persion.username containsString:searchBar.text]) {
+        if ([persion.username containsString:searchBar.text] || [persion.pyusername containsString:searchBar.text] || [persion.pyusername containsString:searchBar.text.uppercaseString]) {
             
             [self.searchArray addObject:persion];
         }
@@ -649,6 +680,16 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     MailDetailsViewController *mailDetailsViewController = [storyborad instantiateViewControllerWithIdentifier:@"MailDetailsViewController"];
     
     mailDetailsViewController.persion = persion;
+    
+    if ([persion.kind isEqualToString:@"SYSTEM"]) {
+        
+        mailDetailsViewController.mailDetailsStatus = MailDetailsStatus_SYSTEM;
+        
+    }else if ([persion.kind isEqualToString:@"PRIVATE"]){
+        
+        mailDetailsViewController.mailDetailsStatus = MailDetailsStatus_PRIVATE;
+        
+    }
     
     mailDetailsViewController.homeappModel = self.homeappModel;
     

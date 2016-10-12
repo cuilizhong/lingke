@@ -9,22 +9,18 @@
 #import "BasicTableViewController.h"
 #import "PersionModel.h"
 
+
+typedef NS_ENUM(NSUInteger, MailDetailsStatus) {
+    MailDetailsStatus_ADD,
+    MailDetailsStatus_LOCAL,
+    MailDetailsStatus_SYSTEM,
+    MailDetailsStatus_PRIVATE
+    
+};
+
 @interface MailDetailsViewController : BasicTableViewController
 
-/**
- *  判断是否可编辑
- */
-@property(nonatomic,assign)BOOL isEdit;
-
-/**
- *  判断是否是新增
- */
-@property(nonatomic,assign)BOOL isAdd;
-
-/**
- *  是否是本地查看
- */
-@property(nonatomic,assign)BOOL isLocal;
+@property(nonatomic,assign)MailDetailsStatus mailDetailsStatus;
 
 @property(nonatomic,strong)HomeappModel *homeappModel;
 

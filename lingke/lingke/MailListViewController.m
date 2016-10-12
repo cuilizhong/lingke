@@ -180,7 +180,7 @@
             MailListClassViewController *mailListClassViewController = [[MailListClassViewController alloc]init];
             
             mailListClassViewController.homeappModel = self.homeappModel;
-            
+                        
             [self.navigationController pushViewController:mailListClassViewController animated:YES];
             
             self.hidesBottomBarWhenPushed = YES;
@@ -226,14 +226,12 @@
         
         mailDetailsViewController.homeappModel = self.homeappModel;
         
-        mailDetailsViewController.isLocal = YES;
+        mailDetailsViewController.mailDetailsStatus = MailDetailsStatus_LOCAL;
         
         [self.navigationController pushViewController:mailDetailsViewController animated:YES];
         
         self.hidesBottomBarWhenPushed = YES;
-    }
-    
-    
+    }    
 }
 
 - (void)didReceiveMemoryWarning {

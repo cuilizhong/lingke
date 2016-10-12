@@ -10,9 +10,10 @@
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 #import "UIImage+Compression.h"
-
 #import "AFNetworking.h"
 #import "GDataXMLNode.h"
+
+
 
 
 @interface MailDetailsViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -84,48 +85,110 @@
     [self.headImageView addGestureRecognizer:singleTapGestureRecognizer];
     
     self.headImageView.layer.cornerRadius = 40.0f;
+    
     self.headImageView.clipsToBounds = YES;
     
-    if (self.persion) {
-        
-        //编辑
-        if ([self.persion.kind isEqualToString:@"SYSTEM"]) {
-            //系统的不可以编辑
+    switch (self.mailDetailsStatus) {
             
-        }else if([self.persion.kind isEqualToString:@"PRIVATE"]){
-            //个人的可以编辑
+        case MailDetailsStatus_ADD:{
             
-            if (!self.isLocal) {
-                
-                //addpersion
-                                
-                self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
-                
-                self.navigationItem.rightBarButtonItem = self.rightBarButton;
-                
-                self.isEdit = YES;
-            }
+            self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(addPersionAction:)];
             
+            self.navigationItem.rightBarButtonItem = self.rightBarButton;
             
         }
-        
-    }else{
-        
-        //新增
-        self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveAction:)];
-        
-        self.navigationItem.rightBarButtonItem = self.rightBarButton;
-        
-        self.isAdd = YES;
+            
+            break;
+            
+        case MailDetailsStatus_LOCAL:{
+            
+        }
+            
+            break;
+            
+        case MailDetailsStatus_SYSTEM:{
+            
+            self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editPersionRelationshipAction:)];
+            
+            self.navigationItem.rightBarButtonItem = self.rightBarButton;
+            
+        }
+            
+            break;
+            
+        case MailDetailsStatus_PRIVATE:{
+            
+            self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editPersionAction:)];
+            
+            self.navigationItem.rightBarButtonItem = self.rightBarButton;
+            
+        }
+            
+            break;
+            
+        default:
+            break;
     }
-    
-    
+
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
     self.navigationItem.leftBarButtonItem = barButtonItem;
 
     self.addressCellHeight = 44.0f;
 }
 
+- (void)editPersionRelationshipAction:(UIBarButtonItem *)sender{
+    
+    if ([self.rightBarButton.title isEqualToString:@"编辑"]) {
+        
+        [self.rightBarButton setTitle:@"保存"];
+        
+        self.myFriendsSwitch.enabled = YES;
+        self.myGroundSwitch.enabled = YES;
+        self.myFollowSwitch.enabled = YES;
+        
+    }else{
+        
+        [self updateRelationship];
+
+    }
+}
+
+- (void)editPersionAction:(UIBarButtonItem *)sender{
+    
+    if ([self.rightBarButton.title isEqualToString:@"编辑"]) {
+        
+        [self.rightBarButton setTitle:@"保存"];
+        
+        self.headImageView.userInteractionEnabled = YES;
+        self.usernameTextField.enabled = YES;
+        self.phoneNumberTextField.enabled = YES;
+        self.departmentTextField.enabled = YES;
+        self.emailTextField.enabled = YES;
+        self.fixedTelephoneTextField.enabled = YES;
+        self.addressTextView.editable = YES;
+        self.myFriendsSwitch.enabled = YES;
+        self.myGroundSwitch.enabled = YES;
+        self.myFollowSwitch.enabled = YES;
+        self.roleTextField.enabled = YES;
+        self.groupTextField.enabled = YES;
+        self.maleButton.enabled = YES;
+        self.femaleButton.enabled = YES;
+        
+    }else{
+        
+        [self update];
+        
+    }
+    
+}
+
+- (void)addPersionAction:(UIBarButtonItem *)sender{
+    
+    [self save];
+}
+
+
+#pragma mark-返回
 - (void)leftBarButtonAction:(UIBarButtonItem *)sender{
     
     if (self.isModify) {
@@ -228,23 +291,49 @@
     
     [super viewWillAppear:animated];
     
-    if (self.isAdd) {
-        
-        [self addPersion];
-        
-    }else{
-        
-        [self setInitValue];
+    
+    switch (self.mailDetailsStatus) {
+            
+        case MailDetailsStatus_ADD:{
+            
+            [self addPersion];
+        }
+            
+            break;
+            
+        case MailDetailsStatus_LOCAL:{
+            
+            [self setInitValue];
 
+        }
+            
+            break;
+            
+        case MailDetailsStatus_SYSTEM:{
+            
+            [self setInitValue];
+
+        }
+            
+            break;
+            
+        case MailDetailsStatus_PRIVATE:{
+            
+            [self setInitValue];
+
+        }
+            
+            break;
+            
+        default:
+            break;
     }
-    
-    
 }
 
 #pragma mark-更新
 - (void)update{
     
-    [self showHUDWithMessage:@"添加中"];
+    [self showHUDWithMessage:@"保存中"];
     
     if (self.usernameTextField.text.length<1) {
         
@@ -267,7 +356,12 @@
         return;
     }
     
-
+    if (self.departmentTextField.text.length<1) {
+        
+        [self hiddenHUDWithMessage:@"请填写部门"];
+        
+        return;
+    }
     
     //上传
     NSDictionary *person = @{
@@ -284,7 +378,7 @@
                              
                              @"email":(self.emailTextField.text.length>0)?self.emailTextField.text:@"",
                              
-                             @"orgname":@"",
+//                             @"orgname":self.persion.orgname,
                              
                              @"deptname":(self.departmentTextField.text.length>0)?self.departmentTextField.text:@"",
                              
@@ -362,6 +456,84 @@
     }];
 }
 
+- (void)updateRelationship{
+    
+    [self showHUDWithMessage:@"保存中"];
+    
+    //上传
+    NSDictionary *person = @{
+                             
+                             @"pid":self.persion.pid,
+                             
+                             @"isattention":[NSString stringWithFormat:@"%d",self.myFollowSwitch.on],
+                             
+                             @"isfriend":[NSString stringWithFormat:@"%d",self.myFriendsSwitch.on],
+                             
+                             @"ismygroup":[NSString stringWithFormat:@"%d",self.myGroundSwitch.on]
+                             
+                             
+                             };
+    
+    [self.persion setValueFromDic:person];
+    
+    NSDictionary *requestdata = @{
+                                  
+                                  @"appcode":self.homeappModel.appcode,
+                                  
+                                  @"method":@"RELATIONSHIPUPDATE",
+                                  
+                                  @"person":person
+                                  
+                                  };
+    
+    NSDictionary *parameters = @{
+                                 
+                                 @"token":[LocalData getToken],
+                                 
+                                 @"requestdata":requestdata,
+                                 
+                                 };
+    
+    @weakify(self)
+    
+    [HttpsRequestManger sendHttpReqestWithUrl:self.homeappModel.appuri parameter:parameters requestSuccess:^(NSData *data) {
+        
+        NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
+        
+        if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
+            
+            weakself.isSaveSuccessful = YES;
+            
+            [weakself hiddenHUDWithMessage:@"已保存"];
+            
+        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+            
+            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+                
+                [weakself update];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:RequestFailureMessage];
+                
+            }];
+            
+        }else{
+            
+            [weakself hiddenHUDWithMessage:xmlDoc[@"statusmsg"]];
+            
+        }
+        
+        NSLog(@"xmlDoc = %@",xmlDoc);
+        
+    } requestFail:^(NSError *error) {
+        
+        [weakself hiddenHUDWithMessage:RequestFailureMessage];
+        
+    }];
+
+}
+
 - (void)save{
     
     [self showHUDWithMessage:@"添加中"];
@@ -387,6 +559,13 @@
         return;
     }
     
+    if (self.departmentTextField.text.length<1) {
+        
+        [self hiddenHUDWithMessage:@"请填写部门"];
+        
+        return;
+    }
+    
     
     //上传
     NSDictionary *person = @{
@@ -401,7 +580,7 @@
                              
                              @"email":(self.emailTextField.text.length>0)?self.emailTextField.text:@"",
                              
-                             @"orgname":@"",
+//                             @"orgname":self.persion.orgname,
                              
                              @"deptname":(self.departmentTextField.text.length>0)?self.departmentTextField.text:@"",
                              
@@ -486,51 +665,7 @@
 }
 
 
-#pragma mark-保存
-- (void)saveAction:(UIBarButtonItem *)sender{
-    
-    if (self.isAdd) {
-        
-        [self save];
-        
-    }else{
-        [self update];
 
-    }
-}
-
-#pragma mark-编辑
-- (void)editAction:(UIBarButtonItem *)sender{
-    
-    if ([self.rightBarButton.title isEqualToString:@"编辑"]) {
-        
-        [self.rightBarButton setTitle:@"保存"];
-        
-        self.headImageView.userInteractionEnabled = YES;
-        self.usernameTextField.enabled = YES;
-        self.phoneNumberTextField.enabled = YES;
-        self.departmentTextField.enabled = YES;
-        self.emailTextField.enabled = YES;
-        self.fixedTelephoneTextField.enabled = YES;
-        self.addressTextView.editable = YES;
-        self.myFriendsSwitch.enabled = YES;
-        self.myGroundSwitch.enabled = YES;
-        self.myFollowSwitch.enabled = YES;
-        self.roleTextField.enabled = YES;
-        self.groupTextField.enabled = YES;
-        
-        
-        self.maleButton.enabled = YES;
-        self.femaleButton.enabled = YES;
-   
-
-        
-    }else{
-        
-        [self saveAction:sender];
-    }
-    
-}
 
 
 #pragma mark-UITextViewDelegate
