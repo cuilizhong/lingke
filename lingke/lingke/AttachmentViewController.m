@@ -139,6 +139,16 @@
         
         [self.tableView reloadData];
         
+        if (self.dataArray.count>0) {
+            
+            self.tipNoDataLabel.hidden = YES;
+            
+        }else{
+            
+            self.tipNoDataLabel.hidden = NO;
+            
+        }
+        
     }else if (editingStyle == UITableViewCellEditingStyleInsert) {
         
     }
