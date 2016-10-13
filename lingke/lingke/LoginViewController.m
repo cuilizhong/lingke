@@ -136,6 +136,8 @@
 #pragma mark-request
 - (void)requestForLogin{
     
+    //先验证->登陆
+    
     [self showHUDWithMessage:@"登陆中"];
     
     if (self.unitcodeTextField.text.length<1) {

@@ -48,7 +48,17 @@
     self.tipNoDataLabel.center = self.view.center;
     self.tipNoDataLabel.frame = CGRectMake(0,self.tipNoDataLabel.frame.origin.y-60, self.view.frame.size.width, 30);
     [self.view addSubview:self.tipNoDataLabel];
-    self.tipNoDataLabel.hidden = YES;
+    
+    if (self.dataArray.count>0) {
+        
+        self.tipNoDataLabel.hidden = YES;
+
+    }else{
+        
+        self.tipNoDataLabel.hidden = NO;
+
+    }
+    
 }
 
 #pragma mark-UITableViewDelegate,UITableViewDataSource
@@ -83,7 +93,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 44.0f;
+    return 55.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -101,6 +111,41 @@
     [self.navigationController pushViewController:previewFileViewController animated:YES];
     self.hidesBottomBarWhenPushed = YES;
 
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        NSDictionary *attachment = self.dataArray[indexPath.row];
+        
+        NSString *filepath = attachment[@"filepath"];
+        
+        NSString *filename = attachment[@"filename"];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        BOOL b = [fileManager removeItemAtPath:filepath error:nil];
+        
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        
+        [delegate deleteFilename:filename];
+        
+        self.dataArray = [delegate selectAllAttachments];
+        
+        [self.tableView reloadData];
+        
+    }else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
 }
 
 

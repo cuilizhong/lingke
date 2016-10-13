@@ -18,6 +18,8 @@
 #import "ApplyModel.h"
 #import "LZPopOverMenu.h"
 #import "FastApplyViewController.h"
+#import "MJRefresh.h"
+
 
 @interface HomepageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -76,7 +78,15 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
-    [self requestData];
+    @weakify(self);
+    self.tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
+        
+        [weakself requestData];
+
+    }];
+    
+    [self.tableView.mj_header beginRefreshing];
+    
 }
 
 
@@ -100,8 +110,11 @@
                                  @"requestdata":requestdata,
                                  
                                  };
+    
     @weakify(self);
     [HttpsRequestManger sendHttpReqestWithUrl:[LocalData getAppcenter] parameter:parameters requestSuccess:^(NSData *data) {
+        
+        [weakself.tableView.mj_header endRefreshing];
         
         NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
         
@@ -118,6 +131,8 @@
             id appArray = [homeappDic objectForKey:@"app"];
             
             [weakself.homeappArray removeAllObjects];
+            
+            [weakself.extendappDataArray removeAllObjects];
 
             if ([appArray isKindOfClass:[NSArray class]]) {
                 
@@ -320,6 +335,8 @@
         
     } requestFail:^(NSError *error) {
         
+        [weakself.tableView.mj_header endRefreshing];
+
         [weakself hiddenHUDWithMessage:RequestFailureMessage];
     }];
     

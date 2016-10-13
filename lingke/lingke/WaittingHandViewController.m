@@ -11,6 +11,8 @@
 #import "WFListModel.h"
 #import "MenusView.h"
 #import "DataIndexViewController.h"
+#import "MJRefresh.h"
+
 
 typedef NS_ENUM(NSInteger, TableViewDataType)
 {
@@ -36,17 +38,21 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 @property(nonatomic,strong)NSMutableArray *sortTitleArray;
 
+@property(nonatomic,assign)NSInteger count;
+
 @end
 
 @implementation WaittingHandViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-//    self.tabBarItem.badgeValue = @"1";
+    
+    
     
     self.title = @"待办";
     
-    self.tableViewDataType = TableViewDataTypeWFList;
+    self.tableViewDataType = TableViewDataTypeWFContent;
     
     self.dataIndexModelArray = [[NSMutableArray alloc]init];
     
@@ -60,16 +66,16 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     @weakify(self)
     self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"所有待办▼",@"创建时间倒序▼", nil] selectedBlock:^(NSString *title) {
         
-        if ([title isEqualToString:@"所有待办▼"]) {
-            
-            weakself.tableViewDataType = TableViewDataTypeWFList;
-            
-        }else{
+        if ([title containsString:@"创建时间"] ) {
             
             weakself.tableViewDataType = TableViewDataTypeSort;
-            
 
+        }else{
+            weakself.tableViewDataType = TableViewDataTypeWFList;
+
+            
         }
+        
         
         [weakself.tableView reloadData];
     }];
@@ -83,14 +89,18 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     self.tableView.dataSource = self;
     
     [self.view addSubview:self.tableView];
-    
+
+    self.tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
+        
+        [weakself request];
+        
+        [weakself requestClass];
+    }];
     
     [self hiddenSurplusLine:self.tableView];
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
     
 }
 
@@ -99,9 +109,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     [super viewWillAppear:animated];
     
-    [self request];
+    [self.tableView.mj_header beginRefreshing];
     
-    [self requestClass];
 }
 
 - (void)request{
@@ -192,6 +201,9 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
+                [weakself.tableView.mj_header endRefreshing];
+
+                
                 [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
@@ -202,12 +214,17 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             
             NSLog(@"errorMessage = %@",errorMessage);
             
+            [weakself.tableView.mj_header endRefreshing];
+            
             [weakself hiddenHUDWithMessage:errorMessage];
+            
             
         }
         
         
     } requestFail:^(NSError *error) {
+        
+        [weakself.tableView.mj_header endRefreshing];
         
         [weakself hiddenHUDWithMessage:@"加载失败"];
         
@@ -297,11 +314,16 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
+                [weakself.tableView.mj_header endRefreshing];
+
+                
                 [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
             
         } else{
+            
+            [weakself.tableView.mj_header endRefreshing];
             
             NSString *errorMessage = xmlDoc[@"statusmsg"];
             
@@ -315,51 +337,53 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
     } requestFail:^(NSError *error) {
         
+        [weakself.tableView.mj_header endRefreshing];
+        
         [weakself hiddenHUDWithMessage:@"加载失败"];
 
     }];
 }
 
-#pragma mark-暂时不需要
-- (void)handClassWithWfList:(NSArray *)wfList{
-    
-    NSMutableArray *array = [[NSMutableArray alloc]init];
-    
-    for (WFListModel *wFListModel in wfList) {
-        
-        if (![array containsObject:wFListModel.formid]) {
-            
-            [array addObject:wFListModel.formid];
-        }
-    }
-    
-    //array中是种类
-    for (NSString *formid in array) {
-        
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-        NSString *wfname;
-        NSInteger count = 0;;
-        
-        for (WFListModel *wFListModel in wfList) {
-            
-            if ([wFListModel.formid isEqualToString:formid]) {
-                
-                wfname = wFListModel.wfname;
-                
-                count++;
-            }
-        }
-        
-        [dic setObject:wfname forKey:@"wfname"];
-        [dic setObject:[NSString stringWithFormat:@"%ld",count] forKey:@"count"];
-        [dic setObject:formid forKey:@"formid"];
-        [self.WFListModelArray addObject:dic];
-        
-    }
-    
-    NSLog(@"self.wflistModelArray = %@",self.WFListModelArray);
-    
-}
+//#pragma mark-暂时不需要
+//- (void)handClassWithWfList:(NSArray *)wfList{
+//    
+//    NSMutableArray *array = [[NSMutableArray alloc]init];
+//    
+//    for (WFListModel *wFListModel in wfList) {
+//        
+//        if (![array containsObject:wFListModel.formid]) {
+//            
+//            [array addObject:wFListModel.formid];
+//        }
+//    }
+//    
+//    //array中是种类
+//    for (NSString *formid in array) {
+//        
+//        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+//        NSString *wfname;
+//        NSInteger count = 0;;
+//        
+//        for (WFListModel *wFListModel in wfList) {
+//            
+//            if ([wFListModel.formid isEqualToString:formid]) {
+//                
+//                wfname = wFListModel.wfname;
+//                
+//                count++;
+//            }
+//        }
+//        
+//        [dic setObject:wfname forKey:@"wfname"];
+//        [dic setObject:[NSString stringWithFormat:@"%ld",count] forKey:@"count"];
+//        [dic setObject:formid forKey:@"formid"];
+//        [self.WFListModelArray addObject:dic];
+//        
+//    }
+//    
+//    NSLog(@"self.wflistModelArray = %@",self.WFListModelArray);
+//    
+//}
 
 
 
@@ -485,6 +509,14 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         WFListModel *wfListModel = self.WFListModelArray[indexPath.row];
         
+        NSString *wfname = wfListModel.wfname;
+        [self.menusView.menusTitleArray removeObjectAtIndex:0];
+        [self.menusView.menusTitleArray insertObject:[NSString stringWithFormat:@"%@▼",wfname] atIndex:0];
+        
+        [self.menusView.tableView reloadData];
+
+        
+        
         self.tableViewDataType = TableViewDataTypeWFContent;
         
         [self handDataWithFormid:wfListModel.formid];
@@ -495,8 +527,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         if (indexPath.row == 0) {
             //@"所有待办▼",@"创建时间倒序▼"
-            [self.menusView.menusTitleArray removeAllObjects];
-            [self.menusView.menusTitleArray addObject:@"所有待办▼"];
+            [self.menusView.menusTitleArray removeLastObject];
+
             [self.menusView.menusTitleArray addObject:@"创建时间倒序▼"];
             self.menusView.selectedTitle = @"创建时间倒序▼";
             [self.menusView.tableView reloadData];
@@ -506,8 +538,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             
         }else if(indexPath.row == 1){
             
-            [self.menusView.menusTitleArray removeAllObjects];
-            [self.menusView.menusTitleArray addObject:@"所有待办▼"];
+            [self.menusView.menusTitleArray removeLastObject];
             [self.menusView.menusTitleArray addObject:@"创建时间正序▼"];
             self.menusView.selectedTitle = @"创建时间正序▼";
 
@@ -564,8 +595,13 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 - (void)handCount{
     
+    NSLog(@"调用");
+    
     [self hiddenHUD];
     
+    [self.tableView.mj_header endRefreshing];
+
+    self.count = 0;
     for (WFListModel *wflistModel in self.WFListModelArray) {
         
         NSInteger count = 0;
@@ -576,13 +612,25 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 
                 count++;
             }
+            
+            if (dataIndexModel.isread.integerValue == 1) {
+                
+                self.count++;
+            }
         }
         
         wflistModel.count = [NSString stringWithFormat:@"%ld",count];
         
     }
     
+    [self.contentArray removeAllObjects];
+    
+    [self.contentArray addObjectsFromArray:self.dataIndexModelArray];
+    
     [self.tableView reloadData];
+    
+    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
+    item.badgeValue = [NSString stringWithFormat:@"%ld",(long)self.count];
 }
 
 - (void)handSort:(BOOL)isReverse{
