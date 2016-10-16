@@ -179,11 +179,20 @@ static const NSInteger pagecount = 20;
             
         }else{
             
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
-            [weakself hiddenHUDWithMessage:errorMessage];
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
             
-            NSLog(@"errorMessage = %@",errorMessage);
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself requestData];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
+            
         }
         
         

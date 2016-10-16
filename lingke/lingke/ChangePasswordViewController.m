@@ -122,15 +122,25 @@
             
             [weakself hiddenHUDWithMessage:@"密码修改成功"];
             
-            
-        
         }else{
             
-            weakself.isChangePasswordSuccess = NO;
             
             NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
-            [weakself hiddenHUDWithMessage:errorMsg];
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself submitAction:sender];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                weakself.isChangePasswordSuccess = NO;
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
+            
         }
 
         

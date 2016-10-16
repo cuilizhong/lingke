@@ -66,4 +66,20 @@
     
 }
 
+
+- (void)handErrorWihtErrorCode:(NSString *)errorCode errorMsg:(NSString *)errorMsg expireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock{
+    
+    if ([errorCode isEqualToString:TokenInvalidCode]) {
+        
+        //token失效
+        //重新登录
+        [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:expireLoginFailureBlock];
+        
+    }else{
+        
+        [self hiddenHUDWithMessage:errorMsg];
+        
+    }
+}
+
 @end

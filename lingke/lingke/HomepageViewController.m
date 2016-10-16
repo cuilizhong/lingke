@@ -455,7 +455,17 @@
             //获取数据失败
             NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
-            [weakself hiddenHUDWithMessage:errorMsg];
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself requestData];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
             
         }
         
@@ -567,7 +577,17 @@
             
             NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
-            [weakself hiddenHUDWithMessage:errorMsg];
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself requestData];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
             
         }
 
@@ -739,20 +759,7 @@
         [self.navigationController pushViewController:fastApplyViewController animated:YES];
         
         self.hidesBottomBarWhenPushed = NO;
-
-        
-//        [[Network alloc]initWithURL:self.applyAppuri parameters:parameters requestSuccess:^(NSData *data) {
-//            
-//            NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLData:data];
-//            
-//            NSLog(@"xmlDoc = %@",xmlDoc);
-//            
-//        } requestFail:^(NSError *error) {
-//            
-//        }];
-        
-        
-        
+    
     } dismissBlock:^{
         
     }];

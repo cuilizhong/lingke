@@ -26,4 +26,6 @@
 - (void)hiddenHUDWithMessage:(NSString *)message;
 
 
+- (void)handErrorWihtErrorCode:(NSString *)errorCode errorMsg:(NSString *)errorMsg expireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock;
+
 @end

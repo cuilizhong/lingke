@@ -185,16 +185,19 @@ static const NSInteger pagecount = 20;
                 [weakself requestMessageDataWithKind:title];
             }];
             
-            [weakself.view addSubview:self.menusView];
+            [weakself.view addSubview:weakself.menusView];
             
             //crearTableView
-            self.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-weakself.menusView.frame.size.height-49) style:UITableViewStylePlain];
-            self.contentTableView.delegate = self;
-            self.contentTableView.dataSource = self;
-            [self.view addSubview:self.contentTableView];
+            weakself.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height, weakself.view.frame.size.width, weakself.view.frame.size.height-weakself.menusView.frame.size.height-49) style:UITableViewStylePlain];
+            weakself.contentTableView.delegate = weakself;
+            weakself.contentTableView.dataSource = weakself;
+            [weakself hiddenSurplusLine:weakself.contentTableView];
             
-            @weakify(self)
-            self.contentTableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
+            [weakself.view addSubview:weakself.contentTableView];
+            
+            [weakself.view bringSubviewToFront:weakself.tipNoDataLabel];
+            
+            weakself.contentTableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
                 
                 weakself.pagestart = 1;
                 
@@ -202,7 +205,7 @@ static const NSInteger pagecount = 20;
                 
             }];
             
-            self.contentTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+            weakself.contentTableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
                 
                 weakself.pagestart = weakself.pagestart+pagecount;
                 
@@ -214,18 +217,22 @@ static const NSInteger pagecount = 20;
             
         }else{
             
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
             
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
-            
-            NSLog(@"errorMessage = %@",errorMessage);
-            
-            [weakself hiddenHUDWithMessage:errorMessage];
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself requst];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
+
         }
-        
-        
-        
-        
+ 
     } requestFail:^(NSError *error) {
         
         [weakself hiddenHUDWithMessage:RequestFailureMessage];
@@ -311,7 +318,7 @@ static const NSInteger pagecount = 20;
                     
                     [messageModel setValueFromDic:dic];
                     
-                    [self.messageContentsArray addObject:messageModel];
+                    [weakself.messageContentsArray addObject:messageModel];
                 }
                 
                 
@@ -321,20 +328,35 @@ static const NSInteger pagecount = 20;
                 
                 [messageModel setValueFromDic:messageArray];
                 
-                [self.messageContentsArray addObject:messageModel];
+                [weakself.messageContentsArray addObject:messageModel];
             }
             
             
             
-            [self.contentTableView reloadData];
+            [weakself.contentTableView reloadData];
+            
+            if (weakself.messageContentsArray.count) {
+                weakself.tipNoDataLabel.hidden = YES;
+            }else{
+                weakself.tipNoDataLabel.hidden = NO;
 
+            }
+            
         }else{
             
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
             
-            [weakself hiddenHUDWithMessage:errorMessage];
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
             
-            NSLog(@"errorMessage = %@",errorMessage);
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself requestMessageDataWithKind:kind];
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
         }
         
         
@@ -426,6 +448,8 @@ static const NSInteger pagecount = 20;
     dataIndexViewController.url = messageModel.url;
     
     
+    self.isSearch = YES;
+
 //    MessageDetailsViewController *messageDetailsViewController = [[MessageDetailsViewController alloc]init];
 //    
 //    messageDetailsViewController.messageModel = messageModel;
