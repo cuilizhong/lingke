@@ -1086,7 +1086,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eT5-sv-bc5">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="必填" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eT5-sv-bc5">
                                                     <rect key="frame" x="96" y="7" width="216" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="47O-AC-Ycf"/>
@@ -1311,6 +1311,9 @@
                                                         <constraint firstAttribute="height" constant="31" id="03V-ZG-5Nc"/>
                                                         <constraint firstAttribute="width" constant="49" id="04V-Dm-9wN"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="myFriendsSwitchAction:" destination="Rog-yK-e65" eventType="valueChanged" id="Nwl-4Y-PqX"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1353,6 +1356,9 @@
                                                         <constraint firstAttribute="width" constant="49" id="9Py-rR-9Ec"/>
                                                         <constraint firstAttribute="height" constant="31" id="rmh-yq-D6D"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="myGroundSwitchAction:" destination="Rog-yK-e65" eventType="valueChanged" id="AgT-G8-srb"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1395,6 +1401,9 @@
                                                         <constraint firstAttribute="height" constant="31" id="6B2-DV-AdA"/>
                                                         <constraint firstAttribute="width" constant="49" id="N8z-AT-gMA"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="myFollowSwitchAction:" destination="Rog-yK-e65" eventType="valueChanged" id="XvH-PM-f2w"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>

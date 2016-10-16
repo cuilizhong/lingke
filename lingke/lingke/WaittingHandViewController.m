@@ -42,6 +42,9 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 @property(nonatomic,strong)UILabel *tipNoDataLabel;
 
+
+@property(nonatomic,copy)NSString *currentFormid;
+
 @end
 
 @implementation WaittingHandViewController
@@ -50,9 +53,9 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     [super viewDidLoad];
     
-    
-    
     self.title = @"待办";
+    
+    self.currentFormid = @"ALL";
     
     self.tableViewDataType = TableViewDataTypeWFContent;
     
@@ -313,6 +316,13 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 [weakself.WFListModelArray addObject:wFListModel];
             }
             
+            WFListModel *allWFListModel = [[WFListModel alloc]init];
+
+            allWFListModel.wfname = @"所有待办";
+            
+            allWFListModel.formid = @"ALL";
+            
+            [weakself.WFListModelArray insertObject:allWFListModel atIndex:0];
             
             
             //处理分类
@@ -476,12 +486,15 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
         
         if (dataIndexModel.isread.integerValue == 0) {
+            //未读
+            cell.textLabel.textColor = [UIColor redColor];
+            cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
+            
+        }else if (dataIndexModel.isread.integerValue == 1){
             //已读
             cell.textLabel.textColor = [UIColor blackColor];
             
-        }else if (dataIndexModel.isread.integerValue == 1){
-            //未读
-            cell.textLabel.textColor = [UIColor redColor];
+            cell.imageView.image = nil;
         }
         
         cell.textLabel.text = dataIndexModel.title;
@@ -525,9 +538,13 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         WFListModel *wfListModel = self.WFListModelArray[indexPath.row];
         
+        self.currentFormid = wfListModel.formid;
+        
         NSString *wfname = wfListModel.wfname;
         [self.menusView.menusTitleArray removeObjectAtIndex:0];
         [self.menusView.menusTitleArray insertObject:[NSString stringWithFormat:@"%@▼",wfname] atIndex:0];
+        
+        self.menusView.selectedTitle = [NSString stringWithFormat:@"%@▼",wfname];
         
         [self.menusView.tableView reloadData];
         
@@ -612,6 +629,15 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     [self.contentArray removeAllObjects];
     
+    if ([formid isEqualToString:@"ALL"]) {
+        
+        [self.contentArray addObjectsFromArray:self.dataIndexModelArray];
+        
+        [self.tableView reloadData];
+        
+        return;
+    }
+    
     for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
         
         if ([dataIndexModel.formid isEqualToString:formid]) {
@@ -621,49 +647,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     }
     
     [self.tableView reloadData];
-    
-}
-
-
-- (void)handCount{
-    
-    NSLog(@"调用");
-    
-    [self hiddenHUD];
-    
-    [self.tableView.mj_header endRefreshing];
-
-    self.count = 0;
-    for (WFListModel *wflistModel in self.WFListModelArray) {
-        
-        NSInteger count = 0;
-        
-        for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
-            
-            if ([dataIndexModel.formid isEqualToString:wflistModel.formid]) {
-                
-                count++;
-            }
-            
-            if (dataIndexModel.isread.integerValue == 1) {
-                
-                self.count++;
-            }
-        }
-        
-        wflistModel.count = [NSString stringWithFormat:@"%ld",count];
-        
-    }
-    
-    [self.contentArray removeAllObjects];
-    
-    [self.contentArray addObjectsFromArray:self.dataIndexModelArray];
-    
-    [self.tableView reloadData];
-    
-    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
-    item.badgeValue = [NSString stringWithFormat:@"%ld",(long)self.count];
-    
     
     
     switch (self.tableViewDataType) {
@@ -716,6 +699,69 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         default:
             break;
     }
+    
+}
+
+
+- (void)handCount{
+    
+    NSLog(@"调用");
+    
+    [self hiddenHUD];
+    
+    [self.tableView.mj_header endRefreshing];
+
+    
+    for (WFListModel *wflistModel in self.WFListModelArray) {
+        
+        NSInteger count = 0;
+        
+        for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
+            
+            if ([dataIndexModel.formid isEqualToString:wflistModel.formid]) {
+                
+                count++;
+            }
+            
+            if (dataIndexModel.isread.integerValue == 0) {
+                
+                self.count++;
+            }
+        }
+        
+        wflistModel.count = [NSString stringWithFormat:@"%ld",count];
+        
+    }
+    
+    WFListModel *wflistModel = self.WFListModelArray[0];
+    
+    wflistModel.count =  [NSString stringWithFormat:@"%lu",(unsigned long)self.dataIndexModelArray.count];
+    
+    [self.contentArray removeAllObjects];
+    
+    [self.contentArray addObjectsFromArray:self.dataIndexModelArray];
+    
+    [self.tableView reloadData];
+    
+    
+    self.count = 0;
+    
+    for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
+        
+        if (dataIndexModel.isread.integerValue == 0) {
+            
+            self.count++;
+        }
+    }
+    
+    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
+    item.badgeValue = [NSString stringWithFormat:@"%ld",(long)self.count];
+    
+    
+    
+    
+    [self handDataWithFormid:self.currentFormid];
+
 }
 
 - (void)handSort:(BOOL)isReverse{

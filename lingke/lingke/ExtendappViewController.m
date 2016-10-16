@@ -301,6 +301,7 @@ static const NSInteger pagecount = 20;
 
 - (void)searchBarButtonAction:(UIBarButtonItem *)sender{
     
+    
     NSLog(@"搜索");
     
     SearchExtendappViewController *searchExtendappViewController = [[SearchExtendappViewController alloc]init];

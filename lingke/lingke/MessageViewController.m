@@ -35,6 +35,11 @@ static const NSInteger pagecount = 20;
 @property(nonatomic,assign)NSInteger pagestart;
 
 
+@property(nonatomic,strong)UILabel *tipNoDataLabel;
+
+@property(nonatomic,assign)BOOL isSearch;
+
+
 @end
 
 @implementation MessageViewController
@@ -57,9 +62,23 @@ static const NSInteger pagecount = 20;
     
     UIBarButtonItem *searchBarButton = [[UIBarButtonItem alloc]initWithTitle:@"搜索" style:UIBarButtonItemStylePlain target:self action:@selector(searchBarButtonAction:)];
     self.navigationItem.rightBarButtonItem = searchBarButton;
+    
+    
+    self.tipNoDataLabel = [[UILabel alloc]init];
+    self.tipNoDataLabel.text = @"无信息";
+    self.tipNoDataLabel.font = [UIFont systemFontOfSize:14];
+    self.tipNoDataLabel.textColor = [UIColor darkGrayColor];
+    self.tipNoDataLabel.textAlignment = NSTextAlignmentCenter;
+    self.tipNoDataLabel.backgroundColor = [UIColor clearColor];
+    self.tipNoDataLabel.center = self.view.center;
+    self.tipNoDataLabel.frame = CGRectMake(0,self.tipNoDataLabel.frame.origin.y-60, self.view.frame.size.width, 30);
+    [self.view addSubview:self.tipNoDataLabel];
+    self.tipNoDataLabel.hidden = YES;
 }
 
 - (void)searchBarButtonAction:(UIBarButtonItem *)sender{
+    
+    self.isSearch = YES;
 
     SearchMessageViewController *searchMessageViewController = [[SearchMessageViewController alloc]init];
     
@@ -76,7 +95,19 @@ static const NSInteger pagecount = 20;
     
     [super viewWillAppear:animated];
     
-    [self requst];
+    if (self.isSearch) {
+        
+        //
+        self.isSearch = NO;
+
+        [self requestMessageDataWithKind:self.currentTitle];
+        
+    }else{
+        
+        [self requst];
+    }
+    
+
 }
 
 - (void)requst{

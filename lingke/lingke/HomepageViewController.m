@@ -35,6 +35,10 @@
 
 @property(nonatomic,assign)BOOL isHasApply;
 
+@property(nonatomic,strong)UIBarButtonItem *rightBarButton;
+
+@property(nonatomic,strong)UIBarButtonItem *leftBarButton;
+
 @end
 
 @implementation HomepageViewController
@@ -54,24 +58,6 @@
     self.extendappDataArray = [[NSMutableArray alloc]init];
     
     self.applyArray = [[NSMutableArray alloc]init];
-    
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setImage:[UIImage imageNamed:@"fast"] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, 25, 44);
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
-    
-    self.navigationItem.rightBarButtonItem = rightBarButton;
-    
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setImage:[UIImage imageNamed:@"mail"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    leftButton.frame = CGRectMake(0, 0, 30, 44);
-    
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
-    
-    self.navigationItem.leftBarButtonItem = leftBarButton;
     
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -226,6 +212,32 @@
                     [HomeFunctionModel sharedInstance].scanAppModel = homeappModel;
                     
                 }
+                
+            }
+            
+            //如果通讯录存在
+            if ([HomeFunctionModel sharedInstance].orgAppModel) {
+                
+                UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                [leftButton setImage:[UIImage imageNamed:@"mail"] forState:UIControlStateNormal];
+                [leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                leftButton.frame = CGRectMake(0, 0, 30, 44);
+                
+                if (self.leftBarButton) {
+                    
+                    self.leftBarButton.customView = leftButton;
+                    
+                }else{
+                    
+                    self.leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
+                }
+                
+                
+                self.navigationItem.leftBarButtonItem = self.leftBarButton;
+                
+            }else{
+                
+                self.navigationItem.leftBarButtonItem = nil;
                 
             }
             
@@ -520,6 +532,31 @@
                 
                 [weakself.applyArray addObject:applyModel];
             }
+            
+            if (weakself.applyArray.count>0) {
+                
+                UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                [rightButton setImage:[UIImage imageNamed:@"fast"] forState:UIControlStateNormal];
+                [rightButton addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                rightButton.frame = CGRectMake(0, 0, 25, 44);
+                
+                if (weakself.rightBarButton) {
+                    
+                    weakself.rightBarButton.customView = rightButton;
+                    
+                }else{
+                    
+                    weakself.rightBarButton = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+                    
+                }
+                
+                self.navigationItem.rightBarButtonItem = weakself.rightBarButton;
+                
+            }else{
+                
+                self.navigationItem.rightBarButtonItem = nil;
+            }
+            
             
             if (weakself.newsInfoArray.count>0) {
                 //所有的请求完成

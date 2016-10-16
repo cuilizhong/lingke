@@ -10,6 +10,7 @@
 #import "NSString+FormatConvert.h"
 #import "AppDelegate.h"
 #import "Attachment.h"
+#import "PreviewFileViewController.h"
 
 @interface DataIndexViewController ()<UIWebViewDelegate>
 
@@ -140,6 +141,13 @@
 
 - (void)downFileFromServer:(NSString *)urlStr filename:(NSString *)filename{
     
+    @weakify(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [weakself showHUDWithMessage:@"下载中"];
+        
+    });
+    
     //urlStr转码
     urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
@@ -189,11 +197,28 @@
         
         [delegate updateFilename:filename filepath:filepath];
         
+        [weakself hiddenHUD];
+        
+        //打开附件
+        PreviewFileViewController *previewFileViewController = [[PreviewFileViewController alloc]init];
+        previewFileViewController.filepath = filepath;
+        
+        weakself.hidesBottomBarWhenPushed = YES;
+        
+        [weakself.navigationController pushViewController:previewFileViewController animated:YES];
+        
+        weakself.hidesBottomBarWhenPushed = YES;
         
     }];
     
     [downloadTask resume];
     
+}
+
+
+- (void)dealloc{
+    
+    NSLog(@"释放");
 }
 
 

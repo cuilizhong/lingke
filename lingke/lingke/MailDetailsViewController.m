@@ -108,15 +108,19 @@
             
         case MailDetailsStatus_SYSTEM:{
             
-            self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editPersionRelationshipAction:)];
-            
-            self.navigationItem.rightBarButtonItem = self.rightBarButton;
+            self.myFriendsSwitch.enabled = YES;
+            self.myGroundSwitch.enabled = YES;
+            self.myFollowSwitch.enabled = YES;
             
         }
             
             break;
             
         case MailDetailsStatus_PRIVATE:{
+            
+            self.myFriendsSwitch.enabled = YES;
+            self.myGroundSwitch.enabled = YES;
+            self.myFollowSwitch.enabled = YES;
             
             self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editPersionAction:)];
             
@@ -136,22 +140,6 @@
     self.addressCellHeight = 44.0f;
 }
 
-- (void)editPersionRelationshipAction:(UIBarButtonItem *)sender{
-    
-    if ([self.rightBarButton.title isEqualToString:@"编辑"]) {
-        
-        [self.rightBarButton setTitle:@"保存"];
-        
-        self.myFriendsSwitch.enabled = YES;
-        self.myGroundSwitch.enabled = YES;
-        self.myFollowSwitch.enabled = YES;
-        
-    }else{
-        
-        [self updateRelationship];
-
-    }
-}
 
 - (void)editPersionAction:(UIBarButtonItem *)sender{
     
@@ -166,9 +154,6 @@
         self.emailTextField.enabled = YES;
         self.fixedTelephoneTextField.enabled = YES;
         self.addressTextView.editable = YES;
-        self.myFriendsSwitch.enabled = YES;
-        self.myGroundSwitch.enabled = YES;
-        self.myFollowSwitch.enabled = YES;
         self.roleTextField.enabled = YES;
         self.groupTextField.enabled = YES;
         self.maleButton.enabled = YES;
@@ -458,7 +443,7 @@
 
 - (void)updateRelationship{
     
-    [self showHUDWithMessage:@"保存中"];
+    [self showHUDWithMessage:@"加载中"];
     
     //上传
     NSDictionary *person = @{
@@ -502,9 +487,9 @@
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
             
-            weakself.isSaveSuccessful = YES;
+//            weakself.isSaveSuccessful = YES;
             
-            [weakself hiddenHUDWithMessage:@"已保存"];
+            [weakself hiddenHUDWithMessage:@"已修改"];
             
         }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
             
@@ -937,4 +922,20 @@
     }];
 }
 
+- (IBAction)myFriendsSwitchAction:(id)sender {
+    
+    [self updateRelationship];
+    
+}
+- (IBAction)myGroundSwitchAction:(id)sender {
+    
+    [self updateRelationship];
+
+}
+
+- (IBAction)myFollowSwitchAction:(id)sender {
+    
+    [self updateRelationship];
+
+}
 @end
