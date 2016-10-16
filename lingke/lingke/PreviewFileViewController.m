@@ -12,6 +12,8 @@
 
 @property(nonatomic,strong)UIWebView *webView;
 
+@property(nonatomic,assign)float proportion;
+
 @end
 
 @implementation PreviewFileViewController
@@ -21,6 +23,9 @@
     [super viewDidLoad];
     
     self.title = @"查看附件";
+    
+    self.proportion = 20;
+    
     
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
     [self.view addSubview:self.webView];
@@ -46,6 +51,15 @@
 
     [self.webView scalesPageToFit];
     
+//    [self zoomWebView];
+    
+}
+
+-(void)zoomWebView{
+    
+    NSString *str =[NSString stringWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%f%%'",self.proportion];
+    
+    [_webView stringByEvaluatingJavaScriptFromString:str];
 }
 
 - (void)didReceiveMemoryWarning {

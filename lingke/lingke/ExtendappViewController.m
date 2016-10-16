@@ -473,6 +473,15 @@ static const NSInteger pagecount = 20;
     
     DataIndexModel *dataIndexModel = self.contentsArray[indexPath.row];
     
+    if (dataIndexModel.isread.integerValue == 0) {
+        //已读
+        cell.titleLabel.textColor = [UIColor blackColor];
+        
+    }else if (dataIndexModel.isread.integerValue == 1){
+        //未读
+        cell.titleLabel.textColor = [UIColor redColor];
+    }
+    
     cell.titleLabel.text = dataIndexModel.title;
     
     return cell;

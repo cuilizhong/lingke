@@ -354,7 +354,30 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 #pragma mark-按部分类
     
     //遍历获取部门
-    for (PersionModel *persion in self.persionModelArray) {
+    //self.persionModelArray按pydeptname首字母排序
+    
+    NSString *testStr = @"abcdefg";
+    
+    NSLog(@"[testStr substringToIndex:1] = %@",[testStr substringToIndex:1]);
+    
+    
+    NSArray *persionModelSortArray = [self.persionModelArray sortedArrayUsingComparator:
+                       ^NSComparisonResult(PersionModel *obj1, PersionModel *obj2) {
+                           // 先按照姓排序
+                           
+                           NSComparisonResult result = [[obj1.pydeptname substringToIndex:1] compare:[obj2.pydeptname substringToIndex:1]];
+                           
+                           if (result == NSOrderedSame) {
+                               
+                               result = [[obj1.pydeptname substringToIndex:2] compare:[obj2.pydeptname substringToIndex:2]];
+                           }
+                           
+                           return result;  
+                       }];  
+
+    
+    
+    for (PersionModel *persion in persionModelSortArray) {
         
         if (![self.headTitleForDeptnameArray containsObject:persion.deptname]) {
             
@@ -362,6 +385,8 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             
         }
     }
+    
+    
     
     //分类
     for (NSString *deptname in self.headTitleForDeptnameArray) {

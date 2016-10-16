@@ -40,6 +40,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 @property(nonatomic,assign)NSInteger count;
 
+@property(nonatomic,strong)UILabel *tipNoDataLabel;
+
 @end
 
 @implementation WaittingHandViewController
@@ -99,8 +101,22 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     [self hiddenSurplusLine:self.tableView];
     
+    self.tipNoDataLabel = [[UILabel alloc]init];
+    self.tipNoDataLabel.text = @"无待办";
+    self.tipNoDataLabel.font = [UIFont systemFontOfSize:14];
+    self.tipNoDataLabel.textColor = [UIColor darkGrayColor];
+    self.tipNoDataLabel.textAlignment = NSTextAlignmentCenter;
+    self.tipNoDataLabel.backgroundColor = [UIColor clearColor];
+    self.tipNoDataLabel.center = self.view.center;
+    self.tipNoDataLabel.frame = CGRectMake(0,self.tipNoDataLabel.frame.origin.y-60, self.view.frame.size.width, 30);
+    [self.view addSubview:self.tipNoDataLabel];
+    self.tipNoDataLabel.hidden = YES;
+    
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    
+    
     
 }
 
@@ -459,7 +475,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
         
-        if (dataIndexModel.isread.integerValue == 1) {
+        if (dataIndexModel.isread.integerValue == 0) {
             //已读
             cell.textLabel.textColor = [UIColor blackColor];
             
@@ -514,12 +530,19 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         [self.menusView.menusTitleArray insertObject:[NSString stringWithFormat:@"%@▼",wfname] atIndex:0];
         
         [self.menusView.tableView reloadData];
-
-        
         
         self.tableViewDataType = TableViewDataTypeWFContent;
         
         [self handDataWithFormid:wfListModel.formid];
+        
+        if (self.contentArray.count>0) {
+            
+            self.tipNoDataLabel.hidden = YES;
+            
+        }else{
+            
+            self.tipNoDataLabel.hidden = NO;
+        }
 
     }else if (self.tableViewDataType == TableViewDataTypeSort){
         
@@ -546,6 +569,15 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             
             [self handSort:NO];
             
+        }
+        
+        if (self.contentArray.count>0) {
+            
+            self.tipNoDataLabel.hidden = YES;
+            
+        }else{
+            
+            self.tipNoDataLabel.hidden = NO;
         }
         
         
@@ -631,6 +663,59 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
     item.badgeValue = [NSString stringWithFormat:@"%ld",(long)self.count];
+    
+    
+    
+    switch (self.tableViewDataType) {
+            
+        case TableViewDataTypeWFList:{
+            
+            if (self.WFListModelArray.count>0) {
+                
+                self.tipNoDataLabel.hidden = YES;
+                
+            }else{
+                
+                self.tipNoDataLabel.hidden = NO;
+            }
+            
+        }
+            
+            break;
+            
+        case TableViewDataTypeWFContent:{
+            
+            if (self.contentArray.count>0) {
+                
+                self.tipNoDataLabel.hidden = YES;
+                
+            }else{
+                
+                self.tipNoDataLabel.hidden = NO;
+            }
+            
+        }
+            
+            break;
+            
+        case TableViewDataTypeSort:{
+            
+            if (self.sortTitleArray.count>0) {
+                
+                self.tipNoDataLabel.hidden = YES;
+                
+            }else{
+                
+                self.tipNoDataLabel.hidden = NO;
+            }
+            
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)handSort:(BOOL)isReverse{

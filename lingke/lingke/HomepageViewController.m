@@ -42,6 +42,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
+    self.title = [NSString stringWithFormat:@"%@.工作易",[LocalData getUnitname]];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -87,6 +89,15 @@
     
     [self.tableView.mj_header beginRefreshing];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:0];
+    
+    item.title = @"主页";
 }
 
 
