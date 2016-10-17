@@ -18,6 +18,8 @@
 
 @property(nonatomic,copy)NSString *appurikind;
 
+@property(nonatomic,copy)NSString *total;
+
 - (void)setValueFromDic:(NSDictionary *)dic;
 
 @end

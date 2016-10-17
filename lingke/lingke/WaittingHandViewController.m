@@ -754,8 +754,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         }
     }
     
-    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
-    item.badgeValue = [NSString stringWithFormat:@"%ld",(long)self.count];
+//    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
+//    item.badgeValue = [NSString stringWithFormat:@"%ld",(long)self.count];
     
     
     

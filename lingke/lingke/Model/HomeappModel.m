@@ -20,6 +20,7 @@
     
     self.appurikind = [dic objectForKey:@"appurikind"];
     
+    self.total = [dic objectForKey:@"total"];
 }
 
 @end
