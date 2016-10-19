@@ -729,6 +729,8 @@
 				TargetAttributes = {
 					070C16291D693CF800738BC7 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = VDS8F373HT;
+						ProvisioningStyle = Automatic;
 					};
 					070C16421D693CF800738BC7 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1070,12 +1072,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VDS8F373HT;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lingke/lingke.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = lingke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkwzig.lingke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lizhong.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1087,14 +1091,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Wuzhou International Holdings Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VDS8F373HT;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lingke/lingke.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2 ";
 				INFOPLIST_FILE = lingke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkwzig.lingke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lizhong.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51fa79fc-db6d-4d6c-addf-46266cf1b3d4";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
