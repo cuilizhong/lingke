@@ -51,6 +51,13 @@
 
     [self.webView scalesPageToFit];
     
+    
+//    [UIView beginAnimations:nil context:(__bridge void * _Nullable)(self)];
+//    [UIView setAnimationDuration:0.2];
+//    self.webView.transform=CGAffineTransformMakeScale(20,20);
+//    [UIView setAnimationDelegate:self];
+//    [UIView commitAnimations];
+    
 //    [self zoomWebView];
     
 }
