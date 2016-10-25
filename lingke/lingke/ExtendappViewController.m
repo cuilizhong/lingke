@@ -120,6 +120,9 @@ static const NSInteger pagecount = 20;
     @weakify(self);
     self.menusView = [[MenusView  alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.menuHeight) menusTitle:menusTitleArray selectedBlock:^(NSString *title) {
         
+        
+        weakself.pagestart = 1;
+
         NSLog(@"title = %@",title);
         
         //控制搜索按钮显示问题
@@ -383,7 +386,22 @@ static const NSInteger pagecount = 20;
             
             id dataindex = dataindexsDic[@"dataindex"];
             
-            [weakself.contentsArray removeAllObjects];
+            
+            if ([appmenuModel.appurikind isEqualToString:@"MYHASDONE"] || [appmenuModel.appurikind isEqualToString:@"HASDONE"]) {
+                
+                if (weakself.pagestart == 1) {
+                    
+                    [weakself.contentsArray removeAllObjects];
+
+                }
+                
+            }else{
+                
+                [weakself.contentsArray removeAllObjects];
+
+            }
+
+            
             
             if ([dataindex isKindOfClass:[NSArray class]]) {
                 

@@ -45,6 +45,16 @@
     self.progressHUD.detailsLabel.font = [UIFont fontWithName:@"Arial" size:14];
 }
 
+- (void)showHUD{
+    
+    [self.progressHUD showAnimated:YES];
+    
+    self.progressHUD.mode = MBProgressHUDModeIndeterminate;
+    
+    self.progressHUD.detailsLabel.text = nil;
+    
+}
+
 - (void)hiddenHUD{
     
     [self.progressHUD hideAnimated:YES];

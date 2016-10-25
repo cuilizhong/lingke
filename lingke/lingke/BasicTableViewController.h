@@ -25,6 +25,7 @@
 
 - (void)hiddenHUDWithMessage:(NSString *)message;
 
+- (void)showHUD;
 
 - (void)handErrorWihtErrorCode:(NSString *)errorCode errorMsg:(NSString *)errorMsg expireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock;
 

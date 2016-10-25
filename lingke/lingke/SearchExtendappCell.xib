@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="43"/>
+                <frame key="frameInset" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cES-2w-2VP">
@@ -24,22 +24,36 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-Zv-KM6">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kWW-Zv-KM6">
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIZ-lT-SZf">
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="请选择">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="selectedDateAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hzN-rU-YIs"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="kWW-Zv-KM6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4pB-Qu-gSA"/>
                     <constraint firstAttribute="trailing" secondItem="kWW-Zv-KM6" secondAttribute="trailing" constant="8" id="BJc-9b-fvF"/>
                     <constraint firstItem="cES-2w-2VP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ns9-NI-BCs"/>
+                    <constraint firstItem="KIZ-lT-SZf" firstAttribute="width" secondItem="kWW-Zv-KM6" secondAttribute="width" id="RCC-AB-YPg"/>
+                    <constraint firstItem="KIZ-lT-SZf" firstAttribute="centerX" secondItem="kWW-Zv-KM6" secondAttribute="centerX" id="TMd-NB-C5z"/>
                     <constraint firstItem="kWW-Zv-KM6" firstAttribute="leading" secondItem="cES-2w-2VP" secondAttribute="trailing" constant="8" id="e1m-Ec-Wfj"/>
+                    <constraint firstItem="KIZ-lT-SZf" firstAttribute="centerY" secondItem="kWW-Zv-KM6" secondAttribute="centerY" id="lga-n7-6bG"/>
+                    <constraint firstItem="KIZ-lT-SZf" firstAttribute="height" secondItem="kWW-Zv-KM6" secondAttribute="height" id="n9U-sk-VAF"/>
                     <constraint firstItem="cES-2w-2VP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ovI-wf-vn4"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="fieldValueTextField" destination="kWW-Zv-KM6" id="SQl-6X-vNt"/>
                 <outlet property="fieldnameLabel" destination="cES-2w-2VP" id="jNi-uW-31v"/>
+                <outlet property="selectedDateButton" destination="KIZ-lT-SZf" id="M3b-bu-SHV"/>
             </connections>
         </tableViewCell>
     </objects>
