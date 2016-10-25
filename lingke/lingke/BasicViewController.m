@@ -7,6 +7,7 @@
 //
 
 #import "BasicViewController.h"
+#import "LoginViewController.h"
 
 @interface BasicViewController()
 
@@ -84,7 +85,20 @@
         
         //token失效
         //重新登录
-        [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:expireLoginFailureBlock];
+        @weakify(self);
+        [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:^(NSString *errorMessage) {
+            
+            //自动登录失败
+            LoginViewController *loginViewController = [[LoginViewController alloc]init];
+            
+            loginViewController.isInsideLogin = YES;
+            
+            [weakself presentViewController:loginViewController animated:NO completion:^{
+                
+            }];
+            
+            
+        }];
         
     }else{
         
@@ -95,5 +109,13 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+
+- (void)setBadge:(NSString *)badge forIndex:(NSInteger)index{
+    
+    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:index];
+    
+    item.badgeValue = badge;
 }
 @end

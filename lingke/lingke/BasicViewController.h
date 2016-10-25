@@ -31,4 +31,6 @@
 
 - (void)handErrorWihtErrorCode:(NSString *)errorCode errorMsg:(NSString *)errorMsg expireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock;
 
+- (void)setBadge:(NSString *)badge forIndex:(NSInteger)index;
+
 @end

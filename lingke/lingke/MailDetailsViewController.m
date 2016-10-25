@@ -79,7 +79,6 @@
     self.title = @"通讯录";
     
     UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
-    
     [singleTapGestureRecognizer setNumberOfTapsRequired:1];
     
     [self.headImageView addGestureRecognizer:singleTapGestureRecognizer];
@@ -353,6 +352,8 @@
                              
                              @"pid":self.persion.pid,
                              
+                             @"headid":(self.persion.headid.length>0)?self.persion.headid:@"",
+                             
                              @"username":self.usernameTextField.text,
                              
                              @"mobile":self.phoneNumberTextField.text,
@@ -414,21 +415,24 @@
             
             [weakself hiddenHUDWithMessage:@"已保存"];
             
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+        }else{
             
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself update];
+
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
-                [weakself hiddenHUDWithMessage:RequestFailureMessage];
+                [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
-            
-        }else{
-            
-            [weakself hiddenHUDWithMessage:xmlDoc[@"statusmsg"]];
+
             
         }
         
@@ -491,21 +495,25 @@
             
             [weakself hiddenHUDWithMessage:@"已修改"];
             
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+        }else{
             
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself update];
                 
+                
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
-                [weakself hiddenHUDWithMessage:RequestFailureMessage];
+                [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
-            
-        }else{
-            
-            [weakself hiddenHUDWithMessage:xmlDoc[@"statusmsg"]];
+         
             
         }
         
@@ -555,6 +563,8 @@
     //上传
     NSDictionary *person = @{
                              
+                             @"headid":(self.persion.headid.length>0)?self.persion.headid:@"",
+
                              @"username":self.usernameTextField.text,
                              
                              @"mobile":self.phoneNumberTextField.text,
@@ -622,22 +632,24 @@
             
             [weakself hiddenHUDWithMessage:@"已保存"];
             
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+        }else{
             
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself save];
                 
+                
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
-                [weakself hiddenHUDWithMessage:RequestFailureMessage];
+                [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
-            
-        }else{
-            
-            [weakself hiddenHUDWithMessage:xmlDoc[@"statusmsg"]];
-            
+   
         }
         
         NSLog(@"xmlDoc = %@",xmlDoc);
@@ -894,24 +906,28 @@
             
             weakself.persion.headid = headId;
             
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
-            
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
-                
-                [weakself update];
-                
-            } expireLoginFailureBlock:^(NSString *errorMessage) {
-                
-                [weakself hiddenHUDWithMessage:RequestFailureMessage];
-                
-            }];
             
         }else{
             
-            [weakself hiddenHUDWithMessage:xmlDoc[@"statusmsg"]];
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
+                
+                [weakself update];
+                
+                
+            } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                [weakself hiddenHUDWithMessage:errorMessage];
+                
+            }];
+            
+            
             
         }
-
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

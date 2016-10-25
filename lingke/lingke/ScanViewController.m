@@ -154,25 +154,28 @@
             weakself.hidesBottomBarWhenPushed = NO;
 
             
-        }else if([statuscode isEqualToString:TokenInvalidCode]){
+        }else{
             
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself submit:result];
+                
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
                 [weakself hiddenHUDWithMessage:errorMessage];
-
+                
             }];
+
             
-        }else{
             
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
-            
-            NSLog(@"errorMessage = %@",errorMessage);
-            
-            [weakself hiddenHUDWithMessage:errorMessage];
+          
             
         }
 

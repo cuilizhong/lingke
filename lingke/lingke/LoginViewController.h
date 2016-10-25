@@ -10,4 +10,6 @@
 
 @interface LoginViewController : BasicTableViewController
 
+@property(nonatomic,assign)BOOL isInsideLogin;
+
 @end

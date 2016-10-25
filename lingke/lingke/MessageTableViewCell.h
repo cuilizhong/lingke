@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MessageModel.h"
+
 @interface MessageTableViewCell : UITableViewCell
 
-- (void)showCellWithTitle:(NSString *)title;
+- (void)showCellWithMessageModel:(MessageModel *)messageModel;
 
 @end

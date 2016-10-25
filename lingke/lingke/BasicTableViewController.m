@@ -7,6 +7,7 @@
 //
 
 #import "BasicTableViewController.h"
+#import "LoginViewController.h"
 
 
 @interface BasicTableViewController()
@@ -66,20 +67,37 @@
     
 }
 
-
 - (void)handErrorWihtErrorCode:(NSString *)errorCode errorMsg:(NSString *)errorMsg expireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock{
     
     if ([errorCode isEqualToString:TokenInvalidCode]) {
         
         //token失效
         //重新登录
-        [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:expireLoginFailureBlock];
+        @weakify(self);
+        [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:^(NSString *errorMessage) {
+            
+            //自动登录失败
+            LoginViewController *loginViewController = [[LoginViewController alloc]init];
+            
+            loginViewController.isInsideLogin = YES;
+            
+            [weakself presentViewController:loginViewController animated:NO completion:^{
+                
+            }];
+            
+            
+        }];
         
     }else{
         
         [self hiddenHUDWithMessage:errorMsg];
         
     }
+}
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 @end

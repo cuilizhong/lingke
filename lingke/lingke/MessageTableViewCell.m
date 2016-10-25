@@ -8,6 +8,13 @@
 
 #import "MessageTableViewCell.h"
 
+@interface MessageTableViewCell()
+
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+
+
+@end
+
 @implementation MessageTableViewCell
 
 - (void)awakeFromNib {
@@ -31,12 +38,27 @@
     return self;
 }
 
-- (void)showCellWithTitle:(NSString *)title{
-    
+- (void)showCellWithMessageModel:(MessageModel *)messageModel{
+
     CGFloat titleLabelTop = 10;
     
-    CGFloat titleLabelLeft = 10;
+    CGFloat titleLabelLeft;
     
+    UIColor *textColor;
+    
+    if (messageModel.isread.integerValue == 0) {
+        //未读
+        titleLabelLeft = 41;
+        textColor = [UIColor redColor];
+        self.headImageView.hidden = NO;
+    }else{
+        
+        //已读
+        titleLabelLeft = 10;
+        textColor = [UIColor blackColor];
+        self.headImageView.hidden = YES;
+    }
+
     CGFloat titleLabelRight = 30;
     
     CGFloat titleLabelWidth = self.frame.size.width - titleLabelLeft - titleLabelRight;
@@ -45,7 +67,7 @@
     
     NSDictionary *attributesDic = @{NSFontAttributeName:[UIFont systemFontOfSize:14],NSForegroundColorAttributeName:[UIColor blackColor]};
     
-    NSAttributedString *locationAttributedString = [[NSAttributedString alloc] initWithString:title attributes:attributesDic];
+    NSAttributedString *locationAttributedString = [[NSAttributedString alloc] initWithString:messageModel.title attributes:attributesDic];
     
     CGSize constraint = CGSizeMake(titleLabelWidth, MAXFLOAT);
     
@@ -61,7 +83,7 @@
         
         titleLabel = [[UILabel alloc]initWithFrame:titleLabelRect];
         titleLabel.font = [UIFont systemFontOfSize:14];
-        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.textColor = textColor;
         titleLabel.tag = 101;
         
         [self addSubview:titleLabel];
@@ -71,7 +93,8 @@
         titleLabel.frame = titleLabelRect;
     }
     
-    titleLabel.text = title;
+    
+    titleLabel.text = messageModel.title;
     
 }
 

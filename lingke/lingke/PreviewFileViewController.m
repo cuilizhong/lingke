@@ -18,11 +18,19 @@
 
 @implementation PreviewFileViewController
 
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
     self.title = @"查看附件";
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
     
     self.proportion = 20;
     
@@ -37,7 +45,8 @@
     
     if([self.filepath.pathExtension rangeOfString:@"txt"].location !=NSNotFound){
         
-        [self.webView loadData:data MIMEType:@"text/plain" textEncodingName:@"UTF-8" baseURL:nil];
+        
+       [self.webView loadData:data MIMEType:@"text/plain" textEncodingName:@"UTF-8" baseURL:nil];
         
     }else if([self.filepath.pathExtension rangeOfString:@"gif"].location !=NSNotFound){
         

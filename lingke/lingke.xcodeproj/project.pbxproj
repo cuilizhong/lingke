@@ -33,6 +33,7 @@
 		070C51C61DAA281300F42D25 /* SearchDataindexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C51DAA281300F42D25 /* SearchDataindexModel.m */; };
 		070C51C91DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */; };
 		070C51CC1DAA426300F42D25 /* SearchMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070C51CB1DAA426300F42D25 /* SearchMessageViewController.m */; };
+		071258CB1DBF2E5B0010C154 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 071258CA1DBF2E5B0010C154 /* MessageTableViewCell.xib */; };
 		072133601DAB85FF00C072EA /* Attachment+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721335D1DAB85FF00C072EA /* Attachment+CoreDataProperties.m */; };
 		072133611DAB85FF00C072EA /* Attachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0721335F1DAB85FF00C072EA /* Attachment.m */; };
 		072190721D7290BA00EA832B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 072190711D7290BA00EA832B /* XMLDictionary.m */; };
@@ -171,6 +172,7 @@
 		070C51C81DAA2E0000F42D25 /* SearchExtendappDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchExtendappDetailsViewController.m; sourceTree = "<group>"; };
 		070C51CA1DAA426300F42D25 /* SearchMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMessageViewController.h; sourceTree = "<group>"; };
 		070C51CB1DAA426300F42D25 /* SearchMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMessageViewController.m; sourceTree = "<group>"; };
+		071258CA1DBF2E5B0010C154 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		0721335C1DAB85FF00C072EA /* Attachment+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Attachment+CoreDataProperties.h"; path = "lingke/Attachment+CoreDataProperties.h"; sourceTree = "<group>"; };
 		0721335D1DAB85FF00C072EA /* Attachment+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Attachment+CoreDataProperties.m"; path = "lingke/Attachment+CoreDataProperties.m"; sourceTree = "<group>"; };
 		0721335E1DAB85FF00C072EA /* Attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attachment.h; path = lingke/Attachment.h; sourceTree = "<group>"; };
@@ -594,6 +596,7 @@
 				070C1A791D8015A200D6E726 /* MessageDetailsViewController.m */,
 				070C1A751D800CEA00D6E726 /* MessageTableViewCell.h */,
 				070C1A761D800CEA00D6E726 /* MessageTableViewCell.m */,
+				071258CA1DBF2E5B0010C154 /* MessageTableViewCell.xib */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				070C163A1D693CF800738BC7 /* Assets.xcassets in Resources */,
 				072190821D72D18500EA832B /* HomepageCollectionViewCell.xib in Resources */,
 				070C16381D693CF800738BC7 /* Main.storyboard in Resources */,
+				071258CB1DBF2E5B0010C154 /* MessageTableViewCell.xib in Resources */,
 				07B44B931D7807040023214C /* MailListTableViewHeadView.xib in Resources */,
 				07B44B8E1D77D33C0023214C /* MailListTableViewCell.xib in Resources */,
 				0721907D1D72CF8000EA832B /* HomepageCell.xib in Resources */,
@@ -1079,7 +1083,7 @@
 				INFOPLIST_FILE = lingke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lizhong.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkwzig.lingke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1098,7 +1102,7 @@
 				INFOPLIST_FILE = lingke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lizhong.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkwzig.lingke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

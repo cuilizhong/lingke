@@ -300,26 +300,25 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             //处理数据
             [weakself handData];
             
-        }else if([statuscode isEqualToString:TokenInvalidCode]){
+        }else{
             
-            //处理token过期
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself requestMailList];
                 
+                
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
-                [weakself showHUDWithMessage:errorMessage];
+                [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
             
-            
-        }else{
-            
-            //数据获取失败
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
-            
-            [weakself showHUDWithMessage:errorMessage];
         }
         
     } requestFail:^(NSError *error) {

@@ -274,8 +274,8 @@ static const NSInteger pagecount = 20;
     
     MessageModel *messageModel = self.dataArray[indexPath.row];
     
-    [cell showCellWithTitle:messageModel.title];
-    
+    [cell showCellWithMessageModel:messageModel];
+        
     return cell;
 }
 

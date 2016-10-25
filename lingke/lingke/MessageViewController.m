@@ -342,6 +342,24 @@ static const NSInteger pagecount = 20;
 
             }
             
+            //计算下面的数字，只有加载ALL才计算
+            if ([kind isEqualToString:@"ALL"]) {
+                
+                int i = 0;
+                
+                for (MessageModel *tmpMessageModel in weakself.messageContentsArray) {
+                    
+                    if (tmpMessageModel.isread.integerValue == 0) {
+                        
+                        i++;
+                    }
+                }
+                
+                [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:3];
+                
+            }
+ 
+            
         }else{
             
             NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
@@ -402,7 +420,7 @@ static const NSInteger pagecount = 20;
     
     MessageModel *messageModel = self.messageContentsArray[indexPath.row];
     
-    [cell showCellWithTitle:messageModel.title];
+    [cell showCellWithMessageModel:messageModel];
     
     return cell;
 }
@@ -447,12 +465,7 @@ static const NSInteger pagecount = 20;
     dataIndexViewController.title = messageModel.title;
     dataIndexViewController.url = messageModel.url;
     
-    
     self.isSearch = YES;
-
-//    MessageDetailsViewController *messageDetailsViewController = [[MessageDetailsViewController alloc]init];
-//    
-//    messageDetailsViewController.messageModel = messageModel;
     
     [self.navigationController pushViewController:dataIndexViewController animated:YES];
     

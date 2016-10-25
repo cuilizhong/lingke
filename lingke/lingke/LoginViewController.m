@@ -271,7 +271,18 @@
                     
                     MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
                     
-                    [weakself.navigationController pushViewController:mainTabBarController animated:YES];
+                    if (weakself.isInsideLogin) {
+                        
+                        [weakself dismissViewControllerAnimated:YES completion:^{
+                            
+                        }];
+                        
+                    }else{
+                        
+                        [weakself.navigationController pushViewController:mainTabBarController animated:YES];
+
+                    }
+                    
 
                     
                 }else{

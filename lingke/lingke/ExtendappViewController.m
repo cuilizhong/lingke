@@ -411,17 +411,23 @@ static const NSInteger pagecount = 20;
             
             
             
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+        }else{
             
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself requestListDataWithAppmenuModel:appmenuModel];
-                
+
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
                 [weakself hiddenHUDWithMessage:errorMessage];
-                
+
             }];
+
         }
         
     } requestFail:^(NSError *error) {
@@ -465,25 +471,32 @@ static const NSInteger pagecount = 20;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    AppurikindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AppurikindTableViewCell"];
+    static NSString *cellID = @"ExtendappViewControllerCellID";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
     if (!cell) {
         
-        cell = [[NSBundle mainBundle]loadNibNamed:@"AppurikindTableViewCell" owner:self options:nil].lastObject;
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
     DataIndexModel *dataIndexModel = self.contentsArray[indexPath.row];
     
     if (dataIndexModel.isread.integerValue == 0) {
-        //已读
-        cell.titleLabel.textColor = [UIColor blackColor];
+        //未读
+        cell.textLabel.textColor = [UIColor redColor];
+        
+        cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
         
     }else if (dataIndexModel.isread.integerValue == 1){
-        //未读
-        cell.titleLabel.textColor = [UIColor redColor];
+        //已读
+        cell.textLabel.textColor = [UIColor blackColor];
+        
+        cell.imageView.image = nil;
+
     }
-    
-    cell.titleLabel.text = dataIndexModel.title;
+
+    cell.textLabel.text = dataIndexModel.title;
     
     return cell;
 }

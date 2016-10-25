@@ -203,6 +203,17 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 [weakself.dataIndexModelArray addObject:dataIndexModel];
             }
             
+            //计算下面的数字
+            int i = 0;
+            for (DataIndexModel *tmpDataIndexModel in weakself.dataIndexModelArray) {
+                
+                if (tmpDataIndexModel.isread.integerValue == 0) {
+                    i++;
+                }
+                
+            }
+            [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:1];
+            
             
             
             if (weakself.WFListModelArray.count>0) {
@@ -212,11 +223,20 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             }
             
             
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
             
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            
+        }else{
+            
+            
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself request];
+                
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
@@ -226,17 +246,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
-            
-        }else{
-            
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
-            
-            NSLog(@"errorMessage = %@",errorMessage);
-            
-            [weakself.tableView.mj_header endRefreshing];
-            
-            [weakself hiddenHUDWithMessage:errorMessage];
-            
             
         }
         
@@ -332,34 +341,29 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             }
             
             
-        }else if([xmlDoc[@"statuscode"] isEqualToString:TokenInvalidCode]){
+        }else{
             
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself requestClass];
+                
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
                 [weakself.tableView.mj_header endRefreshing];
-
+                
                 
                 [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
-            
-        } else{
-            
-            [weakself.tableView.mj_header endRefreshing];
-            
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
-            
-            NSLog(@"errorMessage = %@",errorMessage);
-            
-            [weakself hiddenHUDWithMessage:errorMessage];
 
-            
         }
-        
         
     } requestFail:^(NSError *error) {
         

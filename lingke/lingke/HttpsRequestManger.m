@@ -210,10 +210,14 @@ static NSString *testURL = @"http://www.linkersoft.com:9009/m1srv/xml/person";
                     
                 }else{
                     
+//                    NSString *errorCode = [loginXmlDoc objectForKey:@"statuscode"];
                     
                     NSString *errorMsg = [loginXmlDoc objectForKey:@"statusmsg"];
                     
                     expireLoginFailureBlock(errorMsg);
+                    
+                    
+                   
                 }
                 
                 

@@ -123,9 +123,21 @@
     
     UIStoryboard *storyborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
+    PersionModel *persionModel = self.dataArray[indexPath.row];
+    
     MailDetailsViewController *mailDetailsViewController = [storyborad instantiateViewControllerWithIdentifier:@"MailDetailsViewController"];
     
-    mailDetailsViewController.persion = self.dataArray[indexPath.row];
+    if ([persionModel.kind isEqualToString:@"SYSTEM"]) {
+        
+        mailDetailsViewController.mailDetailsStatus = MailDetailsStatus_SYSTEM;
+        
+    }else if ([persionModel.kind isEqualToString:@"PRIVATE"]){
+        
+        mailDetailsViewController.mailDetailsStatus = MailDetailsStatus_PRIVATE;
+        
+    }
+    
+    mailDetailsViewController.persion = persionModel;
     
     mailDetailsViewController.homeappModel = self.homeappModel;
     
@@ -304,28 +316,26 @@
             [weakself.tableView reloadData];
             
             
-        }else if([statuscode isEqualToString:TokenInvalidCode]){
+        }else{
             
-            //处理token过期
-            [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:^{
+            
+            NSString *errorMsg = [xmlDoc objectForKey:@"statusmsg"];
+            
+            NSString *errorCode = [xmlDoc objectForKey:@"statuscode"];
+            
+            
+            [weakself handErrorWihtErrorCode:errorCode errorMsg:errorMsg expireLoginSuccessBlock:^{
                 
                 [weakself requestMailList];
                 
+                
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
-                [weakself showHUDWithMessage:errorMessage];
+                [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
             
-            
-        }else{
-            
-            //数据获取失败
-            NSString *errorMessage = xmlDoc[@"statusmsg"];
-            
-            [weakself showHUDWithMessage:errorMessage];
         }
-        
     } requestFail:^(NSError *error) {
         
         [weakself.tableView.mj_header endRefreshing];
