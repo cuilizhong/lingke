@@ -120,6 +120,8 @@
             
             weakself.isChangePasswordSuccess = YES;
             
+            [LocalData setPassword:weakself.confirmTextField.text];
+            
             [weakself hiddenHUDWithMessage:@"密码修改成功"];
             
         }else{

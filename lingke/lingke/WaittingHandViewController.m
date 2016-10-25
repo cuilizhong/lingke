@@ -214,6 +214,11 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             }
             [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:1];
             
+            if (i == 0) {
+                
+                [weakself setBadge:nil forIndex:3];
+                
+            }
             
             
             if (weakself.WFListModelArray.count>0) {

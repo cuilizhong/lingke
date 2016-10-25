@@ -449,9 +449,7 @@
 - (void)update:(PersionModel *)persionModel{
     
     //更新 (从数据库找到-->更新)
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSManagedObjectContext *context = self.managedObjectContext;
     
     NSEntityDescription *stu = [NSEntityDescription entityForName:@"Persion" inManagedObjectContext:context];
     
@@ -534,7 +532,7 @@
 - (void)updateFilename:(NSString *)filename filepath:(NSString *)filepath{
     
     //更新 (从数据库找到-->更新)
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = delegate.managedObjectContext;
     

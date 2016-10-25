@@ -68,6 +68,9 @@
  */
 @property (nonatomic,assign)BOOL isModify;
 
+
+@property (nonatomic,copy)NSString *addHeadid;
+
 @end
 
 @implementation MailDetailsViewController
@@ -463,7 +466,9 @@
                              
                              };
     
-    [self.persion setValueFromDic:person];
+    self.persion.isattention = person[@"isattention"];
+    self.persion.isfriend = person[@"isfriend"];
+    self.persion.ismygroup = person[@"ismygroup"];
     
     NSDictionary *requestdata = @{
                                   
@@ -563,7 +568,7 @@
     //上传
     NSDictionary *person = @{
                              
-                             @"headid":(self.persion.headid.length>0)?self.persion.headid:@"",
+                             @"headid":(self.addHeadid.length>0)?self.addHeadid:@"",
 
                              @"username":self.usernameTextField.text,
                              
@@ -725,9 +730,11 @@
 #pragma mark-设为常用联系人
 - (void)insertPersionToLocal{
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [delegate update:self.persion];
+    
+   
 }
 
 - (IBAction)maleAction:(id)sender {
@@ -749,6 +756,8 @@
 }
 
 - (void)singleTap:(UITapGestureRecognizer *)sender{
+    
+    [self.view endEditing:YES];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择照片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -905,6 +914,7 @@
             }];
             
             weakself.persion.headid = headId;
+            weakself.addHeadid = headId;
             
             
         }else{

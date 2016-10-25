@@ -216,12 +216,28 @@
             }
             
             //待办和信息的数量
-            UITabBarItem *item = [weakself.tabBarController.tabBar.items objectAtIndex:1];
-            item.badgeValue = [NSString stringWithFormat:@"%@",[HomeFunctionModel sharedInstance].homeTODOAppModel.total];
+            if ([HomeFunctionModel sharedInstance].homeTODOAppModel.total.integerValue>0) {
+                
+                [weakself setBadge:[HomeFunctionModel sharedInstance].homeTODOAppModel.total forIndex:1];
+                
+            }else{
+                
+                [weakself setBadge:nil forIndex:1];
+
+            }
             
-            UITabBarItem *messageitem = [weakself.tabBarController.tabBar.items objectAtIndex:3];
-            messageitem.badgeValue = [NSString stringWithFormat:@"%@",[HomeFunctionModel sharedInstance].messageAppModel.total];
             
+            if ([HomeFunctionModel sharedInstance].messageAppModel.total.integerValue>0) {
+                
+                [weakself setBadge:[HomeFunctionModel sharedInstance].messageAppModel.total forIndex:3];
+                
+            }else{
+                
+                [weakself setBadge:nil forIndex:3];
+                
+            }
+            
+          
             
             //如果通讯录存在
             if ([HomeFunctionModel sharedInstance].orgAppModel) {
