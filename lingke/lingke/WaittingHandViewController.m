@@ -9,12 +9,13 @@
 #import "WaittingHandViewController.h"
 #import "DataIndexModel.h"
 #import "WFListModel.h"
-#import "MenusView.h"
 #import "DataIndexViewController.h"
 #import "MJRefresh.h"
 #import "SPullDownMenuView.h"
 #import "ConfigureColor.h"
 
+
+static CGFloat menuHeight = 30.0f;
 
 typedef NS_ENUM(NSInteger, TableViewDataType)
 {
@@ -26,20 +27,19 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 @interface WaittingHandViewController ()<UITableViewDelegate,UITableViewDataSource,SPullDownMenuViewDelegate>
 
+//所有的数据
 @property(nonatomic,strong)NSMutableArray *dataIndexModelArray;
 
+//分类
 @property(nonatomic,strong)NSMutableArray *WFListModelArray;
+
+//展示的数据
+@property(nonatomic,strong)NSMutableArray *contentArray;
+
 
 @property(nonatomic,strong)UITableView *tableView;
 
-@property(nonatomic,strong)MenusView *menusView;
-
-@property(nonatomic,assign)TableViewDataType tableViewDataType;
-
-@property(nonatomic,strong)NSMutableArray *contentArray;
-
-@property(nonatomic,strong)NSMutableArray *sortTitleArray;
-
+//未读总数
 @property(nonatomic,assign)NSInteger count;
 
 @property(nonatomic,strong)UILabel *tipNoDataLabel;
@@ -51,8 +51,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 @property(nonatomic,strong)SPullDownMenuView *spullDownMenuView;
 
-@property(nonatomic,strong)NSIndexPath *index;
-
 @end
 
 @implementation WaittingHandViewController
@@ -63,46 +61,15 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     self.title = @"待办";
     
-    self.currentFormid = @"ALL";
-    
-    self.tableViewDataType = TableViewDataTypeWFContent;
-    
     self.dataIndexModelArray = [[NSMutableArray alloc]init];
     
     self.WFListModelArray = [[NSMutableArray alloc]init];
     
     self.contentArray = [[NSMutableArray alloc]init];
     
-//    self.sortTitleArray = [[NSMutableArray alloc]initWithObjects:@"创建时间倒序",@"创建时间正序", nil];
-//    
-//    self.titleMenus = @[@[@"综合排序", @"价格从低到高", @"价格从高到底", @"信用排序"], @[@"销量优先",@"按倒序"]];
-//    
-//    self.spullDownMenuView = [[SPullDownMenuView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30) withTitle:self.titleMenus withSelectColor:[ConfigureColor sharedInstance].highBlue];
-//    
-//    self.spullDownMenuView.delegate = self;
-//    
-//    [self.view addSubview:self.spullDownMenuView];
     
     @weakify(self)
-    self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"所有待办▼",@"创建时间倒序▼", nil] selectedBlock:^(NSString *title) {
-        
-        if ([title containsString:@"创建时间"] ) {
-            
-            weakself.tableViewDataType = TableViewDataTypeSort;
-
-        }else{
-            weakself.tableViewDataType = TableViewDataTypeWFList;
-
-            
-        }
-        
-        
-        [weakself.tableView reloadData];
-    }];
-    
-//    [self.view addSubview:self.menusView];
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.menusView.frame.size.height, self.view.frame.size.width,self.view.frame.size.height - self.menusView.frame.size.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,menuHeight, self.view.frame.size.width,self.view.frame.size.height - menuHeight - 64) style:UITableViewStylePlain];
     
     self.tableView.delegate = self;
     
@@ -132,9 +99,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    
     
 }
 
@@ -370,12 +334,17 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 [weakself.spullDownMenuView removeFromSuperview];
             }
             
-            weakself.spullDownMenuView = [[SPullDownMenuView alloc] initWithFrame:CGRectMake(0, 0, weakself.view.frame.size.width, 30) withTitle:weakself.titleMenus withSelectColor:[ConfigureColor sharedInstance].highBlue];
+            weakself.spullDownMenuView = [[SPullDownMenuView alloc] initWithFrame:CGRectMake(0, 0, weakself.view.frame.size.width, menuHeight) withTitle:weakself.titleMenus withSelectColor:[ConfigureColor sharedInstance].highBlue];
             
             weakself.spullDownMenuView.delegate = self;
             
             [weakself.view addSubview:self.spullDownMenuView];
             
+            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0,29.5, weakself.spullDownMenuView.frame.size.width, 0.5)];
+            
+            lineView.backgroundColor = [UIColor lightGrayColor];
+            
+            [weakself.spullDownMenuView addSubview:lineView];
             
             //处理分类
             if (weakself.dataIndexModelArray.count>0) {
@@ -417,48 +386,6 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     }];
 }
 
-//#pragma mark-暂时不需要
-//- (void)handClassWithWfList:(NSArray *)wfList{
-//    
-//    NSMutableArray *array = [[NSMutableArray alloc]init];
-//    
-//    for (WFListModel *wFListModel in wfList) {
-//        
-//        if (![array containsObject:wFListModel.formid]) {
-//            
-//            [array addObject:wFListModel.formid];
-//        }
-//    }
-//    
-//    //array中是种类
-//    for (NSString *formid in array) {
-//        
-//        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-//        NSString *wfname;
-//        NSInteger count = 0;;
-//        
-//        for (WFListModel *wFListModel in wfList) {
-//            
-//            if ([wFListModel.formid isEqualToString:formid]) {
-//                
-//                wfname = wFListModel.wfname;
-//                
-//                count++;
-//            }
-//        }
-//        
-//        [dic setObject:wfname forKey:@"wfname"];
-//        [dic setObject:[NSString stringWithFormat:@"%ld",count] forKey:@"count"];
-//        [dic setObject:formid forKey:@"formid"];
-//        [self.WFListModelArray addObject:dic];
-//        
-//    }
-//    
-//    NSLog(@"self.wflistModelArray = %@",self.WFListModelArray);
-//    
-//}
-
-
 
 #pragma mark-UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -467,107 +394,40 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (self.tableViewDataType == TableViewDataTypeWFList) {
-        
-        return self.WFListModelArray.count;
+    return self.contentArray.count;
 
-    }else if(self.tableViewDataType == TableViewDataTypeWFContent){
-        
-        return self.contentArray.count;
-    }else{
-        
-        return self.sortTitleArray.count;
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.tableViewDataType == TableViewDataTypeWFList) {
+    static NSString *cellID = @"ContentCellID";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (!cell) {
         
-        static NSString *cellID = @"cellID";
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            
-            cell.textLabel.font = [UIFont systemFontOfSize:15];
-        }
-        
-        WFListModel *wFListModel = self.WFListModelArray[indexPath.row];
-        
-        
-        NSMutableAttributedString *wfname = [[NSMutableAttributedString alloc] initWithString:wFListModel.wfname];
-        
-        NSMutableAttributedString *leftAttributed = [[NSMutableAttributedString alloc] initWithString:@" (" attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-        
-        
-        NSMutableAttributedString *wfnameAttributed = [[NSMutableAttributedString alloc] initWithString:wFListModel.count attributes:@{NSForegroundColorAttributeName:[UIColor blueColor]}];
-        
-        NSMutableAttributedString *rightAttributed = [[NSMutableAttributedString alloc] initWithString:@")" attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-        
-        [wfname appendAttributedString:leftAttributed];
-        
-        [wfname appendAttributedString:wfnameAttributed];
-        
-        [wfname appendAttributedString:rightAttributed];
-        
-        cell.textLabel.attributedText = wfname;
-        
-        return cell;
-        
-    }else if(self.tableViewDataType == TableViewDataTypeWFContent){
-        
-        static NSString *cellID = @"ContentCellID";
-
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            
-            cell.textLabel.font = [UIFont systemFontOfSize:15];
-        }
-        
-        DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
-        
-        if (dataIndexModel.isread.integerValue == 0) {
-            //未读
-            cell.textLabel.textColor = [UIColor redColor];
-            cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
-            
-        }else if (dataIndexModel.isread.integerValue == 1){
-            //已读
-            cell.textLabel.textColor = [UIColor blackColor];
-            
-            cell.imageView.image = nil;
-        }
-        
-        cell.textLabel.text = dataIndexModel.title;
-        
-        return cell;
-        
-    }else{
-        
-        static NSString *cellID = @"SortCellID";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            
-            cell.textLabel.font = [UIFont systemFontOfSize:15];
-        }
-        
-        
-        cell.textLabel.text = self.sortTitleArray[indexPath.row];
-        
-        return cell;
-        
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
     }
     
+    DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
+    
+    if (dataIndexModel.isread.integerValue == 0) {
+        //未读
+        cell.textLabel.textColor = [UIColor redColor];
+        cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
+        
+    }else if (dataIndexModel.isread.integerValue == 1){
+        //已读
+        cell.textLabel.textColor = [UIColor blackColor];
+        
+        cell.imageView.image = nil;
+    }
+    
+    cell.textLabel.text = dataIndexModel.title;
+    
+    return cell;
     
 }
 
@@ -580,98 +440,72 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //处理数据
-    if (self.tableViewDataType == TableViewDataTypeWFList) {
-        
-        WFListModel *wfListModel = self.WFListModelArray[indexPath.row];
-        
-        self.currentFormid = wfListModel.formid;
-        
-        NSString *wfname = wfListModel.wfname;
-        [self.menusView.menusTitleArray removeObjectAtIndex:0];
-        [self.menusView.menusTitleArray insertObject:[NSString stringWithFormat:@"%@▼",wfname] atIndex:0];
-        
-        self.menusView.selectedTitle = [NSString stringWithFormat:@"%@▼",wfname];
-        
-        [self.menusView.tableView reloadData];
-        
-        self.tableViewDataType = TableViewDataTypeWFContent;
-        
-        [self handDataWithFormid:wfListModel.formid];
-        
-        if (self.contentArray.count>0) {
-            
-            self.tipNoDataLabel.hidden = YES;
-            
-        }else{
-            
-            self.tipNoDataLabel.hidden = NO;
-        }
+    //进入待办
+    DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
+    
+    DataIndexViewController *viewController =  [[DataIndexViewController alloc]init];
+    
+    viewController.title = dataIndexModel.title;
+    
+    viewController.url = dataIndexModel.openurl;
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+    
+    self.hidesBottomBarWhenPushed = NO;
+}
 
-    }else if (self.tableViewDataType == TableViewDataTypeSort){
+
+
+#pragma mark-处理数量
+- (void)handCount{
+    
+    self.currentFormid = @"ALL";
+    
+    [self hiddenHUD];
+    
+    [self.tableView.mj_header endRefreshing];
+
+    //计算每个分类下有多少条
+    for (WFListModel *wflistModel in self.WFListModelArray) {
         
-        self.tableViewDataType = TableViewDataTypeWFContent;
+        NSInteger count = 0;
         
-        if (indexPath.row == 0) {
-            //@"所有待办▼",@"创建时间倒序▼"
-            [self.menusView.menusTitleArray removeLastObject];
-
-            [self.menusView.menusTitleArray addObject:@"创建时间倒序▼"];
-            self.menusView.selectedTitle = @"创建时间倒序▼";
-            [self.menusView.tableView reloadData];
-
+        for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
             
-            [self handSort:YES];
-            
-        }else if(indexPath.row == 1){
-            
-            [self.menusView.menusTitleArray removeLastObject];
-            [self.menusView.menusTitleArray addObject:@"创建时间正序▼"];
-            self.menusView.selectedTitle = @"创建时间正序▼";
-
-            [self.menusView.tableView reloadData];
-            
-            [self handSort:NO];
+            if ([dataIndexModel.formid isEqualToString:wflistModel.formid]) {
+                
+                count++;
+            }
             
         }
         
-        if (self.contentArray.count>0) {
-            
-            self.tipNoDataLabel.hidden = YES;
-            
-        }else{
-            
-            self.tipNoDataLabel.hidden = NO;
-        }
-        
-        
-    }else if (self.tableViewDataType == TableViewDataTypeWFContent){
-        
-        //进入待办
-        DataIndexModel *dataIndexModel = self.contentArray[indexPath.row];
-        
-        DataIndexViewController *viewController =  [[DataIndexViewController alloc]init];
-        
-        viewController.title = dataIndexModel.title;
-        
-        viewController.url = dataIndexModel.openurl;
-        
-//        viewController.dataIndexModel = dataIndexModel;
-        
-        self.hidesBottomBarWhenPushed = YES;
-        
-        [self.navigationController pushViewController:viewController animated:YES];
-        
-        self.hidesBottomBarWhenPushed = NO;
+        wflistModel.count = [NSString stringWithFormat:@"%ld",count];
         
     }
     
+    //所有待办有多少条数据
+    WFListModel *wflistModel = self.WFListModelArray[0];
+    
+    wflistModel.count =  [NSString stringWithFormat:@"%lu",(unsigned long)self.dataIndexModelArray.count];
     
     
+    //计算有多少是未读
+    self.count = 0;
     
+    for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
+        
+        if (dataIndexModel.isread.integerValue == 0) {
+            
+            self.count++;
+        }
+    }
     
+    [self handDataWithFormid:self.currentFormid];
 }
 
+#pragma mark-显示数据
 - (void)handDataWithFormid:(NSString *)formid{
     
     [self.contentArray removeAllObjects];
@@ -681,6 +515,19 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         [self.contentArray addObjectsFromArray:self.dataIndexModelArray];
         
         [self.tableView reloadData];
+        
+        
+        if (self.contentArray.count>0) {
+            
+            self.tipNoDataLabel.hidden = YES;
+            
+        }else{
+            
+            self.tipNoDataLabel.hidden = NO;
+            
+        }
+        
+        
         
         return;
     }
@@ -693,145 +540,40 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         }
     }
     
-    [self.tableView reloadData];
-    
-    
-    switch (self.tableViewDataType) {
-            
-        case TableViewDataTypeWFList:{
-            
-            if (self.WFListModelArray.count>0) {
-                
-                self.tipNoDataLabel.hidden = YES;
-                
-            }else{
-                
-                self.tipNoDataLabel.hidden = NO;
-            }
-            
-        }
-            
-            break;
-            
-        case TableViewDataTypeWFContent:{
-            
-            if (self.contentArray.count>0) {
-                
-                self.tipNoDataLabel.hidden = YES;
-                
-            }else{
-                
-                self.tipNoDataLabel.hidden = NO;
-            }
-            
-        }
-            
-            break;
-            
-        case TableViewDataTypeSort:{
-            
-            if (self.sortTitleArray.count>0) {
-                
-                self.tipNoDataLabel.hidden = YES;
-                
-            }else{
-                
-                self.tipNoDataLabel.hidden = NO;
-            }
-            
-        }
-            
-            break;
-            
-        default:
-            break;
-    }
-    
-}
-
-
-- (void)handCount{
-    
-    NSLog(@"调用");
-    
-    [self hiddenHUD];
-    
-    [self.tableView.mj_header endRefreshing];
-
-    
-    for (WFListModel *wflistModel in self.WFListModelArray) {
+    if (self.contentArray.count>0) {
         
-        NSInteger count = 0;
+        self.tipNoDataLabel.hidden = YES;
         
-        for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
-            
-            if ([dataIndexModel.formid isEqualToString:wflistModel.formid]) {
-                
-                count++;
-            }
-            
-            if (dataIndexModel.isread.integerValue == 0) {
-                
-                self.count++;
-            }
-        }
+    }else{
         
-        wflistModel.count = [NSString stringWithFormat:@"%ld",count];
+        self.tipNoDataLabel.hidden = NO;
         
     }
-    
-    WFListModel *wflistModel = self.WFListModelArray[0];
-    
-    wflistModel.count =  [NSString stringWithFormat:@"%lu",(unsigned long)self.dataIndexModelArray.count];
-    
-    [self.contentArray removeAllObjects];
-    
-    [self.contentArray addObjectsFromArray:self.dataIndexModelArray];
     
     [self.tableView reloadData];
-    
-    
-    self.count = 0;
-    
-    for (DataIndexModel *dataIndexModel in self.dataIndexModelArray) {
-        
-        if (dataIndexModel.isread.integerValue == 0) {
-            
-            self.count++;
-        }
-    }
-    
-//    UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
-//    item.badgeValue = [NSString stringWithFormat:@"%ld",(long)self.count];
-    
-    
-    
-    
-    [self handDataWithFormid:self.currentFormid];
-
 }
 
+#pragma mark-排序
 - (void)handSort:(BOOL)isReverse{
     
-    [self.contentArray removeAllObjects];
+    [self handDataWithFormid:self.currentFormid];
     
     if (isReverse) {
-        
-        [self.contentArray addObjectsFromArray:self.dataIndexModelArray];
+        //倒序
         
     }else{
         
         NSMutableArray *tmpArray = [[NSMutableArray alloc]init];
         
         //先正序
-        for (NSInteger i = self.dataIndexModelArray.count-1; i>=0; i--) {
+        for (NSInteger i = self.contentArray.count-1; i>=0; i--) {
             
-            DataIndexModel *dataIndexModel = self.dataIndexModelArray[i];
+            DataIndexModel *dataIndexModel = self.contentArray[i];
             
             [tmpArray addObject:dataIndexModel];
         }
         
-
+        [self.contentArray removeAllObjects];
         
         for (DataIndexModel *dataIndexModel in tmpArray) {
             
@@ -849,32 +591,39 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             }
         }
         
+    }
+    
+    if (self.contentArray.count>0) {
         
+        self.tipNoDataLabel.hidden = YES;
         
+    }else{
+        
+        self.tipNoDataLabel.hidden = NO;
+
     }
     
     [self.tableView reloadData];
-
-    
     
 }
 
 #pragma mark-SPullDownMenuViewDelegate
 - (void)pullDownMenuView:(SPullDownMenuView *)menu didSelectedIndex:(NSIndexPath *)indexPath{
     
-    //选择
-    
-    self.index = indexPath;
-    
-    WFListModel *wfListModel = self.WFListModelArray[indexPath.row];
+    if (indexPath.row == 0) {
+        
+        WFListModel *tmpWfListModel = self.WFListModelArray[indexPath.section];
+        
+        self.currentFormid = tmpWfListModel.formid;
+        
+        [self handDataWithFormid:self.currentFormid];
 
-    self.tableViewDataType = TableViewDataTypeWFContent;
+    }else{
+        
+        [self handSort:indexPath.section];
     
-    [self handDataWithFormid:wfListModel.formid];
-    
-    [self.tableView reloadData];
+    }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
