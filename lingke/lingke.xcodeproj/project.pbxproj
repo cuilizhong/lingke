@@ -62,6 +62,8 @@
 		0731B7391DACE26700D9A646 /* LocationManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0731B7381DACE26700D9A646 /* LocationManger.m */; };
 		0734DF7C1DA32C8A0058B1A3 /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */; };
 		0734DFC41DA4A3B90058B1A3 /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0734DFC31DA4A3B90058B1A3 /* ErrorViewController.m */; };
+		073606C91DC047E300DDAB6D /* SMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 073606C61DC047E300DDAB6D /* SMenuButton.m */; };
+		073606CA1DC047E300DDAB6D /* SPullDownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073606C81DC047E300DDAB6D /* SPullDownMenuView.m */; };
 		073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D01D73DC090013DB67 /* NewInfoImageView.m */; };
 		073A54D41D73E0600013DB67 /* NewsinfoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D31D73E0600013DB67 /* NewsinfoDetailsViewController.m */; };
 		073A54D71D7404700013DB67 /* ExtendappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073A54D61D7404700013DB67 /* ExtendappViewController.m */; };
@@ -230,6 +232,10 @@
 		0734DF7B1DA32C8A0058B1A3 /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
 		0734DFC21DA4A3B90058B1A3 /* ErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorViewController.h; sourceTree = "<group>"; };
 		0734DFC31DA4A3B90058B1A3 /* ErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorViewController.m; sourceTree = "<group>"; };
+		073606C51DC047E300DDAB6D /* SMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMenuButton.h; path = lingke/SMenu/SMenuButton.h; sourceTree = "<group>"; };
+		073606C61DC047E300DDAB6D /* SMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMenuButton.m; path = lingke/SMenu/SMenuButton.m; sourceTree = "<group>"; };
+		073606C71DC047E300DDAB6D /* SPullDownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPullDownMenuView.h; path = lingke/SMenu/SPullDownMenuView.h; sourceTree = "<group>"; };
+		073606C81DC047E300DDAB6D /* SPullDownMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPullDownMenuView.m; path = lingke/SMenu/SPullDownMenuView.m; sourceTree = "<group>"; };
 		073A54CF1D73DC090013DB67 /* NewInfoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInfoImageView.h; sourceTree = "<group>"; };
 		073A54D01D73DC090013DB67 /* NewInfoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInfoImageView.m; sourceTree = "<group>"; };
 		073A54D21D73E0600013DB67 /* NewsinfoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsinfoDetailsViewController.h; sourceTree = "<group>"; };
@@ -503,6 +509,10 @@
 		0721906F1D72907800EA832B /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				073606C51DC047E300DDAB6D /* SMenuButton.h */,
+				073606C61DC047E300DDAB6D /* SMenuButton.m */,
+				073606C71DC047E300DDAB6D /* SPullDownMenuView.h */,
+				073606C81DC047E300DDAB6D /* SPullDownMenuView.m */,
 				07B90A421DA8D6F400B759BA /* NSString+FormatConvert.h */,
 				07B90A431DA8D6F400B759BA /* NSString+FormatConvert.m */,
 				07B90A3C1DA8946A00B759BA /* UIImage+Compression.h */,
@@ -903,6 +913,7 @@
 				0766ECEE1D85997800D884F5 /* ScanWebViewController.m in Sources */,
 				072C28841D6D900100EAFFAC /* HomepageViewController.m in Sources */,
 				07B44B911D7806660023214C /* MailListTableViewHeadView.m in Sources */,
+				073606CA1DC047E300DDAB6D /* SPullDownMenuView.m in Sources */,
 				0721907B1D72CF7300EA832B /* HomepageCell.m in Sources */,
 				075C4A9B1D8B892B0028EF84 /* ChangePasswordViewController.m in Sources */,
 				072C288D1D6D902800EAFFAC /* MessageViewController.m in Sources */,
@@ -933,6 +944,7 @@
 				070C51B81DA93B6C00F42D25 /* PreviewFileViewController.m in Sources */,
 				07B44B991D7951AB0023214C /* PersionModel.m in Sources */,
 				07EE15381D748C2B00E5CE91 /* AppurikindTableViewCell.m in Sources */,
+				073606C91DC047E300DDAB6D /* SMenuButton.m in Sources */,
 				070C1A7A1D8015A200D6E726 /* MessageDetailsViewController.m in Sources */,
 				073A54D11D73DC090013DB67 /* NewInfoImageView.m in Sources */,
 				0766ECEB1D8597CC00D884F5 /* ScanViewController.m in Sources */,

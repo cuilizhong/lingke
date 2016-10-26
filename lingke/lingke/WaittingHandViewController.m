@@ -12,6 +12,8 @@
 #import "MenusView.h"
 #import "DataIndexViewController.h"
 #import "MJRefresh.h"
+#import "SPullDownMenuView.h"
+#import "ConfigureColor.h"
 
 
 typedef NS_ENUM(NSInteger, TableViewDataType)
@@ -22,7 +24,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 };
 
 
-@interface WaittingHandViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WaittingHandViewController ()<UITableViewDelegate,UITableViewDataSource,SPullDownMenuViewDelegate>
 
 @property(nonatomic,strong)NSMutableArray *dataIndexModelArray;
 
@@ -45,6 +47,12 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 @property(nonatomic,copy)NSString *currentFormid;
 
+@property(nonatomic,strong)NSArray *titleMenus;
+
+@property(nonatomic,strong)SPullDownMenuView *spullDownMenuView;
+
+@property(nonatomic,strong)NSIndexPath *index;
+
 @end
 
 @implementation WaittingHandViewController
@@ -65,8 +73,15 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
     self.contentArray = [[NSMutableArray alloc]init];
     
-    self.sortTitleArray = [[NSMutableArray alloc]initWithObjects:@"创建时间倒序",@"创建时间正序", nil];
-    
+//    self.sortTitleArray = [[NSMutableArray alloc]initWithObjects:@"创建时间倒序",@"创建时间正序", nil];
+//    
+//    self.titleMenus = @[@[@"综合排序", @"价格从低到高", @"价格从高到底", @"信用排序"], @[@"销量优先",@"按倒序"]];
+//    
+//    self.spullDownMenuView = [[SPullDownMenuView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30) withTitle:self.titleMenus withSelectColor:[ConfigureColor sharedInstance].highBlue];
+//    
+//    self.spullDownMenuView.delegate = self;
+//    
+//    [self.view addSubview:self.spullDownMenuView];
     
     @weakify(self)
     self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"所有待办▼",@"创建时间倒序▼", nil] selectedBlock:^(NSString *title) {
@@ -85,7 +100,7 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         [weakself.tableView reloadData];
     }];
     
-    [self.view addSubview:self.menusView];
+//    [self.view addSubview:self.menusView];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.menusView.frame.size.height, self.view.frame.size.width,self.view.frame.size.height - self.menusView.frame.size.height - 64) style:UITableViewStylePlain];
     
@@ -337,6 +352,29 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             allWFListModel.formid = @"ALL";
             
             [weakself.WFListModelArray insertObject:allWFListModel atIndex:0];
+            
+            
+            //请求分类完成之后 创建menu
+            NSMutableArray *array = [[NSMutableArray alloc]init];
+            
+            for (WFListModel *tmpWFListModel in weakself.WFListModelArray) {
+                
+                [array addObject:tmpWFListModel.wfname];
+            }
+            
+
+            weakself.titleMenus = @[array, @[@"创建时间倒序",@"创建时间正序"]];
+            
+            if (weakself.spullDownMenuView) {
+                
+                [weakself.spullDownMenuView removeFromSuperview];
+            }
+            
+            weakself.spullDownMenuView = [[SPullDownMenuView alloc] initWithFrame:CGRectMake(0, 0, weakself.view.frame.size.width, 30) withTitle:weakself.titleMenus withSelectColor:[ConfigureColor sharedInstance].highBlue];
+            
+            weakself.spullDownMenuView.delegate = self;
+            
+            [weakself.view addSubview:self.spullDownMenuView];
             
             
             //处理分类
@@ -819,6 +857,22 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
     
     
+}
+
+#pragma mark-SPullDownMenuViewDelegate
+- (void)pullDownMenuView:(SPullDownMenuView *)menu didSelectedIndex:(NSIndexPath *)indexPath{
+    
+    //选择
+    
+    self.index = indexPath;
+    
+    WFListModel *wfListModel = self.WFListModelArray[indexPath.row];
+
+    self.tableViewDataType = TableViewDataTypeWFContent;
+    
+    [self handDataWithFormid:wfListModel.formid];
+    
+    [self.tableView reloadData];
 }
 
 
