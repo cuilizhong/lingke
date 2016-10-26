@@ -13,6 +13,7 @@
 #import "MJRefresh.h"
 #import "MailDetailsViewController.h"
 #import "UIImageView+WebCache.h"
+#import "MenusView.h"
 
 
 static const NSInteger pagecount = 10000;
@@ -32,6 +33,8 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 @property(nonatomic,strong)UISearchBar *searchBar;
 
 @property(nonatomic,strong)UISegmentedControl *segmentedControl;
+
+@property(nonatomic,strong)MenusView *menusView;
 
 /**
  *  开始
@@ -90,17 +93,36 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
     
+    @weakify(self);
+    self.menusView = [[MenusView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40) menusTitle:[[NSMutableArray alloc]initWithObjects:@"按部门",@"按姓名", nil ] selectedBlock:^(NSString *title) {
+        
+        if ([title isEqualToString:@"按部门"]) {
+            
+            weakself.mailListClassify = MailListClassifyForDeptname;
+            
+            [weakself.tableView reloadData];
+            
+        }else{
+            
+            weakself.mailListClassify = MailListClassifyForName;
+            
+            [weakself.tableView reloadData];
+        }
+        
+    }];
     
-    NSArray *items = [[NSArray alloc]initWithObjects:@"按部门",@"按姓名", nil];
+    [self.view addSubview:self.menusView];
     
-    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:items];
-    self.segmentedControl.frame = CGRectMake(0,0, self.view.frame.size.width, 30);
-    [self.segmentedControl addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.selectedSegmentIndex = 0;
-    [self.view addSubview:self.segmentedControl];
+//    NSArray *items = [[NSArray alloc]initWithObjects:@"按部门",@"按姓名", nil];
+//    
+//    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:items];
+//    self.segmentedControl.frame = CGRectMake(0,0, self.view.frame.size.width, 30);
+//    [self.segmentedControl addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
+//    self.segmentedControl.selectedSegmentIndex = 0;
+//    [self.view addSubview:self.segmentedControl];
 
     
-    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,self.segmentedControl.frame.size.height+self.segmentedControl.frame.origin.y, self.view.frame.size.width, 40)];
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,self.menusView.frame.size.height+self.menusView.frame.origin.y, self.view.frame.size.width, 40)];
     self.searchBar.delegate = self;
     
     
@@ -112,7 +134,7 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 
     [self.view addSubview:self.searchBar];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.searchBar.frame.size.height+self.segmentedControl.frame.size.height,self.view.frame.size.width,self.view.frame.size.height - self.searchBar.frame.size.height-self.segmentedControl.frame.size.height-64) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.searchBar.frame.size.height+self.menusView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height - self.searchBar.frame.size.height-self.menusView.frame.size.height-64) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -124,8 +146,6 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     [self.view addSubview:self.searchTableView];
     
     self.searchTableView.hidden = YES;
-    
-    @weakify(self)
     
     self.tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
         
@@ -590,6 +610,32 @@ typedef NS_ENUM(NSInteger, MailListClassify)
     
 }
 
+
+
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+//    
+//    return @[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
+//}
+//
+//- (NSInteger) tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
+//    
+////    NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
+////    
+////    
+////    [tableView selectRowAtIndexPath:indexpath animated:YES scrollPosition:UITableViewScrollPositionTop];
+//    
+//    NSLog(@"检索");
+//
+//    
+//    NSInteger integer = [self.headTitleForNameArray indexOfObject:title];
+//    
+//    NSLog(@"integer = %ld",(long)integer);
+//    
+//    return  2;
+//    
+//}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     if (self.tableView == tableView) {
@@ -761,6 +807,7 @@ typedef NS_ENUM(NSInteger, MailListClassify)
         
         
         return headView;
+        
     }else{
         
         return nil;
