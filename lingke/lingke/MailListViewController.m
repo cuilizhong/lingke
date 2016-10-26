@@ -14,6 +14,8 @@
 #import "PersionModel.h"
 #import "MailDetailsViewController.h"
 #import "MyFriendViewController.h"
+#import "UIImageView+WebCache.h"
+
 
 @interface MailListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -54,7 +56,7 @@
     [super viewWillAppear:animated];
     
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.topContactsArray = [delegate selectAll];
     
@@ -95,7 +97,7 @@
             
             cell = [[NSBundle mainBundle]loadNibNamed:@"MailListTableViewCell" owner:self options:nil].firstObject;
             
-            
+            cell.cell0headImageView.image = [UIImage imageNamed:@"pic1"];
             
             cell.cell0Label.text = [LocalData getUnitname];
             
@@ -112,13 +114,22 @@
                 
                 cell.cell1Label.text = @"我的好友";
                 
+                cell.cell1HeadImageView.image = [UIImage imageNamed:@"pic3"];
+
+                
             }else if (indexPath.row == 2){
                 
                 cell.cell1Label.text = @"我的群组";
+                
+                cell.cell1HeadImageView.image = [UIImage imageNamed:@"pic4"];
+
             
             }else if (indexPath.row == 3){
                 
                 cell.cell1Label.text = @"我的关注";
+                
+                cell.cell1HeadImageView.image = [UIImage imageNamed:@"pic5-1"];
+
             }
             
         }
@@ -137,7 +148,9 @@
         
         cell.cell1Label.text = persionModel.username;
 
-        
+        [cell.cell1HeadImageView sd_setImageWithURL:[NSURL URLWithString:persionModel.headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
     }
     
     return cell;

@@ -243,7 +243,7 @@
             if ([HomeFunctionModel sharedInstance].orgAppModel) {
                 
                 UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                [leftButton setImage:[UIImage imageNamed:@"mail"] forState:UIControlStateNormal];
+                [leftButton setImage:[UIImage imageNamed:@"pic5"] forState:UIControlStateNormal];
                 [leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                 leftButton.frame = CGRectMake(0, 0, 30, 44);
                 
@@ -570,7 +570,7 @@
             if (weakself.applyArray.count>0) {
                 
                 UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                [rightButton setImage:[UIImage imageNamed:@"fast"] forState:UIControlStateNormal];
+                [rightButton setImage:[UIImage imageNamed:@"pic6"] forState:UIControlStateNormal];
                 [rightButton addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                 rightButton.frame = CGRectMake(0, 0, 25, 44);
                 

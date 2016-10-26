@@ -10,6 +10,7 @@
 #import "HomepageCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "NewInfoImageView.h"
+#import "ConfigureColor.h"
 
 
 
@@ -44,9 +45,13 @@
 
 - (void)awakeFromNib{
     
+    [super awakeFromNib];
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"HomepageCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HomepageCollectionCellID"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    
     
     self.scrollView.delegate = self;
     
@@ -105,7 +110,7 @@
         
         if (!self.pageControl) {
             
-            self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(cellSize.width-90-8,cellSize.height-8-37, 90, 37)];
+            self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(cellSize.width - cellSize.width/3.0,cellSize.height-37, cellSize.width/3.0 - 15, 37)];
             self.pageControl.tintColor = [UIColor darkGrayColor];
             self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
             
@@ -137,15 +142,18 @@
                 
             }];
             
+            UIView *labelBackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, imageView.frame.size.height-40, cellSize.width, 40)];
+            labelBackgroundView.backgroundColor = [ConfigureColor sharedInstance].middleBlue;
+            [imageView addSubview:labelBackgroundView];
             
-            UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, imageView.frame.size.height-20, imageView.frame.size.width-20, 20)];
+            UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(8,10, cellSize.width/3.0*2, 20)];
             titleLabel.text = title;
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.textColor = [UIColor whiteColor];
             titleLabel.font = [UIFont systemFontOfSize:13];
+            titleLabel.textAlignment = NSTextAlignmentCenter;
             
-            
-            [imageView addSubview:titleLabel];
+            [labelBackgroundView addSubview:titleLabel];
             
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
             [imageView addGestureRecognizer:tap];
@@ -248,6 +256,13 @@
     
     self.enterExtendappBlock(extendappModel);
 }
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    
+    return 0;
+}
+
+
 
 ////取消选择了某个cell
 //- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{

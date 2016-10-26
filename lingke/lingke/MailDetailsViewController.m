@@ -62,6 +62,9 @@
 
 @property (nonatomic,assign)BOOL isSaveSuccessful;
 
+@property (nonatomic,assign)BOOL isSuccessful;
+
+
 
 /**
  *  判断是否做了修改，用于返回的时候提示用户 是否需要保存
@@ -633,7 +636,7 @@
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
             
-            weakself.isSaveSuccessful = YES;
+            weakself.isSuccessful = YES;
             
             [weakself hiddenHUDWithMessage:@"已保存"];
             
@@ -853,6 +856,14 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
+    
+    
+    if (self.isSuccessful) {
+        //如果是新添加的人员 不算常用联系人，因为没有pid
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
+    
 }
 
 #pragma mark-上传头像

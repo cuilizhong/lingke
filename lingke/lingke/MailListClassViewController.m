@@ -634,7 +634,7 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             
             cell.cell1Label.text = persion.username;
             
-            [cell.cell1HeadImageView sd_setImageWithURL:[NSURL URLWithString:persion.headurl] placeholderImage:[UIImage imageNamed:@" "] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [cell.cell1HeadImageView sd_setImageWithURL:[NSURL URLWithString:persion.headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 
             }];
             
@@ -650,6 +650,11 @@ typedef NS_ENUM(NSInteger, MailListClassify)
             PersionModel *persion = array[indexPath.row];
             
             cell.cell1Label.text = persion.username;
+            
+            [cell.cell1HeadImageView sd_setImageWithURL:[NSURL URLWithString:persion.headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+
         }
         
     }else{
@@ -657,6 +662,10 @@ typedef NS_ENUM(NSInteger, MailListClassify)
         PersionModel *persion = self.searchArray[indexPath.row];
         
         cell.cell1Label.text = persion.username;
+        
+        [cell.cell1HeadImageView sd_setImageWithURL:[NSURL URLWithString:persion.headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
         
     }
 

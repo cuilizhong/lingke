@@ -11,6 +11,7 @@
 #import "PersionModel.h"
 #import "MailListTableViewCell.h"
 #import "MailDetailsViewController.h"
+#import "UIImageView+WebCache.h"
 
 
 @interface MyFriendViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -28,6 +29,9 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
     
     switch (self.mailListState) {
             
@@ -78,6 +82,11 @@
     self.tipNoDataLabel.hidden = YES;
 }
 
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
@@ -108,6 +117,10 @@
     PersionModel *persion = self.dataArray[indexPath.row];
     
     cell.cell1Label.text = persion.username;
+    
+    [cell.cell1HeadImageView sd_setImageWithURL:[NSURL URLWithString:persion.headurl] placeholderImage:[UIImage imageNamed:@"DefaultPhoto"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
     
     return cell;
 }

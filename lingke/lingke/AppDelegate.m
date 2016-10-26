@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import "MainTabBarController.h"
 #import "ViewController.h"
+#import "ConfigureColor.h"
 
 @interface AppDelegate ()
 
@@ -44,8 +45,9 @@
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
     
     //设置title的颜色、字体
+   
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor blackColor], NSForegroundColorAttributeName,
+                                                            [ConfigureColor sharedInstance].highGray, NSForegroundColorAttributeName,
                                                            
                                                            nil]];
     

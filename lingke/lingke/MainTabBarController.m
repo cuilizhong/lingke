@@ -5,6 +5,7 @@
 //
 
 #import "MainTabBarController.h"
+#import "ConfigureColor.h"
 
 @implementation MainTabBarController
 
@@ -19,7 +20,8 @@
     [[UITabBar appearance] setShadowImage:[self createImageWithColor:[UIColor clearColor]]];
     [[UITabBar appearance] setBackgroundImage:[self createImageWithColor:[UIColor clearColor]]];
     //设置TintColor
-    UITabBar.appearance.tintColor = [UIColor orangeColor];
+    
+    UITabBar.appearance.tintColor = [ConfigureColor sharedInstance].highBlue;
 }
 
 
