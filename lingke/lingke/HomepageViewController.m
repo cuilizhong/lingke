@@ -654,9 +654,12 @@
     
     HomepageCell *cell = [[[NSBundle mainBundle]loadNibNamed:@"HomepageCell" owner:self options:nil]objectAtIndex:indexPath.row];
     
+    
     @weakify(self)
     
-    CGSize cellSize = CGSizeMake(self.view.frame.size.width, 160);
+
+    
+    CGSize cellSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, 160);
     
     [cell showCellWithNewsInfoModelArray:self.newsInfoArray cellSize:cellSize cellIndex:indexPath.row extendappArray:self.extendappDataArray jumpNewsinfoBlock:^(NewsInfoModel *newsInfoModel) {
         

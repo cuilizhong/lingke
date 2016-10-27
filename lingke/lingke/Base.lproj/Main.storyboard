@@ -323,7 +323,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqU-fi-Sok">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="Rlf-FC-AMK"/>
+                                                        <constraint firstAttribute="width" constant="100" id="Rlf-FC-AMK"/>
                                                         <constraint firstAttribute="height" constant="20" id="WQ9-Fo-iVn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -366,7 +366,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSt-Es-NKf">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="DAv-kF-1bB"/>
-                                                        <constraint firstAttribute="width" constant="90" id="pjM-mA-Svj"/>
+                                                        <constraint firstAttribute="width" constant="100" id="pjM-mA-Svj"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -407,7 +407,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单位名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpw-a0-Pej">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="NiT-l3-SIj"/>
+                                                        <constraint firstAttribute="width" constant="100" id="NiT-l3-SIj"/>
                                                         <constraint firstAttribute="height" constant="20" id="duP-Bf-Dgf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -450,7 +450,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单位许可证：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0p-mh-jg1">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="N2v-vc-zDe"/>
-                                                        <constraint firstAttribute="width" constant="90" id="Sr9-fs-eNz"/>
+                                                        <constraint firstAttribute="width" constant="100" id="Sr9-fs-eNz"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -581,7 +581,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原密码：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHd-n6-EoK">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="75" id="IQe-J8-mMB"/>
+                                                        <constraint firstAttribute="width" constant="85" id="IQe-J8-mMB"/>
                                                         <constraint firstAttribute="height" constant="20" id="kU4-JE-cvf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -624,7 +624,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新密码：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afM-9N-96W">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="6bK-3I-k1Q"/>
-                                                        <constraint firstAttribute="width" constant="75" id="XdH-bf-RPS"/>
+                                                        <constraint firstAttribute="width" constant="85" id="XdH-bf-RPS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -666,7 +666,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认密码：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MId-WL-nvR">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="6Bb-Nb-YAu"/>
-                                                        <constraint firstAttribute="width" constant="75" id="YhG-aV-tJb"/>
+                                                        <constraint firstAttribute="width" constant="85" id="YhG-aV-tJb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -718,8 +718,8 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="lS7-ld-3BA" firstAttribute="centerY" secondItem="NtN-TD-UaQ" secondAttribute="centerY" id="G0t-iI-3r3"/>
                                                 <constraint firstAttribute="trailing" secondItem="lS7-ld-3BA" secondAttribute="trailing" constant="15" id="fHg-Lw-867"/>
+                                                <constraint firstItem="lS7-ld-3BA" firstAttribute="top" secondItem="NtN-TD-UaQ" secondAttribute="top" constant="30" id="tIJ-m4-aDL"/>
                                                 <constraint firstItem="lS7-ld-3BA" firstAttribute="leading" secondItem="NtN-TD-UaQ" secondAttribute="leading" constant="15" id="zCF-su-4db"/>
                                             </constraints>
                                         </tableViewCellContentView>

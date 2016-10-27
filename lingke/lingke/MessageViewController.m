@@ -187,8 +187,12 @@ static const NSInteger pagecount = 20;
             
             [weakself.view addSubview:weakself.menusView];
             
+            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0,weakself.menusView.frame.size.height, self.view.frame.size.width, 0.5)];
+            lineView.backgroundColor = [UIColor lightGrayColor];
+            [weakself.view addSubview:lineView];
+            
             //crearTableView
-            weakself.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height, weakself.view.frame.size.width, weakself.view.frame.size.height-weakself.menusView.frame.size.height-49) style:UITableViewStylePlain];
+            weakself.contentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, weakself.menusView.frame.size.height+lineView.frame.size.height, weakself.view.frame.size.width, weakself.view.frame.size.height-weakself.menusView.frame.size.height-49-lineView.frame.size.height) style:UITableViewStylePlain];
             weakself.contentTableView.delegate = weakself;
             weakself.contentTableView.dataSource = weakself;
             [weakself hiddenSurplusLine:weakself.contentTableView];
@@ -425,6 +429,9 @@ static const NSInteger pagecount = 20;
     if (!cell) {
         
         cell = [[MessageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        
+        cell.accessoryType  = UITableViewCellAccessoryDisclosureIndicator;
+
     }
     
     MessageModel *messageModel = self.messageContentsArray[indexPath.row];

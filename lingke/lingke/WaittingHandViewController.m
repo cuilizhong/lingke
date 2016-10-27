@@ -416,6 +416,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         
+        cell.accessoryType  = UITableViewCellAccessoryDisclosureIndicator;
+        
         cell.textLabel.font = [UIFont systemFontOfSize:15];
     }
     

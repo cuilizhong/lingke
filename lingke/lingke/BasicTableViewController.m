@@ -105,6 +105,26 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+        
+    }
+    
+}
+
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];

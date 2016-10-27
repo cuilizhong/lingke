@@ -53,7 +53,6 @@
     
     
     
-    self.scrollView.delegate = self;
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
     
@@ -110,9 +109,19 @@
         
         if (!self.pageControl) {
             
-            self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(cellSize.width - cellSize.width/3.0,cellSize.height-37, cellSize.width/3.0 - 15, 37)];
+            CGFloat i = 50.0f;
+            
+            if (cellSize.width>320) {
+                i = 50.0f;
+            }else{
+                
+                i = 10.0f;
+            }
+            
+            self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(cellSize.width - cellSize.width/3.0,cellSize.height-37, cellSize.width/3.0 - i, 37)];
             self.pageControl.tintColor = [UIColor darkGrayColor];
             self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+//            self.pageControl.backgroundColor = [UIColor redColor];
             
             [self addSubview:self.pageControl];
         }

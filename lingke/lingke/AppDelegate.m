@@ -42,7 +42,7 @@
     
     
     //设置navigationbaritem的字体颜色
-    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    [[UINavigationBar appearance] setTintColor:[ConfigureColor sharedInstance].highGray];
     
     //设置title的颜色、字体
    
