@@ -55,6 +55,8 @@
     
     [super viewWillAppear:animated];
     
+    
+    
     [self.scanf scanAgain];
     
     @weakify(self);
