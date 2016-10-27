@@ -612,28 +612,41 @@ typedef NS_ENUM(NSInteger, MailListClassify)
 
 
 
-//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-//    
-//    return @[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
-//}
-//
-//- (NSInteger) tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
-//    
-////    NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
-////    
-////    
-////    [tableView selectRowAtIndexPath:indexpath animated:YES scrollPosition:UITableViewScrollPositionTop];
-//    
-//    NSLog(@"检索");
-//
-//    
-//    NSInteger integer = [self.headTitleForNameArray indexOfObject:title];
-//    
-//    NSLog(@"integer = %ld",(long)integer);
-//    
-//    return  2;
-//    
-//}
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    
+    return self.headTitleForNameArray;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
+    
+    NSLog(@"title = %@",title);
+
+    if (self.mailListClassify == MailListClassifyForDeptname) {
+        //部门
+        NSInteger i = 0;
+        for (NSString *deptname in self.headTitleForDeptnameArray) {
+            
+            if ([[self firstCharactor:deptname ] isEqualToString:title]) {
+                
+                return i;
+            }
+            
+            i++;
+        }
+        
+        return 0;
+        
+        
+    }else{
+        
+        //name
+        return index;
+        
+    }
+    
+    
+    
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
