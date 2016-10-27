@@ -112,6 +112,8 @@ static NSString *testURL = @"http://www.linkersoft.com:9009/m1srv/xml/person";
 //过期重新登陆
 + (void)sendHttpReqestForExpireWithExpireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock{
     
+    
+    
     NSDictionary *parameters = @{
                                  
                                  @"unitcode":[LocalData getUnitcode],
