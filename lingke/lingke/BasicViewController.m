@@ -81,30 +81,63 @@
 
 - (void)handErrorWihtErrorCode:(NSString *)errorCode errorMsg:(NSString *)errorMsg expireLoginSuccessBlock:(ExpireLoginSuccessBlock)expireLoginSuccessBlock expireLoginFailureBlock:(ExpireLoginFailureBlock)expireLoginFailureBlock{
     
-    if ([errorCode isEqualToString:TokenInvalidCode]) {
+    @weakify(self);
+    [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:^(NSString *errorMessage) {
         
-        //token失效
-        //重新登录
-        @weakify(self);
-        [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:^(NSString *errorMessage) {
-            
-            //自动登录失败
-            LoginViewController *loginViewController = [[LoginViewController alloc]init];
-            
-            loginViewController.isInsideLogin = YES;
-            
-            [weakself presentViewController:loginViewController animated:NO completion:^{
-                
-            }];
-            
+        expireLoginFailureBlock(errorMessage);
+        
+        [weakself hiddenHUD];
+        
+        //自动登录失败
+        LoginViewController *loginViewController = [[LoginViewController alloc]init];
+        
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginViewController];
+        
+        [weakself presentViewController:nav animated:YES completion:^{
             
         }];
+
         
-    }else{
         
-        [self hiddenHUDWithMessage:errorMsg];
         
-    }
+//        LoginViewController *loginViewController = [[LoginViewController alloc]init];
+//        
+//        loginViewController.isInsideLogin = YES;
+//        
+//        [weakself presentViewController:loginViewController animated:NO completion:^{
+//            
+//        }];
+        
+        
+    }];
+
+    
+//    if ([errorCode isEqualToString:TokenInvalidCode]) {
+//        
+//        //token失效
+//        //重新登录
+//        @weakify(self);
+//        [HttpsRequestManger sendHttpReqestForExpireWithExpireLoginSuccessBlock:expireLoginSuccessBlock expireLoginFailureBlock:^(NSString *errorMessage) {
+//            
+//            [weakself hiddenHUD];
+//            
+//            //自动登录失败
+//            LoginViewController *loginViewController = [[LoginViewController alloc]init];
+//            
+//            loginViewController.isInsideLogin = YES;
+//            
+//            [weakself presentViewController:loginViewController animated:NO completion:^{
+//                
+//            }];
+//            
+//            
+//        }];
+//        
+//    }else{
+//        
+//        [self hiddenHUDWithMessage:errorMsg];
+//        
+//    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

@@ -21,6 +21,9 @@
 
 @interface SPullDownMenuView : UIView
 - (instancetype)initWithFrame:(CGRect)frame withTitle:(NSArray *)titleArray withSelectColor:(UIColor *)color;
+
+- (void)tapClick;
+
 @property (weak, nonatomic) id<SPullDownMenuViewDelegate> delegate;
 
 @end

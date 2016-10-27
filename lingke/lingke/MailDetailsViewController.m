@@ -65,6 +65,8 @@
 @property (nonatomic,assign)BOOL isSuccessful;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *mobilePhoneButton;
+@property (weak, nonatomic) IBOutlet UIButton *phoneButton;
 
 /**
  *  判断是否做了修改，用于返回的时候提示用户 是否需要保存
@@ -84,6 +86,13 @@
     
     self.title = @"通讯录";
     
+    self.addressTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    
+    self.addressTextView.layer.borderWidth = 0.5f;
+    
+    self.addressTextView.layer.cornerRadius = 5;
+    
+    
     UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
     [singleTapGestureRecognizer setNumberOfTapsRequired:1];
     
@@ -96,6 +105,9 @@
     switch (self.mailDetailsStatus) {
             
         case MailDetailsStatus_ADD:{
+            
+            self.mobilePhoneButton.hidden = YES;
+            self.phoneButton.hidden = YES;
             
             self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(addPersionAction:)];
             
@@ -163,6 +175,9 @@
         self.groupTextField.enabled = YES;
         self.maleButton.enabled = YES;
         self.femaleButton.enabled = YES;
+        
+        self.mobilePhoneButton.hidden = YES;
+        self.phoneButton.hidden = YES;
         
     }else{
         
@@ -974,5 +989,32 @@
     
     [self updateRelationship];
 
+}
+- (IBAction)mobileButtonAction:(id)sender {
+    
+    if (self.phoneNumberTextField.text.length>0) {
+        
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.phoneNumberTextField.text];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
+        
+    }
+    
+ 
+}
+
+
+- (IBAction)phoneButtonAction:(id)sender {
+    
+    if (self.fixedTelephoneTextField.text.length>0) {
+       
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.fixedTelephoneTextField.text];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
+    }
+    
+    
 }
 @end

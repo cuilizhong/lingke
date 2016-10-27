@@ -42,19 +42,19 @@
 
     CGFloat titleLabelTop = 10;
     
-    CGFloat titleLabelLeft;
+    CGFloat titleLabelLeft = 10;
     
     UIColor *textColor;
     
     if (messageModel.isread.integerValue == 0) {
         //未读
-        titleLabelLeft = 41;
+//        titleLabelLeft = 41;
         textColor = [UIColor redColor];
-        self.headImageView.hidden = NO;
+        self.headImageView.hidden = YES;
     }else{
         
         //已读
-        titleLabelLeft = 10;
+//        titleLabelLeft = 10;
         textColor = [UIColor blackColor];
         self.headImageView.hidden = YES;
     }

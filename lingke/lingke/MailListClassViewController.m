@@ -345,8 +345,8 @@ typedef NS_ENUM(NSInteger, MailListClassify)
         
         [weakself endRefresh];
         
-        [weakself showHUDWithMessage:RequestFailureMessage];
-
+        [weakself hiddenHUDWithMessage:RequestFailureMessage];
+        
         
     }];
 }

@@ -355,13 +355,17 @@ static const NSInteger pagecount = 20;
                     }
                 }
                 
-                [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:3];
-                
-                if (i == 0) {
+                if (i>0) {
+                    
+                    [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:3];
+
+                }else{
                     
                     [weakself setBadge:nil forIndex:3];
 
                 }
+                
+                
             }
  
             

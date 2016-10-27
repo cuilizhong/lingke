@@ -1009,13 +1009,22 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXZ-cT-gNZ">
+                                                    <connections>
+                                                        <action selector="mobileButtonAction:" destination="Rog-yK-e65" eventType="touchUpInside" id="mJ9-v7-0ra"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iJ7-MY-kyJ" firstAttribute="centerY" secondItem="Bsg-PI-sYK" secondAttribute="centerY" id="Fvo-Ih-CFT"/>
+                                                <constraint firstItem="iJ7-MY-kyJ" firstAttribute="centerX" secondItem="pXZ-cT-gNZ" secondAttribute="centerX" id="IiA-LF-Zpy"/>
+                                                <constraint firstItem="iJ7-MY-kyJ" firstAttribute="height" secondItem="pXZ-cT-gNZ" secondAttribute="height" id="VSu-yc-t9e"/>
+                                                <constraint firstItem="iJ7-MY-kyJ" firstAttribute="centerY" secondItem="pXZ-cT-gNZ" secondAttribute="centerY" id="cKz-7T-yHY"/>
                                                 <constraint firstAttribute="trailing" secondItem="iJ7-MY-kyJ" secondAttribute="trailing" constant="8" id="caD-5B-hvs"/>
                                                 <constraint firstItem="z3c-I7-5lr" firstAttribute="centerY" secondItem="Bsg-PI-sYK" secondAttribute="centerY" id="iNr-1s-qPu"/>
                                                 <constraint firstItem="z3c-I7-5lr" firstAttribute="leading" secondItem="Bsg-PI-sYK" secondAttribute="leading" constant="8" id="u7B-Fa-H7f"/>
                                                 <constraint firstItem="iJ7-MY-kyJ" firstAttribute="leading" secondItem="z3c-I7-5lr" secondAttribute="trailing" constant="8" id="wcm-Es-G9w"/>
+                                                <constraint firstItem="iJ7-MY-kyJ" firstAttribute="width" secondItem="pXZ-cT-gNZ" secondAttribute="width" id="xsc-bV-nQ3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1108,12 +1117,21 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="de4-Q4-Auj">
+                                                    <connections>
+                                                        <action selector="phoneButtonAction:" destination="Rog-yK-e65" eventType="touchUpInside" id="cv9-sB-WqH"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="de4-Q4-Auj" firstAttribute="centerY" secondItem="7KA-8C-dxS" secondAttribute="centerY" id="5Cz-q2-joH"/>
+                                                <constraint firstItem="de4-Q4-Auj" firstAttribute="centerX" secondItem="7KA-8C-dxS" secondAttribute="centerX" id="6Ta-bV-MZb"/>
                                                 <constraint firstAttribute="trailing" secondItem="7KA-8C-dxS" secondAttribute="trailing" constant="8" id="KKr-Pq-eCD"/>
                                                 <constraint firstItem="7KA-8C-dxS" firstAttribute="leading" secondItem="gEk-0F-0UC" secondAttribute="trailing" constant="8" id="NgG-ab-Dh1"/>
                                                 <constraint firstItem="gEk-0F-0UC" firstAttribute="centerY" secondItem="H9c-Ek-v6M" secondAttribute="centerY" id="RKZ-Zq-UU7"/>
+                                                <constraint firstItem="de4-Q4-Auj" firstAttribute="width" secondItem="7KA-8C-dxS" secondAttribute="width" id="XBl-cl-RI7"/>
                                                 <constraint firstItem="gEk-0F-0UC" firstAttribute="leading" secondItem="H9c-Ek-v6M" secondAttribute="leading" constant="8" id="YGz-Hh-pt8"/>
+                                                <constraint firstItem="de4-Q4-Auj" firstAttribute="height" secondItem="7KA-8C-dxS" secondAttribute="height" id="ZlJ-SC-nkS"/>
                                                 <constraint firstItem="7KA-8C-dxS" firstAttribute="centerY" secondItem="H9c-Ek-v6M" secondAttribute="centerY" id="rIl-JT-960"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1235,10 +1253,10 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_card" translatesAutoresizingMaskIntoConstraints="NO" id="JKz-4m-lF2">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic3" translatesAutoresizingMaskIntoConstraints="NO" id="JKz-4m-lF2">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="ND7-aV-12I"/>
-                                                        <constraint firstAttribute="height" constant="20" id="yp6-Tr-rg8"/>
+                                                        <constraint firstAttribute="width" constant="30" id="ND7-aV-12I"/>
+                                                        <constraint firstAttribute="height" constant="30" id="yp6-Tr-rg8"/>
                                                     </constraints>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oj9-mc-y0R">
@@ -1277,10 +1295,10 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_card" translatesAutoresizingMaskIntoConstraints="NO" id="hPK-dO-Jfw">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic4" translatesAutoresizingMaskIntoConstraints="NO" id="hPK-dO-Jfw">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="RFN-xo-6cT"/>
-                                                        <constraint firstAttribute="height" constant="20" id="fkj-q5-a4L"/>
+                                                        <constraint firstAttribute="width" constant="30" id="RFN-xo-6cT"/>
+                                                        <constraint firstAttribute="height" constant="30" id="fkj-q5-a4L"/>
                                                     </constraints>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TeG-LH-z8i">
@@ -1319,10 +1337,10 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_card" translatesAutoresizingMaskIntoConstraints="NO" id="3Pj-39-DaH">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic5-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Pj-39-DaH">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="JO3-Kc-INe"/>
-                                                        <constraint firstAttribute="height" constant="20" id="klw-W8-kFA"/>
+                                                        <constraint firstAttribute="width" constant="30" id="JO3-Kc-INe"/>
+                                                        <constraint firstAttribute="height" constant="30" id="klw-W8-kFA"/>
                                                     </constraints>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRP-KN-5q2">
@@ -1363,9 +1381,11 @@
                         <outlet property="groupTextField" destination="OWW-dg-CTZ" id="pep-EC-2ze"/>
                         <outlet property="headImageView" destination="2bD-dr-Bap" id="e1x-YB-qfa"/>
                         <outlet property="maleButton" destination="eCM-yt-yGM" id="Pb8-WS-RGc"/>
+                        <outlet property="mobilePhoneButton" destination="pXZ-cT-gNZ" id="21y-DK-A0s"/>
                         <outlet property="myFollowSwitch" destination="dRP-KN-5q2" id="gxe-H5-BSz"/>
                         <outlet property="myFriendsSwitch" destination="oj9-mc-y0R" id="wEL-3o-ehd"/>
                         <outlet property="myGroundSwitch" destination="TeG-LH-z8i" id="qT6-tL-gJG"/>
+                        <outlet property="phoneButton" destination="de4-Q4-Auj" id="1wi-0F-OWG"/>
                         <outlet property="phoneNumberTextField" destination="iJ7-MY-kyJ" id="goa-yh-4pi"/>
                         <outlet property="roleTextField" destination="2HX-fr-Aky" id="bdN-Yr-bOr"/>
                         <outlet property="usernameTextField" destination="hYc-Ep-47C" id="YmF-yd-pgL"/>
@@ -1373,7 +1393,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPC-Mw-wt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1332" y="-1587"/>
+            <point key="canvasLocation" x="1331.25" y="-1587.6760563380283"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="RMJ-48-R8Z">
@@ -1408,6 +1428,9 @@
         <image name="paic2" width="20" height="20"/>
         <image name="paic3" width="20" height="20"/>
         <image name="paic4" width="20" height="20"/>
+        <image name="pic3" width="29" height="29"/>
+        <image name="pic4" width="29" height="29"/>
+        <image name="pic5-1" width="29" height="29"/>
         <image name="waittinghand" width="20" height="20"/>
         <image name="勾" width="16" height="16"/>
         <image name="勾-_未选中" width="16" height="16"/>

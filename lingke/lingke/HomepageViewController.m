@@ -19,7 +19,7 @@
 #import "LZPopOverMenu.h"
 #import "FastApplyViewController.h"
 #import "MJRefresh.h"
-
+#import "DataIndexViewController.h"
 
 @interface HomepageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -38,6 +38,9 @@
 @property(nonatomic,strong)UIBarButtonItem *rightBarButton;
 
 @property(nonatomic,strong)UIBarButtonItem *leftBarButton;
+
+@property(nonatomic,assign)BOOL isRelogin;
+
 
 @end
 
@@ -84,6 +87,14 @@
     UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:0];
     
     item.title = @"主页";
+    
+    if (self.isRelogin) {
+        
+        self.isRelogin = NO;
+        
+        [self.tableView.mj_header beginRefreshing];
+
+    }
 }
 
 
@@ -374,6 +385,8 @@
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
                 
+                weakself.isRelogin = YES;
+                
                 [weakself hiddenHUDWithMessage:errorMessage];
                 
             }];
@@ -486,6 +499,9 @@
                 [weakself requestData];
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                weakself.isRelogin = YES;
+
                 
                 [weakself hiddenHUDWithMessage:errorMessage];
                 
@@ -608,6 +624,8 @@
                 [weakself requestData];
                 
             } expireLoginFailureBlock:^(NSString *errorMessage) {
+                
+                weakself.isRelogin = YES;
                 
                 [weakself hiddenHUDWithMessage:errorMessage];
                 
@@ -767,20 +785,32 @@
         
         NSString *url = [LocalData getLoginInterface];
 
-        url = [NSString stringWithFormat:@"%@/dataapi/applydata/%@/%@?token=%@",url,homeappModel.appcode,applyModel.formid,[LocalData getToken]];
+//        url = [NSString stringWithFormat:@"%@/dataapi/applydata/%@/%@?token=%@",url,homeappModel.appcode,applyModel.formid,[LocalData getToken]];
+        
+        url = [NSString stringWithFormat:@"%@/dataapi/applydata/%@/%@",url,homeappModel.appcode,applyModel.formid];
+
         
         
         NSLog(@"url = %@",url);
         
-        FastApplyViewController *fastApplyViewController = [[FastApplyViewController alloc]init];
+        DataIndexViewController *dataIndexViewController = [[DataIndexViewController alloc]init];
         
-        fastApplyViewController.url = url;
+        dataIndexViewController.title = titlesArray[selectedIndex];
+
         
-        fastApplyViewController.title = titlesArray[selectedIndex];
+        dataIndexViewController.url = url;
+        
+//        
+//        
+//        FastApplyViewController *fastApplyViewController = [[FastApplyViewController alloc]init];
+//        
+//        fastApplyViewController.url = url;
+//        
+//        fastApplyViewController.title = titlesArray[selectedIndex];
         
         self.hidesBottomBarWhenPushed = YES;
         
-        [self.navigationController pushViewController:fastApplyViewController animated:YES];
+        [self.navigationController pushViewController:dataIndexViewController animated:YES];
         
         self.hidesBottomBarWhenPushed = NO;
     

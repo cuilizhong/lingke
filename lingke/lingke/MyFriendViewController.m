@@ -353,7 +353,7 @@
         
         [weakself.tableView.mj_header endRefreshing];
         
-        [weakself showHUDWithMessage:RequestFailureMessage];
+        [weakself hiddenHUDWithMessage:RequestFailureMessage];
         
     }];
 }

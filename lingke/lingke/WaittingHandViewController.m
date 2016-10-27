@@ -51,6 +51,14 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
 
 @property(nonatomic,strong)SPullDownMenuView *spullDownMenuView;
 
+
+@property(nonatomic,assign)BOOL isWFListRequestSuccess;
+
+@property(nonatomic,assign)BOOL isDataIndexRequestSuccess;
+
+
+
+
 @end
 
 @implementation WaittingHandViewController
@@ -111,6 +119,13 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    [self.spullDownMenuView tapClick];
+}
+
 - (void)request{
     
     [self showHUD];
@@ -154,6 +169,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
             
+            weakself.isDataIndexRequestSuccess = YES;
+            
             NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
             
             NSDictionary *dataindexsDic = responsedataDic[@"dataindexs"];
@@ -191,20 +208,29 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 }
                 
             }
-            [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:1];
             
-            if (i == 0) {
+            if (i>0) {
                 
-                [weakself setBadge:nil forIndex:3];
+                [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:1];
+
+            }else{
                 
+                [weakself setBadge:nil forIndex:1];
+
             }
-            
-            
-            if (weakself.WFListModelArray.count>0) {
+
+            //修改
+            if (weakself.isWFListRequestSuccess && weakself.isDataIndexRequestSuccess) {
+                
+                weakself.isDataIndexRequestSuccess = NO;
+                
+                weakself.isWFListRequestSuccess = NO;
                 
                 [weakself handCount];
-                
+
             }
+            
+            
             
             
             
@@ -280,6 +306,8 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
         
         if ([xmlDoc[@"statuscode"] isEqualToString:@"0"]) {
             
+            weakself.isWFListRequestSuccess = YES;
+            
             NSDictionary *responsedataDic = xmlDoc[@"responsedata"];
             
             NSDictionary *wflistDic = responsedataDic[@"wflist"];
@@ -318,39 +346,19 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             [weakself.WFListModelArray insertObject:allWFListModel atIndex:0];
             
             
-            //请求分类完成之后 创建menu
-            NSMutableArray *array = [[NSMutableArray alloc]init];
-            
-            for (WFListModel *tmpWFListModel in weakself.WFListModelArray) {
-                
-                [array addObject:tmpWFListModel.wfname];
-            }
-            
-
-            weakself.titleMenus = @[array, @[@"创建时间倒序",@"创建时间正序"]];
-            
-            if (weakself.spullDownMenuView) {
-                
-                [weakself.spullDownMenuView removeFromSuperview];
-            }
-            
-            weakself.spullDownMenuView = [[SPullDownMenuView alloc] initWithFrame:CGRectMake(0, 0, weakself.view.frame.size.width, menuHeight) withTitle:weakself.titleMenus withSelectColor:[ConfigureColor sharedInstance].highBlue];
-            
-            weakself.spullDownMenuView.delegate = self;
-            
-            [weakself.view addSubview:self.spullDownMenuView];
-            
-            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0,29.5, weakself.spullDownMenuView.frame.size.width, 0.5)];
-            
-            lineView.backgroundColor = [UIColor lightGrayColor];
-            
-            [weakself.spullDownMenuView addSubview:lineView];
             
             //处理分类
-            if (weakself.dataIndexModelArray.count>0) {
+            //修改
+            if (weakself.isWFListRequestSuccess && weakself.isDataIndexRequestSuccess) {
+                
+                weakself.isDataIndexRequestSuccess = NO;
+                
+                weakself.isWFListRequestSuccess = NO;
                 
                 [weakself handCount];
+                
             }
+            
             
             
         }else{
@@ -416,13 +424,13 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
     if (dataIndexModel.isread.integerValue == 0) {
         //未读
         cell.textLabel.textColor = [UIColor redColor];
-        cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
+//        cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
         
     }else if (dataIndexModel.isread.integerValue == 1){
         //已读
         cell.textLabel.textColor = [UIColor blackColor];
         
-        cell.imageView.image = nil;
+//        cell.imageView.image = nil;
     }
     
     cell.textLabel.text = dataIndexModel.title;
@@ -501,6 +509,43 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
             self.count++;
         }
     }
+    
+    
+    //请求分类完成之后 创建menu
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    
+    for (WFListModel *tmpWFListModel in self.WFListModelArray) {
+        
+        NSString *str = [NSString stringWithFormat:@"%@(%@)",tmpWFListModel.wfname,tmpWFListModel.count];
+        
+        [array addObject:str];
+    }
+    
+    
+    self.titleMenus = @[array, @[@"创建时间倒序",@"创建时间正序"]];
+    
+    if (self.spullDownMenuView) {
+        
+        [self.spullDownMenuView removeFromSuperview];
+    }
+    
+    self.spullDownMenuView = [[SPullDownMenuView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, menuHeight) withTitle:self.titleMenus withSelectColor:[ConfigureColor sharedInstance].highBlue];
+    
+    self.spullDownMenuView.delegate = self;
+    
+    [self.view addSubview:self.spullDownMenuView];
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0,29.5, self.spullDownMenuView.frame.size.width, 0.5)];
+    
+    lineView.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.spullDownMenuView addSubview:lineView];
+
+    
+    
+    
+    
+    
     
     [self handDataWithFormid:self.currentFormid];
 }

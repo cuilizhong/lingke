@@ -290,13 +290,26 @@ static const NSInteger pagecount = 20;
     
     self.hidesBottomBarWhenPushed = YES;
     
-    ApplyViewController *applyViewController = [[ApplyViewController alloc]init];
     
-    applyViewController.applyAppmenuModel = self.applyAppmenuModel;
+    NSString *url = [LocalData getLoginInterface];
     
-    applyViewController.appcode = self.extendappModel.appcode;
     
-    [self.navigationController pushViewController:applyViewController animated:YES];
+    url = [NSString stringWithFormat:@"%@/dataapi/applydata/%@/%@",url,self.extendappModel.appcode,self.applyAppmenuModel.formid];
+    
+    
+    DataIndexViewController *dataIndexViewController = [[DataIndexViewController alloc]init];
+    
+    dataIndexViewController.title = @"申请";
+    
+    dataIndexViewController.url = url;
+    
+//    ApplyViewController *applyViewController = [[ApplyViewController alloc]init];
+//    
+//    applyViewController.applyAppmenuModel = self.applyAppmenuModel;
+//    
+//    applyViewController.appcode = self.extendappModel.appcode;
+    
+    [self.navigationController pushViewController:dataIndexViewController animated:YES];
     
     self.hidesBottomBarWhenPushed = YES;
 
