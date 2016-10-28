@@ -193,7 +193,7 @@
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         //设置下载完成操作
         
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         [delegate updateFilename:filename filepath:filepath];
         
@@ -214,6 +214,10 @@
     [downloadTask resume];
     
 }
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+}
+
 
 
 - (void)dealloc{
