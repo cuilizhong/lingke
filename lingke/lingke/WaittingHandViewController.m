@@ -199,19 +199,19 @@ typedef NS_ENUM(NSInteger, TableViewDataType)
                 [weakself.dataIndexModelArray addObject:dataIndexModel];
             }
             
-            //计算下面的数字
-            int i = 0;
-            for (DataIndexModel *tmpDataIndexModel in weakself.dataIndexModelArray) {
-                
-                if (tmpDataIndexModel.isread.integerValue == 0) {
-                    i++;
-                }
-                
-            }
+            //计算下面的数字 显示信息总数量
+//            int i = 0;
+//            for (DataIndexModel *tmpDataIndexModel in weakself.dataIndexModelArray) {
+//                
+//                if (tmpDataIndexModel.isread.integerValue == 0) {
+//                    i++;
+//                }
+//                
+//            }
             
-            if (i>0) {
+            if (weakself.dataIndexModelArray.count>0) {
                 
-                [weakself setBadge:[NSString stringWithFormat:@"%d",i] forIndex:1];
+                [weakself setBadge:[NSString stringWithFormat:@"%lu",(unsigned long)weakself.dataIndexModelArray.count] forIndex:1];
 
             }else{
                 

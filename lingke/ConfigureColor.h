@@ -47,6 +47,10 @@
 
 @property(nonatomic,strong)UIColor *enterMainButtonColor;
 
+@property(nonatomic,strong)UIColor *textViewBackgroundColor;
+
+@property(nonatomic,strong)UIColor *textViewLineColor;
+
 
 
 

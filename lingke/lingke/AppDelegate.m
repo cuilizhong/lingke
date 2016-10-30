@@ -16,6 +16,7 @@
 #import "MainTabBarController.h"
 #import "ViewController.h"
 #import "ConfigureColor.h"
+#import <Bugtags/Bugtags.h>
 
 @interface AppDelegate ()
 
@@ -39,6 +40,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [Bugtags startWithAppKey:@"d879056c36ac4395a7d934751f6fdc53" invocationEvent:BTGInvocationEventBubble];
     
     
     //设置navigationbaritem的字体颜色

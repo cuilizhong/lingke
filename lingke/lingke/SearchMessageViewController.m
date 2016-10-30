@@ -44,7 +44,7 @@ static const NSInteger pagecount = 20;
     
     self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 40)];
     self.searchBar.delegate = self;
-    self.searchBar.showsCancelButton = YES;
+    self.searchBar.showsCancelButton = NO;
     
     for(id view in [self.searchBar.subviews[0] subviews]){
         
@@ -216,6 +216,9 @@ static const NSInteger pagecount = 20;
 //任务编辑文本
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     
+    self.searchBar.showsCancelButton = YES;
+
+    
     return YES;
 }
 
@@ -230,6 +233,8 @@ static const NSInteger pagecount = 20;
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
     
+    self.searchBar.showsCancelButton = NO;
+
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
@@ -238,6 +243,8 @@ static const NSInteger pagecount = 20;
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
+    self.searchBar.showsCancelButton = NO;
+
     [searchBar resignFirstResponder];
   
 }
@@ -245,6 +252,8 @@ static const NSInteger pagecount = 20;
 //当点击search的时候调用
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     
+    self.searchBar.showsCancelButton = NO;
+
     [searchBar resignFirstResponder];
     
     [self.tableView.mj_header beginRefreshing];

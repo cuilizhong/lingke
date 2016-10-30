@@ -8,4 +8,5 @@ target 'lingke' do
     pod 'MJRefresh'
     pod 'SDWebImage'
     pod 'SSKeychain'
+    pod 'Bugtags', '~> 1.1.9' 
 end

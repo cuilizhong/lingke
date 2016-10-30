@@ -23,6 +23,10 @@ static ConfigureColor *color = nil;
         
         color = [[self alloc] init];
         
+        color.textViewLineColor = UIColorFromRGB(0xd1d1d1);
+        
+        color.textViewBackgroundColor = UIColorFromRGB(0xfafafa);
+        
         color.ligthGray = UIColorFromRGB(0xcbcdcf);
         
         color.gray = UIColorFromRGB(0x9c9b9b);

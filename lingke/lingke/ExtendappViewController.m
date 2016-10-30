@@ -427,7 +427,6 @@ static const NSInteger pagecount = 20;
                     [weakself.contentsArray addObject:dataIndexModel];
                 }
                 
-                [weakself.contentTableView reloadData];
 
             }else if([dataindex isKindOfClass:[NSDictionary class]]){
                 
@@ -436,10 +435,11 @@ static const NSInteger pagecount = 20;
                 [dataIndexModel setValueFromDic:dataindex];
                 
                 [weakself.contentsArray addObject:dataIndexModel];
-                [weakself.contentTableView reloadData];
 
             }
             
+            [weakself.contentTableView reloadData];
+
             
             
         }else{
@@ -517,13 +517,13 @@ static const NSInteger pagecount = 20;
         //未读
         cell.textLabel.textColor = [UIColor redColor];
         
-        cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
+//        cell.imageView.image = [UIImage imageNamed:@"勾-_未选中"];
         
     }else if (dataIndexModel.isread.integerValue == 1){
         //已读
         cell.textLabel.textColor = [UIColor blackColor];
         
-        cell.imageView.image = nil;
+//        cell.imageView.image = nil;
 
     }
 

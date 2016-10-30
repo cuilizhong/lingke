@@ -12,6 +12,7 @@
 #import "UIImage+Compression.h"
 #import "AFNetworking.h"
 #import "GDataXMLNode.h"
+#import "ConfigureColor.h"
 
 
 
@@ -76,6 +77,9 @@
 
 @property (nonatomic,copy)NSString *addHeadid;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *deleteCell;
+
+
 @end
 
 @implementation MailDetailsViewController
@@ -86,7 +90,9 @@
     
     self.title = @"通讯录";
     
-    self.addressTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.addressTextView.backgroundColor = [ConfigureColor sharedInstance].textViewBackgroundColor;
+    
+    self.addressTextView.layer.borderColor = [[ConfigureColor sharedInstance].textViewLineColor CGColor];
     
     self.addressTextView.layer.borderWidth = 0.5f;
     
@@ -113,11 +119,16 @@
             
             self.navigationItem.rightBarButtonItem = self.rightBarButton;
             
+            self.deleteCell.hidden = YES;
+
+            
         }
             
             break;
             
         case MailDetailsStatus_LOCAL:{
+            
+            self.deleteCell.hidden = YES;
             
         }
             
@@ -129,6 +140,8 @@
             self.myGroundSwitch.enabled = YES;
             self.myFollowSwitch.enabled = YES;
             
+            self.deleteCell.hidden = YES;
+            
         }
             
             break;
@@ -138,6 +151,7 @@
             self.myFriendsSwitch.enabled = YES;
             self.myGroundSwitch.enabled = YES;
             self.myFollowSwitch.enabled = YES;
+            self.deleteCell.hidden = NO;
             
             self.rightBarButton = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editPersionAction:)];
             
@@ -163,6 +177,8 @@
     if ([self.rightBarButton.title isEqualToString:@"编辑"]) {
         
         [self.rightBarButton setTitle:@"保存"];
+        
+        [self displayEditBox];
         
         self.headImageView.userInteractionEnabled = YES;
         self.usernameTextField.enabled = YES;
@@ -309,7 +325,9 @@
         case MailDetailsStatus_LOCAL:{
             
             [self setInitValue];
-
+            
+            [self hiddenEditBox];
+            
         }
             
             break;
@@ -317,6 +335,9 @@
         case MailDetailsStatus_SYSTEM:{
             
             [self setInitValue];
+            
+            [self hiddenEditBox];
+
 
         }
             
@@ -325,6 +346,9 @@
         case MailDetailsStatus_PRIVATE:{
             
             [self setInitValue];
+            
+            [self hiddenEditBox];
+
 
         }
             
@@ -1017,4 +1041,53 @@
     
     
 }
+
+- (void)displayEditBox{
+    
+    self.usernameTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.phoneNumberTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.departmentTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.emailTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.fixedTelephoneTextField.borderStyle = UITextBorderStyleRoundedRect;
+//    self.addressTextView.borderStyle = YES;
+    self.roleTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.groupTextField.borderStyle = UITextBorderStyleRoundedRect;
+    
+    self.addressTextView.backgroundColor = [UIColor clearColor];
+
+    
+//    self.addressTextView.backgroundColor = [ConfigureColor sharedInstance].textViewBackgroundColor;
+    
+    self.addressTextView.layer.borderColor = [[ConfigureColor sharedInstance].textViewLineColor CGColor];
+    
+    self.addressTextView.layer.borderWidth = 0.5f;
+    
+    self.addressTextView.layer.cornerRadius = 5;
+
+}
+
+- (void)hiddenEditBox{
+    
+    self.usernameTextField.borderStyle = UITextBorderStyleNone;
+    self.phoneNumberTextField.borderStyle = UITextBorderStyleNone;
+    self.departmentTextField.borderStyle = UITextBorderStyleNone;
+    self.emailTextField.borderStyle = UITextBorderStyleNone;
+    self.fixedTelephoneTextField.borderStyle = UITextBorderStyleNone;
+    //    self.addressTextView.borderStyle = YES;
+    self.roleTextField.borderStyle = UITextBorderStyleNone;
+    self.groupTextField.borderStyle = UITextBorderStyleNone;
+    
+    
+    self.addressTextView.backgroundColor = [UIColor clearColor];
+    
+    self.addressTextView.layer.borderColor = [[UIColor clearColor] CGColor];
+    
+    self.addressTextView.layer.borderWidth = 0.5f;
+    
+    self.addressTextView.layer.cornerRadius = 5;
+    
+}
+- (IBAction)deleteAtion:(id)sender {
+}
+
 @end
